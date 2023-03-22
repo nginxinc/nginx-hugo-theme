@@ -2,13 +2,9 @@
 
 <script src="{{ $jquery.RelPermalink }}" type="text/javascript" integrity="{{ $jquery.Data.Integrity }}"></script>
 
-{{ $kubejs := resources.Get "/js/kube.js" | fingerprint "sha512" }}
-{{ if .Site.IsServer }}
-  <script src="{{ $kubejs.RelPermalink }}"></script>
-{{ else }}
-  {{ $kubejs := $kubejs | minify | fingerprint "sha512" }}
-  <script src="{{ $kubejs.RelPermalink }}" type="text/javascript" integrity="{{ $kubejs.Data.Integrity }}"></script>
-{{ end }}
+{{ $kubejs := resources.Get "/js/kube.js" | minify | fingerprint "sha512" }}
+<script src="{{ $kubejs.RelPermalink }}" type="text/javascript" integrity="{{ $kubejs.Data.Integrity }}"></script>
+
 
 <!-- load Bootstrap from local assets -->  
 {{ $jsBootstrap := resources.Get "js/bootstrap.bundle.min.js" | fingerprint "sha512" }}
@@ -18,13 +14,13 @@
 {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
 <!-- START COVEO -->
 
-  <script class="coveo-script" src="https://static.cloud.coveo.com/searchui/v2.8959/js/CoveoJsSearch.Lazy.min.js"></script>
+<script class="coveo-script" src="https://static.cloud.coveo.com/searchui/v2.8959/js/CoveoJsSearch.Lazy.min.js"></script>
 
-  <script src="https://static.cloud.coveo.com/searchui/v2.8959/js/templates/templates.js"></script>
+<script src="https://static.cloud.coveo.com/searchui/v2.8959/js/templates/templates.js"></script>
 
-  {{ $coveo := resources.Get "js/coveo.js" }}
-  {{ $secureCoveo := $coveo | minify | fingerprint "sha512" }}
-  <script src="{{ $secureCoveo.RelPermalink }}" integrity="{{ $secureCoveo.Data.Integrity }}" type="text/javascript"></script>
+{{ $coveo := resources.Get "js/coveo.js" }}
+{{ $secureCoveo := $coveo | minify | fingerprint "sha512" }}
+<script src="{{ $secureCoveo.RelPermalink }}" integrity="{{ $secureCoveo.Data.Integrity }}" type="text/javascript"></script>
 
 <!-- END COVEO -->
 {{ end }}
@@ -36,10 +32,11 @@
   {{ $redoc := $redoc | fingerprint "sha512" }}
   
   <!-- only load the redoc js if we're on an api reference page -->
-  {{ if and (in .Params.doctypes "reference") (in .Params.tags "api") }}<script src="{{$redoc.RelPermalink}}" type="text/javascript"></script>{{ end }}
+  {{ if and (in .Params.doctypes "reference") (in .Params.tags "api") }}
+<script src="{{$redoc.RelPermalink}}" type="text/javascript"></script>{{ end }}
 
 {{ end }}
 
 <!-- Load Sidebar javascript -->
-{{ $jsSidebar := resources.Get "js/sidebar.js" | fingerprint }}
-  <script src="{{ $jsSidebar.RelPermalink }}" type="text/javascript" integrity="{{ $jsSidebar.Data.Integrity }}"></script>
+{{ $jsSidebar := resources.Get "js/sidebar.js" | minify | fingerprint "sha512" }}
+<script src="{{ $jsSidebar.RelPermalink }}" type="text/javascript" integrity="{{ $jsSidebar.Data.Integrity }}"></script>

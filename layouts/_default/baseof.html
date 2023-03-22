@@ -4,27 +4,27 @@
 <head>  
 {{ block "head" . }}
 
-    {{ partial "meta.html" . }}
+{{ partial "meta.html" . }}
 
-    {{ partial "favicon.html" . }}
+{{ partial "favicon.html" . }}
 
-    {{ partial "styles.html" . }}
+{{ partial "styles.html" . }}
 
-    {{ if in .Params.doctypes "devportal" }}
-      {{ partial "devportal/style.html" . }}
-    {{ end }}
+{{ if in .Params.doctypes "devportal" }}
+{{ partial "devportal/style.html" . }}
+{{ end }}
 
-    {{ if fileExists "/layouts/partials/head_custom.html" }}
-      {{ partial "head_custom.html" . }}
-    {{ end }}
+{{ if fileExists "/layouts/partials/head_custom.html" }}
+{{ partial "head_custom.html" . }}
+{{ end }}
 
-    {{ if or ( not .Site.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
+{{ if or ( not .Site.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
       
-      {{ partial "trustarc.html" . }}
+{{ partial "trustarc.html" . }}
 
-      {{ partial "tealium-profile.html" . }}
+{{ partial "tealium-profile.html" . }}
 
-    {{ end }}
+{{ end }}
 
 {{ end }}
 
@@ -32,7 +32,7 @@
 
 <body>
   {{ if or ( not .Site.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }} 
-    {{ partial "universal-tag.html" . }}
+{{ partial "universal-tag.html" . }}
   {{ end }}
 
   <header>

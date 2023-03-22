@@ -14,3 +14,10 @@ Thumbs.db
 # Logs #
 ########
 *.log
+
+node_modules/*
+.markdownlint.json
+resources/*
+
+# Local Netlify folder
+.netlify

@@ -1,55 +1,66 @@
-# NGINX Template Repository
+# nginx-hugo-theme
 
-## How do I use this template?
+A documentation theme for F5 NGINX projects using [Hugo](https://gohugo.io/).
 
-**DO NOT FORK** -- this template is meant to be used from the **[`Use this template`](https://github.com/nginxinc/template-repository/generate)** feature.
+## Installation
 
-1. Click on **[`Use this template`](https://github.com/nginxinc/template-repository/generate)**
-2. Give a name to your project
-3. Wait until the first run of CI finishes (Github Actions will process the template and commit to your new repo)
-4. Clone your new project and happy coding!
+1. Add the `nginx-hugo-theme` theme as a module mount to your project's config file:
 
-**NOTE**: **WAIT** until the first CI run on GitHub Actions before cloning your new project.
+    ```toml
+    [module]
+    [[module.imports]]
+    path="github.com/nginxinc/nginx-hugo-theme"
+    ```
 
-## What is included on this template?
+## Usage
 
-This template includes all the scaffolding you need to get started on a standards compliant NGINX repository:
+### Create a new doc
 
-- Standard license for NGINX OSS projects
-- Standard `.gitignore` with minimal defaults
-- Issue and PR templates
-- Contributing guidelines
-- Support guidelines
-- Security guidelines for reporting major vulnerabilities
-- NGINX Code of Conduct
-- README placeholder
-- Changelog placeholder
-- Codeowners placeholder
+Run `hugo new <path/doc-title.md>` to add a new doc.
 
----
+> Using the `hugo new` command adds *all* of our pre-configured frontmatter to the new file.
 
-<!--  DELETE THE LINES ABOVE THIS AND WRITE YOUR PROJECT README BELOW -- PLACEHOLDER SECTIONS HAVE BEEN INCLUDED FOR YOUR CONVENIENCE -->
+### Build the docs
 
-# nginx_hugo_theme
+- Run `hugo` to build static HTML for your docs.
+- Run `hugo server` to run the Hugo development server, so you can watch your changes as you work.
+  Open `localhost:1313` (`127.0.0.1:1313`) in a browser window to view the docs.  
 
-## Requirements
+### Shortcodes
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam elit turpis, varius et arcu elementum, viverra rhoncus sem. Aliquam nec sodales magna, et egestas enim. Mauris lobortis ultrices euismod. Pellentesque in arcu lacus. Mauris cursus laoreet nulla, ac vehicula est. Vestibulum eu mauris quis lorem consectetur aliquam ac nec quam. Vestibulum commodo pharetra mi, at bibendum neque faucibus ut. Mauris et tortor sed sem consectetur eleifend ut non magna. Praesent feugiat placerat nibh, varius viverra orci bibendum sed. Vestibulum dapibus ex ut pulvinar facilisis. Quisque sodales enim et augue tempor mattis. Suspendisse finibus congue felis, ac blandit ligula. Praesent condimentum ultrices odio quis semper. Nunc ultrices, nibh quis mattis pellentesque, elit nulla bibendum felis, quis dapibus erat turpis ac urna.
+See [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/) for an overview.
 
-## Getting Started
+This theme contains the following custom shorcodes:
 
-Duis sit amet sapien vel velit ornare vulputate. Nulla rutrum euismod risus ac efficitur. Curabitur in sagittis elit, a semper leo. Suspendisse malesuada aliquam velit, eu suscipit lorem vehicula at. Proin turpis lacus, semper in placerat in, accumsan non ipsum. Cras euismod, elit eget pretium laoreet, tortor nulla finibus tortor, nec hendrerit elit turpis ut eros. Quisque congue nisi id mauris molestie, eu condimentum dolor rutrum. Nullam eleifend elit ac lobortis tristique. Pellentesque nec tellus non mauris aliquet commodo a eu elit. Ut at feugiat metus, at tristique mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+**Callouts**:
 
-## How to Use
+- caution.html
+- important.html
+- note.html
+- see-also.html
+- tip.html
+- warning.html
 
-Maecenas at vehicula justo. Suspendisse posuere elementum elit vel posuere. Etiam quis pulvinar massa. Integer tempor semper risus, vitae maximus eros ullamcorper vitae. In egestas, ex vitae gravida sodales, ipsum dolor varius est, et cursus lorem dui a mi. Morbi faucibus ut nisi id faucibus. Sed quis ullamcorper ex. In et dolor id nunc interdum suscipit.
+**Formatting**:
 
-## Contributing
+- collapse.html - Make a collapsible section.
+- comment.html - Insert a comment that won't be rendered at build time.
+- raw-html.html - Insert raw HTML into a markdown doc.
 
-Please see the [contributing guide](https://github.com/nginxinc/nginx-hugo-theme/blob/main/CONTRIBUTING.md) for guidelines on how to best contribute to this project.
+**Custom data**:
 
-## License
+- openapi.html - Render an OpenAPI spec using ReDoc.
+- metrics.html - Imports data from a JSON file and presents it in table format.
 
-[Apache License, Version 2.0](https://github.com/nginxinc/nginx-hugo-theme/blob/main/LICENSE)
+### Includes
 
-&copy; [F5, Inc.](https://www.f5.com/) 2023
+This theme contains a custom shortcode called "includes" that lets you reuse content. 
+To use this shortcode, you must add an "includes" folder to the folder that contains your site content (e.g., `content/includes`).
+
+You can reuse the content of any file in the includes directory using the following shortcode syntax:
+
+```md
+{{< include "filename.md" >}}
+```
+
+

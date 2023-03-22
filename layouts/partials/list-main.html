@@ -17,7 +17,32 @@
         </div>
     </div>
 
-    <section class="col-md-12 col-xl-12 py-md-3 pl-md-5" id="section-content-list">
+          <ul class="contents">
+          {{ range .Paginator.Pages }}
+              <li>{{.Title}}
+              </li>
+          {{ end }}
+          </ul>
+
+    {{ range .Pages.GroupBy "Type" }}
+          <!-- Checks for existence of _index.md for a section; if available, pulls from "title" in front matter -->
+          {{ with $.Site.GetPage "section" .Key }}
+          <h3>{{.Title}}</h3>
+          {{ else }}
+          <!-- If no _index.md is available, ".Key" defaults to the section title and filters to title casing -->
+          <h3>{{ .Key | title }}</h3>
+          {{ end }}
+          <ul>
+              {{ range .Pages }}
+              <li>
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+
+              </li>
+              {{ end }}
+          </ul>
+    {{ end }}
+
+    <!--section class="col-md-12 col-xl-12 py-md-3 pl-md-5" id="section-content-list">
         
         <div class="row">
             <div class="card-deck">
@@ -67,11 +92,11 @@
             {{ end }}        
           </div>
         </div>
-    </section>
+    </section-->
 
     {{ if not .IsHome }}
     <div class="row justify-content-center">
-        {{ partial "pagination.html" . }}
+        {{/* partial "pagination.html" . */}}
     </div>
     {{ end }}
 

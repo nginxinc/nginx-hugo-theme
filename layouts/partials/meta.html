@@ -38,9 +38,7 @@
 {{ end }}
 
 
-{{/* set custom CSP to load styles and scripts with special handling for GTM scripts (requires unsafe-inline) and Dev Portal page(s) (requires 'unsafe-eval') */}}
-<meta http-equiv="Content-Security-Policy" content="script-src 
-    'self' 
+{{/* set custom CSP to load styles and scripts with special handling for GTM scripts (requires unsafe-inline) and Dev Portal page(s) (requires 'unsafe-eval') 
     https://code.jquery.com/ 
     https://cdn.jsdelivr.net/ 
     https://static.cloud.coveo.com 
@@ -58,8 +56,9 @@
     https://consent.trustarc.com/
     https://f5networksglobalprod.122.2o7.net/
     https://f5networksnginxdocs.122.2o7.net/
-    https://*.f5.com
-    'unsafe-inline'
+    https://*.f5.com */}}
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'
+    https://consent.trustarc.com/ https://mktg.tags.f5.com/basic/prod/utag.sync.js https://static.cloud.coveo.com/ https://*.f5.com/
     {{ if in .Params.doctypes "devportal" }} 'unsafe-eval' {{end}}; 
     worker-src 'self' blob:">
 {{/* end */}}

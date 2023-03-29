@@ -35,11 +35,8 @@ To suggest a feature or enhancement, please create an issue on GitHub with the l
 
 Note: if you'd like to implement a new feature, please consider creating a [feature request issue](https://github.com/nginxinc/nginx-hugo-theme/blob/main/.github/feature_request_template.md) first to start a discussion about the feature.
 
-## Code Guidelines
 
-<!-- ### Go/Python/Bash/etc... Guidelines (OPTIONAL) -->
-
-### Git Guidelines
+## Git Guidelines
 
 - Keep a clean, concise and meaningful git commit history on your branch (within reason), rebasing locally and squashing before submitting a PR.
 - If possible and/or relevant, use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format when writing a commit message, so that changelogs can be automatically generated

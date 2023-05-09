@@ -17,14 +17,24 @@
             <div class="accordion-group">
                 <div class="accordion-heading">
                     <li class="nginx-toc-link l1">
-                        <a data-menu-id="{{.RelPermalink}}" class="accordion-toggle" aria-expanded="false"
+                        {{ $theRealSection := (print "/"   $.Section  "/") }}
+                        {{ if eq .RelPermalink $theRealSection }}
+                            <a data-menu-id="{{.RelPermalink}}" class="accordion-toggle" aria-expanded="true"
+                        {{ else }}
+                            <a data-menu-id="{{.RelPermalink}}" class="accordion-toggle" aria-expanded="false"
+                        {{ end }}
                             data-toggle="collapse" href="#" data-target="#{{.Section | urlize}}--{{.Title | urlize}}--collapseOne"
                             aria-controls="{{.Section | urlize}}--{{.Title | urlize}}--collapseOne">
                             <i class="fa fa-sm fa-fw fa-chevron-right"></i><i
                                 class="fa fa-sm fa-fw fa-chevron-down"></i>{{ .Title }}</a>
                     </li>
                 </div>
+<!-- This is necessary to expand the current product after clicking on the product cards in docs.nginx.com-->
+                {{ if eq .RelPermalink $theRealSection }}
+                <div id="{{.Section | urlize}}--{{.Title | urlize}}--collapseOne" class="accordion-body collapse show">
+                {{ else }}
                 <div id="{{.Section | urlize}}--{{.Title | urlize}}--collapseOne" class="accordion-body collapse">
+                {{ end }}
                     <div class="accordion-inner">
                         {{ range .Sections }}
                         <div class="accordion" id="accordion2">
@@ -58,16 +68,49 @@
                                                                 </li>
                                                             <ul>
                                                         </div>
+
                                                         <div id="{{.Section | urlize}}--{{.Title | urlize}}--collapseThree" class="accordion-body collapse leaf">
                                                             <div class="accordion-inner">
-                                                            {{ range .Pages }}
-                                                            <ul class="sidebar-l2-padding">
-                                                                <li class="nginx-toc-link l3 sidebar-il-border ">
-                                                                    <a data-menu-id="{{.RelPermalink}}"
-                                                                        href="{{ .Permalink }}">{{ .Title }}</a>
-                                                                </li>
-                                                            </ul>
-                                                            {{ end }}
+                                                                {{ range .Sections }}
+                                                                <div class="accordion" id="Accordion4">
+                                                                    <div class="sidebar-l2-padding">
+                                                                        <div class="accordion-group sidebar-il-border">
+                                                                            <div class="accordion-heading">
+                                                                                <ul>
+                                                                                    <li class="nginx-toc-link l2">
+                                                                                        <a data-menu-id="{{.RelPermalink}}" class="accordion-toggle"
+                                                                                            aria-expanded="false" data-toggle="collapse"
+                                                                                            href="#{{.Section | urlize}}--{{.Title | urlize}}--collapseFour">
+                                                                                            <i class="fa fa-sm fa-fw fa-chevron-right"></i><i
+                                                                                                class="fa fa-sm fa-fw fa-chevron-down"></i>{{ .Title }}</a>
+                                                                                    </li>
+                                                                                <ul>
+                                                                            </div>
+
+                                                                            <div id="{{.Section | urlize}}--{{.Title | urlize}}--collapseFour" class="accordion-body collapse leaf">
+                                                                                <div class="accordion-inner">
+                                                                                {{ range .Pages }}
+                                                                                <ul class="sidebar-l2-padding">
+                                                                                    <li class="nginx-toc-link l3 sidebar-il-border ">
+                                                                                        <a data-menu-id="{{.RelPermalink}}"
+                                                                                            href="{{ .Permalink }}">{{ .Title }}</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                                {{ end }}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {{ end }}
+                                                                {{ range .RegularPages }}
+                                                                <ul class="sidebar-l2-padding">
+                                                                    <li class="nginx-toc-link l3 sidebar-il-border ">
+                                                                        <a data-menu-id="{{.RelPermalink}}"
+                                                                            href="{{ .Permalink }}">{{ .Title }}</a>
+                                                                    </li>
+                                                                </ul>
+                                                                {{ end }}  
                                                             </div>
                                                         </div>
                                                     </div>

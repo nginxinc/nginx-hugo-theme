@@ -62,14 +62,14 @@
                                                                 <li class="nginx-toc-link l2">
                                                                     <a data-menu-id="{{.RelPermalink}}" class="accordion-toggle"
                                                                         aria-expanded="false" data-toggle="collapse"
-                                                                        href="#{{.Section | urlize}}--{{.Title | urlize}}--collapseThree">
+                                                                        href="#{{.Section | urlize}}--{{.Parent.File.ContentBaseName}}--{{.Title | urlize}}--collapseThree">
                                                                         <i class="fa fa-sm fa-fw fa-chevron-right"></i><i
                                                                             class="fa fa-sm fa-fw fa-chevron-down"></i>{{ .Title }}</a>
                                                                 </li>
                                                             <ul>
                                                         </div>
 
-                                                        <div id="{{.Section | urlize}}--{{.Title | urlize}}--collapseThree" class="accordion-body collapse leaf">
+                                                        <div id="{{.Section | urlize}}--{{.Parent.File.ContentBaseName}}--{{.Title | urlize}}--collapseThree" class="accordion-body collapse leaf">
                                                             <div class="accordion-inner">
                                                                 {{ range .Sections }}
                                                                 <div class="accordion" id="Accordion4">
@@ -80,14 +80,14 @@
                                                                                     <li class="nginx-toc-link l2">
                                                                                         <a data-menu-id="{{.RelPermalink}}" class="accordion-toggle"
                                                                                             aria-expanded="false" data-toggle="collapse"
-                                                                                            href="#{{.Section | urlize}}--{{.Title | urlize}}--collapseFour">
+                                                                                            href="#{{.Section | urlize}}--{{.Parent.Parent.File.ContentBaseName}}--{{.Parent.File.ContentBaseName}}--{{.Title | urlize}}--collapseFour">
                                                                                             <i class="fa fa-sm fa-fw fa-chevron-right"></i><i
                                                                                                 class="fa fa-sm fa-fw fa-chevron-down"></i>{{ .Title }}</a>
                                                                                     </li>
                                                                                 <ul>
                                                                             </div>
 
-                                                                            <div id="{{.Section | urlize}}--{{.Title | urlize}}--collapseFour" class="accordion-body collapse leaf">
+                                                                            <div id="{{.Section | urlize}}--{{.Parent.Parent.File.ContentBaseName}}--{{.Parent.File.ContentBaseName}}--{{.Title | urlize}}--collapseFour" class="accordion-body collapse leaf">
                                                                                 <div class="accordion-inner">
                                                                                 {{ range .Pages }}
                                                                                 <ul class="sidebar-l2-padding">

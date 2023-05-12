@@ -5,12 +5,12 @@
                 {{ .Title }}
             </h1>
             {{ if .Description }}
-                <p class="bd-lead">
+                <p>
                     {{ .Description | markdownify }}
                 </p>
             {{ end}}
             {{ if .Content }}
-                <p class="bd-lead">
+                <p>
                     {{ .Content | markdownify }}
                 </p>
             {{ end }}
@@ -18,55 +18,32 @@
     </div>
 
     <section class="col-md-12 col-xl-12 py-md-3 pl-md-5" id="section-content-list">
-        
         <div class="row">
             <div class="card-deck">
-            {{ if .Sections }}
-                {{ range .Sections }}
-                <div class="col-md-5 card">
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <i class="fas fa-{{if .Page.Params.icon}}{{ .Page.Params.icon }}{{else}}book{{end}} fa-2x card-img-top"></i>
-                            <a href="{{ .Permalink }}">{{ .Title }}</a>
-                        </h3>
-                        {{/*}}<p class="card-text">
-                            {{ if .Description }}{{ .Description | markdownify }}{{ end }}
-                        </p>{{*/}}
-                        {{ if and (eq .Site.Params.useSectionPageLists "true") (.Pages) }}
-                        <ul class="card-list">
-                            {{ range first 5 .Pages.ByWeight }}
-                            <li>
-                                <a href="{{ .Permalink }}">{{ .Title }}</a>
-                            </li>
-                            {{ end }}
-                            {{ if gt .Pages "5" }}
-                            <li>
-                                <a href="{{ .Permalink }}">More...</a>
-                            </li>
-                            {{ end }}
-                        </ul>
-                        {{ end }}
-                    </div>
-                </div>
-                {{ end }}
-            {{ end }}
+        {{ range .Pages.GroupBy "Section" }}
+            {{ with $.Site.GetPage "section" .Key }}
             
-            {{ range (.Paginate ( where .Pages.ByWeight ".Kind" "!=" "section" )).Pages }}
-                <div class="col-md-5 card">
-                    <div class="card-body">
-                        <h3 class="card-title">
-                            <i class="far fa-{{if .Page.Params.icon}}{{ .Page.Params.icon }}{{else}}file-alt{{end}} fa-2x card-img-top"></i>
-                            <a href="{{ .Permalink }}">{{ .Title }}</a>
-                        </h3>
-                        {{/*}}
-                        <p class="card-text">
-                            {{ if .Description }} {{ .Description | markdownify }}{{ end }}
-                        </p>{{*/}}
-                    </div>
-                </div>
-            {{ end }}        
-          </div>
-        </div>
+            {{ range .Pages.ByWeight }}
+            <div class="col-md-5 card">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas fa-{{if eq .Kind "page"}}file-alt{{else}}book{{end}} fa-2x card-img-top"></i>
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h3>
+                    {{/*}}<p class="card-text">
+                        {{ if .Description }}{{ .Description | markdownify }}{{ end }}
+                    </p>{{*/}}
+            
+            </div>
+            </div>
+
+            {{ end }}
+            {{ end }}
+        </div> 
+    </div>  
+        {{ end }}
+
+
     </section>
 
     {{ if not .IsHome }}

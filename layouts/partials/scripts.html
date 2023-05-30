@@ -13,10 +13,9 @@
 
 {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
 <!-- START COVEO -->
+<script class="coveo-script" src="https://static.cloud.coveo.com/searchui/v2.10104/0/js/CoveoJsSearch.Lazy.min.js" integrity="sha512-HxdDBIp5snbqtu1TPkBnXLKEvN9IPz3PeZW8zT9KfsflV9Ck822XDroDlpVbfCfXeiu8C0RDVn0fdu7aGy/H1g==" crossorigin="anonymous"></script>
 
-<script class="coveo-script" src="https://static.cloud.coveo.com/searchui/v2.8959/js/CoveoJsSearch.Lazy.min.js"></script>
-
-<script src="https://static.cloud.coveo.com/searchui/v2.8959/js/templates/templates.js"></script>
+<script src="https://static.cloud.coveo.com/searchui/v2.10104/0/js/templates/templates.js" integrity="sha512-CR0Yk/LIwgh1MsKqjecDp/r6F9ipKc6gA+4+E1pplT3N3r1pk+la/HaqyDiKtjOFwrwIIbIYBFrUJgPql93QHw==" crossorigin="anonymous"></script>
 
 {{ $coveo := resources.Get "js/coveo.js" }}
 {{ $secureCoveo := $coveo | minify | fingerprint "sha512" }}

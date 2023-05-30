@@ -22,8 +22,7 @@
 
 {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
 <!-- load Coveo CSS -->
-<link rel="stylesheet" href="https://static.cloud.coveo.com/searchui/v2.8959/css/CoveoFullSearch.min.css" />
-{{ end }}
+<link rel="stylesheet" href="https://static.cloud.coveo.com/searchui/v2.10104/0/css/CoveoFullSearch.min.css" integrity="sha512-9/A9yVCU4GS6/iIwTRJKnan4Hf8gDKj3anwItN9QCsU8SixaT5xkjjWsZ/iq0TWaizhtqOLacadXJfxHlwYCcA==" crossorigin="anonymous" />{{ end }}
 
 {{ $cssHeader := $css1 | minify | fingerprint "sha512"}}
 <link href="{{ $cssHeader.RelPermalink }}" rel="stylesheet" type="text/css">

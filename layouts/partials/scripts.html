@@ -23,6 +23,9 @@
 {{ if eq hugo.Environment "production" }}
   {{- $coveo := resources.Get "js/coveo-prod.js" | js.Build $options -}}  
   {{ $.Scratch.Set "coveoSc" $coveo}}
+{{ else if eq hugo.Environment "staging" }}
+  {{- $coveo := resources.Get "js/coveo-staging.js" | js.Build $options -}}  
+  {{ $.Scratch.Set "coveoSc" $coveo}} 
 {{ else }}
   {{- $coveo := resources.Get "js/coveo-dev.js" | js.Build $options -}}  
   {{ $.Scratch.Set "coveoSc" $coveo}}

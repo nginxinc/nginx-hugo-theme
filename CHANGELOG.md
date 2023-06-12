@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 0.31.1
+2023-06-06
+
+### Fixes
+
+- sections and pages are now sorted by weight, mixed (5556d9dc2a0fcf477f4a740d061ed7ea7a9a11c7)
+
 ## 0.27.1
 2023-03-13
 

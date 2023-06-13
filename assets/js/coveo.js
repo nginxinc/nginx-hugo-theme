@@ -1,5 +1,6 @@
+import * as params from '@params';
 document.addEventListener('DOMContentLoaded', function () {
-    Coveo.SearchEndpoint.configureCloudV2Endpoint("", 'xxdb89e3ea-5468-4e34-824f-91cf8b004b66'); // test API key
+    Coveo.SearchEndpoint.configureCloudV2Endpoint("", params.coveokey);
     const root = document.getElementById("search");
     const searchBoxRoot = document.getElementById("searchbox");
     Coveo.initSearchbox(searchBoxRoot, "/search.html");

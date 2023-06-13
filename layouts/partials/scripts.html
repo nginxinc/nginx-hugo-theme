@@ -11,18 +11,31 @@
 <script src="{{ $jsBootstrap.RelPermalink }}" type="text/javascript" integrity="{{ $jsBootstrap.Data.Integrity }}"></script>
 
 
-{{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
+
 <!-- START COVEO -->
 <script class="coveo-script" src="https://static.cloud.coveo.com/searchui/v2.10104/0/js/CoveoJsSearch.Lazy.min.js" integrity="sha512-HxdDBIp5snbqtu1TPkBnXLKEvN9IPz3PeZW8zT9KfsflV9Ck822XDroDlpVbfCfXeiu8C0RDVn0fdu7aGy/H1g==" crossorigin="anonymous"></script>
 
 <script src="https://static.cloud.coveo.com/searchui/v2.10104/0/js/templates/templates.js" integrity="sha512-CR0Yk/LIwgh1MsKqjecDp/r6F9ipKc6gA+4+E1pplT3N3r1pk+la/HaqyDiKtjOFwrwIIbIYBFrUJgPql93QHw==" crossorigin="anonymous"></script>
 
-{{ $coveo := resources.Get "js/coveo.js" }}
-{{ $secureCoveo := $coveo | minify | fingerprint "sha512" }}
+<!-- build a different coveo.js (with different key) based on build env -->
+
+{{ $.Scratch.Set "coveoSc" "" }}
+{{ if eq hugo.Environment "production" }}
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xx79df1e1f-11e4-4da5-8ea8-2ed7e24cca6a" )) -}}  
+  {{ $.Scratch.Set "coveoSc" $coveo}}
+{{ else if eq hugo.Environment "staging" }}
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xxdb89e3ea-5468-4e34-824f-91cf8b004b66" )) -}}  
+  {{ $.Scratch.Set "coveoSc" $coveo}} 
+{{ else }}
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xxe1e9046f-585c-4518-a14a-6b986a5efffd" )) -}}  
+  {{ $.Scratch.Set "coveoSc" $coveo}}
+{{ end }}
+{{ $secureCoveo := $.Scratch.Get "coveoSc" | minify | fingerprint "sha512" }}
+
+
 <script src="{{ $secureCoveo.RelPermalink }}" integrity="{{ $secureCoveo.Data.Integrity }}" type="text/javascript"></script>
 
-<!-- END COVEO -->
-{{ end }}
+
 
 <!-- Load the Redoc resources if we're not using Dev Portal for the API reference layout-->
 {{ if not ( eq .Site.Params.useDevPortal true ) }}

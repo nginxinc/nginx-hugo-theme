@@ -5,7 +5,6 @@
 {{ $css5 := resources.Get "css/highlight.css" }}
 {{ $css6 := resources.Get "css/coveo.css" }}
 
-
 <!-- load FontAwesome from assets -->
 {{ $cssFA1 := resources.Get "fontawesome/css/all.min.css" | fingerprint "sha512" }}
 <link href="{{ $cssFA1.RelPermalink }}" integrity="{{ $cssFA1.Data.Integrity }}" rel="stylesheet" type="text/css">
@@ -44,6 +43,8 @@
 {{ if fileExists "assets/css/custom.css" }}
   {{ $customCSS := resources.Get "css/custom.css" | minify | fingerprint "sha512" }}
   <link href="{{ $customCSS.RelPermalink }}" rel="stylesheet" type="text/css">
-
 {{ end }}
 
+<!-- load Highlight CSS -->
+{{ $cssHighlight := $css5 | minify | fingerprint "sha512"}}
+<link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">

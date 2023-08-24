@@ -21,7 +21,7 @@
 
 {{ $.Scratch.Set "coveoSc" "" }}
 {{ if eq hugo.Environment "production" }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xx79df1e1f-11e4-4da5-8ea8-2ed7e24cca6a" )) -}}  
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xx3b887403-1ec2-43cf-9e3c-d6dd3c1056c0" )) -}}  
   {{ $.Scratch.Set "coveoSc" $coveo}}
 {{ else if eq hugo.Environment "staging" }}
   {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xxababbbee-d1e5-44e7-8e49-876ece453e60" )) -}}  

@@ -10,6 +10,9 @@
 {{ $jsBootstrap := resources.Get "js/bootstrap.bundle.min.js" | fingerprint "sha512" }}
 <script src="{{ $jsBootstrap.RelPermalink }}" type="text/javascript" integrity="{{ $jsBootstrap.Data.Integrity }}"></script>
 
+<!-- load code copy js -->
+{{ $codecopy := resources.Get "/js/code-copy.js" | fingerprint "sha512" }}
+<script src="{{ $codecopy.RelPermalink }}" type="text/javascript" ></script>
 
 
 <!-- START COVEO -->

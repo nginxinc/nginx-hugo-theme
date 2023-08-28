@@ -7,6 +7,37 @@
     padding-left: 8px;
 }
 
+.code-copy {
+    color: #272822;
+    background-color: #fff;
+    border-color: #272822;
+    border: 1px solid;
+    border-radius: 4px 4px 0px 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: -12px;
+    padding: 3px 8px;
+    font-size: 0.8em;
+}
+
+.code-copy:hover {
+    cursor: pointer;
+    background-color: #009639;
+    color: #ffffff;
+    border-color: #272822!important;
+    border: 1px solid;
+}
+
+.code-copy:focus {
+    outline: 0px solid transparent;
+    background-color: #e6e6e6;
+}
+
+.code-copy:active {
+    background-color: #d9d9d9;
+}
+
 .button {
     text-transform: uppercase;
     font-size: 14px;
@@ -742,6 +773,10 @@ pre {
     border-radius: 4px;
 }
 
+pre.chroma {
+    border-radius: 4px 0px 4px 4px;
+}
+
 code {
     font-family: Courier;
     color: #343434;
@@ -1153,3 +1188,6 @@ ol.breadcrumb > li:first-child {
 .fa, .far, .fas {
     padding-right: 4px;    
 }
+
+
+

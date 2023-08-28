@@ -21,13 +21,13 @@
 
 {{ $.Scratch.Set "coveoSc" "" }}
 {{ if eq hugo.Environment "production" }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xx79df1e1f-11e4-4da5-8ea8-2ed7e24cca6a" )) -}}  
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xx3b887403-1ec2-43cf-9e3c-d6dd3c1056c0" )) -}}  
   {{ $.Scratch.Set "coveoSc" $coveo}}
 {{ else if eq hugo.Environment "staging" }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xxdb89e3ea-5468-4e34-824f-91cf8b004b66" )) -}}  
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xxababbbee-d1e5-44e7-8e49-876ece453e60" )) -}}  
   {{ $.Scratch.Set "coveoSc" $coveo}} 
 {{ else }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xxe1e9046f-585c-4518-a14a-6b986a5efffd" )) -}}  
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" "xx6bbcd723-fec1-4af0-a13d-1c499cf5a15f" )) -}}  
   {{ $.Scratch.Set "coveoSc" $coveo}}
 {{ end }}
 {{ $secureCoveo := $.Scratch.Get "coveoSc" | minify | fingerprint "sha512" }}

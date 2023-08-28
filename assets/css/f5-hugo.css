@@ -28,6 +28,7 @@
     color: #ffffff;
     border-color: #272822!important;
     border: 1px solid;
+    border-bottom: 0px;
 }
 
 .code-copy:focus {

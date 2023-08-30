@@ -25,8 +25,6 @@ function CopyCode(clipboard) {
         if (pre.parentNode.classList.contains('highlight')) {
             var highlight = pre.parentNode;
             highlight.parentNode.insertBefore(button, highlight);
-        } else {
-            pre.parentNode.insertBefore(button, pre);
         }
     });
 }

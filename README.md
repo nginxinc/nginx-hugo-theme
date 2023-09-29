@@ -55,12 +55,20 @@ This theme contains the following custom shorcodes:
 ### Includes
 
 This theme contains a custom shortcode called "includes" that lets you reuse content. 
-To use this shortcode, you must add an "includes" folder to the folder that contains your site content (e.g., `content/includes`).
+
+To use this shortcode:
+
+1. Add an "includes" folder to the folder that contains your site content (for example, `content/includes`).
+2. In the includes folder, create an `index.md` file and add these lines:
+
+    ```text
+    ---
+    headless: true
+    ---
+    ```
 
 You can reuse the content of any file in the includes directory using the following shortcode syntax:
 
 ```md
 {{< include "filename.md" >}}
 ```
-
-

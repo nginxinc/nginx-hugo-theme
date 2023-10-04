@@ -237,7 +237,8 @@
 }
 
 .coveo-modal-backdrop{
-z-index: 1072
+z-index: 1072;
+background: #1c6333;
 }
 .coveo-modal-container{
 z-index: 1073

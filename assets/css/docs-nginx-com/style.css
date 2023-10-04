@@ -1787,6 +1787,9 @@ input.pull-left {
     border-color: #666;
 }
 
+.main.container-fluid {
+    background: white;
+}
 
 @media screen and (min-width: 801px) {
     .nginx-doc-sidebar{

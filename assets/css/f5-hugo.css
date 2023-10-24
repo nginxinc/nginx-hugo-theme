@@ -8,9 +8,9 @@
 }
 
 .code-copy {
-    color: #272822;
+    color: #429345;
     background-color: #fff;
-    border-color: #272822;
+    border-color: #429345;
     border: 1px solid;
     border-radius: 4px 4px 0px 0px;
     border-bottom: 0px;
@@ -24,9 +24,9 @@
 
 .code-copy:hover {
     cursor: pointer;
-    background-color: #009639;
+    background-color: #429345;
     color: #ffffff;
-    border-color: #272822!important;
+    border-color: #429345!important;
     border: 1px solid;
     border-bottom: 0px;
 }
@@ -1191,5 +1191,63 @@ ol.breadcrumb > li:first-child {
     padding-right: 4px;    
 }
 
+/* tabs css */
 
+.nav {
+    margin-left: 0px;
+    
+}
 
+.nav-item {
+    border: 1px solid #dee2e6;
+    background: none;
+    border-radius: 5px 5px 0px 0px;
+    position: relative;
+    padding-bottom: 0px!important;
+}
+
+li.nav-item a.nav-link {
+    color: #898787;
+    font-weight: 300;
+
+}
+
+.nav-item:has(.active) {
+    border: 2px solid #429345;
+    border-bottom: 1px;
+    border-color: 429345;
+    box-shadow: 5px 0px #d1d0d0aa;
+    z-index: 6;
+}
+.nav-item .nav-link:focus {
+    outline: 0px solid transparent;
+}
+
+.nav-item:not(:has(.active)) > .nav-link:hover {
+    color: #429345;
+}
+
+.nav-item .nav-link {
+    background: none!important;
+}
+
+.nav-tabs .nav-link.active {
+    border: 5px;
+    color: #429345;
+    font-weight: bold;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.tab-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #429345;
+    border-right: 1px solid #429345;
+    border-left: 1px solid #429345;
+    border-top: 1px solid #429345;
+    margin-bottom: 10px;
+
+}

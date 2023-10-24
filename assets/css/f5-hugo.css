@@ -1231,26 +1231,14 @@ li.nav-item a.nav-link {
 }
 
 .nav-item:not(:has(.active)):hover {
-    border: 2px solid #dee2e6;
-    border-bottom: none;
-    margin-right: -1px;
-    margin-left: -1px;
-    border-bottom: none;
-    background-color: #ffffff;
-    border-color: #dee2e6;
+    border: 1px solid #11bd8d;
 }
 
 .nav-item:not(:has(.active)) > .nav-link:focus {
     outline: none;
 }
 .nav-item:not(:has(.active)):focus-within {
-    border: 2px solid #dee2e6;
-    border-bottom: none;
-    margin-right: -1px;
-    margin-left: -1px;
-    border-bottom: none;
-    background-color: #ffffff;
-    border-color: #dee2e6;
+    border: 1px solid #11bd8d;
 }
 
 .nav-item .nav-link {

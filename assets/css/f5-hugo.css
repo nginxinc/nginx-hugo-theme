@@ -1212,13 +1212,13 @@ li.nav-item a.nav-link {
 }
 
 .nav-item:has(.active) {
-    border: 2px solid #429345;
+    border: 1px solid #429345;
     border-bottom: none;
     background-color: #ffffff;
     border-color: #429345;
-    box-shadow: 5px -2px #d1d0d0aa;
+    box-shadow: 5px -2px 2px 1px #d1d0d0aa;
     z-index: 6;
-    margin-bottom: -2px;
+    margin-bottom: -1px;
 }
 
 .nav-item .nav-link:focus {
@@ -1232,6 +1232,7 @@ li.nav-item a.nav-link {
 
 .nav-item:not(:has(.active)):hover {
     border: 2px solid #dee2e6;
+    border-bottom: none;
     margin-right: -1px;
     margin-left: -1px;
     border-bottom: none;
@@ -1240,13 +1241,16 @@ li.nav-item a.nav-link {
 }
 
 .nav-item:not(:has(.active)) > .nav-link:focus {
+    outline: none;
+}
+.nav-item:not(:has(.active)):focus-within {
     border: 2px solid #dee2e6;
+    border-bottom: none;
     margin-right: -1px;
     margin-left: -1px;
     border-bottom: none;
     background-color: #ffffff;
     border-color: #dee2e6;
-    outline: none; 
 }
 
 .nav-item .nav-link {
@@ -1254,7 +1258,7 @@ li.nav-item a.nav-link {
 }
 
 .nav-tabs .nav-link.active {
-    border: 5px;
+    border: 1px;
     color: #429345;
     font-weight: bold;
 }
@@ -1265,6 +1269,6 @@ li.nav-item a.nav-link {
 
 .tab-content {
     padding: 10px;
-    border: 2px solid #429345;
+    border: 1px solid #429345;
     margin-bottom: 10px;
 }

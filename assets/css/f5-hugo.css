@@ -1205,6 +1205,12 @@ ol.breadcrumb > li:first-child {
     padding-bottom: 0!important;
 }
 
+.nav-item-explore {
+    background: none;
+    position: relative;
+    padding-bottom: 0!important;
+}
+
 li.nav-item a.nav-link {
     color: #898787;
     font-weight: 300;

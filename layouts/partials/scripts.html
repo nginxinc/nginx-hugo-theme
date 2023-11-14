@@ -23,10 +23,10 @@
 <!-- build a different coveo.js (with different key) based on build env -->
 {{ $.Scratch.Set "coveoSc" "" }}
 {{ if eq hugo.Environment "production" }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_API_PROD" }} )) -}}  
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_API_PROD" }} )) -}}
   {{ $.Scratch.Set "coveoSc" $coveo}}
 {{ else if eq hugo.Environment "staging" }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_API_STAGING" }} )) -}}  
+  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_API_STAGING" }} )) -}}
   {{ $.Scratch.Set "coveoSc" $coveo}} 
 {{ else }}
   {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_API_DEV" }})) -}}

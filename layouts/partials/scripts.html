@@ -20,7 +20,7 @@
 
 <script src="https://static.cloud.coveo.com/searchui/v2.10104/0/js/templates/templates.js" integrity="sha512-CR0Yk/LIwgh1MsKqjecDp/r6F9ipKc6gA+4+E1pplT3N3r1pk+la/HaqyDiKtjOFwrwIIbIYBFrUJgPql93QHw==" crossorigin="anonymous"></script>
 
-<!-- build a different coveo.js (with different key) based on build env -->
+<!-- build coveo.js -->
 {{ $.Scratch.Set "coveoSc" "" }}
 {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_SEARCH_TOKEN" }} )) -}}
 {{ $.Scratch.Set "coveoSc" $coveo}}

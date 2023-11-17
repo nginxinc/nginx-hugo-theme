@@ -22,16 +22,6 @@
 
 <!-- build a different coveo.js (with different key) based on build env -->
 {{ $.Scratch.Set "coveoSc" "" }}
-<!-- {{ if eq hugo.Environment "production" }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_SEARCH_TOKEN" }} )) -}}
-  {{ $.Scratch.Set "coveoSc" $coveo}}
-{{ else if eq hugo.Environment "staging" }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_SEARCH_TOKEN" }} )) -}}
-  {{ $.Scratch.Set "coveoSc" $coveo}} 
-{{ else }}
-  {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_SEARCH_TOKEN" }} )) -}}
-  {{ $.Scratch.Set "coveoSc" $coveo}}
-{{ end }} -->
 {{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_SEARCH_TOKEN" }} )) -}}
 {{ $.Scratch.Set "coveoSc" $coveo}}
 {{ $secureCoveo := $.Scratch.Get "coveoSc" | minify | fingerprint "sha512" }}

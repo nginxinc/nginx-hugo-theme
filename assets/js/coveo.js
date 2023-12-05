@@ -2,14 +2,14 @@ import * as params from '@params';
 document.addEventListener('DOMContentLoaded', function () {
 
     // call our Netlify function via API to get the coveo search key
-    (async function getSearchToken() {
+    async function getSearchToken() {
       const response = await fetch(
         "/netlify/functions/search_token"
       );
-      const {coveokey} = await response.json();
-    })()
+      return await response.json();
+    }
 
-    Coveo.SearchEndpoint.configureCloudV2Endpoint("", coveokey);
+    Coveo.SearchEndpoint.configureCloudV2Endpoint("", getSearchToken());
     const root = document.getElementById("search");
     const searchBoxRoot = document.getElementById("searchbox");
     Coveo.initSearchbox(searchBoxRoot, "/search.html");

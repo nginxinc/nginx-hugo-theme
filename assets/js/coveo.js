@@ -1,6 +1,15 @@
 import * as params from '@params';
 document.addEventListener('DOMContentLoaded', function () {
-    Coveo.SearchEndpoint.configureCloudV2Endpoint("", params.coveokey);
+
+    // call our Netlify function via API to get the coveo search key
+    async function getSearchToken() {
+      const response = await fetch(
+        "/netlify/functions/search_token"
+      );
+      const {coveokey} = await response.json();
+    }
+
+    Coveo.SearchEndpoint.configureCloudV2Endpoint("", coveokey);
     const root = document.getElementById("search");
     const searchBoxRoot = document.getElementById("searchbox");
     Coveo.initSearchbox(searchBoxRoot, "/search.html");

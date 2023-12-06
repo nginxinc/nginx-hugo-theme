@@ -22,7 +22,7 @@
 
 <!-- build coveo.js -->
 {{ $.Scratch.Set "coveoSc" "" }}
-{{- $coveo := resources.Get "js/coveo.js" | js.Build ( dict "params" ( dict "coveokey" {{ getenv "COVEO_SEARCH_TOKEN" }} )) -}}
+{{- $coveo := resources.Get "js/coveo.js" | js.Build -}}
 {{ $.Scratch.Set "coveoSc" $coveo}}
 {{ $secureCoveo := $.Scratch.Get "coveoSc" | minify | fingerprint "sha512" }}
 

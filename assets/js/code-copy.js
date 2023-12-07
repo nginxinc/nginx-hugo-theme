@@ -6,7 +6,8 @@ function CopyCode(clipboard) {
         button.innerHTML = '<i class="fas fa-copy"></i> Copy';
 
         button.addEventListener('click', function() {
-            clipboard.writeText(codeBlock.textContent).then(
+            // removes return carriage from copied text
+            clipboard.writeText(codeBlock.textContent.replace(/\n$/g, "")).then(
                 function() {
                     button.blur(); /* Chrome fix */
                     button.innerHTML = '<i class="fas fa-check"></i> Copied!';

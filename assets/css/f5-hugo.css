@@ -773,6 +773,7 @@ pre {
     -moz-tab-size: 4;
     -o-tab-size: 4;
     border-radius: 4px;
+    white-space: pre-wrap;
 }
 
 pre.chroma {
@@ -1057,7 +1058,6 @@ nav#TableOfContents > ul:not(:first-child) {
 
 }
 
-
 #sidebar.content > ul > li.nginx-toc-link.has-subnav:before {
     content: "3";
     font-family: "nginx-font" !important;
@@ -1095,6 +1095,53 @@ a.headerlink {
 a.headerlink:hover {
     opacity: 100%;
 }
+
+/* custom-styles shortcode additions */
+h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+main h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 1.8em;
+}
+
+main h4 {
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+h5 {
+    margin-top: 30px;
+}
+
+hr {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+td hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+summary {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: 300;
+    font-size: 15px;
+    color: green;
+}
+
+.fa-circle-check {
+    color: green;
+}
+
+/* end custom-styles shortcode additions */
 
 /* credit: 
     Randy_Lough

@@ -124,9 +124,9 @@ ol > li > ol {
     box-sizing: border-box;
     border-radius: 4px;
     height: 100%;
-  }
-  
-  .saas-card {
+}
+
+.saas-card {
     display: flex;
 }
 
@@ -162,22 +162,22 @@ h3.saas-title {
 }
 
 
-  a.products-card {
+a.products-card {
     display: block;
     transition: transform 150ms ease-in-out;
     color: #000;
-  }
-  
-  a.products-card:hover {
+}
+
+a.products-card:hover {
     opacity: 1;
     /* transform: scale(1.03); */
     box-shadow: 0px 5px 10px 0px #4856650F;
     box-shadow: 0px 12px 24px 0px #48566533;
-  }
-  
-  .card-img {
+}
+
+.card-img {
     background-repeat: no-repeat;
-  }
+}
 
 .card-text-placeholder {
     min-height: 35px;
@@ -402,7 +402,7 @@ footer a:hover,
 #footer .site-info.footer-text a,
 #footer .site-info.footer-text a:active,
 #footer .site-info.footer-text a:hover {
-  color: #CCCCCC;
+    color: #CCCCCC;
 }
 
 .footer-text,
@@ -427,10 +427,10 @@ footer a:hover,
 }
 
 .footer-head {
-  font-weight: 700;
-  color: #CCCCCC;
-  font-size: 14px;
-  line-height: 20px;
+    font-weight: 700;
+    color: #CCCCCC;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 .nginx-logo-footer {
@@ -704,7 +704,7 @@ redoc {
 }
 
 div pre>code {
-   white-space: pre;
+    white-space: pre;
 }
 
 .content {
@@ -773,6 +773,7 @@ pre {
     -moz-tab-size: 4;
     -o-tab-size: 4;
     border-radius: 4px;
+    white-space: pre-wrap;
 }
 
 pre.chroma {
@@ -793,11 +794,11 @@ code {
     background: #f1f1f1;
     border-radius: 4px;
 }
- 
+
 a>code:hover {
     color: #11BD8D;
 }
-  
+
 .min-page-height {
     min-height: 100vh;
 }
@@ -1000,7 +1001,6 @@ main a:hover {
 }
 
 .l3, .l3 > a {
-   
     padding-left: 15px;
     font-weight: normal;
     line-height: 20px;
@@ -1058,7 +1058,6 @@ nav#TableOfContents > ul:not(:first-child) {
 
 }
 
- 
 #sidebar.content > ul > li.nginx-toc-link.has-subnav:before {
     content: "3";
     font-family: "nginx-font" !important;
@@ -1081,10 +1080,10 @@ nav#TableOfContents > ul:not(:first-child) {
 
 a[aria-expanded=true] .fa-chevron-right {
     display: none;
- }
- a[aria-expanded=false] .fa-chevron-down {
+}
+a[aria-expanded=false] .fa-chevron-down {
     display: none;
- }
+}
 
 a.headerlink {
     font-size: 2rem;
@@ -1096,6 +1095,53 @@ a.headerlink {
 a.headerlink:hover {
     opacity: 100%;
 }
+
+/* custom-styles shortcode additions */
+h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+main h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 1.8em;
+}
+
+main h4 {
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+h5 {
+    margin-top: 30px;
+}
+
+hr {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+td hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+summary {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: 300;
+    font-size: 15px;
+    color: green;
+}
+
+.fa-circle-check {
+    color: green;
+}
+
+/* end custom-styles shortcode additions */
 
 /* credit: 
     Randy_Lough
@@ -1131,25 +1177,24 @@ a.headerlink:hover {
 }
 
 /* style all input elements with a required attribute */
-  
-  /**
+/**
    * style input elements that have a required
    * attribute and a focus state
    */
-  input:required:focus,
-  textarea:required:focus {
+input:required:focus,
+textarea:required:focus {
     border: .25px solid red;
     outline: none;
-  }
-  
-  /**
+}
+
+/**
    * style input elements that have a required
    * attribute and a hover state
    */
-  input:required:hover,
-  textarea:required:hover {
+input:required:hover,
+textarea:required:hover {
     opacity: 1;
-  }
+}
 
 .btn-outline-success:hover {
     background-color: var(--nginx-green);

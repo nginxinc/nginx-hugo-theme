@@ -161,7 +161,7 @@ sup {
     font-weight: inherit
 }
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     font-size: 62.5%;
     overflow-y: scroll;
     -webkit-text-size-adjust: 100%;

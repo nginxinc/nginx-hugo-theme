@@ -5,6 +5,7 @@ function handleInitialCollapse() {
 
   if (collapsed === "true") {
     $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
+    $(".sidenav").addClass("sidebar-col-collapsed-width");
   }
 }
 

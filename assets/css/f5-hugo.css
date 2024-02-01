@@ -1092,7 +1092,7 @@ main a:hover {
 
 .sidebar-toggle-collapsed #sidebar-content {
   transform: translate(-100%);
-  visibility: collapse;
+  display: none;
 }
 
 .sidebar-visible-collapsed {
@@ -1109,6 +1109,18 @@ main a:hover {
 
 .sidebar-col-collapsed-width {
   max-width: 50px;
+}
+
+.content-no-toc {
+  max-width: 100%;
+}
+
+.content-has-toc {
+  max-width: 50%;
+}
+
+.sidebar-content-collapsed-width {
+  max-width: calc(100% - 50px) !important;
 }
 
 .nginx-toc {

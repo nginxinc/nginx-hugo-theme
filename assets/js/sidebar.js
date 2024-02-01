@@ -6,6 +6,8 @@ function handleInitialCollapse() {
   if (collapsed === "true") {
     $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
     $(".sidenav").addClass("sidebar-col-collapsed-width");
+    $(".content").addClass("sidebar-content-collapsed-width");
+    $(".nginx-docs-api-container").addClass("sidebar-content-collapsed-width");
   }
 }
 
@@ -17,10 +19,16 @@ function handleSetCollapse() {
   if (collapsed === "false") {
     $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
     $(".sidenav").addClass("sidebar-col-collapsed-width");
+    $(".content").addClass("sidebar-content-collapsed-width");
+    $(".nginx-docs-api-container").addClass("sidebar-content-collapsed-width");
     localStorage.setItem(LOCAL_STORAGE_COLLAPSE_KEY, true);
   } else {
     $("#sidebar-wrapper").removeClass("sidebar-toggle-collapsed");
     $(".sidenav").delay(500).removeClass("sidebar-col-collapsed-width");
+    $(".content").removeClass("sidebar-content-collapsed-width");
+    $(".nginx-docs-api-container").removeClass(
+      "sidebar-content-collapsed-width"
+    );
     localStorage.setItem(LOCAL_STORAGE_COLLAPSE_KEY, false);
   }
 }

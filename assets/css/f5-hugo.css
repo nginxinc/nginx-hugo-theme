@@ -1061,15 +1061,54 @@ main a:hover {
   padding-left: 0px;
 }
 
-#sidebar-toggle {
-  position: absolute;
+#sidebar-wrapper {
+  width: 100%;
+  background: #f8f9f9;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 20px;
+  min-height: 100%;
   top: 0;
-  right: 0;
-  z-index: 10;
+  overflow-y: scroll;
 }
 
-.sidebar-collapsed {
+#sidebar-wrapper.sidebar-toggle-animate {
+  transition: transform 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#sidebar-toggle-button {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  top: 2rem;
+  border-radius: 50%;
+  right: calc(1.5rem);
+  z-index: 200 !important;
+}
+
+.sidebar-toggle-collapsed {
   transform: translateX(calc(-100% + 50px));
+}
+
+.sidebar-toggle-collapsed #sidebar-content {
+  transform: translate(-100%);
+  visibility: collapse;
+}
+
+.sidebar-visible-collapsed {
+  display: none;
+}
+
+.sidebar-toggle-collapsed .sidebar-visible-collapsed {
+  display: initial;
+}
+
+.sidebar-toggle-collapsed .sidebar-visible-expanded {
+  display: none;
+}
+
+.sidebar-col-collapsed-width {
+  max-width: 50px;
 }
 
 .nginx-toc {
@@ -1128,13 +1167,11 @@ main a:hover {
 }
 
 .sidenav {
-  background: #f8f9f9;
-  padding-left: 24px;
-  padding-top: 20px;
   position: sticky;
   top: 0rem;
   align-self: start;
   height: 100vh;
+  padding: 0;
 }
 
 #sidebar {

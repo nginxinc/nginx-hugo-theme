@@ -1,5 +1,35 @@
+const LOCAL_STORAGE_COLLAPSE_KEY = "sidebar-collapsed";
+
+function handleInitialCollapse() {
+  const collapsed = localStorage.getItem(LOCAL_STORAGE_COLLAPSE_KEY);
+
+  if (collapsed === "true") {
+    $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
+  }
+}
+
+function handleSetCollapse() {
+  $("#sidebar-wrapper").addClass("sidebar-toggle-animate");
+
+  const collapsed = localStorage.getItem(LOCAL_STORAGE_COLLAPSE_KEY);
+
+  if (collapsed === "false") {
+    $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
+    $(".sidenav").addClass("sidebar-col-collapsed-width");
+    localStorage.setItem(LOCAL_STORAGE_COLLAPSE_KEY, true);
+  } else {
+    $("#sidebar-wrapper").removeClass("sidebar-toggle-collapsed");
+    $(".sidenav").delay(500).removeClass("sidebar-col-collapsed-width");
+    localStorage.setItem(LOCAL_STORAGE_COLLAPSE_KEY, false);
+  }
+}
+
 // This code makes the sidebar remember which sections has been clicked when using the sidebar
 $(document).ready(function () {
+  // sidebar toggle navigation logic
+  handleInitialCollapse();
+  $("#sidebar-toggle-button").on("click", handleSetCollapse);
+
   $(".sidebar .nginx-toc-link a").each(function (i, item) {
     if (item.dataset.menuId == $(".main").data("menuId")) {
       $(item).css("color", "#429345");
@@ -31,21 +61,6 @@ $(document).ready(function () {
         });
 
       $(item).next(".accordion-body").find(".collapse").addClass("show");
-    }
-  });
-
-  // sidebar toggle navigation logic
-  $("#sidebar-toggle").on("click", function () {
-    const collapsed = $("#sidenav").data("sidebar-collapsed") === "true";
-    alert(collapsed);
-    if (!collapsed) {
-      $("#sidenav")
-        .data("sidebar-collapsed", "true")
-        .removeClass("sidebar-collapsed");
-    } else {
-      $("#sidenav")
-        .data("sidebar-collapsed", "false")
-        .addClass("sidebar-collapsed");
     }
   });
 });

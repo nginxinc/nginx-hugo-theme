@@ -4,10 +4,19 @@ function handleInitialCollapse() {
   const collapsed = localStorage.getItem(LOCAL_STORAGE_COLLAPSE_KEY);
 
   if (collapsed === "true") {
+    $("#sidebar-toggle-button").attr({
+      "aria-expanded": "false",
+      title: "Show sidebar navigation",
+    });
     $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
     $(".sidenav").addClass("sidebar-col-collapsed-width");
     $(".content").addClass("sidebar-content-collapsed-width");
     $(".nginx-docs-api-container").addClass("sidebar-redoc-collapsed-width");
+  } else {
+    $("#sidebar-toggle-button").attr({
+      "aria-expanded": "true",
+      title: "Hide sidebar navigation",
+    });
   }
 }
 
@@ -17,12 +26,20 @@ function handleSetCollapse() {
   const collapsed = localStorage.getItem(LOCAL_STORAGE_COLLAPSE_KEY);
 
   if (collapsed === "false") {
+    $("#sidebar-toggle-button").attr({
+      "aria-expanded": "false",
+      title: "Show sidebar navigation",
+    });
     $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
     $(".sidenav").addClass("sidebar-col-collapsed-width");
     $(".content").addClass("sidebar-content-collapsed-width");
     $(".nginx-docs-api-container").addClass("sidebar-redoc-collapsed-width");
     localStorage.setItem(LOCAL_STORAGE_COLLAPSE_KEY, true);
   } else {
+    $("#sidebar-toggle-button").attr({
+      "aria-expanded": "true",
+      title: "Hide sidebar navigation",
+    });
     $("#sidebar-wrapper").removeClass("sidebar-toggle-collapsed");
     $(".sidenav").delay(500).removeClass("sidebar-col-collapsed-width");
     $(".content").removeClass("sidebar-content-collapsed-width");

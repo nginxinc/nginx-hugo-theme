@@ -718,10 +718,6 @@ redoc {
   overscroll-behavior-y: none;
 }
 
-.nginx-docs-api-container {
-  width: 100%;
-}
-
 .nginx-docs-api-container button {
   border-color: inherit;
   box-shadow: none !important;
@@ -1078,16 +1074,29 @@ main a:hover {
 
 #sidebar-toggle-button {
   position: absolute;
-  width: 3rem;
-  height: 3rem;
-  top: 2rem;
-  border-radius: 50%;
-  right: calc(1.5rem);
+  width: 2.4rem;
+  height: 2.4rem;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 200 !important;
+  border-radius: 0;
+  padding: 0;
+}
+
+#sidebar-toggle-button > i {
+  padding: 0 !important;
+}
+
+#sidebar-toggle-button:hover {
+  background-color: var(--nginx-green);
+  color: white;
 }
 
 .sidebar-toggle-collapsed {
-  transform: translateX(calc(-100% + 50px));
+  transform: translateX(calc(-100% + 2.4rem));
 }
 
 .sidebar-toggle-collapsed #sidebar-content {
@@ -1108,7 +1117,7 @@ main a:hover {
 }
 
 .sidebar-col-collapsed-width {
-  max-width: 50px;
+  max-width: 2.4rem;
 }
 
 .content-no-toc {
@@ -1120,7 +1129,17 @@ main a:hover {
 }
 
 .sidebar-content-collapsed-width {
-  max-width: calc(100% - 50px) !important;
+  max-width: 100% !important;
+}
+
+.sidebar-redoc-collapsed-width {
+  max-width: calc(100% + 2.4rem) !important;
+}
+
+@media (min-width: 768px) {
+  .sidebar-redoc-collapsed-width {
+    max-width: 100% !important;
+  }
 }
 
 .nginx-toc {

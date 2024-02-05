@@ -1126,6 +1126,7 @@ main a:hover {
 
 .content-has-toc {
   max-width: 50%;
+  width: 50%;
 }
 
 .sidebar-content-collapsed-width {

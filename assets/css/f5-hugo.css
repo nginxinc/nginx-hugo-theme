@@ -1129,6 +1129,18 @@ main a:hover {
   width: 50%;
 }
 
+.hide-sidebar-border {
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-sidebar-border::-webkit-scrollbar {
+  width: 0px; /* Chrome, Safari */
+}
+
+.sidebar-toggle-collapsed::-webkit-scrollbar {
+  width: 0px; /* Chrome, Safari */
+}
+
 .sidebar-content-collapsed-width {
   max-width: 100% !important;
 }

@@ -17,6 +17,7 @@ function handleInitialCollapse() {
       "aria-expanded": "true",
       title: "Hide sidebar navigation",
     });
+    $("#sidebar-wrapper").addClass("hide-sidebar-border");
   }
 }
 
@@ -40,6 +41,7 @@ function handleSetCollapse() {
       "aria-expanded": "true",
       title: "Hide sidebar navigation",
     });
+    $("#sidebar-wrapper").addClass("hide-sidebar-border");
     $("#sidebar-wrapper").removeClass("sidebar-toggle-collapsed");
     $(".sidenav").delay(500).removeClass("sidebar-col-collapsed-width");
     $(".content").removeClass("sidebar-content-collapsed-width");

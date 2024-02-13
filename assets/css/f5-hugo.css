@@ -1069,7 +1069,7 @@ main a:hover {
 }
 
 #sidebar-wrapper.sidebar-toggle-animate {
-  transition: transform 0.25s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 #sidebar-toggle-button {
@@ -1117,6 +1117,8 @@ main a:hover {
 }
 
 .sidebar-col-collapsed-width {
+  transition: max-width 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  width: auto;
   max-width: 2.4rem;
 }
 

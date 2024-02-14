@@ -8,8 +8,8 @@ function handleInitialCollapse() {
       "aria-expanded": "false",
       title: "Show sidebar navigation",
     });
+    $(".sidenav").css("max-width", "2.4rem");
     $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
-    $(".sidenav").addClass("sidebar-col-collapsed-width");
     $(".content").addClass("sidebar-content-collapsed-width");
     $(".nginx-docs-api-container").addClass("sidebar-redoc-collapsed-width");
   } else {
@@ -17,6 +17,7 @@ function handleInitialCollapse() {
       "aria-expanded": "true",
       title: "Hide sidebar navigation",
     });
+    $(".sidenav").css("max-width", "100%");
     $("#sidebar-wrapper").addClass("hide-sidebar-border");
   }
 }
@@ -32,7 +33,6 @@ function handleSetCollapse() {
       title: "Show sidebar navigation",
     });
     $("#sidebar-wrapper").addClass("sidebar-toggle-collapsed");
-    $(".sidenav").addClass("sidebar-col-collapsed-width");
     $(".content").addClass("sidebar-content-collapsed-width");
     $(".nginx-docs-api-container").addClass("sidebar-redoc-collapsed-width");
     localStorage.setItem(LOCAL_STORAGE_COLLAPSE_KEY, true);
@@ -41,12 +41,19 @@ function handleSetCollapse() {
       "aria-expanded": "true",
       title: "Hide sidebar navigation",
     });
+    $(".sidenav").css("max-width", "100%");
     $("#sidebar-wrapper").addClass("hide-sidebar-border");
     $("#sidebar-wrapper").removeClass("sidebar-toggle-collapsed");
-    $(".sidenav").delay(500).removeClass("sidebar-col-collapsed-width");
     $(".content").removeClass("sidebar-content-collapsed-width");
     $(".nginx-docs-api-container").removeClass("sidebar-redoc-collapsed-width");
     localStorage.setItem(LOCAL_STORAGE_COLLAPSE_KEY, false);
+  }
+}
+
+function handleAnimationEnd(event) {
+  const collapsed = localStorage.getItem(LOCAL_STORAGE_COLLAPSE_KEY);
+  if (collapsed === "true") {
+    $(this).css("max-width", "2.4rem");
   }
 }
 
@@ -55,6 +62,7 @@ $(document).ready(function () {
   // sidebar toggle navigation logic
   handleInitialCollapse();
   $("#sidebar-toggle-button").on("click", handleSetCollapse);
+  $(".sidenav").on("transitionend", handleAnimationEnd);
 
   $(".sidebar .nginx-toc-link a").each(function (i, item) {
     if (item.dataset.menuId == $(".main").data("menuId")) {

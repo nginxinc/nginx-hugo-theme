@@ -12,7 +12,7 @@
 
 {{ if .Get 1 }}
     {{ $linktext := .Get 1 | markdownify }} 
-    <a href="{{$ref}}" download="$linktext">{{$linktext}}</a>
+    <a href="{{$ref}}" download="{{$linktext}}">{{$linktext}}</a>
 
 {{/* Otherwise, just get the path to the file to be downloaded. This will be run through the markdown processor
   and used as the filename. */}}

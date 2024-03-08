@@ -1,0 +1,28 @@
+{{/* This shortcode lets you create a link to download a file */}}
+{{/* It accepts 2 strings: the path to the file to download, relative to the Hugo build context (aka, content or static directory); the name to display for the target file */}}
+{{/* Usage: download <path/to/file.ext> <desired file name (optional)> */}}
+
+<i class="fas fa-file-download fa-sm"></i>
+
+{{/* Sets the file path provided in the shortcode as the href target, prepended by the Hugo BaseURL */}}
+
+{{ $ref := .Get 0 | relURL }}
+
+{{/* If it exists, get the second string provided by the user and run it through the markdown processor */}}
+
+{{ if .Get 1 }}
+    {{ $linktext := .Get 1 | markdownify }} 
+    <a href="{{$ref}}" download="{{$linktext}}">{{$linktext}}</a>
+
+{{/* Otherwise, just get the path to the file to be downloaded. This will be run through the markdown processor
+  and used as the filename. */}}
+
+{{ else if .Get 0 }} 
+    {{ $linktext := .Get 0 | markdownify }} 
+    <a href="{{$ref}}" download>{{$linktext}}</a>
+
+{{ else }}
+
+    {{ errorf "no file path value provided in download shortcode: %s" .Position }}
+
+{{ end }}

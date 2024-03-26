@@ -220,6 +220,18 @@ ol > li > ol {
   height: 100%;
 }
 
+.other-products-card {
+   color: #33444d;
+   background-color: #fff;
+   box-shadow: 0px 1px 4px 0px #4856653d;
+   box-shadow: 0px 4px 8px 0px #48566529;
+   padding: 24px 36px;
+   border: 1px solid #f8f9f9;
+   box-sizing: border-box;
+   border-radius: 4px;
+   height: 100%;
+ }
+
 .saas-card {
   display: flex;
 }
@@ -266,6 +278,19 @@ a.products-card:hover {
   box-shadow: 0px 5px 10px 0px #4856650f;
   box-shadow: 0px 12px 24px 0px #48566533;
 }
+
+a.other-products-card {
+   display: block;
+   transition: transform 150ms ease-in-out;
+   color: #000;
+ }
+
+ a.other-products-card:hover {
+   opacity: 1;
+   /* transform: scale(1.03); */
+   box-shadow: 0px 5px 10px 0px #4856650f;
+   box-shadow: 0px 12px 24px 0px #48566533;
+ }
 
 .card-img {
   background-repeat: no-repeat;
@@ -339,6 +364,11 @@ a.products-card:hover {
   padding-left: 52px;
   text-indent: -52px;
 }
+
+.other-products-card > .card-title {
+   padding-left: 52px;
+   text-indent: -52px;
+ }
 
 h3.card-title a {
   color: #000;
@@ -732,7 +762,7 @@ redoc {
   font-family: "Roboto-Regular", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* 
+/*
 / Make tooltip appear on hover
 */
 
@@ -1342,7 +1372,7 @@ summary {
 
 /* end custom-styles shortcode additions */
 
-/* credit: 
+/* credit:
     Randy_Lough
     https://discourse.gohugo.io/t/bootstrap-4-pagination-some-added-functionality/11393
 */

@@ -44,6 +44,7 @@ This theme contains the following custom shorcodes:
 **Formatting**:
 
 - collapse.html - Make a collapsible section.
+- details-disclosure.html - Renders information inside a toggleable element (open by default but can be toggled in/out of visibility).
 - comment.html - Insert a comment that won't be rendered at build time.
 - raw-html.html - Insert raw HTML into a markdown doc.
 

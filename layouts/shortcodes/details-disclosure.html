@@ -1,5 +1,9 @@
 {{ $summary := .Get "summary"}} 
-<details open>
+{{ $initial_state := .Get "initial_state"}} 
+
+<details {{ $initial_state }}>
     <summary>{{ $summary }}</summary>
+    
     {{ .Inner | markdownify }}
+
 </details>

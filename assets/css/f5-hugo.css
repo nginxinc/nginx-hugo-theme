@@ -1540,3 +1540,25 @@ li.nav-item a.nav-link {
   border-top: 1px solid #429345;
   margin-bottom: 10px;
 }
+
+.figure-bitmap {
+   border: solid 2px #42932D;
+   margin-bottom: 10px;
+   display: inline-block;
+   max-width: 100%;
+}
+
+.figure-svg {
+   border: solid 2px #42932D;
+   margin-bottom: 10px;
+   display: block;
+   min-width: 100%;
+}
+
+.md__image {
+  border: solid 2px #42932D;
+  margin-bottom: 10px;
+  display: inline-block;
+  max-width: 100%;
+  min-width: 100%;
+}

@@ -186,20 +186,6 @@ section {
     display: block
 }
 
-.figure-bitmap {
-   border: solid 2px #42932D;
-   margin-bottom: 10px;
-   display: inline-block;
-   max-width: 100%;
-}
-
-.figure-svg {
-   border: solid 2px #42932D;
-   margin-bottom: 10px;
-   display: block;
-   min-width: 100%;
-}
-
 caption,
 td {
     font-weight: 300

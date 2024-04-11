@@ -18,6 +18,7 @@ function handleInitialCollapse() {
       title: "Hide sidebar navigation",
     });
     $(".sidenav").css("max-width", "100%");
+    $(".content").addClass("sidebar-content-collapsed-width");
     $("#sidebar-wrapper").addClass("hide-sidebar-border");
   }
 }

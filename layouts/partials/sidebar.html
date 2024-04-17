@@ -43,8 +43,8 @@
                                 <a data-menu-id="{{.RelPermalink}}" class="accordion-toggle" aria-expanded="false"
                                     data-toggle="collapse" href="#" data-target="#{{.Section | urlize}}--{{.Title | urlize}}"
                                     aria-controls="{{.Section | urlize}}--{{.Title | urlize}}">
-                                    <i class="fa fa-sm fa-fw fa-chevron-right"></i><i
-                                        class="fa fa-sm fa-fw fa-chevron-down"></i>{{ .Title }}</a>
+                                    <i class="fa fa-2xs fa-fw fa-chevron-right"></i><i
+                                        class="fa fa-2xs fa-fw fa-chevron-down"></i>{{ .Title }}</a>
                             </li>
                         </div>
                         <div id="{{.Section | urlize}}--{{.Title | urlize}}" class="accordion-body collapse">
@@ -92,7 +92,7 @@
                                                         <li class="nginx-toc-link l3 sidebar-il-border">
                                                             <a data-menu-id="{{.RelPermalink}}" href="{{ .Permalink }}">{{ .Title }}</a>
                                                         </li>
-                                                    </ul>                                            
+                                                    </ul>
                                                     <!-- Create an accordion group for Level 3 sections -->
                                                     {{else}}
                                                     <div class="accordion" id="Accordion3">
@@ -148,7 +148,7 @@
                                                                                                 </li>
                                                                                             </ul>
                                                                                             <!-- Create an accordion group for Level 5sections -->
-                                                                                            {{else}}    
+                                                                                            {{else}}
                                                                                             <div class="accordion" id="Accordion5">
                                                                                                 <div class="sidebar-l2-padding">
                                                                                                     <div class="accordion-group sidebar-il-border">
@@ -174,14 +174,14 @@
                                                                             </div>
                                                                         </div>
                                                                         {{ end }}
-                                                                        {{ end }}  
+                                                                        {{ end }}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     {{ end }}
-                                                {{ end }}                                        
+                                                {{ end }}
                                                 </div>
                                             </div>
                                         </div>
@@ -192,7 +192,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
                 {{ end }}
             {{ end }}
         {{ end }}

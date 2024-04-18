@@ -1,12 +1,10 @@
 {{ $jquery := resources.Get "/js/jquery-3-6-4.min.js" }}
-
 <script src="{{ $jquery.RelPermalink }}" type="text/javascript" integrity="{{ $jquery.Data.Integrity }}"></script>
 
 {{ $kubejs := resources.Get "/js/kube.js" | minify | fingerprint "sha512" }}
 <script src="{{ $kubejs.RelPermalink }}" type="text/javascript" integrity="{{ $kubejs.Data.Integrity }}"></script>
 
-
-<!-- load Bootstrap from local assets -->  
+<!-- load Bootstrap from local assets -->
 {{ $jsBootstrap := resources.Get "js/bootstrap.bundle.min.js" | fingerprint "sha512" }}
 <script src="{{ $jsBootstrap.RelPermalink }}" type="text/javascript" integrity="{{ $jsBootstrap.Data.Integrity }}"></script>
 
@@ -14,6 +12,11 @@
 {{ $codecopy := resources.Get "/js/code-copy.js" | fingerprint "sha512" }}
 <script src="{{ $codecopy.RelPermalink }}" type="text/javascript" ></script>
 
+<!-- load mermaid.js -->
+{{ if .Page.Store.Get "hasMermaid" }}
+{{ $mermaid := resources.Get "js/mermaid.min.js" | fingerprint "sha512" }}
+<script src="{{ $mermaid.RelPermalink }}" type="text/javascript" integrity="{{ $mermaid.Data.Integrity }}"></script>
+{{ end }}
 
 <!-- START COVEO -->
 <script class="coveo-script" src="https://static.cloud.coveo.com/searchui/v2.10104/0/js/CoveoJsSearch.Lazy.min.js" integrity="sha512-HxdDBIp5snbqtu1TPkBnXLKEvN9IPz3PeZW8zT9KfsflV9Ck822XDroDlpVbfCfXeiu8C0RDVn0fdu7aGy/H1g==" crossorigin="anonymous"></script>
@@ -36,7 +39,7 @@
 
   {{ $redoc := resources.Get "js/redoc.standalone.js" }}
   {{ $redoc := $redoc | fingerprint "sha512" }}
-  
+
   <!-- only load the redoc js if we're on an api reference page -->
   {{ if and (in .Params.doctypes "reference") (in .Params.tags "api") }}
 <script src="{{$redoc.RelPermalink}}" type="text/javascript"></script>{{ end }}

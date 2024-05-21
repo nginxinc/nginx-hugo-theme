@@ -1,8 +1,9 @@
 {{ $summary := .Get "summary"}} 
 {{ $initial_state := .Get "initial_state"}} 
+{{ $icon := .Get "icon"}}
 
 <details {{ $initial_state }}>
-    <summary>{{ $summary }}</summary>
+    <summary>{{ if .Get "icon_prefix" }}<i class="{{ $icon }}"></i>&nbsp;{{ end }}{{ $summary }}</summary>
     
     {{ .Inner | markdownify }}
 

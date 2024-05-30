@@ -550,7 +550,7 @@ footer a:hover,
 
 .site-info.footer-text p {
   font-weight: 300;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 16px;
 }
 
@@ -1557,4 +1557,9 @@ li.nav-item a.nav-link {
   display: inline-block;
   max-width: 100%;
   min-width: 100%;
+}
+
+.f5-logo-footer {
+   height: 32px;
+   width: 32px;
 }

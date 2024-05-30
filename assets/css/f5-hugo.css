@@ -549,9 +549,13 @@ footer a:hover,
 }
 
 .site-info.footer-text p {
-  font-weight: 300;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 13px;
   line-height: 16px;
+}
+
+.site-info.footer-text a {
+   padding-right: 20px;
 }
 
 .footer-head {
@@ -1557,4 +1561,9 @@ li.nav-item a.nav-link {
   display: inline-block;
   max-width: 100%;
   min-width: 100%;
+}
+
+.f5-logo-footer {
+   height: 32px;
+   width: 32px;
 }

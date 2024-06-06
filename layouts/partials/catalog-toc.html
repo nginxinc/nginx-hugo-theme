@@ -1,0 +1,16 @@
+{{/*  Parse param from front matter  */}}
+{{ $dataPath := split .Params.catalogType "." }}
+{{ $data := .Site.Data }}
+{{range $dataPath}}
+    {{ $data =  index $data . }}
+{{ end }}
+<nav id="TableOfContents">
+    <ul>
+        {{ range $data }}
+        {{/*  Render catalog toc list  */}}
+        <li>
+            <a href="#{{.name}}">{{.name}}</a>
+        </li>
+        {{ end }}
+    </ul>
+</nav>

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Netlify function to get the coveo search token via API
     async function getSearchToken() {
       const response = await fetch(
-        window.location.origin+"/.netlify/functions/search_token"
+        window.location.origin+"/api/v1/auth/search_token"
       );
       return response.json();
     }

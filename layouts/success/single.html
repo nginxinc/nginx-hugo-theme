@@ -6,18 +6,18 @@
             <div class="d-xl-flex align-center justify-content-center p-4">
                 <h1>{{ .Title }}</h1>
             </div>
-            
+
             <div class="d-xl-flex align-center justify-content-center p-4">
-                <p>Your comments have been received. 
+                <p>Your comments have been received.
                 We appreciate you taking the time to give us feedback!</p>
             </div>
-            
+
             <div class="d-xl-flex align-center justify-content-center p-4">
-                <a class="btn btn-outline-success btn-lg" href="{{.Site.BaseURL}}" role="button">
+                <a class="btn btn-outline-success btn-lg" href="{{ "/" | absURL }}" role="button">
                   Go to the NGINX Docs Home page</a>
             </div>
         </div>
     </main>
-</div> 
+</div>
 
 {{ end }}

@@ -484,7 +484,6 @@ blockquote,
 dd,
 ol,
 p,
-table,
 ul {
   border: 0;
   font-family: inherit;
@@ -496,33 +495,27 @@ ul {
   padding: 0;
 }
 
-/* add css styles for tables with the fancy class */
-.fancy {
+table {
    width: 100%;
    border-collapse: collapse;
-}
-
-.fancy th, .fancy td {
+  }
+  th, td {
    padding: 8px;
    text-align: left;
-}
-
-.fancy th {
-   background-color: #289951; /* Dark green */
+  }
+  th {
+   background-color: #289951 ; /* Dark green */
    color: white; /* White text for readability */
-}
-
-.fancy.table-striped > tbody > tr:nth-of-type(odd) {
-   background-color: #fff; /* White */
-}
-
-.fancy.table-striped > tbody > tr:nth-of-type(even) {
+  }
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #fff; /* White */
+  }
+  .table-striped > tbody > tr:nth-of-type(even) {
    background-color: #f9f9f9; /* Light gray */
-}
-
-.fancy th, .fancy td {
+  }
+  th, td {
    border: none;
-}
+  }
 
 
 .section-heading {

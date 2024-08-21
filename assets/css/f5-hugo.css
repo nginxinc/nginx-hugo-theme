@@ -496,6 +496,35 @@ ul {
   padding: 0;
 }
 
+/* add css styles for tables with the fancy class */
+.fancy {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.fancy th, .fancy td {
+   padding: 8px;
+   text-align: left;
+}
+
+.fancy th {
+   background-color: #289951; /* Dark green */
+   color: white; /* White text for readability */
+}
+
+.fancy.table-striped > tbody > tr:nth-of-type(odd) {
+   background-color: #fff; /* White */
+}
+
+.fancy.table-striped > tbody > tr:nth-of-type(even) {
+   background-color: #f9f9f9; /* Light gray */
+}
+
+.fancy th, .fancy td {
+   border: none;
+}
+
+
 .section-heading {
   padding-top: 20px;
 }

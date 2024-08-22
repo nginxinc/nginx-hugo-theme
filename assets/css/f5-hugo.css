@@ -556,14 +556,18 @@ footer a:hover,
 }
 
 .footer-text,
-.footer-text li,
-.footer-social li {
+.footer-text li {
   font-style: normal;
   font-size: 14px;
   line-height: 20px;
   font-weight: 300;
   /* identical to box height */
   color: #cccccc;
+}
+
+.footer-social li {
+  font-size: 25px;
+  padding-right: 8px;
 }
 
 .site-info {

@@ -484,7 +484,6 @@ blockquote,
 dd,
 ol,
 p,
-table,
 ul {
   border: 0;
   font-family: inherit;
@@ -495,6 +494,29 @@ ul {
   outline: 0;
   padding: 0;
 }
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+  }
+  th, td {
+   padding: 8px;
+   text-align: left;
+  }
+  th {
+   background-color: #289951 ; /* Dark green */
+   color: white; /* White text for readability */
+  }
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #fff; /* White */
+  }
+  .table-striped > tbody > tr:nth-of-type(even) {
+   background-color: #f9f9f9; /* Light gray */
+  }
+  th, td {
+   border: none;
+  }
+
 
 .section-heading {
   padding-top: 20px;

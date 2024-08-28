@@ -4,14 +4,11 @@
   <main class="col-xl-8 d-block" role="main">
     <div class="container">
       <h1 class="align-center">{{ .Title }}</h1>
-      {{ if .Description }}
-      <p class="muted align-center pb-4">{{ .Description | markdownify }}</p><hr>{{ end}}
       {{ if .Content }}
       <div class="pb-4 mb-2">{{ .Content }}</div>
       {{ end }}
     </div>
   </main>
 </div>
-
 
 {{ end }}

@@ -4,11 +4,6 @@
             <h1 class="bd-title">
                 {{ .Title | humanize }} Index
             </h1>
-            {{ if .Description }}
-                <p class="bd-lead">
-                    {{ .Description | markdownify }}
-                </p>
-            {{ end}}
             {{ if .Content }}
                 <p class="bd-lead">
                     {{ .Content | markdownify }}

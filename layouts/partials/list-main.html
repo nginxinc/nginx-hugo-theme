@@ -4,11 +4,6 @@
             <h1 class="bd-title">
                 {{ .Title }}
             </h1>
-            {{ if .Description }}
-                <p class="bd-lead">
-                    {{ .Description | markdownify }}
-                </p>
-            {{ end}}
             {{ if .Content }}
                 <p class="bd-lead">
                     {{ .Content | markdownify }}
@@ -28,9 +23,6 @@
                             <i class="fas fa-{{if eq .Kind "page"}}file-alt{{else}}book{{end}} fa-2x card-img-top"></i>
                             <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
                         </h3>
-                        {{/*}}<p class="card-text">
-                            {{ if .Description }}{{ .Description | markdownify }}{{ end }}    
-                        </p>{{*/}}
                     </div>
                 </div>
                 {{ end }}

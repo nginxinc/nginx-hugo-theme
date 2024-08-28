@@ -3,7 +3,4 @@
         <a href="{{ .Permalink }}" itemprop="headline">{{ .Title }}</a>
     </h2>
     <hr>
-    {{ if .Description }}
-    <p itemprop="about">{{ .Description | markdownify }}</p>
-    {{ end }}
 </li>

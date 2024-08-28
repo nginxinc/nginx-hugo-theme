@@ -11,12 +11,10 @@
   {{ else }}
   <main class="content col d-block align-top content-no-toc" role="main">
   {{ end }}
-
     
     <h1>{{ .Title }}</h1>
 
       {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
-      {{ if .Description }}<p>{{ .Description | markdownify }}</p>{{ end}}
 
       {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
   

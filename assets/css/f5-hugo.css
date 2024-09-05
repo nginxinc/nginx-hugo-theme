@@ -207,6 +207,12 @@ ol > li > ol {
   border-radius: 2px;
 }
 
+@media (max-width: 575px) {
+  .card {
+    min-width: 100% !important;
+  }
+}
+
 .products-card {
   color: #33444d;
   background-color: #fff;
@@ -283,14 +289,14 @@ a.other-products-card {
    display: block;
    transition: transform 150ms ease-in-out;
    color: #000;
- }
+}
 
- a.other-products-card:hover {
-   opacity: 1;
-   /* transform: scale(1.03); */
-   box-shadow: 0px 5px 10px 0px #4856650f;
-   box-shadow: 0px 12px 24px 0px #48566533;
- }
+a.other-products-card:hover {
+  opacity: 1;
+  /* transform: scale(1.03); */
+  box-shadow: 0px 5px 10px 0px #4856650f;
+  box-shadow: 0px 12px 24px 0px #48566533;
+}
 
 .card-img {
   background-repeat: no-repeat;
@@ -298,6 +304,14 @@ a.other-products-card {
 
 .card-text-placeholder {
   min-height: 35px;
+}
+
+.mini-card-body {
+  display: flex; 
+  flex-direction: column;
+  gap: 8px; 
+  align-items: start;
+  margin-top: -30px;
 }
 
 .list-card {

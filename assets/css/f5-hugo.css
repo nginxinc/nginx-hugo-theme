@@ -306,7 +306,7 @@ a.other-products-card:hover {
   min-height: 35px;
 }
 
-.mini-card-body {
+.card-body {
   display: flex; 
   flex-direction: column;
   gap: 8px; 
@@ -357,7 +357,7 @@ a.other-products-card:hover {
 .card-img,
 .card-img-top {
   width: auto;
-  height: 40px;
+  max-height: 40px;
   color: var(--nginx-green);
   margin-right: 5px;
 }

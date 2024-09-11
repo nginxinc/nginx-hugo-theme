@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     window.onclick = function(event) {
         if (!event.target.matches('#navbar-sites-button') && !event.target.matches('#navbar-sites-button-icon')) {
-            if(dropdownContent.style.display !== "none"){
+            if(dropdownContent.style.display !== "none" && dropdownContent.style.display !== ""){
                 chevronIcon.classList.toggle('rotate-chevron');
             }
             dropdownContent.style.display = "none"

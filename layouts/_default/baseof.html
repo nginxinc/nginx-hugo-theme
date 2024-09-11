@@ -18,7 +18,7 @@
 {{ partial "head_custom.html" . }}
 {{ end }}
 
-{{ if or ( not .Site.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
+{{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
       
 {{ partial "trustarc.html" . }}
 
@@ -37,7 +37,7 @@
 </head>
 
 <body>
-  {{ if or ( not .Site.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }} 
+  {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
 {{ partial "universal-tag.html" . }}
   {{ end }}
 

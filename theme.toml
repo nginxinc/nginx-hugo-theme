@@ -7,7 +7,7 @@ licenselink = "https://github.com/nginxinc/nginx-hugo-theme/blob/main/LICENSE"
 description = "Hugo theme for F5 NGINX documentation"
 homepage = "https://docs.nginx.com/"
 
-min_version = "0.74.3"
+min_version = "0.128.0"
 
 [author]
   name = "F5, Inc."

@@ -1607,3 +1607,42 @@ li.nav-item a.nav-link {
    height: 32px;
    width: 32px;
 }
+
+.link-chevron-icon {
+  transition: transform 0.15s ease-in-out; 
+}
+
+.rotate-chevron {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0; 
+  display: none;
+  width: 400px;
+  max-width: 80vw;
+  margin-right: 8px;
+}
+
+.dropdown-content ul {
+  padding: 20px 10px;
+  list-style: none;
+}
+
+@media (max-width: 767px) {
+  .dropdown-content {
+    right: auto; 
+    left: 50%; 
+    transform: translateX(-50%);
+    margin-right: 0px;
+  }
+}
+
+.remove-bottom-radius {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}

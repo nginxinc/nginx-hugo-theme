@@ -60,3 +60,7 @@
 {{ $jsThemeSwitcher := resources.Get "js/theme-switcher.js" | minify | fingerprint "sha512" }}
 <script src="{{ $jsThemeSwitcher.RelPermalink }}" type="text/javascript"
   integrity="{{ $jsThemeSwitcher.Data.Integrity }}"></script>
+  
+<!-- Load Product Dropdown javascript -->
+{{ $jsProductDropdown := resources.Get "js/product-dropdown.js" | minify | fingerprint "sha512" }}
+<script src="{{ $jsProductDropdown.RelPermalink }}" type="text/javascript" integrity="{{ $jsProductDropdown.Data.Integrity }}"></script>

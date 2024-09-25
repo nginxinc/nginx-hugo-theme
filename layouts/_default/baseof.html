@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 
-<head>  
+<head>
 {{ block "head" . }}
 
 {{ partial "meta.html" . }}
@@ -19,7 +19,7 @@
 {{ end }}
 
 {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
-      
+
 {{ partial "trustarc.html" . }}
 
 {{ partial "tealium-profile.html" . }}
@@ -45,14 +45,16 @@
     {{ block "header" . }}{{end}}
   </header>
 
+  {{ partial "license" .}}
+
   {{ if not .IsHome }}
     {{ if not (in .Params.display_breadcrumb "false" ) }}
-    {{ partial "breadcrumb" .}}  
+    {{ partial "breadcrumb" .}}
     {{ end }}
   {{ end }}
 
   <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
-    
+
     {{ block "main" . }}{{ end }}
 
   </div>
@@ -65,7 +67,7 @@
 
   </footer>
 
-{{ partial "scripts.html" . }} 
+{{ partial "scripts.html" . }}
 <div id="consent_blackbar" style="position:fixed;top:0px;width:100%"></div>
 </body>
 </html>

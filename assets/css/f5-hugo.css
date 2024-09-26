@@ -1116,6 +1116,9 @@ main a:hover {
 .sidebar-title {
   font-size: 22px;
   font-weight: 600 !important;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 #sidebar > h3 > a:hover {

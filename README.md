@@ -52,6 +52,20 @@ This theme contains the following custom shorcodes:
 
 - openapi.html - Render an OpenAPI spec using ReDoc.
 - metrics.html - Imports data from a JSON file and presents it in table format.
+- ghcode.html - Rendering code from github
+
+#### `ghcode` example
+To render code directly from github at build time, you can use the `ghcode` shortcode.
+
+_Param 1_ - The url for the `raw` github file you want to render
+
+_Param 2_ - Options for highlighting following Hugo's [Highlight shortcode](https://gohugo.io/content-management/syntax-highlighting/#highlight-shortcode)
+
+```
+{{< ghcode "https://raw.githubusercontent.com/nginxinc/kubernetes-ingress/refs/heads/main/examples/custom-resources/access-control/access-control-policy-allow.yaml" "hl_lines=4" >}}
+```
+
+
 
 ### Includes
 

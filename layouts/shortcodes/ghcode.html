@@ -1,0 +1,12 @@
+{{ $file := .Get 0 }}
+{{ $params := .Get 1 }}
+{{ with resources.GetRemote $file }}
+  {{ with .Err }}
+    {{ errorf "%s" . }}
+  {{ else }}
+    {{ $lang := path.Ext $file | strings.TrimPrefix "." }}
+    {{ highlight .Content $lang $params }}
+  {{ end }}
+{{ else }}
+  {{ errorf "Unable to load github content from %s from %q" $file .Position}}
+{{ end }}

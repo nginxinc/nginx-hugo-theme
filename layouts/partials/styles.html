@@ -5,6 +5,7 @@
 {{ $css5 := resources.Get "css/highlight.css" }}
 {{ $css6 := resources.Get "css/coveo.css" }}
 {{ $css7 := resources.Get "css/v2/style.css" }}
+{{ $css8 := resources.Get "css/inline-overrides.css" }}
 
 <!-- load v2 theme assets -->
 <link href="{{ $css7.RelPermalink }}" integrity="{{ $css7.Data.Integrity }}" rel="stylesheet" type="text/css" id="css7"
@@ -50,6 +51,9 @@
 
 {{ $cssF5Hugo := $css4 | minify | fingerprint "sha512"}}
 <link href="{{ $cssF5Hugo.RelPermalink }}" rel="stylesheet" type="text/css" id="css4">
+
+{{ $cssOverrides := $css8 | minify | fingerprint "sha512"}}
+<link href="{{ $cssOverrides.RelPermalink }}" rel="stylesheet" type="text/css" id="css8">
 
 {{ if fileExists "assets/css/custom.css" }}
 {{ $customCSS := resources.Get "css/custom.css" | minify | fingerprint "sha512" }}

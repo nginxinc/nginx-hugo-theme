@@ -1,6 +1,6 @@
 {{ define "main" }}
-<div class="row" style="max-width: calc(100% + 30px) !important; flex-wrap: nowrap;">
-  <nav class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top" style="width: 25%;">
+<div class="row override-sidebar-collapse">
+  <nav class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top">
     {{ partial "sidebar.html" . }}
   </nav>
   
@@ -26,7 +26,7 @@
   </main>
   {{ if and (gt .WordCount 200 ) (.Params.toc) }}
     {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
-      <div class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top" style="width: 25%;">
+      <div class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
       {{ partial "toc.html" . }}
       </div>
     {{ end }}

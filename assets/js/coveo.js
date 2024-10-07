@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     const searchToken = await getSearchToken()
+    console.log("ORG ID: f5networkx1h1607h")
     Coveo.SearchEndpoint.configureCloudV2Endpoint("f5networkx1h1607h", searchToken.token, "https://f5networkx1h1607h.org.coveo.com/rest/search");
 
     const root = document.getElementById("search");

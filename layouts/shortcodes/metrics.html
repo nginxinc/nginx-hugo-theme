@@ -8,7 +8,7 @@
     {{ $metricsRef = . | transform.Unmarshal }}
   {{ end }}
 {{ else }}
-  {{ warnf "Unable to get remote resource %q" $jsPath }}
+  {{ errorf "Unable to get asset resource %q" $jsPath }}
 {{ end }}
 
 

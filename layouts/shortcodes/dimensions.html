@@ -1,6 +1,16 @@
 
 {{ $jsPath := .Get "path" }}
-{{ $dimensionsRef := getJSON $jsPath }}
+{{ $dimensionsRef := dict }}
+{{ with resources.Get $jsPath }}
+  {{ with .Err }}
+    {{ errorf "%s" . }}
+  {{ else }}
+    {{ $dimensionsRef = . | transform.Unmarshal }}
+  {{ end }}
+{{ else }}
+  {{ warnf "Unable to get remote resource %q" $jsPath }}
+{{ end }}
+
 
 <div class="row flex-xl-nowrap">
 

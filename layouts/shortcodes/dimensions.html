@@ -1,5 +1,6 @@
 
-{{ $jsPath := .Get "path" }}
+{{ $rawJSPath := .Get "path" }}
+{{ $jsPath := replace $rawJSPath "/static" "" }}
 {{ $dimensionsRef := dict }}
 {{ with resources.Get $jsPath }}
   {{ with .Err }}

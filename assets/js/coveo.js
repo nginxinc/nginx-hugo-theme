@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     const searchToken = await getSearchToken()
-    Coveo.SearchEndpoint.configureCloudV2Endpoint("f5networkx1h1607h", searchToken.token);
+    Coveo.SearchEndpoint.configureCloudV2Endpoint("f5networkx1h1607h", searchToken.token, "https://f5networkx1h1607h.org.coveo.com/rest/search");
 
     const root = document.getElementById("search");
     const searchBoxRoot = document.getElementById("searchbox");

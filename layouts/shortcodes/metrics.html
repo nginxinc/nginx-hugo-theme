@@ -1,6 +1,17 @@
 
-{{ $jsPath := .Get "path" }}
-{{ $metricsRef := getJSON $jsPath }}
+{{ $rawJSPath := .Get "path" }}
+{{ $jsPath := replace $rawJSPath "/static" "" }}
+{{ $metricsRef := dict }}
+{{ with resources.Get $jsPath }}
+  {{ with .Err }}
+    {{ errorf "%s" . }}
+  {{ else }}
+    {{ $metricsRef = . | transform.Unmarshal }}
+  {{ end }}
+{{ else }}
+  {{ errorf "Unable to get asset resource %q" $jsPath }}
+{{ end }}
+
 
 
 

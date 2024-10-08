@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', async function () {
 
     // Netlify function to get the coveo search token via API
-    async function getSearchToken() {
+    async function getsearchObj() {
       const response = await fetch(
         window.location.origin+"/api/v1/auth/search_token"
       );
       return response.json();
     }
 
-    const searchToken = await getSearchToken()
-    Coveo.SearchEndpoint.configureCloudV2Endpoint("f5networkx1h1607h", searchToken.token, "https://f5networkx1h1607h.org.coveo.com/rest/search");
+    const searchObj = await getsearchObj()
+    Coveo.SearchEndpoint.configureCloudV2Endpoint(searchObj.org_id, searchObj.token, `https://${searchObj.org_id}.org.coveo.com/rest/search`);
 
     const root = document.getElementById("search");
     const searchBoxRoot = document.getElementById("searchbox");

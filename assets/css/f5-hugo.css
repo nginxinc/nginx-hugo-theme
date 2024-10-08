@@ -1649,3 +1649,7 @@ li.nav-item a.nav-link {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+.last-modified {
+  font-weight:300;
+}

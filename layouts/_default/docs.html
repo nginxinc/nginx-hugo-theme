@@ -1,7 +1,11 @@
 {{ define "main" }}
 <div class="row override-sidebar-collapse">
-  <nav class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top">
+  <nav id="sidebar" class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top">
     {{ partial "sidebar.html" . }}
+  </nav>
+
+  <nav id="sidebar-v2" class="" style="display:none">
+    Sidebar placeholder
   </nav>
   
   {{if (.Params.catalog) }}

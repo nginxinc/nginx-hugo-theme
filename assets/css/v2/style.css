@@ -1,3 +1,188 @@
-html {
-    background-color: lightgreen;
+/* webfonts */
+:root {
+    font-family: "Inter var", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-feature-settings: 'liga' on, 'calt' on;
+
+    /* fallback to slightly thinner font on browsers without variable 'wght' support */
+    font-weight: 300;
+
+    /* base rem = 16px by default, left as percentage for screen readers */
+    font-size: 100%;
+
+    --color-brand: #009639;
+    --color-brand-300: #a6daba;
+    --color-brand-200: #ccead7;
+    --color-brand-100: #f2faf5;
+    --color-background: #FFFFFF;
+    --color-foreground: #000000;
+    --color-shadow: #D2D2D2;
+}
+
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: InterVariable, sans-serif;
+        font-variation-settings: 'wght' 350;
+    }
+
+    h1, h2, h3, h4, h5, h6, .breadcrumb {
+        font-variation-settings: 'wght' 500;
+    }
+}
+
+h1, h2, h3, h4, h5, h6, .breadcrumb {
+    font-weight: 500;
+}
+
+/* layout */
+header {
+    margin: 2rem 2rem;
+
+    .navbar {
+
+    }
+}
+/* breadcrumbs */
+nav {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+    .logo {
+        height: 3rem;
+        width: 3rem;
+        
+    }
+
+    .links a {
+        margin: 0 0 0 1rem;
+    }
+}
+
+.main {
+    display: flex;
+    margin: 0 1rem;
+}
+
+.sidebar {
+    flex-basis: 1;
+    width: 20rem;
+    margin: 2rem 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+/* content */
+main {
+    max-width: 40rem;
+    min-width: 30rem;
+    margin: 2rem 2rem;
+}
+
+p {
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5rem;
+}
+
+.breadcrumb {
+    font-size: 0.875rem;
+    margin: 0 0 2rem 0;
+}
+
+.breadcrumb {
+    color: var(--color-foreground);
+    text-decoration: none;
+}
+
+.breadcrumb .active {
+    font-weight: 600;
+}
+
+.breadcrumb ol {
+    list-style: none;
+    padding: 0;
+    display: flex;
+}
+
+.breadcrumb li:after {
+    padding: 0 0.25rem;
+    content: "\E1D7";
+}
+
+
+a {
+    color: var(--color-brand);
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0 0 2rem 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 3rem 0 1rem 0;
+}
+
+/* callouts */
+blockquote {
+    border: 1px solid var(--color-foreground);
+    padding: 1rem;
+    margin: 3rem -1rem;
+
+    /* solid 3px drop shadow */
+    box-shadow: 3px 3px 0px var(--color-shadow);
+}
+
+blockquote.note:before{
+    content: "Note";
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 600;
+    font-variation-settings: 'wght' 600;
+
+    position: absolute;
+    margin: -1.625rem 0 0 -0.25rem;
+    padding: 0 0.25rem;
+    display: block;
+    background-color: var(--color-background);
+}
+
+blockquote p:first-child {
+    margin: 0 auto 1rem auto;
+}
+
+blockquote p:last-child {
+    margin: 0 auto;
+}
+
+code {
+    font-weight: light;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* FILTHY HACKS BEGIN */
+
+/* Override logo with black text version */
+.navbar-brand {
+    height: 3.5rem;
+    display: block;
+
+    /* non-tiling background logo */
+    background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
+    background-repeat: no-repeat;
+
+    img {
+        display: none;
+    }
+}
+
+/* FILTHY HACKS END */
+
+/* Hidden temporarily */
+.code-copy {
+    display: none;
 }

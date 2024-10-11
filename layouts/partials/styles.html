@@ -11,6 +11,12 @@
 <link href="{{ $css7.RelPermalink }}" integrity="{{ $css7.Data.Integrity }}" rel="stylesheet" type="text/css" id="css7"
   disabled>
 
+{{ $cssInter := resources.Get "css/inter/inter.css" | fingerprint "sha512" }}
+<link href="{{ $cssInter.RelPermalink }}" integrity="{{ $cssInter.Data.Integrity }}" rel="stylesheet" type="text/css"
+  id="cssInter">
+<!-- end v2 theme assets -->
+
+
 <!-- load FontAwesome from assets -->
 {{ $cssFA1 := resources.Get "fontawesome/css/all.min.css" | fingerprint "sha512" }}
 <link href="{{ $cssFA1.RelPermalink }}" integrity="{{ $cssFA1.Data.Integrity }}" rel="stylesheet" type="text/css"

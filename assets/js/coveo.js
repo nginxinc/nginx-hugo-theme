@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     const searchObj = await getsearchObj()
     Coveo.SearchEndpoint.configureCloudV2Endpoint(searchObj.org_id, searchObj.token, `https://${searchObj.org_id}.org.coveo.com/rest/search`);
 
+    const analyticsElement = document.querySelector('.CoveoAnalytics');
+    if (analyticsElement) {
+      const analyticsEndpoint = `https://${searchObj.org_id}.analytics.org.coveo.com/rest/ua`;
+      analyticsElement.setAttribute('data-endpoint', analyticsEndpoint);
+    }
+
     const root = document.getElementById("search");
     const searchBoxRoot = document.getElementById("searchbox");
     Coveo.initSearchbox(searchBoxRoot, "/search.html");

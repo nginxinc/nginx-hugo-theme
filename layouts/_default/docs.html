@@ -24,6 +24,7 @@
   
     {{ .Content }}
     {{ partial "version-list" . }}
+    {{ partial "qualtrics-feedback.html" }}
   <hr>
     
   {{ if .Page.Lastmod }}
@@ -33,7 +34,6 @@
   {{ end }}
 
   {{ partial "previous-next-links-in-section-with-title.html" . }}
-  {{ partial "qualtrics-feedback.html" }}
   </main>
   {{ if and (gt .WordCount 200 ) (.Params.toc) }}
     {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}

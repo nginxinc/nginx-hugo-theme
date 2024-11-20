@@ -24,15 +24,16 @@
   
     {{ .Content }}
     {{ partial "version-list" . }}
+    {{ partial "qualtrics-feedback.html" }}
   <hr>
-
+    
   {{ if .Page.Lastmod }}
   <div class="last-modified">
     Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
   </div>
   {{ end }}
 
-    {{ partial "previous-next-links-in-section-with-title.html" . }}
+  {{ partial "previous-next-links-in-section-with-title.html" . }}
   </main>
   {{ if and (gt .WordCount 200 ) (.Params.toc) }}
     {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}

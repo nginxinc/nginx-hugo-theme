@@ -1,0 +1,13 @@
+{
+    "name": "theme",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+      "@f5/aigw-ui": "^1.0.5",
+      "@types/react": "^18.3.1",
+      "@types/react-dom": "^18.3.1",
+      "react": "^18.3.1",
+      "react-dom": "^18.3.1"
+    }
+  }
+  

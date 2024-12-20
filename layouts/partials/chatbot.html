@@ -1,0 +1,3 @@
+<div id="chatbot_window_container"></div>
+{{ $js := resources.Get "ts/Chatbot.tsx" | js.Build }}        
+<script src="{{ $js.Permalink }}" defer></script>    

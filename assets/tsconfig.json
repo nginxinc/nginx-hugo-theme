@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+    "jsx": "react",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+     "baseUrl": ".",
+     "paths": {
+      "*": [
+       "*"
+      ]
+     }
+    }
+}

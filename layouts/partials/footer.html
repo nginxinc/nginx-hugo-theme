@@ -1,90 +1,283 @@
 <footer id="footer">
-   <div class="container-fluid">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-md-6 d-md-flex">
+        <img class="nginx-logo-footer" src="{{
+        "/images/icons/NGINX-Part-of-F5-horiz-all-white-525x208@2x.png" | absURL
+        }}"/>
+      </div>
+    </div>
 
-       <div class="row align-items-center">
+    {{ if not ( in .Site.Params.buildtype "package" ) }}
+    <div class="row d-print-none d-none d-md-flex">
+      <div class="col-md-3 d-none d-md-block">
+        <span class="footer-head">Company</span>
+        <ul class="footer-text">
+          <li>
+            <a
+              href="https://www.f5.com/go/product/welcome-to-nginx"
+              target="_blank"
+              alt="Select to learn about F5 NGINX"
+              >About F5 NGINX</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.f5.com/company/events"
+              target="_blank"
+              alt="Select to learn about F5 events"
+              >Events</a
+            >
+          </li>
+        </ul>
+        <br />
+        <span class="footer-head">Resources</span>
+        <ul class="footer-text">
+          <li>
+            <a
+              href="https://www.f5.com/company/blog/nginx"
+              target="_blank"
+              alt="Select to visit the F5 NGINX blog"
+              >Blog</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.f5.com/go/faq/nginx-faq"
+              target="_blank"
+              alt="Select to visit the F5 NGINX frequently asked questions page"
+              >FAQ</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.f5.com/services"
+              target="_blank"
+              alt="Select to learn about F5 NGINX Support"
+              >Professional Services</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.f5.com/learn/training"
+              target="_blank"
+              alt="Select to learn about F5 training offerings"
+              >Training</a
+            >
+          </li>
+        </ul>
+      </div>
 
-         <div class="col-md-6 d-md-flex">
-             <img class="nginx-logo-footer" src="{{ "/images/icons/NGINX-Part-of-F5-horiz-all-white-525x208@2x.png" | absURL }}"/>
-         </div>
+      <div class="col-md-3 d-none d-md-block">
+        <span class="footer-head">Products</span>
+        <ul class="footer-text">
+          <li>
+            <a
+              title="F5 NGINX One"
+              aria-label="F5 NGINX One"
+              href="https://www.f5.com/products/nginx/one"
+              >F5 NGINX One</a
+            >
+          </li>
+          <li>
+            <a
+              title="F5 NGINX Plus"
+              aria-label="F5 NGINX Plus"
+              href="https://www.f5.com/products/nginx/nginx-plus"
+              >F5 NGINX Plus</a
+            >
+          </li>
+          <li>
+            <a
+              title="F5 NGINX App Protect"
+              aria-label="F5 NGINX App Protect"
+              href="https://www.f5.com/products/nginx/nginx-app-protect"
+              >F5 NGINX App Protect</a
+            >
+          </li>
+          <li>
+            <a
+              title="F5 NGINX Instance Manager"
+              aria-label="F5 NGINX Instance Manager"
+              href="https://www.f5.com/products/nginx/instance-manager"
+              >F5 NGINX Instance Manager</a
+            >
+          </li>
+          <li>
+            <a
+              title="F5 NGINX Ingress Controller"
+              aria-label="F5 NGINX Ingress Controller"
+              href="https://www.f5.com/products/nginx/nginx-ingress-controller"
+              >F5 NGINX Ingress Controller</a
+            >
+          </li>
+          <li>
+            <a
+              title="F5 NGINX Gateway Fabric"
+              aria-label="F5 NGINX Gateway Fabric"
+              href="https://www.f5.com/products/nginx/nginx-gateway-fabric"
+              >F5 NGINX Gateway Fabric</a
+            >
+          </li>
+          <li>
+            <a
+              title="F5 NGINXaaS for Azure"
+              aria-label="F5 NGINXaaS for Azure"
+              href="https://www.f5.com/products/nginx/f5-nginxaas-for-azure"
+              >F5 NGINXaaS for Azure</a
+            >
+          </li>
+        </ul>
+      </div>
 
-         {{ if not ( in .Site.Params.buildtype "package" ) }}
-         <div class="col-md d-flex footer-text">
-           <div class="col-xl d-none d-md-block align-self-center text-semibold align-right">
-             <span>Found a bug? Looking for something new?</span>
-           </div>
-           <div class="col-lg d-none d-md-block pl-0">
-             <button class="button footer-button"><a href="{{ "/feedback/" | absURL }}" alt="Select if you have feedback">Let Us Know</a></button>
-           </div>
-         </div>
-         {{ end }}
+      <div class="col-md-3 d-none d-md-block">
+        <span class="footer-head">NGINX on GitHub</span>
+        <ul class="footer-text">
+          <li>
+            <a
+              title="NGINX Open Source"
+              aria-label="NGINX Open Source"
+              href="https://github.com/nginx/nginx"
+              ><span class="inner">NGINX Open Source</span></a
+            >
+          </li>
+          <li>
+            <a
+              title="NGINX Unit"
+              aria-label="NGINX Unit"
+              href="https://github.com/nginx/unit"
+              ><span class="inner">NGINX Unit</span></a
+            >
+          </li>
+          <li>
+            <a
+              title="NGINX Amplify"
+              aria-label="NGINX Amplify"
+              href="https://github.com/nginxinc/nginx-amplify-agent"
+              ><span class="inner">NGINX Amplify</span></a
+            >
+          </li>
+          <li>
+            <a
+              title="NGINX Agent"
+              aria-label="NGINX Agent"
+              href="https://github.com/nginx/Agent"
+              ><span class="inner">NGINX Agent</span></a
+            >
+          </li>
+          <li>
+            <a
+              title="NGINX Kubernetes Ingress Controller"
+              aria-label="NGINX Kubernetes Ingress Controller"
+              href="https://github.com/nginxinc/kubernetes-ingress"
+              ><span class="inner">NGINX Kubernetes Ingress Controller</span></a
+            >
+          </li>
+          <li>
+            <a
+              title="NGINX Gateway Fabric"
+              aria-label="NGINX Gateway Fabric"
+              href="https://github.com/nginxinc/nginx-gateway-fabric"
+              ><span class="inner">NGINX Gateway Fabric</span></a
+            >
+          </li>
+        </ul>
+      </div>
 
-       </div>
-
-
-       {{ if not ( in .Site.Params.buildtype "package" ) }}
-       <div class="row d-print-none d-none d-md-flex">
-         <div class="col-md-3 d-none d-md-block">
-           <span class="footer-head">Company</span>
-           <ul class="footer-text">
-             <li><a href="https://www.f5.com/go/product/welcome-to-nginx" target="_blank" alt="Select to learn about F5 NGINX">About F5 NGINX</a></li>
-             <li><a href="https://www.f5.com/company/events" target="_blank" alt="Select to learn about F5 events">Events</a></li>
-           </ul>
-           <br />
-           <span class="footer-head">Resources</span>
-           <ul class="footer-text">
-             <li><a href="https://www.f5.com/company/blog/nginx" target="_blank" alt="Select to visit the F5 NGINX blog" >Blog</a></li>
-             <li><a href="https://www.f5.com/go/faq/nginx-faq" target="_blank" alt="Select to visit the F5 NGINX frequently asked questions page" >FAQ</a></li>
-             <li><a href="https://www.f5.com/services" target="_blank" alt="Select to learn about F5 NGINX Support">Professional Services</a></li>
-             <li><a href="https://www.f5.com/learn/training" target="_blank" alt="Select to learn about F5 training offerings" >Training</a></li>
-           </ul>
-         </div>
-
-         <div class="col-md-3 d-none d-md-block">
-           <span class="footer-head">Products</span>
-             <ul class="footer-text">
-                 <li><a title="F5 NGINX One" aria-label="F5 NGINX One" href="https://www.f5.com/products/nginx/one">F5 NGINX One</a></li>
-                 <li><a title="F5 NGINX Plus" aria-label="F5 NGINX Plus" href="https://www.f5.com/products/nginx/nginx-plus">F5 NGINX Plus</a></li>
-                 <li><a title="F5 NGINX App Protect" aria-label="F5 NGINX App Protect" href="https://www.f5.com/products/nginx/nginx-app-protect">F5 NGINX App Protect</a></li>
-                 <li><a title="F5 NGINX Instance Manager" aria-label="F5 NGINX Instance Manager" href="https://www.f5.com/products/nginx/instance-manager">F5 NGINX Instance Manager</a></li>
-                 <li><a title="F5 NGINX Ingress Controller" aria-label="F5 NGINX Ingress Controller" href="https://www.f5.com/products/nginx/nginx-ingress-controller">F5 NGINX Ingress Controller</a></li>
-                 <li><a title="F5 NGINX Gateway Fabric" aria-label="F5 NGINX Gateway Fabric" href="https://www.f5.com/products/nginx/nginx-gateway-fabric">F5 NGINX Gateway Fabric</a></li>
-                 <li><a title="F5 NGINXaaS for Azure" aria-label="F5 NGINXaaS for Azure" href="https://www.f5.com/products/nginx/f5-nginxaas-for-azure">F5 NGINXaaS for Azure</a></li>
-             </ul>
-         </div>
-
-         <div class="col-md-3 d-none d-md-block">
-           <span class="footer-head">NGINX on GitHub</span>
-           <ul class="footer-text">
-             <li><a title="NGINX Open Source" aria-label="NGINX Open Source" href="https://github.com/nginx/nginx"><span class="inner">NGINX Open Source</span></a></li>
-             <li><a title="NGINX Unit" aria-label="NGINX Unit" href="https://github.com/nginx/unit"><span class="inner">NGINX Unit</span></a></li>
-             <li><a title="NGINX Amplify" aria-label="NGINX Amplify" href="https://github.com/nginxinc/nginx-amplify-agent"><span class="inner">NGINX Amplify</span></a></li>
-             <li><a title="NGINX Agent" aria-label="NGINX Agent" href="https://github.com/nginx/Agent"><span class="inner">NGINX Agent</span></a></li>
-             <li><a title="NGINX Kubernetes Ingress Controller" aria-label="NGINX Kubernetes Ingress Controller" href="https://github.com/nginxinc/kubernetes-ingress"><span class="inner">NGINX Kubernetes Ingress Controller</span></a></li>
-             <li><a title="NGINX Gateway Fabric" aria-label="NGINX Gateway Fabric" href="https://github.com/nginxinc/nginx-gateway-fabric"><span class="inner">NGINX Gateway Fabric</span></a></li>
-         </ul>
-         </div>
-
-         <div class="col-md-2 d-none d-md-block">
-           <span class="footer-head">Social</span>
-               <ul class="footer-social">
-                 <li><a href="https://www.facebook.com/nginxinc" title="facebook" aria-label="facebook" target="_blank" rel="noreferrer"><i class="fa-brands fa-facebook" aria-hidden="true"></i>
-                  </a></li>
-                 <li><a href="https://twitter.com/nginx" title="X" aria-label="x" target="_blank" rel="noreferrer"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
-                 <li><a href="https://www.linkedin.com/company/nginx" title="linkedin" aria-label="linkedin" target="_blank" rel="noreferrer"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                  </a></li>
-                 <li><a href="https://www.youtube.com/user/NginxInc" title="youtube" aria-label="youtube" target="_blank" rel="noreferrer" alt="NGINX Youtube Channel"><i class="fa-brands fa-square-youtube" aria-hidden="true"></i>
-                  </a></li>
-               </ul>
-         </div>
-       </div>
-       {{ end }}
-       <div class="site-info footer-text">
-
-           <div class="text-center">
-           <p><a href="https://www.f5.com/"><img class="f5-logo-footer" src="{{ "/images/icons/Logo_F5.svg" | absURL }}" alt="F5 logo"></a>
-              ©2025 F5, Inc. All rights reserved.</p><p><a href="https://www.f5.com/company/policies/trademarks" rel="noopener" target="_blank">Trademarks</a>  <a href="https://www.f5.com/company/policies" rel="noopener" target="_blank">Policies</a> <a href="https://docs.nginx.com/ossc">Open Source Components</a>  <a href="https://www.f5.com/company/policies/privacy-notice" rel="noopener" target="_blank">Privacy</a>  <a href="https://www.f5.com/company/policies/F5-California-privacy-summary" rel="noopener" target="_blank">California Privacy</a>  <a href="https://www.f5.com/company/policies/privacy-notice#no-sell" rel="noopener" target="_blank">Do Not Sell My Personal Information</a>  <span id="teconsent"></span></p>
-           </div>
-
-       </div><!-- /.site-info -->
-   </div><!-- /.container-fluid -->
+      <div class="col-md-2 d-none d-md-block">
+        <span class="footer-head">Social</span>
+        <ul class="footer-social">
+          <li>
+            <a
+              href="https://www.facebook.com/nginxinc"
+              title="facebook"
+              aria-label="facebook"
+              target="_blank"
+              rel="noreferrer"
+              ><i class="fa-brands fa-facebook" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://twitter.com/nginx"
+              title="X"
+              aria-label="x"
+              target="_blank"
+              rel="noreferrer"
+              ><i class="fa-brands fa-x-twitter" aria-hidden="true"></i
+            ></a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/company/nginx"
+              title="linkedin"
+              aria-label="linkedin"
+              target="_blank"
+              rel="noreferrer"
+              ><i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.youtube.com/user/NginxInc"
+              title="youtube"
+              aria-label="youtube"
+              target="_blank"
+              rel="noreferrer"
+              alt="NGINX Youtube Channel"
+              ><i class="fa-brands fa-square-youtube" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {{ end }}
+    <div class="site-info footer-text">
+      <div class="text-center">
+        <p>
+          <a href="https://www.f5.com/"
+            ><img class="f5-logo-footer" src="{{ "/images/icons/Logo_F5.svg" |
+            absURL }}" alt="F5 logo"></a
+          >
+          ©2025 F5, Inc. All rights reserved.
+        </p>
+        <p>
+          <a
+            href="https://www.f5.com/company/policies/trademarks"
+            rel="noopener"
+            target="_blank"
+            >Trademarks</a
+          >
+          <a
+            href="https://www.f5.com/company/policies"
+            rel="noopener"
+            target="_blank"
+            >Policies</a
+          >
+          <a href="https://docs.nginx.com/ossc">Open Source Components</a>
+          <a
+            href="https://www.f5.com/company/policies/privacy-notice"
+            rel="noopener"
+            target="_blank"
+            >Privacy</a
+          >
+          <a
+            href="https://www.f5.com/company/policies/F5-California-privacy-summary"
+            rel="noopener"
+            target="_blank"
+            >California Privacy</a
+          >
+          <a
+            href="https://www.f5.com/company/policies/privacy-notice#no-sell"
+            rel="noopener"
+            target="_blank"
+            >Do Not Sell My Personal Information</a
+          >
+          <span id="teconsent"></span>
+        </p>
+      </div>
+    </div>
+    <!-- /.site-info -->
+  </div>
+  <!-- /.container-fluid -->
 </footer>

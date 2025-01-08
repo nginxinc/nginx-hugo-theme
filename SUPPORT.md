@@ -10,14 +10,6 @@ Don't know how something in this project works? Curious if this project can achi
 
 This isn't the right place to get support for NGINX specific questions, but the following resources are available below. Thanks for your understanding!
 
-### Community Slack
-
-We have a community [Slack](https://nginxcommunity.slack.com/)!
-
-If you are not a member click [here](https://community.nginx.org/joinslack) to sign up (and let us know if the link does not seem to be working!)
-
-Once you join, check out the `#beginner-questions` and `nginx-users` channels :)
-
 ### Documentation
 
 For a comprehensive list of all NGINX directives, check out <https://nginx.org>.

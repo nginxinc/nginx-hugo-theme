@@ -37,7 +37,7 @@
   </main>
   {{ if and (gt .WordCount 200 ) (.Params.toc) }}
     {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
-      <div class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
+      <div id="toc" class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
       {{ partial "toc.html" . }}
       </div>
     {{ end }}

@@ -77,8 +77,8 @@ nav {
 
 /* content */
 main {
-    max-width: 40rem;
-    min-width: 30rem;
+    max-width: 50rem;
+    min-width: 40rem;
     margin: 2rem 2rem;
 }
 
@@ -162,6 +162,11 @@ blockquote p:last-child {
 code {
     font-weight: light;
     font-family: 'JetBrains Mono', monospace;
+}
+
+pre.chroma {
+    overflow-x: auto;
+    box-sizing: border-box;
 }
 
 /* FILTHY HACKS BEGIN */

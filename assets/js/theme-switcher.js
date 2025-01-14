@@ -29,7 +29,7 @@ function useNewTheme(useNewTheme) {
   });
 
   // swap out v1 and v2 elements
-  const v1ElementIds = ["sidebar"]
+  const v1ElementIds = ["sidebar", "toc"]
 
   v1ElementIds.forEach((elementId) => {
     document.getElementById(elementId).style.display = useNewTheme ? "none" : "";

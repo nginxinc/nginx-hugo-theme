@@ -40,6 +40,43 @@ header {
     .navbar {
 
     }
+
+    .header-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; 
+        align-items: center;
+        width: 100%;   
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        right: 0; 
+        display: none;
+        width: 400px;
+        max-width: 80vw;
+        margin-right: 8px;
+    }
+
+    .dropdown-content ul {
+        padding: 20px 10px;
+    }
+
+    .navbar-button {
+        padding: 0.5rem 0.5rem;
+        border: none;
+        border-radius: 0.25rem;
+        text-align: center;    
+        text-decoration: none;  
+        cursor: pointer;
+    }
 }
 /* breadcrumbs */
 nav {
@@ -179,6 +216,9 @@ pre.chroma {
     /* non-tiling background logo */
     background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
     background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    width: 200px; /* Adjust the width as needed to fit the logo */
 
     img {
         display: none;

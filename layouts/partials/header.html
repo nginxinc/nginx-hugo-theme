@@ -9,7 +9,32 @@
             <!-- Standalone search box. -->
         <div id="searchbox">
           <!--div class="CoveoAnalytics" data-search-hub="HUB_ES_Nginx_Docs_And_Org"></div-->
-          <div class="CoveoSearchbox" data-placeholder='Search NGINX Docs...'></div>
+          <div class="CoveoSearchbox" data-placeholder='Search NGINX Docs...'>
+
+
+            <input
+            autocomplete="off"
+            type="text"
+            role="combobox"
+            form="coveo-dummy-form"
+            aria-autocomplete="list"
+            title="Insert a query. Press enter to send"
+            aria-expanded="true"
+            aria-owns="coveo-magicbox-suggestions-856d6d08-c286-cf4a-f1f0-37634180cef3"
+            aria-controls="coveo-magicbox-suggestions-856d6d08-c286-cf4a-f1f0-37634180cef3"
+            aria-label="Search"
+            placeholder="Search NGINX Docs..."
+            style="width: 300px;
+    height: 44px;
+    text-align: left;
+    padding: 12px 49px 12px 12px;
+    text-indent: 0;
+    font-family: arial, sans-serif;
+    font-size: 16px;
+    line-height: 24px;"
+          />
+
+          </div>
         </div>
       </div>
     {{ end }}

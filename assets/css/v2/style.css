@@ -78,6 +78,7 @@ header {
         cursor: pointer;
     }
 }
+
 /* breadcrumbs */
 nav {
     display: flex;
@@ -93,6 +94,38 @@ nav {
     .links a {
         margin: 0 0 0 1rem;
     }
+}
+
+/* main content layout */
+
+.docs-container {
+    box-sizing: border-box;
+}
+
+.base-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 2rem;
+    column-gap: 3.5rem;
+
+    border: #000000 3px solid;
+}
+
+.sidebar-v2 {
+    grid-column-start: 1;
+    width: 24rem;
+    background-color: goldenrod;
+}
+
+.text-content {
+    grid-column-start: 2;
+    width: 40rem; /*CHANGE TO BE DYNAMIC*/
+}
+
+.side-gutter {
+    grid-column-start: 3;
+    width: 20rem;
+    background-color: goldenrod;
 }
 
 .main {

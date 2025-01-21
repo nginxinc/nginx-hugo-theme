@@ -1,7 +1,11 @@
 {{ define "main" }}
-<div class="docs-container row override-sidebar-collapse">
+<div class="row override-sidebar-collapse">
   <nav id="sidebar" class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top">
     {{ partial "sidebar.html" . }}
+  </nav>
+
+  <nav id="sidebar-v2" class="" style="display:none">
+    Sidebar placeholder
   </nav>
   
   {{if (.Params.catalog) }}
@@ -12,33 +16,24 @@
   <main class="content col d-block align-top content-no-toc" role="main">
   {{ end }}
     
-  <section class="base-layout">
-    <nav id="sidebar-v2" class="sidebar-v2">
-      Sidebar placeholder
-    </nav>
-
     <h1>{{ .Title }}</h1>
-    {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
-    {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
 
-    <div class="text-content">
-      {{ .Content }}
-    </div>
-    <div class="side-gutter">
-      <p>Side gutter</p>
-    </div>
-  </section>
+      {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
 
-  {{ partial "version-list" . }}
-  {{ partial "qualtrics-feedback.html" }}
+      {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
+  
+    {{ .Content }}
+    {{ partial "version-list" . }}
+    {{ partial "qualtrics-feedback.html" }}
+  <hr>
     
-  <!-- {{ if .Page.Lastmod }}
+  {{ if .Page.Lastmod }}
   <div class="last-modified">
     Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
   </div>
-  {{ end }} -->
+  {{ end }}
 
-  <!-- {{ partial "previous-next-links-in-section-with-title.html" . }}
+  {{ partial "previous-next-links-in-section-with-title.html" . }}
   </main>
   {{ if and (gt .WordCount 200 ) (.Params.toc) }}
     {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
@@ -46,7 +41,7 @@
       {{ partial "toc.html" . }}
       </div>
     {{ end }}
-  {{ end }} -->
+  {{ end }}
 
 </div>
 <!-- If there is a script defined in the page metadata, load it  -->

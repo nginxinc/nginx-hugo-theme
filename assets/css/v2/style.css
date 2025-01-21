@@ -33,7 +33,7 @@ h1, h2, h3, h4, h5, h6, .breadcrumb {
     font-weight: 500;
 }
 
-/* layout */
+/* header */
 header {
     margin: 2rem 2rem;
 
@@ -83,7 +83,6 @@ header {
 nav {
     display: flex;
     align-items: center;
-    padding: 1rem;
 
     .logo {
         height: 3rem;
@@ -96,41 +95,63 @@ nav {
     }
 }
 
-/* main content layout */
-
-.docs-container {
+/* main content */
+.docs-container * {
     box-sizing: border-box;
 }
 
-.base-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    padding: 0 2rem;
-    column-gap: 3.5rem;
-
-    border: #000000 3px solid;
+.docs-container {
+    min-width: 100%;
 }
 
-.sidebar-v2 {
-    grid-column-start: 1;
-    width: 24rem;
-    background-color: goldenrod;
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.sidebar-layout {
+    display: flex;
+    flex-direction: column;
 }
 
 .text-content {
-    grid-column-start: 2;
-    width: 40rem; /*CHANGE TO BE DYNAMIC*/
+    grid-column-start: 1;
 }
 
-.side-gutter {
-    grid-column-start: 3;
-    width: 20rem;
-    background-color: goldenrod;
+@media only screen and (min-width: 1170px) {
+    .main-layout {
+        display: grid;
+        grid-template-columns: 24rem 1fr;
+        column-gap: 3.5rem;
+    }
+
+    .content-layout {
+        display: grid;
+        grid-template-columns: 40rem 20rem; /*CHANGE TO BE DYNAMIC*/
+        column-gap: 3.5rem;
+    }
+
+    .content-layout .side-gutter {
+        grid-column-start: 2;
+    }
+
+    .base-layout {
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        column-gap: 3.5rem;
+    }
+
+    .breadcrumb-layout {
+        display: grid;
+        grid-template-columns: 24rem 1fr;
+        column-gap: 3.5rem;
+        align-items: center;
+        margin: 0 2rem;
+    }
 }
 
 .main {
     display: flex;
-    margin: 0 1rem;
 }
 
 .sidebar {
@@ -158,13 +179,9 @@ p {
 }
 
 .breadcrumb {
-    font-size: 0.875rem;
-    margin: 0 0 2rem 0;
-}
-
-.breadcrumb {
     color: var(--color-foreground);
     text-decoration: none;
+    font-size: 0.875rem;
 }
 
 .breadcrumb .active {

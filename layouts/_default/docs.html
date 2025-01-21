@@ -12,41 +12,44 @@
   <main class="content col d-block align-top content-no-toc" role="main">
   {{ end }}
     
-  <section class="base-layout">
-    <nav id="sidebar-v2" class="sidebar-v2">
-      Sidebar placeholder
-    </nav>
-
-    <h1>{{ .Title }}</h1>
-    {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
-    {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
-
-    <div class="text-content">
-      {{ .Content }}
+  <section class="main-layout">
+    <div class="sidebar-layout">
+      <nav id="sidebar-v2" class="sidebar-v2">
+        Sidebar placeholder
+      </nav>
     </div>
-    <div class="side-gutter">
-      <p>Side gutter</p>
-    </div>
-  </section>
 
-  {{ partial "version-list" . }}
-  {{ partial "qualtrics-feedback.html" }}
-    
-  <!-- {{ if .Page.Lastmod }}
-  <div class="last-modified">
-    Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
-  </div>
-  {{ end }} -->
+    <section class="content-layout">
+      <div class="text-content">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+        {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
+        {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
 
-  <!-- {{ partial "previous-next-links-in-section-with-title.html" . }}
-  </main>
-  {{ if and (gt .WordCount 200 ) (.Params.toc) }}
-    {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
-      <div id="toc" class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
-      {{ partial "toc.html" . }}
+        <hr>
+  
+        {{ if .Page.Lastmod }}
+        <div class="last-modified">
+          Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
+        </div>
+        {{ end }}
+
+        {{ partial "version-list" . }}
+        {{ partial "qualtrics-feedback.html" }}
+
+        {{ partial "previous-next-links-in-section-with-title.html" . }}
+        </main>
+        {{ if and (gt .WordCount 200 ) (.Params.toc) }}
+          {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
+            <div id="toc" class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
+            {{ partial "toc.html" . }}
+            </div>
+          {{ end }}
+        {{ end }}
+        
       </div>
-    {{ end }}
-  {{ end }} -->
+    </section>
+  </section>
 
 </div>
 <!-- If there is a script defined in the page metadata, load it  -->

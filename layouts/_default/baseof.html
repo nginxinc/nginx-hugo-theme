@@ -45,17 +45,22 @@
     {{ block "header" . }}{{end}}
   </header>
 
-  {{ if not .IsHome }}
-    {{ if not (in .Params.display_breadcrumb "false" ) }}
-    {{ partial "breadcrumb" .}}  
-    {{ end }}
-  {{ end }}
+  <section class="base-layout">
+    <section class="breadcrumb-layout">
+      <div data-mf="true" id="searchbox">
+        <div class="CoveoSearchbox" data-placeholder='Search NGINX Docs...'></div>
+      </div>
+      {{ if not .IsHome }}
+        {{ if not (in .Params.display_breadcrumb "false" ) }}
+        {{ partial "breadcrumb" .}}  
+        {{ end }}
+      {{ end }}
+    </section>
 
-  <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
-    
-    {{ block "main" . }}{{ end }}
-
-  </div>
+    <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
+      {{ block "main" . }}{{ end }}
+    </div>
+</section>
 
   <footer>
 

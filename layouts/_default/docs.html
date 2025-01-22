@@ -1,11 +1,7 @@
 {{ define "main" }}
-<div class="row override-sidebar-collapse">
+<div class="docs-container row override-sidebar-collapse">
   <nav id="sidebar" class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top">
     {{ partial "sidebar.html" . }}
-  </nav>
-
-  <nav id="sidebar-v2" class="" style="display:none">
-    Sidebar placeholder
   </nav>
   
   {{if (.Params.catalog) }}
@@ -16,32 +12,44 @@
   <main class="content col d-block align-top content-no-toc" role="main">
   {{ end }}
     
-    <h1>{{ .Title }}</h1>
+  <section class="main-layout">
+    <div class="sidebar-container">
+      <nav data-mf="true" id="sidebar-v2" class="sidebar-v2" style="display:none;">
+        Sidebar placeholder
+      </nav>
+    </div>
 
-      {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
+    <section class="content-layout">
+      <div class="text-content">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+        {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
+        {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
 
-      {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
+        <hr>
   
-    {{ .Content }}
-    {{ partial "version-list" . }}
-    {{ partial "qualtrics-feedback.html" }}
-  <hr>
-    
-  {{ if .Page.Lastmod }}
-  <div class="last-modified">
-    Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
-  </div>
-  {{ end }}
+        {{ if .Page.Lastmod }}
+        <div class="last-modified">
+          Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
+        </div>
+        {{ end }}
 
-  {{ partial "previous-next-links-in-section-with-title.html" . }}
-  </main>
-  {{ if and (gt .WordCount 200 ) (.Params.toc) }}
-    {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
-      <div id="toc" class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
-      {{ partial "toc.html" . }}
+        {{ partial "version-list" . }}
+        {{ partial "qualtrics-feedback.html" }}
+
+        {{ partial "previous-next-links-in-section-with-title.html" . }}
+        </main>
+        {{ if and (gt .WordCount 200 ) (.Params.toc) }}
+          {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
+            <div id="toc" class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
+            {{ partial "toc.html" . }}
+            </div>
+          {{ end }}
+        {{ end }}
+        
       </div>
-    {{ end }}
-  {{ end }}
+    </section>
+  </section>
 
 </div>
 <!-- If there is a script defined in the page metadata, load it  -->

@@ -16,6 +16,15 @@
     --color-background: #FFFFFF;
     --color-foreground: #000000;
     --color-shadow: #D2D2D2;
+
+    --sidebar-width: 24rem;
+    --side-gutter-width: 20rem;
+    --text-content-width-iphone-13: 30rem;
+    --text-content-width-mbp-14: 40rem;
+    --text-content-width-mbp-16: 50rem;
+    --text-content-width-4k-display: 60rem;
+    --component-gap: 3.5rem;
+
 }
 
 @supports (font-variation-settings: normal) {
@@ -33,19 +42,62 @@ h1, h2, h3, h4, h5, h6, .breadcrumb {
     font-weight: 500;
 }
 
-/* layout */
+/* header */
 header {
     margin: 2rem 2rem;
 
     .navbar {
 
     }
+
+    .header-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; 
+        align-items: center;
+        width: 100%;   
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .dropdown-content {
+        position: absolute;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        right: 0; 
+        display: none;
+        width: 400px;
+        max-width: 80vw;
+        margin-right: 8px;
+    }
+
+    .dropdown-content ul {
+        padding: 20px 10px;
+    }
+
+    .navbar-button {
+        padding: 0.5rem 0.5rem;
+        border: none;
+        border-radius: 0.25rem;
+        text-align: center;    
+        text-decoration: none;  
+        cursor: pointer;
+    }
 }
+
+/* footer */
+footer {
+    background-color: #32302f;
+    padding: 0.5rem;
+}
+
 /* breadcrumbs */
 nav {
     display: flex;
     align-items: center;
-    padding: 1rem;
 
     .logo {
         height: 3rem;
@@ -58,9 +110,94 @@ nav {
     }
 }
 
+#searchbox {
+    width: 24rem;
+    display:none;
+    grid-column: 1;
+}
+
+/* main content */
+.docs-container * {
+    box-sizing: border-box;
+}
+
+.docs-container {
+    min-width: 100%;
+}
+
+.breadcrumb-layout {
+    margin: 0 2rem;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-layout {
+    display: grid;
+    grid-template-columns: var(--text-content-width-iphone-13) var(--side-gutter-width); 
+    column-gap: var(--component-gap);
+}
+
+.text-content {
+    grid-column-start: 1;
+}
+
+@media (min-width: 1512px) { /* Macbook Pro 14 */
+    .base-layout {
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        column-gap: var(--component-gap);
+    }
+
+    .breadcrumb-layout {
+        display: grid;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        column-gap: var(--component-gap);
+        align-items: center;
+    }
+
+    .main-layout {
+        display: grid;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        column-gap: var(--component-gap);
+    }
+
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-mbp-14) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
+    }
+
+    .content-layout .side-gutter {
+        grid-column-start: 2;
+    }
+}
+
+@media (min-width: 1728px) { /* Macbook Pro 16 */
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-mbp-16) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
+    }
+}
+
+@media (min-width: 2560px) { /* 4k Desktop */
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-4k-display) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
+    }
+}
+
 .main {
     display: flex;
-    margin: 0 1rem;
 }
 
 .sidebar {
@@ -88,13 +225,10 @@ p {
 }
 
 .breadcrumb {
-    font-size: 0.875rem;
-    margin: 0 0 2rem 0;
-}
-
-.breadcrumb {
     color: var(--color-foreground);
     text-decoration: none;
+    font-size: 0.875rem;
+    grid-column: 2 / -1;
 }
 
 .breadcrumb .active {
@@ -169,6 +303,16 @@ pre.chroma {
     box-sizing: border-box;
 }
 
+.f5-logo-footer {
+    height: 32px;
+    width: 32px;
+}
+
+.nginx-logo-footer {
+    height: 72x;
+    width: 156px;
+}
+
 /* FILTHY HACKS BEGIN */
 
 /* Override logo with black text version */
@@ -179,6 +323,9 @@ pre.chroma {
     /* non-tiling background logo */
     background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
     background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    width: 200px; /* Adjust the width as needed to fit the logo */
 
     img {
         display: none;

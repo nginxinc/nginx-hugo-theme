@@ -110,6 +110,12 @@ nav {
     }
 }
 
+#searchbox {
+    width: 24rem;
+    display:none;
+    grid-column: 1;
+}
+
 /* main content */
 .docs-container * {
     box-sizing: border-box;
@@ -219,6 +225,7 @@ p {
     color: var(--color-foreground);
     text-decoration: none;
     font-size: 0.875rem;
+    grid-column: 2 / -1;
 }
 
 .breadcrumb .active {

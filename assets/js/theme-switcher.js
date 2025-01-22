@@ -40,4 +40,13 @@ function useNewTheme(useNewTheme) {
     document.getElementById(elementId).style.display = useNewTheme ? "": "none";
   });
 
+  const mfElements = ['[data-mf="true"]'];
+  mfElements.forEach((elementId) => {
+    document
+      .querySelectorAll(elementId)
+      .forEach(
+        (element) => (element.style.display = useNewTheme ? "" : "none")
+      );
+  });
+
 }

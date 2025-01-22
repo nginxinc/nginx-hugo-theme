@@ -121,14 +121,12 @@ nav {
     box-sizing: border-box;
 }
 
-.content-layout {
-    display: grid;
-    grid-template-columns: var(--text-content-width-iphone-13) var(--side-gutter-width); 
-    column-gap: var(--component-gap);
-}
-
 .docs-container {
     min-width: 100%;
+}
+
+.breadcrumb-layout {
+    margin: 0 2rem;
 }
 
 .main-layout {
@@ -136,9 +134,15 @@ nav {
     grid-template-columns: 1fr;
 }
 
-.sidebar-layout {
+.sidebar-container {
     display: flex;
     flex-direction: column;
+}
+
+.content-layout {
+    display: grid;
+    grid-template-columns: var(--text-content-width-iphone-13) var(--side-gutter-width); 
+    column-gap: var(--component-gap);
 }
 
 .text-content {
@@ -146,6 +150,19 @@ nav {
 }
 
 @media (min-width: 1512px) { /* Macbook Pro 14 */
+    .base-layout {
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        column-gap: var(--component-gap);
+    }
+
+    .breadcrumb-layout {
+        display: grid;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        column-gap: var(--component-gap);
+        align-items: center;
+    }
+
     .main-layout {
         display: grid;
         grid-template-columns: var(--sidebar-width) 1fr;
@@ -160,20 +177,6 @@ nav {
 
     .content-layout .side-gutter {
         grid-column-start: 2;
-    }
-
-    .base-layout {
-        display: grid;
-        grid-template-rows: repeat(2, auto);
-        column-gap: var(--component-gap);
-    }
-
-    .breadcrumb-layout {
-        display: grid;
-        grid-template-columns: var(--sidebar-width) 1fr;
-        column-gap: var(--component-gap);
-        align-items: center;
-        margin: 0 2rem;
     }
 }
 

@@ -16,6 +16,15 @@
     --color-background: #FFFFFF;
     --color-foreground: #000000;
     --color-shadow: #D2D2D2;
+
+    --sidebar-width: 24rem;
+    --side-gutter-width: 20rem;
+    --text-content-width-iphone-13: 30rem;
+    --text-content-width-mbp-14: 40rem;
+    --text-content-width-mbp-16: 50rem;
+    --text-content-width-4k-display: 60rem;
+    --component-gap: 3.5rem;
+
 }
 
 @supports (font-variation-settings: normal) {
@@ -79,6 +88,12 @@ header {
     }
 }
 
+/* footer */
+footer {
+    background-color: #32302f;
+    padding: 0.5rem;
+}
+
 /* breadcrumbs */
 nav {
     display: flex;
@@ -100,6 +115,12 @@ nav {
     box-sizing: border-box;
 }
 
+.content-layout {
+    display: grid;
+    grid-template-columns: var(--text-content-width-iphone-13) var(--side-gutter-width); 
+    column-gap: var(--component-gap);
+}
+
 .docs-container {
     min-width: 100%;
 }
@@ -118,17 +139,17 @@ nav {
     grid-column-start: 1;
 }
 
-@media only screen and (min-width: 1170px) {
+@media (min-width: 1512px) { /* Macbook Pro 14 */
     .main-layout {
         display: grid;
-        grid-template-columns: 24rem 1fr;
-        column-gap: 3.5rem;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        column-gap: var(--component-gap);
     }
 
     .content-layout {
         display: grid;
-        grid-template-columns: 40rem 20rem; /*CHANGE TO BE DYNAMIC*/
-        column-gap: 3.5rem;
+        grid-template-columns: var(--text-content-width-mbp-14) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
     }
 
     .content-layout .side-gutter {
@@ -138,15 +159,31 @@ nav {
     .base-layout {
         display: grid;
         grid-template-rows: repeat(2, auto);
-        column-gap: 3.5rem;
+        column-gap: var(--component-gap);
     }
 
     .breadcrumb-layout {
         display: grid;
-        grid-template-columns: 24rem 1fr;
-        column-gap: 3.5rem;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        column-gap: var(--component-gap);
         align-items: center;
         margin: 0 2rem;
+    }
+}
+
+@media (min-width: 1728px) { /* Macbook Pro 16 */
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-mbp-16) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
+    }
+}
+
+@media (min-width: 2560px) { /* 4k Desktop */
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-4k-display) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
     }
 }
 
@@ -254,6 +291,16 @@ code {
 pre.chroma {
     overflow-x: auto;
     box-sizing: border-box;
+}
+
+.f5-logo-footer {
+    height: 32px;
+    width: 32px;
+}
+
+.nginx-logo-footer {
+    height: 72x;
+    width: 156px;
 }
 
 /* FILTHY HACKS BEGIN */

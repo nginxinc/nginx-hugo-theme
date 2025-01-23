@@ -365,8 +365,8 @@ nav {
 .product-selector {
     position: absolute;
     top: 0;
-    min-width: 100%;
-    margin-left: 49rem;
+    min-width: 80%;
+    margin-left: 46rem;
     padding: 0.75rem;
     background-color: white;
     border: black 1px solid;

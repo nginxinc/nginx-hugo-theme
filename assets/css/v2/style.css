@@ -318,6 +318,7 @@ nav {
 }
 
 .product-selector {
+    display: none;
     position: absolute;
     top: 0;
     min-width: 80%;
@@ -349,6 +350,7 @@ nav {
 .sidebar .sidebar-navigation {
     width: 100%;
     font-weight: 500;
+    margin-left: 3rem;
 }
 
 /* removes the built in ul padding/margin */
@@ -377,10 +379,45 @@ nav {
 
 .sidebar .sidebar-navigation .collapsible-content {
     display: none;
+    position: relative;
+}
+
+.sidebar .sidebar-navigation .box.opened {
+    display: none;
 }
 
 .toggle-checkbox:checked ~ .collapsible-content {
     display: block;
+}
+
+.toggle-checkbox:checked ~ .collapsible-header .box.expand {
+    display: none; 
+}
+
+.toggle-checkbox:checked ~ .collapsible-header .box.opened {
+    display: block;
+}
+
+.toggle-checkbox:checked ~ .collapsible-content::before {
+    content: '';
+    position: absolute;
+    border-left: black 1px solid;
+    left: calc(0.1rem - 0.75rem);
+    top: -1.5rem;
+    height: calc(100% + 0.925rem );
+}
+
+.toggle-checkbox:checked ~ .collapsible-content li {
+    position: relative;
+}
+
+.toggle-checkbox:checked ~ .collapsible-content li::after {
+    content: '';
+    position: absolute;
+    border-top: black 1px solid;
+    left: -1.65rem;
+    width: 0.9rem; 
+    top: 0.6rem; 
 }
 
 .selected {
@@ -389,6 +426,67 @@ nav {
 
 .sidebar .sidebar-navigation li:first-child {
     margin-top: 1rem;
+}
+
+.sidebar .sidebar-navigation ul li .box-link {
+    content: '';
+    background-color: black;
+    position: absolute;
+    width: 0.1rem;
+    height: 0.25rem;  
+    margin-top: 0.5rem;
+    left: 0.75rem;
+}
+
+.sidebar .sidebar-navigation ul li .box { 
+    content: '';
+    position: absolute;
+    width: 0.25rem;
+    height: 0.25rem;  
+    margin-top: 0.5rem;
+    left: 0.75rem;
+}
+
+.sidebar .sidebar-navigation ul li .expand { 
+    background-color: black;
+}
+
+.sidebar .sidebar-navigation ul li .opened { 
+    border: black 1px solid;
+}
+
+.sidebar .sidebar-navigation ul li .current { 
+    background-color: var(--color-brand);
+    z-index: 999;
+}
+
+.sidebar .sidebar-navigation ul li .partial-box {
+    margin-left: -1.5rem;
+}
+
+.sidebar .sidebar-navigation ul li .partial {
+    left: -0.8125rem;
+}
+
+/* First Sidebar Nav Vertical Line */
+.sidebar .sidebar-navigation .parent-collapsible-content::before{
+    content: '';
+    position: absolute;
+    border-left: black 1px solid;
+    left: 0;
+    bottom: 1.55rem;
+    height: calc(100% - 5.65rem);
+}
+
+/* First Sidebar Nav Horizontal Lines */
+.sidebar .sidebar-navigation .parent-collapsible-content .parent-collapsible-content-item::before, 
+.sidebar .sidebar-navigation .parent-collapsible-content .parent-collapsible-content-item::after {
+    content: '';
+    position: absolute;
+    border-top: black 1px solid;
+    left: 0;
+    margin-top: 0.6rem;
+    width: 0.8rem; 
 }
 
 .row {

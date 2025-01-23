@@ -1,13 +1,25 @@
+{{ $currentUrl := .currentUrl }}
+{{ $context := .context }}
+
 <ul class="collapsible-content">
-    {{ range .Pages.ByWeight }}
+    {{ range $context.Pages.ByWeight }}
     <li>
         {{ if eq .Kind "section" }}
             <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
             <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
+                {{ if .Pages }}
+                    <span class="box expand partial-box"></span>
+                    <span class="box opened partial-box"></span>
+                {{ end }}
                 {{ .Title }} 
             </label>
-            {{ partial "sidebar-list-pages.html" . }}
+            {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $currentUrl) }}
         {{ else if eq .Kind "page" }}
+            {{ if eq $currentUrl .Permalink }}                      
+                <span class="box current partial"></span>                 
+            {{ else }}                     
+                <span class="box-link partial"></span>              
+            {{ end }}
             <a href="{{ .Permalink }}">{{ .Title }} </a>
         {{ end }}
     </li>

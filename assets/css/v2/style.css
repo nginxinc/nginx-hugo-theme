@@ -17,6 +17,8 @@
     --color-foreground: #000000;
     --color-shadow: #D2D2D2;
 
+    --color-product-title: #8D8D8D;
+
     --sidebar-width: 24rem;
     --side-gutter-width: 20rem;
     --text-content-width-iphone-13: 30rem;
@@ -30,7 +32,6 @@
 @supports (font-variation-settings: normal) {
     :root {
         font-family: InterVariable, sans-serif;
-        font-variation-settings: 'wght' 350;
     }
 
     h1, h2, h3, h4, h5, h6, .breadcrumb {
@@ -43,6 +44,11 @@ h1, h2, h3, h4, h5, h6, .breadcrumb {
 }
 
 /* header */
+p {
+    font-weight: 400;
+}
+
+/* layout */
 header {
     margin: 2rem 2rem;
 
@@ -107,6 +113,90 @@ nav {
 
     .links a {
         margin: 0 0 0 1rem;
+    }
+}
+
+/* main content */
+.docs-container * {
+    box-sizing: border-box;
+}
+
+.content-layout {
+    display: grid;
+    grid-template-columns: var(--text-content-width-iphone-13) var(--side-gutter-width); 
+    column-gap: var(--component-gap);
+}
+
+.docs-container {
+    min-width: 100%;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.sidebar-layout {
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+}
+
+@media (max-width: 1512px){
+    .sidebar-layout {
+        display: none;
+    }
+}
+
+.text-content {
+    grid-column-start: 1;
+}
+
+@media (min-width: 1512px) { /* Macbook Pro 14 */
+    .main-layout {
+        display: grid;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        column-gap: var(--component-gap);
+    }
+
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-mbp-14) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
+    }
+
+    .content-layout .side-gutter {
+        grid-column-start: 2;
+    }
+
+    .base-layout {
+        display: grid;
+        grid-template-rows: repeat(2, auto);
+        column-gap: var(--component-gap);
+    }
+
+    .breadcrumb-layout {
+        display: grid;
+        grid-template-columns: var(--sidebar-width) 1fr;
+        column-gap: var(--component-gap);
+        align-items: center;
+        margin: 0 2rem;
+    }
+}
+
+@media (min-width: 1728px) { /* Macbook Pro 16 */
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-mbp-16) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
+    }
+}
+
+@media (min-width: 2560px) { /* 4k Desktop */
+    .content-layout {
+        display: grid;
+        grid-template-columns: var(--text-content-width-4k-display) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
     }
 }
 
@@ -201,9 +291,87 @@ nav {
 }
 
 .sidebar {
-    flex-basis: 1;
-    width: 20rem;
-    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    width: 24rem;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar .product-selector-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:  var(--color-brand);
+    color: var(--color-brand-100);
+    border: none;
+    font-weight: 500;
+    font-size: 1.25rem;
+    width: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.sidebar .product-selector-button .selector-icon {
+    height:24px;
+    width: 24px;
+}
+
+.product-selector {
+    display: none;
+    position: absolute;
+    top: 0;
+    min-width: 80%;
+    margin-left: 46rem;
+    padding: 0.75rem;
+    background-color: white;
+    border: black 1px solid;
+    box-shadow: 3px 3px 0px var(--color-shadow);
+}
+
+.product-selector p {
+    font-size: 0.75rem;
+    color: var(--color-product-title);
+    display: inline;
+}
+
+.product-selector ul {
+    padding-left: 0;
+    margin-top: 0;
+    list-style-type: none;
+}
+
+.product-selector a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+}
+
+.sidebar .sidebar-navigation {
+    width: 100%;
+    font-weight: 500;
+}
+
+/* removes the built in ul padding/margin */
+.sidebar .sidebar-navigation ul {
+   margin-left: 0;
+   padding-left: 0;
+}
+
+.sidebar ul :not(.sidebar-navigation) ul {
+    padding-left: 1rem;
+}
+
+.sidebar .sidebar-navigation li {
+    margin-bottom: 1rem;
+}
+
+.selected {
+    font-weight: 800;
+}
+
+.sidebar .sidebar-navigation li:first-child {
+    margin-top: 1rem;
 }
 
 .row {
@@ -214,6 +382,7 @@ nav {
 
 /* content */
 main {
+    flex: 1;
     max-width: 50rem;
     min-width: 40rem;
     margin: 2rem 2rem;
@@ -313,6 +482,16 @@ pre.chroma {
     width: 156px;
 }
 
+.f5-logo-footer {
+    height: 32px;
+    width: 32px;
+}
+
+.nginx-logo-footer {
+    height: 72x;
+    width: 156px;
+}
+
 /* FILTHY HACKS BEGIN */
 
 /* Override logo with black text version */
@@ -323,6 +502,9 @@ pre.chroma {
     /* non-tiling background logo */
     background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
     background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    width: 200px; /* Adjust the width as needed to fit the logo */
     background-size: contain;
     background-position: left center;
     width: 200px; /* Adjust the width as needed to fit the logo */

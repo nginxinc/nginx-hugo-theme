@@ -1,0 +1,91 @@
+
+<button class="product-selector-button" id="product-selector-button">
+    {{/* product name and selector */}}
+    <div class="product-name">NGINX Plus</div>
+    <div class="product-selector-button-icon">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 13L7 7L0.999999 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>     
+    </div>
+</button>
+<div class="product-selector" id="product-selector">
+    {{ $nginxProducts := slice 
+        (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
+        (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
+        (dict "title" "NGINX Instance Manager" "url" "/nginx-instance-manager" "type" "nginx-one")
+        (dict "title" "NGINX Ingress Controller" "url" "/nginx-ingress-controller" "type" "nginx-one")
+        (dict "title" "NGINX Gateway Fabric" "url" "/nginx-gateway-fabric" "type" "nginx-one")
+        (dict "title" "NGINX Open Source" "url" "https://nginx.org/en/docs/" "type" "nginx-one")
+        (dict "title" "NGINX Agent" "url" "/nginx-agent" "type" "nginx-one")
+        (dict "title" "NGINX App Protect WAF" "url" "/nginx-app-protect-waf" "type" "nginx-app-protect")
+        (dict "title" "NGINX App Protect DoS" "url" "/nginx-app-protect-dos" "type" "nginx-app-protect")
+        (dict "title" "NGINX as a Service for Azure" "url" "/nginxaas/azure/" "type" "nginx-as-a-service")
+        (dict "title" "NGINX Unit" "url" "https://unit.nginx.org/" "type" "nginx-other")
+    }}
+    {{ $groupedProducts := dict 
+        "nginx-one" (where $nginxProducts "type" "nginx-one")
+        "nginx-app-protect" (where $nginxProducts "type" "nginx-app-protect")
+        "nginx-as-a-service" (where $nginxProducts "type" "nginx-as-a-service")
+        "nginx-other" (where $nginxProducts "type" "nginx-other")
+    }}
+    {{ $orderedKeys := slice "nginx-one" "nginx-app-protect" "nginx-as-a-service" "nginx-other" }}
+    {{ range $orderedKeys }}
+    {{ $type := . }}
+    {{ $products := index $groupedProducts $type }}
+        <div class="product-selector-content" id="product-selector-content">
+            <p>{{ $type | humanize | title | upper }}</p>
+            <ul>
+            {{ range $products }}
+                <li>
+                    <a href="{{ .url }}" target="_blank">{{ .title }}</a>
+                </li>
+            {{ end }}
+            </ul>
+        </div>
+    {{ end }}
+</div>
+<div class="sidebar-navigation">
+    <ul>
+        <li>
+            Admin Guide
+            <ul>
+                <li class="selected">
+                    Installing NGINX and NGINX Plus
+                </li>
+                <li>
+                    Basic Functionality
+                </li>
+            </ul>
+            <ul>
+                <li> Load Balancer
+                    <ul>
+                        <li> HTTP Load Balancing </li>
+                        <li> TCP and UDP Load Balancing </li>
+                        
+                            <ul>
+                                <li>Waaaay to deeply nested</li>
+                            </ul>
+                        
+                    </ul>
+
+                </li>
+            </ul>
+            <ul>
+                <li> Something else
+                    <ul>
+                        <li> To check </li>
+                        <li> That things </li>
+                        
+                            <ul>
+                                <li>Are working</li>
+                            </ul>
+                        
+                    </ul>
+
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+
+</div>

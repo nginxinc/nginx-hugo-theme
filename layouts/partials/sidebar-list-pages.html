@@ -1,0 +1,15 @@
+<ul class="collapsible-content">
+    {{ range .Pages.ByWeight }}
+    <li>
+        {{ if eq .Kind "section" }}
+            <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
+            <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
+                {{ .Title }} 
+            </label>
+            {{ partial "sidebar-list-pages.html" . }}
+        {{ else if eq .Kind "page" }}
+            <a href="{{ .Permalink }}">{{ .Title }} </a>
+        {{ end }}
+    </li>
+    {{ end }}
+</ul>

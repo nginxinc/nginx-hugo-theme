@@ -355,6 +355,7 @@ nav {
 .sidebar .sidebar-navigation ul {
    margin-left: 0;
    padding-left: 0;
+   list-style-type: none;
 }
 
 .sidebar ul :not(.sidebar-navigation) ul {
@@ -363,6 +364,23 @@ nav {
 
 .sidebar .sidebar-navigation li {
     margin-bottom: 1rem;
+}
+
+.sidebar .sidebar-navigation a {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar .sidebar-navigation .collapsible-header {
+    cursor: pointer;
+}
+
+.sidebar .sidebar-navigation .collapsible-content {
+    display: none;
+}
+
+.toggle-checkbox:checked ~ .collapsible-content {
+    display: block;
 }
 
 .selected {

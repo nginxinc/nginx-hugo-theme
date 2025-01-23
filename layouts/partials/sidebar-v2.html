@@ -46,46 +46,14 @@
 </div>
 <div class="sidebar-navigation">
     <ul>
+    {{ range .FirstSection.Pages.ByWeight }}
         <li>
-            Admin Guide
-            <ul>
-                <li class="selected">
-                    Installing NGINX and NGINX Plus
-                </li>
-                <li>
-                    Basic Functionality
-                </li>
-            </ul>
-            <ul>
-                <li> Load Balancer
-                    <ul>
-                        <li> HTTP Load Balancing </li>
-                        <li> TCP and UDP Load Balancing </li>
-                        
-                            <ul>
-                                <li>Waaaay to deeply nested</li>
-                            </ul>
-                        
-                    </ul>
-
-                </li>
-            </ul>
-            <ul>
-                <li> Something else
-                    <ul>
-                        <li> To check </li>
-                        <li> That things </li>
-                        
-                            <ul>
-                                <li>Are working</li>
-                            </ul>
-                        
-                    </ul>
-
-                </li>
-            </ul>
+            <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
+            <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
+                {{ .Title }} 
+            </label>
+            {{ partial "sidebar-list-pages.html" . }}
         </li>
-
+    {{ end }}
     </ul>
-
 </div>

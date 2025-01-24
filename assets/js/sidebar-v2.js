@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentPage) {
             let parentLabel = currentPage.closest("li");
             while (parentLabel) {
-                var checkbox = parentLabel.querySelector(".toggle-checkbox");
+                let checkbox = parentLabel.querySelector(".toggle-checkbox");
                 if (checkbox) {
                     checkbox.checked = true;
                 }

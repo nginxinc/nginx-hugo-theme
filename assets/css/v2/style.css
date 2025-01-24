@@ -16,9 +16,12 @@
     --color-background: #FFFFFF;
     --color-foreground: #000000;
     --color-shadow: #D2D2D2;
-
     --color-product-title: #8D8D8D;
 
+    --sidebar-margin: 3rem;
+    --sidebar-line-box-side-length: 0.25rem;
+    --sidebar-line-box-top: 0.5rem;
+    --sidebar-line-box-left: 0.75rem;
     --sidebar-width: 24rem;
     --side-gutter-width: 20rem;
     --text-content-width-iphone-13: 30rem;
@@ -350,7 +353,7 @@ nav {
 .sidebar .sidebar-navigation {
     width: 100%;
     font-weight: 500;
-    margin-left: 3rem;
+    margin-left: var(--sidebar-margin);
 }
 
 /* removes the built in ul padding/margin */
@@ -386,27 +389,29 @@ nav {
     display: none;
 }
 
-.toggle-checkbox:checked ~ .collapsible-content {
-    display: block;
-}
-
 .toggle-checkbox:checked ~ .collapsible-header .box.expand {
     display: none; 
+}
+
+.toggle-checkbox:checked ~ .collapsible-content {
+    display: block;
 }
 
 .toggle-checkbox:checked ~ .collapsible-header .box.opened {
     display: block;
 }
 
+/* Every other Sidebar Partial Vertical Line */
 .toggle-checkbox:checked ~ .collapsible-content::before {
     content: '';
     position: absolute;
     border-left: black 1px solid;
-    left: calc(0.1rem - 0.75rem);
+    left: -0.65rem;
     top: -1.5rem;
-    height: calc(100% + 0.925rem );
+    height: calc(100% + 0.925rem);
 }
 
+/* Every other Sidebar Partial Horizontal Lines */
 .toggle-checkbox:checked ~ .collapsible-content li {
     position: relative;
 }
@@ -433,18 +438,18 @@ nav {
     background-color: black;
     position: absolute;
     width: 0.1rem;
-    height: 0.25rem;  
-    margin-top: 0.5rem;
-    left: 0.75rem;
+    height: var(--sidebar-line-box-side-length);  
+    margin-top: var(--sidebar-line-box-top);
+    left: var(--sidebar-line-box-left);
 }
 
 .sidebar .sidebar-navigation ul li .box { 
     content: '';
     position: absolute;
-    width: 0.25rem;
-    height: 0.25rem;  
-    margin-top: 0.5rem;
-    left: 0.75rem;
+    width: var(--sidebar-line-box-side-length);
+    height: var(--sidebar-line-box-side-length);  
+    margin-top: var(--sidebar-line-box-top);
+    left: var(--sidebar-line-box-left);
 }
 
 .sidebar .sidebar-navigation ul li .expand { 
@@ -486,7 +491,7 @@ nav {
     border-top: black 1px solid;
     left: 0;
     margin-top: 0.6rem;
-    width: 0.8rem; 
+    width: 0.75rem; 
 }
 
 .row {

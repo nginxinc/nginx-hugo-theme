@@ -1,7 +1,8 @@
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function() {
     const productSelectorContent = document.getElementById("product-selector");
+    const productSelectorButton = document.getElementById("product-selector-button");
 
-    $("#product-selector-button").on("click", () => {
+    productSelectorButton.addEventListener("click", function() {
         if (productSelectorContent.style.display === "block") {
             productSelectorContent.style.display = "none";
         } else {
@@ -9,9 +10,9 @@ $(document).ready(function () {
         }
     });
 
-    window.onclick = function(event) {
+    window.addEventListener("click", function(event) {
         if (!event.target.matches('#product-selector-button') && !event.target.matches('#product-selector-button-icon')) {
-            productSelectorContent.style.display = "none"
+            productSelectorContent.style.display = "none";
         }
-    }
-})
+    });
+});

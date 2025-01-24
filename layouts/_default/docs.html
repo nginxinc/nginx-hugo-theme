@@ -52,20 +52,6 @@
       </div>
     </section>
   </section>
-        {{ partial "previous-next-links-in-section-with-title.html" . }}
-        </main>
-        {{ if and (gt .WordCount 200 ) (.Params.toc) }}
-          {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
-            <div id="toc" class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
-            {{ partial "toc.html" . }}
-            </div>
-          {{ end }}
-        {{ end }}
-        
-      </div>
-    </section>
-  </section>
-
 </div>
 <!-- If there is a script defined in the page metadata, load it  -->
 {{if .Params.script}}

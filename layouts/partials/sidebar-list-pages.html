@@ -15,7 +15,7 @@
             {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $currentUrl) }}
         {{ else if eq .Kind "page" }}
             {{ if eq $currentUrl .Permalink }}                      
-                <span class="box current partial"></span>                 
+                <span class="box current partial" id="current-page"></span>                 
             {{ else }}                     
                 <span class="box-link partial"></span>              
             {{ end }}

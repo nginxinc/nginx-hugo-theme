@@ -1,7 +1,28 @@
+{{ $nginxProducts := slice 
+    (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
+    (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
+    (dict "title" "NGINX Instance Manager" "url" "/nginx-instance-manager" "type" "nginx-one")
+    (dict "title" "NGINX Ingress Controller" "url" "/nginx-ingress-controller" "type" "nginx-one")
+    (dict "title" "NGINX Gateway Fabric" "url" "/nginx-gateway-fabric" "type" "nginx-one")
+    (dict "title" "NGINX Open Source" "url" "https://nginx.org/en/docs/" "type" "nginx-one")
+    (dict "title" "NGINX Agent" "url" "/nginx-agent" "type" "nginx-one")
+    (dict "title" "NGINX App Protect WAF" "url" "/nginx-app-protect-waf" "type" "nginx-app-protect")
+    (dict "title" "NGINX App Protect DoS" "url" "/nginx-app-protect-dos" "type" "nginx-app-protect")
+    (dict "title" "NGINX as a Service for Azure" "url" "/nginxaas/azure/" "type" "nginx-as-a-service")
+    (dict "title" "NGINX Unit" "url" "https://unit.nginx.org/" "type" "nginx-other")
+}}
+{{ $productMap := dict }}
+{{ range $nginxProducts }}
+    {{ $productId := index (split .url "/") 1 }}
+    {{ $productMap = merge $productMap (dict $productId .title) }}
+{{ end }}
+{{ $relPermalink := .RelPermalink }}
+{{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
+{{ $productName := index $productMap $productIdentifier }}
 
 <button class="product-selector-button" id="product-selector-button">
     {{/* product name and selector */}}
-    <div class="product-name">NGINX Plus</div>
+    <div class="product-name">{{ $productName }}</div>
     <div class="product-selector-button-icon">
         <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 13L7 7L0.999999 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -9,19 +30,6 @@
     </div>
 </button>
 <div class="product-selector" id="product-selector">
-    {{ $nginxProducts := slice 
-        (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
-        (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
-        (dict "title" "NGINX Instance Manager" "url" "/nginx-instance-manager" "type" "nginx-one")
-        (dict "title" "NGINX Ingress Controller" "url" "/nginx-ingress-controller" "type" "nginx-one")
-        (dict "title" "NGINX Gateway Fabric" "url" "/nginx-gateway-fabric" "type" "nginx-one")
-        (dict "title" "NGINX Open Source" "url" "https://nginx.org/en/docs/" "type" "nginx-one")
-        (dict "title" "NGINX Agent" "url" "/nginx-agent" "type" "nginx-one")
-        (dict "title" "NGINX App Protect WAF" "url" "/nginx-app-protect-waf" "type" "nginx-app-protect")
-        (dict "title" "NGINX App Protect DoS" "url" "/nginx-app-protect-dos" "type" "nginx-app-protect")
-        (dict "title" "NGINX as a Service for Azure" "url" "/nginxaas/azure/" "type" "nginx-as-a-service")
-        (dict "title" "NGINX Unit" "url" "https://unit.nginx.org/" "type" "nginx-other")
-    }}
     {{ $groupedProducts := dict 
         "nginx-one" (where $nginxProducts "type" "nginx-one")
         "nginx-app-protect" (where $nginxProducts "type" "nginx-app-protect")

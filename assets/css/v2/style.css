@@ -19,8 +19,8 @@
     --color-product-title: #8D8D8D;
 
     --sidebar-margin: 3rem;
-    --sidebar-line-box-side-length: 0.25rem;
-    --sidebar-line-box-top: 0.5rem;
+    --sidebar-line-box-side-length: 0.5rem;
+    --sidebar-line-box-top: 0.375rem;
     --sidebar-line-box-left: 0.75rem;
     --sidebar-width: 24rem;
     --side-gutter-width: 20rem;
@@ -406,9 +406,9 @@ nav {
     content: '';
     position: absolute;
     border-left: black 1px solid;
-    left: -0.65rem;
-    top: -1.5rem;
-    height: calc(100% + 0.925rem);
+    left: -0.525rem;
+    top: -1.33rem;
+    height: calc(100% + 0.78rem);
 }
 
 /* Every other Sidebar Partial Horizontal Lines */
@@ -420,8 +420,8 @@ nav {
     content: '';
     position: absolute;
     border-top: black 1px solid;
-    left: -1.65rem;
-    width: 0.9rem; 
+    left: -1.5rem;
+    width: 0.75rem; 
     top: 0.6rem; 
 }
 

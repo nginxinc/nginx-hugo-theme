@@ -1,6 +1,5 @@
 {{ $currentUrl := .currentUrl }}
 {{ $context := .context }}
-
 <ul class="collapsible-content">
     {{ range $context.Pages.ByWeight }}
     <li>
@@ -20,7 +19,7 @@
             {{ else }}                     
                 <span class="box-link partial"></span>              
             {{ end }}
-            <a href="{{ .Permalink }}">{{ .Title }} </a>
+            <a href="{{ .Permalink }}" style="{{if eq $currentUrl .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a>
         {{ end }}
     </li>
     {{ end }}

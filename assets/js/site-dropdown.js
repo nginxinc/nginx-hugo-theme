@@ -1,9 +1,9 @@
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
     const dropdownContent = document.getElementById("dropdown-content");
     const navbarButton = document.getElementById("navbar-sites-button");
     const chevronIcon = document.getElementById("navbar-sites-button-icon");
 
-    $("#navbar-sites-button").on("click", () => {
+    navbarButton.addEventListener("click", function () {
         chevronIcon.classList.toggle('rotate-chevron');
 
         if (dropdownContent.style.display === "block") {
@@ -15,13 +15,13 @@ $(document).ready(function () {
         }
     });
 
-    window.onclick = function(event) {
+    window.addEventListener("click", function (event) {
         if (!event.target.matches('#navbar-sites-button') && !event.target.matches('#navbar-sites-button-icon')) {
-            if(dropdownContent.style.display !== "none" && dropdownContent.style.display !== ""){
+            if (dropdownContent.style.display !== "none" && dropdownContent.style.display !== "") {
                 chevronIcon.classList.toggle('rotate-chevron');
             }
-            dropdownContent.style.display = "none"
+            dropdownContent.style.display = "none";
             navbarButton.classList.remove("remove-bottom-radius");
         }
-    }
-})
+    });
+});

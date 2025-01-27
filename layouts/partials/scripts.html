@@ -52,14 +52,11 @@
 
 {{ end }}
 
+
+
 <!-- Load Sidebar javascript -->
 {{ $jsSidebar := resources.Get "js/sidebar.js" | minify | fingerprint "sha512" }}
 <script src="{{ $jsSidebar.RelPermalink }}" type="text/javascript" integrity="{{ $jsSidebar.Data.Integrity }}"></script>
-
-<!-- Inline theme switcher -->
-{{ $jsThemeSwitcher := resources.Get "js/theme-switcher.js" | minify | fingerprint "sha512" }}
-<script src="{{ $jsThemeSwitcher.RelPermalink }}" type="text/javascript"
-  integrity="{{ $jsThemeSwitcher.Data.Integrity }}"></script>
   
 <!-- Load Site Dropdown javascript -->
 {{ $jsSiteDropdown := resources.Get "js/site-dropdown.js" | minify | fingerprint "sha512" }}

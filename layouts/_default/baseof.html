@@ -2,75 +2,158 @@
 <html lang="{{ .Site.LanguageCode }}">
 
 <head>  
-{{ block "head" . }}
+  <style>
+    body {
+      /* Hide entire body for first paint. This suppresses flicker when theme is loading. */
+      visibility: hidden;
+    }
+  </style>
+  
+  <noscript>
+    <style>
+      /* Styles when JavaScript is disabled. Fallsback to old theme. */
+      body {
+        visibility: visible;
+      }
+    </style>
+  </noscript>
+  
 
-{{ partial "meta.html" . }}
 
-{{ partial "favicon.html" . }}
+  <script>
+    
+    function useNewTheme(isNewTheme) {
+      localStorage.setItem("useNewTheme", `${isNewTheme}`);
 
-{{ partial "styles.html" . }}
+      // swap out v1 and v2 css style
+      const v1cssIds = [
+        "cssFA1",
+        "cssFA2",
+        "cssFA3",
+        "cssBootstrap",
+        "css1",
+        "css2",
+        "css3",
+        "css4",
+        "css5",
+        "css6"
+      ];
 
-{{ if in .Params.doctypes "devportal" }}
-{{ partial "devportal/style.html" . }}
-{{ end }}
+      v1cssIds.forEach((cssId) => {
+        const element =  document.getElementById(cssId);
+        if (element !== null) {
+          element.disabled = isNewTheme;
+        }
+      });
 
-{{ if fileExists "/layouts/partials/head_custom.html" }}
-{{ partial "head_custom.html" . }}
-{{ end }}
+      const v2cssIds = ["css7"];
+      v2cssIds.forEach((cssId) => {
+        const element =  document.getElementById(cssId);
+        if (element !== null) {
+          element.disabled = !isNewTheme;
+        }
+      });
 
-{{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
-      
-{{ partial "trustarc.html" . }}
+      // swap out v1 and v2 elements
+      const v1ElementIds = ["sidebar", "toc"]
 
-{{ partial "tealium-profile.html" . }}
+      v1ElementIds.forEach((elementId) => {
+        const element =  document.getElementById(elementId);
+        if (element !== null) {
+          element.style.display = isNewTheme ? "none" : "";
+        }
+      });
 
-{{ end }}
+      const mfElements = ['[data-mf="true"]'];
+      mfElements.forEach((elementId) => {
+        document
+          .querySelectorAll(elementId)
+          .forEach(
+            (element) => (element.style.display = isNewTheme ? "" : "none")
+          );
+      });
 
-{{ end }}
+      document.getElementById("body").style.visibility = "visible";
+    }
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-K5HG9JT');</script>
+    const mf = useNewTheme;
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      useNewTheme(localStorage.getItem("useNewTheme") === "true");
+    })
 
-</head>
 
-<body>
-  {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
-{{ partial "universal-tag.html" . }}
+  </script>
+
+  {{ block "head" . }}
+
+  {{ partial "meta.html" . }}
+  
+  {{ partial "favicon.html" . }}
+  
+  {{ partial "styles.html" . }}
+  
+  {{ if in .Params.doctypes "devportal" }}
+  {{ partial "devportal/style.html" . }}
   {{ end }}
-
-  <header>
-    {{ block "header" . }}{{end}}
-  </header>
-
-  <section class="base-layout">
-    <section class="breadcrumb-layout">
-      <div data-mf="true" id="searchbox" style="display:none;">
-        <div class="CoveoSearchbox" data-placeholder='Search NGINX Docs...'></div>
-      </div>
-      {{ if not .IsHome }}
-        {{ if not (in .Params.display_breadcrumb "false" ) }}
-        {{ partial "breadcrumb" .}}  
-        {{ end }}
-      {{ end }}
-    </section>
-
-    <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
-      {{ block "main" . }}{{ end }}
-    </div>
-</section>
-
-  <footer>
-
-    {{ block "footer" . }}
-    {{ partial "footer.html" . }}
+  
+  {{ if fileExists "/layouts/partials/head_custom.html" }}
+  {{ partial "head_custom.html" . }}
+  {{ end }}
+  
+  {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
+        
+  {{ partial "trustarc.html" . }}
+  
+  {{ partial "tealium-profile.html" . }}
+  
+  {{ end }}
+  
+  {{ end }}
+  
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K5HG9JT');</script>
+  
+  </head>
+  
+  <body id="body">
+    {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
+  {{ partial "universal-tag.html" . }}
     {{ end }}
-
-  </footer>
-
-{{ partial "scripts.html" . }} 
-<div id="consent_blackbar"></div>
+  
+    <header>
+      {{ block "header" . }}{{end}}
+    </header>
+  
+    <section class="base-layout">
+      <section class="breadcrumb-layout">
+        <div data-mf="true" id="searchbox" style="display:none;">
+          <div class="CoveoSearchbox" data-placeholder='Search NGINX Docs...'></div>
+        </div>
+        {{ if not .IsHome }}
+          {{ if not (in .Params.display_breadcrumb "false" ) }}
+          {{ partial "breadcrumb" .}}  
+          {{ end }}
+        {{ end }}
+      </section>
+  
+      <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
+        {{ block "main" . }}{{ end }}
+      </div>
+  </section>
+  
+    <footer>
+  
+      {{ block "footer" . }}
+      {{ partial "footer.html" . }}
+      {{ end }}
+  
+    </footer>
+  
+  {{ partial "scripts.html" . }} 
+  <div id="consent_blackbar"></div>
 </body>
 </html>

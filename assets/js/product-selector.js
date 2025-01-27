@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const productSelectorContent = document.getElementById("product-selector");
     const productSelectorButton = document.getElementById("product-selector-button");
 
+    if (productSelectorButton === null || productSelectorButton == null) {
+        return;
+    }
+
     productSelectorButton.addEventListener("click", function() {
         if (productSelectorContent.style.display === "block") {
             productSelectorContent.style.display = "none";

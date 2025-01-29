@@ -17,6 +17,7 @@
     --color-foreground: #000000;
     --color-shadow: #D2D2D2;
     --color-footer: #1D1D1D;
+    --color-footer-text: #E2E2E2;
     --color-product-title: #8D8D8D;
 
     --sidebar-margin: 3rem;
@@ -102,7 +103,6 @@ header {
 footer {
     background-color: var(--color-footer);
     padding: 1rem;
-    color: white;
 }
 
 .footer-layout {
@@ -121,6 +121,7 @@ footer {
 
 .footer-f5-trademark p {
     margin: 0;
+    color: var(--color-footer-text);
 }
 
 .footer-useful-links {
@@ -130,7 +131,7 @@ footer {
 }
 
 .footer-useful-links a {
-    color: white;
+    color: var(--color-footer-text);
     text-decoration: none;
 }
 

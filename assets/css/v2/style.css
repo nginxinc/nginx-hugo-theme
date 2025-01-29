@@ -365,6 +365,7 @@ nav {
    margin-left: 0;
    padding-left: 0;
    list-style-type: none;
+   padding-right: 1.5rem;
 }
 
 .sidebar ul :not(.sidebar-navigation) ul {

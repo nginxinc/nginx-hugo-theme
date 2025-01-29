@@ -25,3 +25,4 @@ resources/*
 
 .hugo_build.lock
 public/*
+exampleSite/public

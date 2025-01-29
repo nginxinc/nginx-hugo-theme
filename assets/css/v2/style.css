@@ -4,7 +4,7 @@
     font-feature-settings: 'liga' on, 'calt' on;
 
     /* fallback to slightly thinner font on browsers without variable 'wght' support */
-    font-weight: 300;
+    font-weight: 400;
 
     /* base rem = 16px by default, left as percentage for screen readers */
     font-size: 100%;
@@ -18,10 +18,10 @@
     --color-shadow: #D2D2D2;
     --color-product-title: #8D8D8D;
 
-    --sidebar-margin: 3rem;
-    --sidebar-line-box-side-length: 0.5rem;
-    --sidebar-line-box-top: 0.375rem;
-    --sidebar-line-box-left: 0.75rem;
+    --sidebar-margin: 48px;
+    --sidebar-line-box-side-length: 8px;
+    --sidebar-line-box-top: 6px;
+    --sidebar-line-box-left: 12px;
     --sidebar-width: 24rem;
     --side-gutter-width: 20rem;
     --text-content-width-iphone-13: 30rem;
@@ -74,13 +74,14 @@ header {
     .dropdown-content {
         position: absolute;
         background-color: white;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        border: black 1px solid;
+        box-shadow: 3px 3px 0px var(--color-shadow);
         z-index: 1;
         right: 0; 
         display: none;
         width: 400px;
         max-width: 80vw;
-        margin-right: 8px;
+        margin-right: 2.5rem;
     }
 
     .dropdown-content ul {
@@ -94,6 +95,11 @@ header {
         text-align: center;    
         text-decoration: none;  
         cursor: pointer;
+    }
+
+    .remove-bottom-radius {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
     }
 }
 
@@ -308,7 +314,6 @@ nav {
     background-color:  var(--color-brand);
     color: var(--color-brand-100);
     border: none;
-    font-weight: 500;
     font-size: 1.25rem;
     width: 100%;
     padding: 0.5rem;
@@ -326,7 +331,7 @@ nav {
     top: 0;
     min-width: 80%;
     margin-left: 46rem;
-    padding: 0.75rem;
+    padding: 1rem 1.5rem;
     background-color: white;
     border: black 1px solid;
     box-shadow: 3px 3px 0px var(--color-shadow);
@@ -352,7 +357,6 @@ nav {
 
 .sidebar .sidebar-navigation {
     width: 100%;
-    font-weight: 500;
     margin-left: var(--sidebar-margin);
 }
 
@@ -364,11 +368,11 @@ nav {
 }
 
 .sidebar ul :not(.sidebar-navigation) ul {
-    padding-left: 1rem;
+    padding-left: 16px;
 }
 
 .sidebar .sidebar-navigation li {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 .sidebar .sidebar-navigation a {
@@ -406,9 +410,9 @@ nav {
     content: '';
     position: absolute;
     border-left: black 1px solid;
-    left: -0.525rem;
-    top: -1.33rem;
-    height: calc(100% + 0.78rem);
+    left: -8.5px;
+    top: -21.5px;
+    height: calc(100% + 12.5px);
 }
 
 /* Every other Sidebar Partial Horizontal Lines */
@@ -416,13 +420,31 @@ nav {
     position: relative;
 }
 
-.toggle-checkbox:checked ~ .collapsible-content li::after {
+.collapsible-content .box::after {
     content: '';
     position: absolute;
     border-top: black 1px solid;
-    left: -1.5rem;
-    width: 0.75rem; 
-    top: 0.6rem; 
+    left: -11.5px;
+    width: 11.5px;
+    top: 50%;
+}
+
+.collapsible-content .opened::after {
+    content: '';
+    position: absolute;
+    border-top: black 1px solid;
+    left: -12.5px;
+    width: 11.5px;
+    top: 50%;
+}
+
+.collapsible-content .box-link::after {
+    content: '';
+    position: absolute;
+    border-top: black 1px solid;
+    left: -11.5px;
+    width: 11.5px;
+    top: 50%;
 }
 
 .selected {
@@ -430,14 +452,14 @@ nav {
 }
 
 .sidebar .sidebar-navigation li:first-child {
-    margin-top: 1rem;
+    margin-top: 16px;
 }
 
 .sidebar .sidebar-navigation ul li .box-link {
     content: '';
     background-color: black;
     position: absolute;
-    width: 0.1rem;
+    width: 1px;
     height: var(--sidebar-line-box-side-length);  
     margin-top: var(--sidebar-line-box-top);
     left: var(--sidebar-line-box-left);
@@ -466,11 +488,13 @@ nav {
 }
 
 .sidebar .sidebar-navigation ul li .partial-box {
-    margin-left: -1.5rem;
+    margin-left: -24px;
 }
 
 .sidebar .sidebar-navigation ul li .partial {
-    left: -0.8125rem;
+    margin-top: 0;
+    top: calc(50% - 3.5px);
+    left: -13px;
 }
 
 /* First Sidebar Nav Vertical Line */

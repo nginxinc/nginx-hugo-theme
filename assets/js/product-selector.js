@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", function() {
     productSelectorButton.addEventListener("click", function() {
         if (productSelectorContent.style.display === "block") {
             productSelectorContent.style.display = "none";
+            productSelectorButton.classList.remove("remove-bottom-radius");
         } else {
             productSelectorContent.style.display = "block";
+            productSelectorButton.classList.add("remove-bottom-radius");
         }
     });
 
@@ -18,5 +20,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!event.target.matches('#product-selector-button') && !event.target.matches('#product-selector-button-icon')) {
             productSelectorContent.style.display = "none";
         }
+        productSelectorButton.classList.remove("remove-bottom-radius");
     });
 });

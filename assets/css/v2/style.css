@@ -16,6 +16,8 @@
     --color-background: #FFFFFF;
     --color-foreground: #000000;
     --color-shadow: #D2D2D2;
+    --color-footer: #1D1D1D;
+    --color-footer-text: #E2E2E2;
     --color-product-title: #8D8D8D;
 
     --sidebar-margin: 3rem;
@@ -99,8 +101,51 @@ header {
 
 /* footer */
 footer {
-    background-color: #32302f;
-    padding: 0.5rem;
+    background-color: var(--color-footer);
+    padding: 1rem;
+}
+
+.footer-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    font-size: 0.875rem;
+    gap: 24px;
+}
+
+.footer-f5-trademark {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.footer-f5-trademark p {
+    margin: 0;
+    color: var(--color-footer-text);
+}
+
+.footer-useful-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.footer-useful-links a {
+    color: var(--color-footer-text);
+    text-decoration: none;
+}
+
+@media (min-width: 814px) {
+    .footer-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        font-size: 0.875rem;
+    }
+
+    .footer-useful-links {
+        gap: 4px;
+    }
+    
 }
 
 /* breadcrumbs */

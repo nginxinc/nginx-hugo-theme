@@ -55,7 +55,7 @@
       });
 
       // swap out v1 and v2 elements
-      const v1ElementIds = ["sidebar", "toc"]
+      const v1ElementIds = ["sidebar", "footer", "toc"]
 
       v1ElementIds.forEach((elementId) => {
         const element =  document.getElementById(elementId);
@@ -145,14 +145,20 @@
       </div>
   </section>
   
-    <footer>
+    <footer id="footer">
   
       {{ block "footer" . }}
       {{ partial "footer.html" . }}
       {{ end }}
   
     </footer>
-  
+
+    <footer data-mf="true" id="footer-v2" style="display:none;">
+      {{ block "footer-v2" . }}
+      {{ partial "footer-v2.html" . }}
+      {{ end }}
+    </footer>
+
   {{ partial "scripts.html" . }} 
   <div id="consent_blackbar"></div>
 </body>

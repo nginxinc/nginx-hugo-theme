@@ -62,14 +62,24 @@
         if (element !== null) {
           element.style.display = isNewTheme ? "none" : "";
         }
+
+        const trustarc = document.getElementById("teconsent-v1");
+        if(trustarc) {
+          trustarc.id = isNewTheme ? "teconsent-v1" : "teconsent";
+        }
       });
 
       const mfElements = ['[data-mf="true"]'];
       mfElements.forEach((elementId) => {
-        document
-          .querySelectorAll(elementId)
-          .forEach(
-            (element) => (element.style.display = isNewTheme ? "" : "none")
+        document.querySelectorAll(elementId).forEach(
+            (element) => {
+              element.style.display = isNewTheme ? "" : "none";
+
+              const trustarc = document.getElementById("teconsent-v2");
+              if(trustarc) {
+                trustarc.id = isNewTheme ?  "teconsent" : "teconsent-v2";
+              }
+            }
           );
       });
 

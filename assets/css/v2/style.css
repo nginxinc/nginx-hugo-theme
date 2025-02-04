@@ -20,11 +20,12 @@
     --color-footer-text: #E2E2E2;
     --color-product-title: #8D8D8D;
 
-    --sidebar-margin: 48px;
+    --sidebar-margin: 24px;
     --sidebar-line-box-side-length: 8px;
     --sidebar-line-box-top: 6px;
     --sidebar-line-box-left: 12px;
     --sidebar-width: 24rem;
+    --sidebar-line-width: 11.5px;
     --side-gutter-width: 20rem;
     --text-content-width-iphone-13: 30rem;
     --text-content-width-mbp-14: 40rem;
@@ -400,8 +401,19 @@ nav {
     font-size: 1rem;
 }
 
-.sidebar .sidebar-navigation {
+/* Sidebar scroller */ 
+.sidebar .scrollbar-container {
     width: 100%;
+    max-height: calc(100vh - 50px);
+    overflow: hidden;
+}
+
+.sidebar .scrollbar-container:hover {
+    overflow: auto;
+}
+
+
+.sidebar .sidebar-navigation {
     margin-left: var(--sidebar-margin);
 }
 
@@ -435,16 +447,22 @@ nav {
     position: relative;
 }
 
+.sidebar .sidebar-navigation .parent-box.opened,
 .sidebar .sidebar-navigation .box.opened {
     display: none;
 }
 
+.toggle-checkbox:checked ~ .collapsible-header .parent-box.expand,
 .toggle-checkbox:checked ~ .collapsible-header .box.expand {
     display: none; 
 }
 
 .toggle-checkbox:checked ~ .collapsible-content {
     display: block;
+}
+
+.toggle-checkbox:checked ~ .collapsible-header .parent-box.opened {
+    display: inline-block;
 }
 
 .toggle-checkbox:checked ~ .collapsible-header .box.opened {
@@ -457,8 +475,8 @@ nav {
     position: absolute;
     border-left: black 1px solid;
     left: -8.5px;
-    top: -21.5px;
-    height: calc(100% + 12.5px);
+    top: -22.5px;
+    height: calc(100% + 13.5px);
 }
 
 /* Every other Sidebar Partial Horizontal Lines */
@@ -471,7 +489,7 @@ nav {
     position: absolute;
     border-top: black 1px solid;
     left: -11.5px;
-    width: 11.5px;
+    width: var(--sidebar-line-width);
     top: 50%;
 }
 
@@ -480,7 +498,7 @@ nav {
     position: absolute;
     border-top: black 1px solid;
     left: -12.5px;
-    width: 11.5px;
+    width: var(--sidebar-line-width);
     top: 50%;
 }
 
@@ -489,7 +507,7 @@ nav {
     position: absolute;
     border-top: black 1px solid;
     left: -11.5px;
-    width: 11.5px;
+    width: var(--sidebar-line-width);
     top: 50%;
 }
 
@@ -501,6 +519,16 @@ nav {
     margin-top: 16px;
 }
 
+.sidebar .sidebar-navigation ul li .parent-box-link {
+    content: '';
+    background-color: black;
+    position: absolute;
+    width: 1px;
+    height: var(--sidebar-line-box-side-length);  
+    margin-top: var(--sidebar-line-box-top);
+    left: calc(0px - var(--sidebar-line-box-left));
+}
+
 .sidebar .sidebar-navigation ul li .box-link {
     content: '';
     background-color: black;
@@ -509,6 +537,16 @@ nav {
     height: var(--sidebar-line-box-side-length);  
     margin-top: var(--sidebar-line-box-top);
     left: var(--sidebar-line-box-left);
+}
+
+.sidebar .sidebar-navigation ul li .parent-box {
+    content: '';
+    display: inline-block;
+    width: var(--sidebar-line-box-side-length);
+    height: var(--sidebar-line-box-side-length);  
+    vertical-align: middle;
+    margin-left: -12px;
+    margin-top: -4px;
 }
 
 .sidebar .sidebar-navigation ul li .box { 
@@ -544,24 +582,36 @@ nav {
 }
 
 /* First Sidebar Nav Vertical Line */
-.sidebar .sidebar-navigation .parent-collapsible-content::before{
+.sidebar .sidebar-navigation .parent-collapsible-content {
+    position: relative;
+}
+
+.sidebar .sidebar-navigation .parent-collapsible-content::before {
     content: '';
     position: absolute;
     border-left: black 1px solid;
-    left: 0;
-    bottom: 1.55rem;
-    height: calc(100% - 5.65rem);
+    left: -24px;
+    top: 10px;
+    height: calc(100% - 9px - 10px);
 }
 
 /* First Sidebar Nav Horizontal Lines */
-.sidebar .sidebar-navigation .parent-collapsible-content .parent-collapsible-content-item::before, 
-.sidebar .sidebar-navigation .parent-collapsible-content .parent-collapsible-content-item::after {
+.sidebar .sidebar-navigation .parent-collapsible-content .parent-box::before {
+    content: '';
+    display: block;
+    border-top: black 1px solid;
+    margin-left: -12px;
+    margin-top: 50%;
+    width: var(--sidebar-line-width);
+}
+
+.parent-collapsible-content .parent-box-link::after {
     content: '';
     position: absolute;
     border-top: black 1px solid;
-    left: 0;
-    margin-top: 0.6rem;
-    width: 0.75rem; 
+    left: -11.5px;
+    width: var(--sidebar-line-width);
+    top: 50%;
 }
 
 .row {

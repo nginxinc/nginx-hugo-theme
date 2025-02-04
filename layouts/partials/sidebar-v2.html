@@ -52,29 +52,31 @@
         </div>
     {{ end }}
 </div>
-<div class="sidebar-navigation">
-    <ul class="parent-collapsible-content">
-    {{ range .FirstSection.Pages.ByWeight }}
-        <li class="parent-collapsible-content-item">
-            {{ if eq .Kind "section" }}
-                <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
-                <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
-                    {{ if .Pages }}
-                        <span class="box expand"></span>
-                        <span class="box opened"></span>
+<div class="scrollbar-container">
+    <div class="sidebar-navigation">
+        <ul class="parent-collapsible-content">
+        {{ range .FirstSection.Pages.ByWeight }}
+            <li class="parent-collapsible-content-item">
+                {{ if eq .Kind "section" }}
+                    <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
+                    <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
+                        {{ if .Pages }}
+                            <span class="parent-box expand"></span>
+                            <span class="parent-box opened"></span>
+                        {{ end }}
+                        {{ .Title }} 
+                    </label>
+                    {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $.Permalink) }}
+                {{ else if eq .Kind "page" }}
+                    {{ if eq $.Permalink .Permalink }}                      
+                        <span class="parent-box current"></span>                 
+                    {{ else }}                     
+                        <span class="parent-box-link"></span>              
                     {{ end }}
-                    {{ .Title }} 
-                </label>
-                {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $.Permalink) }}
-            {{ else if eq .Kind "page" }}
-                {{ if eq $.Permalink .Permalink }}                      
-                    <span class="box current"></span>                 
-                {{ else }}                     
-                    <span class="box-link"></span>              
+                    <a href="{{ .Permalink }}" style="{{if eq $.Permalink .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a> 
                 {{ end }}
-                <a href="{{ .Permalink }}" style="{{if eq $.Permalink .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a> 
-            {{ end }}
-        </li>
-    {{ end }}
-    </ul>
+            </li>
+        {{ end }}
+        </ul>
+    </div>
 </div>

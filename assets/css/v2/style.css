@@ -19,6 +19,7 @@
     --color-footer: #1D1D1D;
     --color-footer-text: #E2E2E2;
     --color-product-title: #8D8D8D;
+    --color-table-divider: #CCCCCC;
 
     --sidebar-margin: 24px;
     --sidebar-line-box-side-length: 8px;
@@ -27,6 +28,10 @@
     --sidebar-width: 24rem;
     --sidebar-line-width: 11.5px;
     --side-gutter-width: 20rem;
+    --table-top-bottom-spacing: 3rem;
+    --table-min-column-spacing: 1.5rem;
+    --table-header-bottom-spacing: 1rem;
+    --table-line-extension: 1rem;
     --text-content-width-iphone-13: 30rem;
     --text-content-width-mbp-14: 40rem;
     --text-content-width-mbp-16: 50rem;
@@ -670,6 +675,44 @@ h1 {
 h2 {
     font-size: 1.5rem;
     margin: 3rem 0 1rem 0;
+}
+
+/* tables */
+table {
+    min-width: 100%;
+    margin: var(--table-top-bottom-spacing) 0;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 1.5rem 0;
+    padding-left: var(--table-min-column-spacing);
+}
+
+th {
+    font-weight: bold;
+    text-align: start;
+    vertical-align: top;
+    padding-bottom: var(--table-header-bottom-spacing);
+    padding-left: var(--table-min-column-spacing);
+}
+
+tr {
+    position: relative;
+}
+
+tr::after {
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid var(--color-table-divider);
+    bottom: 0;
+    left: calc(-1 * var(--table-line-extension));
+    width: calc(100% + (2 * var(--table-line-extension)));
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 0;
 }
 
 /* callouts */

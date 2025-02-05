@@ -108,7 +108,9 @@ header {
 /* footer */
 footer {
     background-color: var(--color-footer);
-    padding: 1rem;
+    padding: 2.5rem;
+    margin: -0.5rem;
+    margin-top: auto;
 }
 
 .footer-layout {

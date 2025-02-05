@@ -351,6 +351,7 @@ nav {
     width: 24rem;
     position: sticky;
     top: 0;
+    height: 100vh; 
 }
 
 .sidebar .product-selector-button {
@@ -367,7 +368,7 @@ nav {
 }
 
 .sidebar .product-selector-button .selector-icon {
-    height:24px;
+    height: 24px;
     width: 24px;
 }
 
@@ -404,14 +405,14 @@ nav {
 /* Sidebar scroller */ 
 .sidebar .scrollbar-container {
     width: 100%;
-    max-height: calc(100vh - 50px);
+    max-height: 100vh;
     overflow: hidden;
+    scrollbar-gutter: stable;
 }
 
 .sidebar .scrollbar-container:hover {
     overflow: auto;
 }
-
 
 .sidebar .sidebar-navigation {
     margin-left: var(--sidebar-margin);
@@ -422,7 +423,6 @@ nav {
    margin-left: 0;
    padding-left: 0;
    list-style-type: none;
-   padding-right: 1.5rem;
 }
 
 .sidebar ul :not(.sidebar-navigation) ul {

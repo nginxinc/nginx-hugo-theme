@@ -195,11 +195,6 @@ nav {
     min-width: 100%;
 }
 
-.main-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
 .sidebar-layout {
     display: flex;
     flex-direction: column;
@@ -209,58 +204,6 @@ nav {
 @media (max-width: 1512px){
     .sidebar-layout {
         display: none;
-    }
-}
-
-.text-content {
-    grid-column-start: 1;
-}
-
-@media (min-width: 1512px) { /* Macbook Pro 14 */
-    .main-layout {
-        display: grid;
-        grid-template-columns: var(--sidebar-width) 1fr;
-        column-gap: var(--component-gap);
-    }
-
-    .content-layout {
-        display: grid;
-        grid-template-columns: var(--text-content-width-mbp-14) var(--side-gutter-width); 
-        column-gap: var(--component-gap);
-    }
-
-    .content-layout .side-gutter {
-        grid-column-start: 2;
-    }
-
-    .base-layout {
-        display: grid;
-        grid-template-rows: repeat(2, auto);
-        column-gap: var(--component-gap);
-    }
-
-    .breadcrumb-layout {
-        display: grid;
-        grid-template-columns: var(--sidebar-width) 1fr;
-        column-gap: var(--component-gap);
-        align-items: center;
-        margin: 0 2rem;
-    }
-}
-
-@media (min-width: 1728px) { /* Macbook Pro 16 */
-    .content-layout {
-        display: grid;
-        grid-template-columns: var(--text-content-width-mbp-16) var(--side-gutter-width); 
-        column-gap: var(--component-gap);
-    }
-}
-
-@media (min-width: 2560px) { /* 4k Desktop */
-    .content-layout {
-        display: grid;
-        grid-template-columns: var(--text-content-width-4k-display) var(--side-gutter-width); 
-        column-gap: var(--component-gap);
     }
 }
 
@@ -293,14 +236,17 @@ nav {
     flex-direction: column;
 }
 
-.content-layout {
-    display: grid;
-    grid-template-columns: var(--text-content-width-iphone-13) var(--side-gutter-width); 
-    column-gap: var(--component-gap);
-}
-
 .text-content {
     grid-column-start: 1;
+    display: grid;
+}
+
+.text-content > :not(.wide) {
+    grid-column: 1;
+}
+
+.text-content .wide {
+    grid-column: 1 / -1;
 }
 
 @media (min-width: 1512px) { /* Macbook Pro 14 */
@@ -315,6 +261,11 @@ nav {
         grid-template-columns: var(--sidebar-width) 1fr;
         column-gap: var(--component-gap);
         align-items: center;
+    }
+
+    .text-content {
+        grid-template-columns: var(--text-content-width-mbp-14) var(--side-gutter-width);
+        column-gap: var(--component-gap);
     }
 
     .main-layout {
@@ -340,12 +291,22 @@ nav {
         grid-template-columns: var(--text-content-width-mbp-16) var(--side-gutter-width); 
         column-gap: var(--component-gap);
     }
+
+    .text-content {
+        grid-template-columns: var(--text-content-width-mbp-16) var(--side-gutter-width);
+        column-gap: var(--component-gap);
+    }
 }
 
 @media (min-width: 2560px) { /* 4k Desktop */
     .content-layout {
         display: grid;
         grid-template-columns: var(--text-content-width-4k-display) var(--side-gutter-width); 
+        column-gap: var(--component-gap);
+    }
+
+    .text-content {
+        grid-template-columns: var(--text-content-width-4k-display) var(--side-gutter-width);
         column-gap: var(--component-gap);
     }
 }

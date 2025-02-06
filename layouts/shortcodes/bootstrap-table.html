@@ -1,6 +1,12 @@
 {{ $htmlTable := .Inner | markdownify }}
 {{ $class := .Get 0 }}
 {{ $old := "<table>" }}
-{{ $new := printf "<table class=\"%s\">" $class }}
+{{ $new := printf "<table class=\"%s %s\">" $class "table-v1" }}
 {{ $htmlTable := replace $htmlTable $old $new }}
 {{ $htmlTable | safeHTML }}
+
+
+<div data-mf="true" style="display: none;" class="table-v2 {{ .Get 0 }}">
+    {{ .Inner | markdownify }}
+
+</div>

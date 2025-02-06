@@ -29,7 +29,9 @@
     --sidebar-line-width: 11.5px;
     --side-gutter-width: 20rem;
     --table-top-bottom-spacing: 3rem;
-    --table-min-column-spacing: 1.5rem;
+    --table-row-space-between: 1.5rem;
+    --table-min-column-spacing-narrow: 1.5rem;
+    --table-min-column-spacing-wide: 0.75rem;
     --table-header-bottom-spacing: 1rem;
     --table-line-extension: 1rem;
     --text-content-width-iphone-13: 30rem;
@@ -679,39 +681,54 @@ h2 {
 
 /* tables */
 table {
+    td {
+        padding: var(--table-row-space-between) 0;
+    }
+    
+    th {
+        font-weight: bold;
+        text-align: start;
+        vertical-align: top;
+        padding-bottom: var(--table-header-bottom-spacing);
+    }
+    
+    tr {
+        position: relative;
+    }
+    
+    tr::after {
+        content: '';
+        position: absolute;
+        border-bottom: 1px solid var(--color-table-divider);
+        bottom: 0;
+        left: calc(-1 * var(--table-line-extension));
+        width: calc(100% + (2 * var(--table-line-extension)));
+    }
+}
+
+.narrow table {
     min-width: 100%;
     margin: var(--table-top-bottom-spacing) 0;
     border-collapse: collapse;
 }
 
-td {
-    padding: 1.5rem 0;
-    padding-left: var(--table-min-column-spacing);
+.wide table {
+    margin: var(--table-top-bottom-spacing) 0;
+    border-collapse: collapse;
 }
 
-th {
-    font-weight: bold;
-    text-align: start;
-    vertical-align: top;
-    padding-bottom: var(--table-header-bottom-spacing);
-    padding-left: var(--table-min-column-spacing);
+.narrow table th,
+.narrow table td {
+    padding-left: var(--table-min-column-spacing-narrow);
 }
 
-tr {
-    position: relative;
+.wide table th,
+.wide table td {
+    padding-left: var(--table-min-column-spacing-wide);
 }
 
-tr::after {
-    content: '';
-    position: absolute;
-    border-bottom: 1px solid var(--color-table-divider);
-    bottom: 0;
-    left: calc(-1 * var(--table-line-extension));
-    width: calc(100% + (2 * var(--table-line-extension)));
-}
-
-th:first-child,
-td:first-child {
+table th:first-child,
+table td:first-child {
     padding-left: 0;
 }
 

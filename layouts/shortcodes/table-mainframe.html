@@ -1,0 +1,19 @@
+<script>
+    function changeWideTableWidth() {
+        var contentLayout = document.querySelector('.content-layout');
+        var tableContainer = document.querySelector('.wide');
+        var table = tableContainer.querySelector('table');
+
+        if (contentLayout && table) {
+            var contentLayoutWidth = contentLayout.offsetWidth;
+            tableContainer.style.width = contentLayoutWidth + 'px';
+        }
+    }
+
+    window.addEventListener('load', changeWideTableWidth);
+    window.addEventListener('resize', changeWideTableWidth);
+</script>
+
+<div class="{{ .Get 0 }}">
+    {{ .Inner | markdownify }}
+</div>

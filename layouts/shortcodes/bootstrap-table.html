@@ -5,8 +5,13 @@
 {{ $htmlTable := replace $htmlTable $old $new }}
 {{ $htmlTable | safeHTML }}
 
+<!-- Add default option for table of "narrow" if one is not provided -->
+{{ $narrowOption := "narrow" }}
+{{ $wideOption := "wide" }}
+{{ if and (not (strings.Contains $class $narrowOption)) (not (strings.Contains $class $wideOption)) }}
+  {{ $class = printf "%s %s" $class $narrowOption }}
+{{ end }}
 
-<div data-mf="true" style="display: none;" class="table-v2 {{ .Get 0 }}">
+<div data-mf="true" style="display: none;" class="table-v2 {{ $class }}">
     {{ .Inner | markdownify }}
-
 </div>

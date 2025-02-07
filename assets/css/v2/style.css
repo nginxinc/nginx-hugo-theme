@@ -249,6 +249,10 @@ nav {
     grid-column: 1 / -1;
 }
 
+.text-content table {
+    width: 100%;
+}
+
 @media (min-width: 1512px) { /* Macbook Pro 14 */
     .base-layout {
         display: grid;

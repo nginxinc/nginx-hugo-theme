@@ -34,6 +34,7 @@
     --table-min-column-spacing-wide: 0.75rem;
     --table-header-bottom-spacing: 1rem;
     --table-line-extension: 1rem;
+    --table-line-height: 1px;
     --text-content-width-iphone-13: 30rem;
     --text-content-width-mbp-14: 40rem;
     --text-content-width-mbp-16: 50rem;
@@ -664,7 +665,7 @@ table {
     tr::after {
         content: '';
         position: absolute;
-        border-bottom: 1px solid var(--color-table-divider);
+        border-bottom: var(--table-line-height) solid var(--color-table-divider);
         bottom: 0;
         left: calc(-1 * var(--table-line-extension));
         width: calc(100% + (2 * var(--table-line-extension)));
@@ -695,6 +696,12 @@ table {
 table th:first-child,
 table td:first-child {
     padding-left: 0;
+}
+
+table hr {
+    color: var(--color-table-divider);
+    border: none;
+    border-bottom: var(--table-line-height) solid var(--color-table-divider);
 }
 
 /* callouts */

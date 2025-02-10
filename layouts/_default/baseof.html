@@ -72,6 +72,10 @@
         }
       });
 
+      document.querySelectorAll(".table-v1").forEach((table) => {
+        table.style.display = isNewTheme ? "none" : "";
+      });
+
       const mfElements = ['[data-mf="true"]'];
       mfElements.forEach((elementId) => {
         document.querySelectorAll(elementId).forEach(

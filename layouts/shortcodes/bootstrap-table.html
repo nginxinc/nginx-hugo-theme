@@ -1,6 +1,17 @@
 {{ $htmlTable := .Inner | markdownify }}
 {{ $class := .Get 0 }}
 {{ $old := "<table>" }}
-{{ $new := printf "<table class=\"%s\">" $class }}
+{{ $new := printf "<table class=\"%s %s\">" $class "table-v1" }}
 {{ $htmlTable := replace $htmlTable $old $new }}
 {{ $htmlTable | safeHTML }}
+
+<!-- Add default option for table of "narrow" if one is not provided -->
+{{ $narrowOption := "narrow" }}
+{{ $wideOption := "wide" }}
+{{ if and (not (strings.Contains $class $narrowOption)) (not (strings.Contains $class $wideOption)) }}
+  {{ $class = printf "%s %s" $class $narrowOption }}
+{{ end }}
+
+<div data-mf="true" style="display: none;" class="table-v2 {{ $class }}">
+    {{ .Inner | markdownify }}
+</div>

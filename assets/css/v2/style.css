@@ -21,7 +21,7 @@
     --color-product-title: #8D8D8D;
     --color-table-divider: #CCCCCC;
     --color-codeblock-code-with-comment: #00963926;
-
+    
     --sidebar-margin: 24px;
     --sidebar-line-box-side-length: 8px;
     --sidebar-line-box-top: 6px;
@@ -34,13 +34,17 @@
     --table-min-column-spacing-narrow: 1.5rem;
     --table-min-column-spacing-wide: 0.75rem;
     --table-header-bottom-spacing: 1rem;
-    --overflow-gutter-extension: 1rem;
     --table-line-height: 1px;
     --text-content-width-iphone-13: 30rem;
     --text-content-width-mbp-14: 40rem;
     --text-content-width-mbp-16: 50rem;
     --text-content-width-4k-display: 60rem;
+    --codeblock-comment-diff: 2rem;
+    --codeblock-comment-space-between: 10px;
+    --codeblock-horizontal-line-length: 2rem;
+    --codeblock-horizontal-line-overflow: 1rem;
     --component-gap: 3.5rem;
+    --overflow-gutter-extension: 1rem;
 
 }
 
@@ -769,7 +773,29 @@ code .line:has(.comment) .code {
     white-space: pre-wrap;
     width: 100%;
     background-color: var(--color-codeblock-code-with-comment);
-    margin: 10px 0;
+    margin: var(--codeblock-comment-space-between) 0;
+    position: relative;
+}
+
+code .line:has(.comment) .code::before {
+    /* Horizontal Lines */
+    content: '';
+    position: absolute;
+    border-top: black 1px solid;
+    left: calc(var(--codeblock-comment-diff) * -1);
+    top: 10px;
+    width: calc(var(--codeblock-horizontal-line-length) + var(--codeblock-horizontal-line-overflow));
+}
+
+code .line:has(.comment) .code::after {
+    /* Block */
+    content: '';
+    background-color: black;
+    position: absolute;
+    height: var(--sidebar-line-box-side-length);
+    width: var(--sidebar-line-box-side-length);
+    top: 6.5px;
+    left: var(--codeblock-horizontal-line-overflow); 
 }
 
 code .line:not(:has(.comment)) .code {
@@ -785,10 +811,10 @@ code:not(:has(.comment)) .code {
 code .comment {
     display: inline-block;
     white-space: normal;
-    margin: 10px 0;
+    margin: var(--codeblock-comment-space-between) 0;
     grid-column: 1;
     grid-row: 1;
-    width: calc(100% - 2rem);
+    width: calc(100% - var(--codeblock-comment-diff));
     border: black 1px solid;
     box-shadow: 3px 3px 0px var(--color-shadow);
     padding: 8px;

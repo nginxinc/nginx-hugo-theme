@@ -20,6 +20,7 @@
     --color-footer-text: #E2E2E2;
     --color-product-title: #8D8D8D;
     --color-table-divider: #CCCCCC;
+    --color-codeblock-code-with-comment: #00963926;
 
     --sidebar-margin: 24px;
     --sidebar-line-box-side-length: 8px;
@@ -33,7 +34,7 @@
     --table-min-column-spacing-narrow: 1.5rem;
     --table-min-column-spacing-wide: 0.75rem;
     --table-header-bottom-spacing: 1rem;
-    --table-line-extension: 1rem;
+    --overflow-gutter-extension: 1rem;
     --table-line-height: 1px;
     --text-content-width-iphone-13: 30rem;
     --text-content-width-mbp-14: 40rem;
@@ -667,8 +668,8 @@ table {
         position: absolute;
         border-bottom: var(--table-line-height) solid var(--color-table-divider);
         bottom: 0;
-        left: calc(-1 * var(--table-line-extension));
-        width: calc(100% + (2 * var(--table-line-extension)));
+        left: calc(-1 * var(--overflow-gutter-extension));
+        width: calc(100% + (2 * var(--overflow-gutter-extension)));
     }
 }
 
@@ -736,9 +737,19 @@ blockquote p:last-child {
     margin: 0 auto;
 }
 
+/* Codeblocks */
+.highlight {
+    grid-column: 1 / -1 !important;
+    position: relative;
+    margin-left: calc(var(--overflow-gutter-extension) / -2);
+    width: calc(100% + var(--overflow-gutter-extension));
+}
+
 code {
     font-weight: light;
     font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    flex-direction: column;
 }
 
 pre.chroma {
@@ -746,6 +757,49 @@ pre.chroma {
     box-sizing: border-box;
 }
 
+code .line {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+code .line:has(.comment) .code {
+    display: inline-block;
+    height: fit-content;
+    white-space: pre-wrap;
+    width: 100%;
+    background-color: var(--color-codeblock-code-with-comment);
+    margin: 10px 0;
+}
+
+code .line:not(:has(.comment)) .code {
+    grid-column: 2 / -1;
+    grid-row: 1;
+}
+
+code:not(:has(.comment)) .code {
+    grid-column: 1 / -1 !important;
+    grid-row: 1;
+}
+
+code .comment {
+    display: inline-block;
+    white-space: normal;
+    margin: 10px 0;
+    grid-column: 1;
+    grid-row: 1;
+    width: calc(100% - 2rem);
+    border: black 1px solid;
+    box-shadow: 3px 3px 0px var(--color-shadow);
+    padding: 8px;
+}
+
+code:not(:has(.comment)) .code {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+/* Logo */
 .f5-logo-footer {
     height: 32px;
     width: 32px;

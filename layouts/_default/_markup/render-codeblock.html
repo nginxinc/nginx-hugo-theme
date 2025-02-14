@@ -1,0 +1,14 @@
+{{ $code := .Inner | safeHTML }}
+{{ $lines := split $code "\n" }}
+<div class="highlight">
+    <pre class="chroma" tabindex="0">
+        <code class="language">
+            {{ range $lines }}
+                <span class="line">{{ $line := . }}{{ $parts := split $line "#" }}<span class="code">{{ index $parts 0 | safeHTML }}
+</span>{{ $commentPart := "" }}{{ if gt (len $parts) 1 }}<span class="comment">{{ index $parts 1 | safeHTML }}</span>{{ end }}</span>
+            {{ end }}
+        </code>
+    </pre> 
+</div>
+
+<!-- ABSOLUTELY DO NOT CHANGE THIS ORDER -->

@@ -794,3 +794,10 @@ pre.chroma {
 .code-copy {
     display: none;
 }
+
+@media print {
+    .qualtrics-feedback {
+      visibility: hidden;
+    }
+  }
+  

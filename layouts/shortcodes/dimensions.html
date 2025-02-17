@@ -2,11 +2,11 @@
 {{ $rawJSPath := .Get "path" }}
 {{ $jsPath := replace $rawJSPath "/static" "" }}
 {{ $dimensionsRef := dict }}
-{{ with resources.Get $jsPath }}
+{{ with try (resources.Get $jsPath) }}
   {{ with .Err }}
     {{ errorf "%s" . }}
   {{ else }}
-    {{ $dimensionsRef = . | transform.Unmarshal }}
+    {{ $dimensionsRef = .Value | transform.Unmarshal }}
   {{ end }}
 {{ else }}
   {{ errorf "Unable to get asset resource %q" $jsPath }}

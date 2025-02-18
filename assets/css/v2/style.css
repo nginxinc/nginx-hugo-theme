@@ -42,7 +42,10 @@
     --codeblock-comment-diff: 2rem;
     --codeblock-comment-space-between: 10px;
     --codeblock-horizontal-line-length: 2rem;
-    --codeblock-horizontal-line-overflow: 1rem;
+    --codeblock-horizontal-line-overflow: 0.25rem;
+    --codeblock-border-thickness: 1px;
+    --codeblock-code-section-padding-left: 1rem;
+    --codeblock-line-box-side-length: 4px;
     --component-gap: 3.5rem;
     --overflow-gutter-extension: 1rem;
 
@@ -764,7 +767,9 @@ pre.chroma {
 code .line {
     position: relative;
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: " code "
+                         " comment ";
 }
 
 code .line:has(.comment) .code {
@@ -775,16 +780,44 @@ code .line:has(.comment) .code {
     background-color: var(--color-codeblock-code-with-comment);
     margin: var(--codeblock-comment-space-between) 0;
     position: relative;
+    grid-column: 1 / -1;
+}
+
+code .line:not(:has(.comment)) .code {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+code:not(:has(.comment)) .code {
+    /* For codeblocks without comments */
+    grid-column: 1 / -1 !important;
+    grid-row: 1;
+}
+
+code .code {
+    padding-left: var(--codeblock-code-section-padding-left);
+    grid-area: code;
+}
+
+code .comment {
+    display: inline-block;
+    white-space: normal;
+    margin: var(--codeblock-comment-space-between) 0;
+    width: calc(100vw - (var(--codeblock-comment-diff) * 2));
+    border: black var(--codeblock-border-thickness) solid;
+    box-shadow: 3px 3px 0px var(--color-shadow);
+    padding: 8px;
+    grid-column: 1 / -1;
 }
 
 code .line:has(.comment) .code::before {
-    /* Horizontal Lines */
+    /* Vertical Lines */
     content: '';
     position: absolute;
-    border-top: black 1px solid;
-    left: calc(var(--codeblock-comment-diff) * -1);
+    border-left: black var(--codeblock-border-thickness) solid;
+    left: calc(var(--codeblock-horizontal-line-overflow) + 1px);
     top: 10px;
-    width: calc(var(--codeblock-horizontal-line-length) + var(--codeblock-horizontal-line-overflow));
+    height: calc(100% + 0.7rem);
 }
 
 code .line:has(.comment) .code::after {
@@ -792,37 +825,39 @@ code .line:has(.comment) .code::after {
     content: '';
     background-color: black;
     position: absolute;
-    height: var(--sidebar-line-box-side-length);
-    width: var(--sidebar-line-box-side-length);
-    top: 6.5px;
+    height: var(--codeblock-line-box-side-length);
+    width: var(--codeblock-line-box-side-length);
+    top: calc(10px - (var(--codeblock-border-thickness) * 1.5));
     left: var(--codeblock-horizontal-line-overflow); 
 }
 
-code .line:not(:has(.comment)) .code {
-    grid-column: 2 / -1;
-    grid-row: 1;
-}
+@media (min-width: 768px) { /* Tablet */
+    code .line:has(.comment) .code {
+        grid-column: 2 / -1;
+    }
 
-code:not(:has(.comment)) .code {
-    grid-column: 1 / -1 !important;
-    grid-row: 1;
-}
+    code .comment {
+        grid-column: 1;
+        width: calc(100% - (var(--codeblock-comment-diff)));
+    }
 
-code .comment {
-    display: inline-block;
-    white-space: normal;
-    margin: var(--codeblock-comment-space-between) 0;
-    grid-column: 1;
-    grid-row: 1;
-    width: calc(100% - var(--codeblock-comment-diff));
-    border: black 1px solid;
-    box-shadow: 3px 3px 0px var(--color-shadow);
-    padding: 8px;
-}
+    code .line:not(:has(.comment)) .code {
+        grid-column: 2 / -1;
+    }
 
-code:not(:has(.comment)) .code {
-    grid-column: 1 / -1;
-    grid-row: 1;
+    code .line {
+        /* Readjust the areas to be more responsive */
+        grid-template-columns: 40% 60%;
+        grid-template-areas: "comment code";
+    }
+
+    code .line:has(.comment) .code::before {
+        /* Horizontal Lines */
+        border-left: none;
+        border-top: black var(--codeblock-border-thickness) solid;
+        left: calc(var(--codeblock-comment-diff) * -1);
+        width: calc(var(--codeblock-horizontal-line-length) + var(--codeblock-horizontal-line-overflow));
+    }
 }
 
 /* Logo */

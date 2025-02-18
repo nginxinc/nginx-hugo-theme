@@ -9,7 +9,6 @@
 ###############
 Thumbs.db
 .DS_Store
-.vscode
 *.code-workspace
 
 # Logs #

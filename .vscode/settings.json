@@ -1,16 +1,11 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "eslint.validate": ["javascript"],
-  "eslint.useFlatConfig": true,
-  "eslint.options": {
-    "overrideConfigFile": "eslint.config.js"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "stylelint.vscode-stylelint"
-  },
-  "stylelint.enable": true,
-  "css.validate": false,
-  "stylelint.validate": ["css"],
-  "stylelint.configFile": "stylelint.config.js"
+	"editor.defaultFormatter": "biomejs.biome",
+	"css.validate": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit"
+	},
+	"[javascript][css][json]": {
+		"editor.defaultFormatter": "biomejs.biome",
+		"editor.formatOnSave": true
+	}
 }

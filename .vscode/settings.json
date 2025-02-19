@@ -5,5 +5,12 @@
   "eslint.useFlatConfig": true,
   "eslint.options": {
     "overrideConfigFile": "eslint.config.js"
-  }
+  },
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "stylelint.enable": true,
+  "css.validate": false,
+  "stylelint.validate": ["css"],
+  "stylelint.configFile": "stylelint.config.js"
 }

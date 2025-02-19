@@ -1,3 +1,4 @@
 **/*.min.js
 **/*.standalone.js
 kube.js
+assets/css/*.css

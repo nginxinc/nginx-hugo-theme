@@ -909,3 +909,10 @@ code .line:has(.comment) .code::after {
 .code-copy {
     display: none;
 }
+
+@media print {
+    .qualtrics-feedback {
+      visibility: hidden;
+    }
+  }
+  

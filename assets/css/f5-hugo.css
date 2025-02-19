@@ -1670,3 +1670,9 @@ div.QSIUserDefinedHTML * {
     height: 550px !important;
   }
 }
+
+@media print {
+  .qualtrics-feedback {
+    visibility: hidden;
+  }
+}

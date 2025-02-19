@@ -1672,38 +1672,41 @@ div.QSIUserDefinedHTML * {
 }
 
 @media print {
-  .qualtrics-feedback {
+  body { 
+      visibility: hidden;
+      height: 0;
+  }
+
+  footer {
+      display: none;
+  }
+
+  h1,
+  .next-prev-icon,
+  .qualtrics-feedback,
+  .last-modified {
     visibility: hidden;
   }
 
-  body { 
-        visibility: hidden;
-        height: 0;
-     }
+  #calculator { 
+      visibility: visible; 
+      position: absolute;
+      top: 20px;
 
-    footer {
-        display: none;
-    }
+      margin: 0 auto;
 
-    #calculator { 
-        visibility: visible; 
-        position: absolute;
-        top: 20px;
+      width: 100%;
+  }
 
-        margin: 0 auto;
+  #calculator h3#calculator-section-heading {
+      justify-content: left;
+  }
+  
+  #calculator h3#calculator-section-heading button {
+      visibility: hidden;
+  }
 
-        width: 100%;
-    }
-
-    #calculator h3#calculator-section-heading {
-        justify-content: left;
-    }
-    
-    #calculator h3#calculator-section-heading button {
-        visibility: hidden;
-    }
-
-    #calculator-section-heading::before {
-        content: "NGINX as a Service for Azure\00a0"
-    }
+  #calculator-section-heading::before {
+      content: "NGINX as a Service for Azure\00a0"
+  }
 }

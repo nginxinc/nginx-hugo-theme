@@ -1675,4 +1675,35 @@ div.QSIUserDefinedHTML * {
   .qualtrics-feedback {
     visibility: hidden;
   }
+
+  body { 
+        visibility: hidden;
+        height: 0;
+     }
+
+    footer {
+        display: none;
+    }
+
+    #calculator { 
+        visibility: visible; 
+        position: absolute;
+        top: 20px;
+
+        margin: 0 auto;
+
+        width: 100%;
+    }
+
+    #calculator h3#calculator-section-heading {
+        justify-content: left;
+    }
+    
+    #calculator h3#calculator-section-heading button {
+        visibility: hidden;
+    }
+
+    #calculator-section-heading::before {
+        content: "NGINX as a Service for Azure\00a0"
+    }
 }

@@ -1,7 +1,7 @@
 {{ $code := .Inner | safeHTML }}
 {{ $lines := split $code "\n" }}
 <div data-mf="true" class="highlight-mf" style="display: none">
-  <pre class="chroma" tabindex="0">
+    <pre class="chroma" tabindex="0">
         <code class="language-{{ .Type }}">
             {{ range $lines }}
                 <span class="line">{{ $line := . }}{{ $parts := split $line "#" }}<span class="code">{{ index $parts 0 | safeHTML }}

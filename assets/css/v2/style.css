@@ -74,10 +74,6 @@ p {
 header {
     margin: 2rem 2rem;
 
-    .navbar {
-
-    }
-
     .header-container {
         display: flex;
         flex-direction: row;
@@ -750,114 +746,116 @@ blockquote p:last-child {
     position: relative;
     margin-left: calc(var(--overflow-gutter-extension) / -2);
     width: calc(100% + var(--overflow-gutter-extension));
-}
 
-code {
-    font-weight: light;
-    font-family: 'JetBrains Mono', monospace;
-    display: flex;
-    flex-direction: column;
-}
-
-pre.chroma {
-    overflow-x: auto;
-    box-sizing: border-box;
-}
-
-code .line {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: " code "
-                         " comment ";
-}
-
-code .line:has(.comment) .code {
-    display: inline-block;
-    height: fit-content;
-    white-space: pre-wrap;
-    width: 100%;
-    background-color: var(--color-codeblock-code-with-comment);
-    margin: var(--codeblock-comment-space-between) 0;
-    position: relative;
-    grid-column: 1 / -1;
-}
-
-code .line:not(:has(.comment)) .code {
-    grid-column: 1 / -1;
-    grid-row: 1;
-}
-
-code:not(:has(.comment)) .code {
-    /* For codeblocks without comments */
-    grid-column: 1 / -1 !important;
-    grid-row: 1;
-}
-
-code .code {
-    padding-left: var(--codeblock-code-section-padding-left);
-    grid-area: code;
-}
-
-code .comment {
-    display: inline-block;
-    white-space: normal;
-    margin: var(--codeblock-comment-space-between) 0;
-    width: calc(100vw - (var(--codeblock-comment-diff) * 2));
-    border: black var(--codeblock-border-thickness) solid;
-    box-shadow: 3px 3px 0px var(--color-shadow);
-    padding: 8px;
-    grid-column: 1 / -1;
-}
-
-code .line:has(.comment) .code::before {
-    /* Vertical Lines */
-    content: '';
-    position: absolute;
-    border-left: black var(--codeblock-border-thickness) solid;
-    left: calc(var(--codeblock-horizontal-line-overflow) + 1px);
-    top: 10px;
-    height: calc(100% + 0.7rem);
-}
-
-code .line:has(.comment) .code::after {
-    /* Block */
-    content: '';
-    background-color: black;
-    position: absolute;
-    height: var(--codeblock-line-box-side-length);
-    width: var(--codeblock-line-box-side-length);
-    top: calc(10px - (var(--codeblock-border-thickness) * 1.5));
-    left: var(--codeblock-horizontal-line-overflow); 
-}
-
-@media (min-width: 768px) { /* Tablet */
-    code .line:has(.comment) .code {
-        grid-column: 2 / -1;
+    code {
+        font-weight: light;
+        font-family: 'JetBrains Mono', monospace;
+        display: flex;
+        flex-direction: column;
     }
-
-    code .comment {
-        grid-column: 1;
-        width: calc(100% - (var(--codeblock-comment-diff)));
+    
+    pre.chroma {
+        overflow-x: auto;
+        box-sizing: border-box;
     }
-
-    code .line:not(:has(.comment)) .code {
-        grid-column: 2 / -1;
-    }
-
+    
     code .line {
-        /* Readjust the areas to be more responsive */
-        grid-template-columns: 40% 60%;
-        grid-template-areas: "comment code";
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: " code "
+                             " comment ";
     }
-
+    
+    code .line:has(.comment) .code {
+        display: inline-block;
+        height: fit-content;
+        white-space: pre-wrap;
+        width: 100%;
+        background-color: var(--color-codeblock-code-with-comment);
+        margin: var(--codeblock-comment-space-between) 0;
+        position: relative;
+        grid-column: 1 / -1;
+    }
+    
+    code .line:not(:has(.comment)) .code {
+        grid-column: 1 / -1;
+        grid-row: 1;
+    }
+    
+    code:not(:has(.comment)) .code {
+        /* For codeblocks without comments */
+        grid-column: 1 / -1 !important;
+        grid-row: 1;
+        padding-left: 0;
+    }
+    
+    code .code {
+        padding-left: var(--codeblock-code-section-padding-left);
+        grid-area: code;
+    }
+    
+    code .comment {
+        display: inline-block;
+        white-space: normal;
+        margin: var(--codeblock-comment-space-between) 0;
+        width: calc(100vw - (var(--codeblock-comment-diff) * 2));
+        border: black var(--codeblock-border-thickness) solid;
+        box-shadow: 3px 3px 0px var(--color-shadow);
+        padding: 8px;
+        grid-column: 1 / -1;
+    }
+    
     code .line:has(.comment) .code::before {
-        /* Horizontal Lines */
-        border-left: none;
-        border-top: black var(--codeblock-border-thickness) solid;
-        left: calc(var(--codeblock-comment-diff) * -1);
-        width: calc(var(--codeblock-horizontal-line-length) + var(--codeblock-horizontal-line-overflow));
+        /* Vertical Lines */
+        content: '';
+        position: absolute;
+        border-left: black var(--codeblock-border-thickness) solid;
+        left: calc(var(--codeblock-horizontal-line-overflow) + 1px);
+        top: 10px;
+        height: calc(100% + 0.7rem);
     }
+    
+    code .line:has(.comment) .code::after {
+        /* Block */
+        content: '';
+        background-color: black;
+        position: absolute;
+        height: var(--codeblock-line-box-side-length);
+        width: var(--codeblock-line-box-side-length);
+        top: calc(10px - (var(--codeblock-border-thickness) * 1.5));
+        left: var(--codeblock-horizontal-line-overflow); 
+    }
+    
+    @media (min-width: 768px) { /* Tablet */
+        code .line:has(.comment) .code {
+            grid-column: 2 / -1;
+        }
+    
+        code .comment {
+            grid-column: 1;
+            width: calc(100% - (var(--codeblock-comment-diff)));
+        }
+    
+        code .line:not(:has(.comment)) .code {
+            grid-column: 2 / -1;
+        }
+    
+        code .line {
+            /* Readjust the areas to be more responsive */
+            grid-template-columns: 40% 60%;
+            grid-template-areas: "comment code";
+        }
+    
+        code .line:has(.comment) .code::before {
+            /* Horizontal Lines */
+            border-left: none;
+            border-top: black var(--codeblock-border-thickness) solid;
+            left: calc(var(--codeblock-comment-diff) * -1);
+            width: calc(var(--codeblock-horizontal-line-length) + var(--codeblock-horizontal-line-overflow));
+        }
+    }
+    
 }
 
 /* Logo */
@@ -867,17 +865,7 @@ code .line:has(.comment) .code::after {
 }
 
 .nginx-logo-footer {
-    height: 72x;
-    width: 156px;
-}
-
-.f5-logo-footer {
-    height: 32px;
-    width: 32px;
-}
-
-.nginx-logo-footer {
-    height: 72x;
+    height: 72px;
     width: 156px;
 }
 
@@ -891,9 +879,6 @@ code .line:has(.comment) .code::after {
     /* non-tiling background logo */
     background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: left center;
-    width: 200px; /* Adjust the width as needed to fit the logo */
     background-size: contain;
     background-position: left center;
     width: 200px; /* Adjust the width as needed to fit the logo */

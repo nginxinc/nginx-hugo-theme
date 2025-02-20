@@ -745,7 +745,7 @@ blockquote p:last-child {
 }
 
 /* Codeblocks */
-.highlight {
+.highlight-mf {
     grid-column: 1 / -1 !important;
     position: relative;
     margin-left: calc(var(--overflow-gutter-extension) / -2);

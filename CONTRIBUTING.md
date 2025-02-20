@@ -20,6 +20,12 @@ Follow our [Getting Started Guide](https://github.com/nginxinc/nginx-hugo-theme/
 
 ## Contributing
 
+### Pre-commit setup
+We use [pre-commit](https://pre-commit.com/#install) for local pre-commit hooks.
+To get setup:
+- Install [pre-commit ](https://pre-commit.com/#install)
+- Install the hooks `pre-commit install`
+
 ### Report a Bug
 
 To report a bug, open an issue on GitHub with the label `bug` using the available bug report issue template. Please ensure the bug has not already been reported. **If the bug is a potential security vulnerability, please report it using our [security policy](https://github.com/nginxinc/nginx-hugo-theme/blob/main/SECURITY.md).**
@@ -35,14 +41,28 @@ To suggest a feature or enhancement, please create an issue on GitHub with the l
 
 Note: if you'd like to implement a new feature, please consider creating a [feature request issue](https://github.com/nginxinc/nginx-hugo-theme/blob/main/.github/feature_request_template.md) first to start a discussion about the feature.
 
-
 ## Git Guidelines
 
 - Keep a clean, concise and meaningful git commit history on your branch (within reason), rebasing locally and squashing before submitting a PR.
-- If possible and/or relevant, use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format when writing a commit message, so that changelogs can be automatically generated
-- Follow the guidelines of writing a good commit message as described here <https://chris.beams.io/posts/git-commit/> and summarised in the next few points:
-  - In the subject line, use the present tense ("Add feature" not "Added feature").
-  - In the subject line, use the imperative mood ("Move cursor to..." not "Moves cursor to...").
-  - Limit the subject line to 72 characters or less.
-  - Reference issues and pull requests liberally after the subject line.
-  - Add more detailed description in the body of the git message (`git commit -a` to give you more space and time in your text editor to write a good message instead of `git commit -am`).
+- Split your changes into separate, atomic commits (i.e. A commit per feature or fix, where the build, tests and the system are all functioning).
+- Make sure your commits are rebased on the `main` branch.
+- Wrap your commit messages at 72 characters.
+- The first line of the commit message is the subject line, and must have the format "Category: Brief description of what's being changed".
+- The category should reflect the part of the Hugo theme you're working on, such as `Layouts`, `Styles`, `Templates`, `Assets`, `Config`, or `Docs`.
+  - **Examples:**
+    - `Layouts: Fix navigation menu rendering issue`
+    - `Styles: Update typography for post headings`
+    - `Templates: Add archive page template`
+    - `Assets: Optimize images and minify JS files`
+    - `Config: Fix site URL for production builds`
+
+  - Avoid generic categories like "`Theme`" or "`Misc`" unless the change truly applies across the entire project and can't be narrowed down further.
+
+  - You may combine categories with `+` if multiple areas are affected.
+    - Example: `Layouts+Styles: Add dark mode toggle styles and layout`
+- Write the commit message subject line in the imperative mood ("Foo: Change the way dates work", not "Foo: Changed the way dates work").
+- Write your commit messages in proper English, with care and punctuation.
+- Amend your existing commits when adding changes after a review, where relevant.
+- Mark each review comment as "resolved" after pushing a fix with the requested changes.
+- Add your personal copyright line to files when making substantive changes. (Optional but encouraged!)
+- Check the spelling of your code, comments and commit messages.

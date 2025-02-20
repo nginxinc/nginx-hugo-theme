@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: lint-commit
+        name: Lint commit message to ensure it will pass the commit linting on CI
+        entry: scripts/lint-commit.sh
+        stages: [ commit-msg ]
+        language: system

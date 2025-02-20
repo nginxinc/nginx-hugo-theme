@@ -1,30 +1,30 @@
-{{ $result := transform.HighlightCodeBlock . }}
-{{ $code := replace .Inner "\n" "<br>" | safeHTML }}
-{{ $lines := split $code "<br>" }}
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- $code := replace .Inner "\n" "<br>" | safeHTML -}}
+{{- $lines := split $code "<br>" -}}
 
 <div data-mf="true" class="highlight-mf" style="display: none">
     <pre class="chroma" tabindex="0">
         <div class="codeblock">
-            {{ range $lines }}
+            {{- range $lines -}}
                 <span class="line">
-                    {{ $line := . }}
-                    {{ $parts := split $line "#" }}
-                    {{ if not $line }}
+                    {{- $line := . -}}
+                    {{- $parts := split $line "#" -}}
+                    {{- if not $line -}}
                         <span class="empty-space"><br><br></span>
-                    {{ else }}
-                        <span class="code">{{ index $parts 0 | safeHTML }}</span>
-                    {{ end }}
-                    {{ $commentPart := "" }}
-                    {{ if gt (len $parts) 1 }}
+                    {{- else -}}
+                        <span class="code">{{- index $parts 0 | safeHTML -}}</span>
+                    {{- end -}}
+                    {{- $commentPart := "" -}}
+                    {{- if gt (len $parts) 1 -}}
                         <span class="comment">
-                            {{ index $parts 1 | safeHTML }}
+                            {{- index $parts 1 | safeHTML -}}
                         </span>
-                    {{ end }}
+                    {{- end -}}
                 </span>
-            {{ end }}
+            {{- end -}}
         </div>
     </pre>
 </div>
 
-{{ $result := transform.HighlightCodeBlock . }}
-{{ $result.Wrapped }}
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- $result.Wrapped -}}

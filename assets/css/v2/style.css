@@ -744,10 +744,9 @@ blockquote p:last-child {
 .highlight-mf {
     grid-column: 1 / -1 !important;
     position: relative;
-    margin-left: calc(var(--overflow-gutter-extension) / -2);
     width: calc(100% + var(--overflow-gutter-extension));
 
-    code {
+    .codeblock {
         font-weight: light;
         font-family: 'JetBrains Mono', monospace;
         display: flex;
@@ -759,7 +758,7 @@ blockquote p:last-child {
         box-sizing: border-box;
     }
     
-    code .line {
+    .codeblock .line {
         position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -767,7 +766,7 @@ blockquote p:last-child {
                              " comment ";
     }
     
-    code .line:has(.comment) .code {
+    .codeblock .line:has(.comment) .code {
         display: inline-block;
         height: fit-content;
         white-space: pre-wrap;
@@ -778,24 +777,24 @@ blockquote p:last-child {
         grid-column: 1 / -1;
     }
     
-    code .line:not(:has(.comment)) .code {
+    .codeblock .line:not(:has(.comment)) .code {
         grid-column: 1 / -1;
         grid-row: 1;
     }
     
-    code:not(:has(.comment)) .code {
+    .codeblock:not(:has(.comment)) .code {
         /* For codeblocks without comments */
         grid-column: 1 / -1 !important;
         grid-row: 1;
         padding-left: 0;
     }
     
-    code .code {
+    .codeblock .code {
         padding-left: var(--codeblock-code-section-padding-left);
         grid-area: code;
     }
     
-    code .comment {
+    .codeblock .comment {
         display: inline-block;
         white-space: normal;
         margin: var(--codeblock-comment-space-between) 0;
@@ -806,7 +805,7 @@ blockquote p:last-child {
         grid-column: 1 / -1;
     }
     
-    code .line:has(.comment) .code::before {
+    .codeblock .line:has(.comment) .code::before {
         /* Vertical Lines */
         content: '';
         position: absolute;
@@ -816,7 +815,7 @@ blockquote p:last-child {
         height: calc(100% + 0.7rem);
     }
     
-    code .line:has(.comment) .code::after {
+    .codeblock .line:has(.comment) .code::after {
         /* Block */
         content: '';
         background-color: black;
@@ -828,26 +827,26 @@ blockquote p:last-child {
     }
     
     @media (min-width: 768px) { /* Tablet */
-        code .line:has(.comment) .code {
+        .codeblock .line:has(.comment) .code {
             grid-column: 2 / -1;
         }
     
-        code .comment {
+        .codeblock .comment {
             grid-column: 1;
             width: calc(100% - (var(--codeblock-comment-diff)));
         }
     
-        code .line:not(:has(.comment)) .code {
+        .codeblock .line:not(:has(.comment)) .code {
             grid-column: 2 / -1;
         }
     
-        code .line {
+        .codeblock .line {
             /* Readjust the areas to be more responsive */
             grid-template-columns: 40% 60%;
             grid-template-areas: "comment code";
         }
     
-        code .line:has(.comment) .code::before {
+        .codeblock .line:has(.comment) .code::before {
             /* Horizontal Lines */
             border-left: none;
             border-top: black var(--codeblock-border-thickness) solid;

@@ -1,17 +1,30 @@
-{{ $code := .Inner | safeHTML }}
-{{ $lines := split $code "\n" }}
+{{ $result := transform.HighlightCodeBlock . }}
+{{ $code := replace .Inner "\n" "<br>" | safeHTML }}
+{{ $lines := split $code "<br>" }}
+
 <div data-mf="true" class="highlight-mf" style="display: none">
     <pre class="chroma" tabindex="0">
-        <code class="language-{{ .Type }}">
+        <div class="codeblock">
             {{ range $lines }}
-                <span class="line">{{ $line := . }}{{ $parts := split $line "#" }}<span class="code">{{ index $parts 0 | safeHTML }}
-</span>{{ $commentPart := "" }}{{ if gt (len $parts) 1 }}<span class="comment">{{ index $parts 1 | safeHTML }}</span>{{ end }}</span>
+                <span class="line">
+                    {{ $line := . }}
+                    {{ $parts := split $line "#" }}
+                    {{ if not $line }}
+                        <span class="empty-space"><br><br></span>
+                    {{ else }}
+                        <span class="code">{{ index $parts 0 | safeHTML }}</span>
+                    {{ end }}
+                    {{ $commentPart := "" }}
+                    {{ if gt (len $parts) 1 }}
+                        <span class="comment">
+                            {{ index $parts 1 | safeHTML }}
+                        </span>
+                    {{ end }}
+                </span>
             {{ end }}
-        </code>
+        </div>
     </pre>
 </div>
 
 {{ $result := transform.HighlightCodeBlock . }}
 {{ $result.Wrapped }}
-
-<!-- ABSOLUTELY DO NOT CHANGE THIS ORDER -->

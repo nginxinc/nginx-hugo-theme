@@ -76,6 +76,10 @@
         table.style.display = isNewTheme ? "none" : "";
       });
 
+      document.querySelectorAll(".highlight").forEach((codeblock) => {
+        codeblock.style.display = isNewTheme ? "none" : "";
+      })
+
       const mfElements = ['[data-mf="true"]'];
       mfElements.forEach((elementId) => {
         document.querySelectorAll(elementId).forEach(

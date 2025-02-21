@@ -1,0 +1,24 @@
+name: Lint and Biome Check
+
+# Run the workflow when code is pushed or when a pull request is created
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  biome:
+    name: Run Biome
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository so the workflow has access to the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Run the run-biome.sh script
+      - name: Run run-biome.sh
+        run: scripts/run-biome.sh

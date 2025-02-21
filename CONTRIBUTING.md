@@ -24,7 +24,7 @@ Follow our [Getting Started Guide](https://github.com/nginxinc/nginx-hugo-theme/
 We use [pre-commit](https://pre-commit.com/#install) for local pre-commit hooks.
 To get setup:
 - Install [pre-commit ](https://pre-commit.com/#install)
-- Install the hooks `pre-commit install`
+- Run the make target `make setup-pre-commit`
 
 ### Report a Bug
 

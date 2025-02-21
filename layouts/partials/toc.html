@@ -1,12 +1,12 @@
 <nav class="bd-links" aria-label="Main navigation">
   <div class="bd-toc-item active">
     <h3 class="bd-toc-link">What's on This Page</h3>
-    {{ if .Params.catalogType }}
-      {{ partial "catalog-toc" . }}  
-    {{ else }}
-      {{ with .TableOfContents }}
-        {{ . }}
-      {{ end }}
+    {{- if .Params.catalogType -}}
+      {{- partial "catalog-toc" . -}}  
+    {{- else -}}
+      {{- with .TableOfContents -}}
+        {{- . -}}
+      {{- end -}}
     {{ end }}
   </div>
 </nav>

@@ -13,7 +13,7 @@ list help::
 	@echo "		   biome-all:		Runs both the lint and formatting commands."
 	@echo "  (Set BIOME_ARGS to add additional arguments to biome command (ex: make biome-all BIOME_ARGS=write))"
 
-.PHONY: biome-format biome-lint biome-all 
+.PHONY: biome-format biome-lint biome-all setup-pre-commit
 BIOME_ARGS ?= 
 FLAG :=
 ifeq ($(BIOME_ARGS), write)
@@ -26,3 +26,13 @@ biome-lint:
 	$(BIOME_BASE_CMD) lint $(BIOME_CONFIG_PATH) $(FLAG)
 biome-all:
 	$(BIOME_BASE_CMD) check $(BIOME_CONFIG_PATH) $(FLAG)
+
+setup-pre-commit:
+	@if ! command -v pre-commit &> /dev/null; then \
+		echo "WARNING: 'pre-commit' is not installed. Please install it using: pip install pre-commit or brew install pre-commit"; \
+	else \
+		echo "pre-commit is installed! Proceeding with hook installation."; \
+		pre-commit install; \
+		pre-commit install --hook-type commit-msg; \
+		echo "pre-commit hooks have been successfully installed."; \
+	fi

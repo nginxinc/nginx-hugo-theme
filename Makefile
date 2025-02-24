@@ -8,12 +8,13 @@ list help::
 	@echo "<COMMON>"
 	@echo "		list | help:  		Print these available make targets"
 	@echo "<LINTING AND FORMATTING>"
-	@echo "		biome-format: 		Runs the biome formatter."
-	@echo "		  biome-lint: 		Runs the biome linter."
-	@echo "		   biome-all:		Runs both the lint and formatting commands."
+	@echo "		 biome-format: 		Runs the biome formatter."
+	@echo "		   biome-lint: 		Runs the biome linter."
+	@echo "		    biome-all:		Runs both the lint and formatting commands."
+	@echo "build-example-site:		Builds hugo exampleSite."
 	@echo "  (Set BIOME_ARGS to add additional arguments to biome command (ex: make biome-all BIOME_ARGS=write))"
 
-.PHONY: biome-format biome-lint biome-all setup-pre-commit
+.PHONY: biome-format biome-lint biome-all setup-pre-commit build-example-site
 BIOME_ARGS ?= 
 FLAG :=
 ifeq ($(BIOME_ARGS), write)
@@ -36,3 +37,6 @@ setup-pre-commit:
 		pre-commit install --hook-type commit-msg; \
 		echo "pre-commit hooks have been successfully installed."; \
 	fi
+
+build-example-site:
+	cd exampleSite && hugo mod get && hugo build --gc -e production

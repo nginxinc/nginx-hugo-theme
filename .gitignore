@@ -15,7 +15,7 @@ Thumbs.db
 ########
 *.log
 
-node_modules/*
+*/node_modules
 .markdownlint.json
 resources/*
 
@@ -28,3 +28,8 @@ exampleSite/public
 
 # Python
 .venv
+
+# Playwright
+/coverage
+*/test-results
+*/playwright-report

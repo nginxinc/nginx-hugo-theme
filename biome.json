@@ -22,7 +22,9 @@
       "**/coveo.css",
       "**/f5-hugo.css",
       "**/highlight.css",
-      "**/*-overrides.css"
+      "**/*-overrides.css",
+
+      "exampleSite"
     ]
   },
   "formatter": {

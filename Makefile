@@ -6,15 +6,19 @@ WRITE_FLAG := --write
 list help::
 	$(info Available Make targets:)
 	@echo "<COMMON>"
-	@echo "		list | help:  		Print these available make targets"
+	@echo "				 list | help:  		Print these available make targets"
 	@echo "<LINTING AND FORMATTING>"
-	@echo "		biome-format: 		Runs the biome formatter."
-	@echo "		  biome-lint: 		Runs the biome linter."
-	@echo "		   biome-all:		Runs both the lint and formatting commands."
+	@echo "				biome-format: 		Runs the biome formatter."
+	@echo "				  biome-lint: 		Runs the biome linter."
+	@echo "		   		   biome-all:		Runs both the lint and formatting commands."
 	@echo "  (Set BIOME_ARGS to add additional arguments to biome command (ex: make biome-all BIOME_ARGS=write))"
+	@echo "<PRE-COMMIT>"
+	@echo "			    setup-pre-commit:		Sets up pre-commit (assuming it is installed)"
+	@echo "<PLAYWRIGHT TESTS>"
+	@echo "		     			test: 		Runs playwright against the old theme."
+	@echo "		    tests-update-screenshots:		Runs playwright against the old theme."
 
-.PHONY: biome-format biome-lint biome-all setup-pre-commit
-BIOME_ARGS ?= 
+.PHONY: biome-format biome-lint biome-all setup-pre-commit tests
 FLAG :=
 ifeq ($(BIOME_ARGS), write)
 	FLAG := $(WRITE_FLAG)
@@ -36,3 +40,8 @@ setup-pre-commit:
 		pre-commit install --hook-type commit-msg; \
 		echo "pre-commit hooks have been successfully installed."; \
 	fi
+
+tests:
+	cd tests && npx playwright test
+tests-update-screenshots:
+	cd tests && npx playwright test --update-snapshots

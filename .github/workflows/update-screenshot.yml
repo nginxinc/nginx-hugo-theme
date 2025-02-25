@@ -1,8 +1,7 @@
 name: Update screenshot on comment
 on:
-    pull_request:
-    # issue_comment:
-    #   types: [created]
+    issue_comment:
+       types: [created]
 jobs:
   update-screenshots:
     name: Update Screenshot

@@ -61,15 +61,3 @@ jobs:
                   repo: context.repo.repo,
                   body: body,
                 });
-
-          # - name: Update the screenshots based on Ubuntu env on GH
-          #   id: test-visual-update
-          #   if: ${{ failure() && steps.test-visual.conclusion == 'failure' }}
-          #   run: make tests-update-screenshots
-          # - name: Upload updated Playwright screenshots
-          #   uses: actions/upload-artifact@v4
-          #   if: ${{ failure() && steps.test-visual-update.conclusion == 'success' }}
-          #   with:
-          #       name: playwright-screenshots-updated
-          #       path: tests/src/__screenshots__/**/*.png
-          #       retention-days: 3

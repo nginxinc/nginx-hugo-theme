@@ -12,6 +12,8 @@ test.describe('Testing old theme', () => {
       window.scrollTo(0, 0);
     });
     await page.waitForFunction(() => window.scrollY === 0);
-    await expect(page).toHaveScreenshot('example-site-screenshot.png');
+    await expect(page).toHaveScreenshot('example-site-screenshot.png', {
+      fullPage: true,
+    });
   });
 });

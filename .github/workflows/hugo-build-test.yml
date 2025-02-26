@@ -1,7 +1,10 @@
 name: Hugo Build Test
 
 on:
-  workflow_dispatch:
+    pull_request:
+        branches:
+        - main
+    workflow_dispatch:
 
 jobs:
   build:
@@ -18,7 +21,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
         with:
-          go-version: 'latest'
+          go-version: '>=1.23'
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0

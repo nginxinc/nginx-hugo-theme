@@ -24,7 +24,9 @@
       "**/highlight.css",
       "**/*-overrides.css",
 
-      "exampleSite"
+      "exampleSite",
+      "public/*",
+      "test-results/*"
     ]
   },
   "formatter": {

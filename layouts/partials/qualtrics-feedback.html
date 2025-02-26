@@ -47,17 +47,25 @@
                 a.src=g;
                 document.body&&document.body.appendChild(a)
             }
-        }; 
-        
+        };
+
         this.start=function(){
             var t=this;
             "complete"!==document.readyState?window.addEventListener ?
                 window.addEventListener("load",function(){t.go()},!1) : 
-                window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};}; 
-            try{
-                (new g(100,"r","QSI_S_ZN_2QSTn2r41YlXrYk","https://zn2qstn2r41ylxryk-f5.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_2QSTn2r41YlXrYk")).start()
-            }
-            catch(i){}})();
+                window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};
+    }; 
+
+    try{
+        const project_id = window.location.hostname.includes("staging") ? "QSI_S_ZN_2YG73ads2zp5bN0" : "QSI_S_ZN_2QSTn2r41YlXrYk";
+        const endpoint = window.location.hostname.includes("staging") ? "https://zn2yg73ads2zp5bn0-f5.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_2YG73ads2zp5bN0" : "https://zn2qstn2r41ylxryk-f5.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_2QSTn2r41YlXrYk";
+        (new g(100,"r", project_id, endpoint)).start()
+    }
+    catch(i){}})();
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".qualtrics-feedback").id = window.location.hostname.includes("staging") ? "ZN_2YG73ads2zp5bN0" : "ZN_2QSTn2r41YlXrYk"
+    });
 </script>
 <hr>
 <div style="height: 60px;"></div>

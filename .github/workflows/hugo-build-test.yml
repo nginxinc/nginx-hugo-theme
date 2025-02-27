@@ -1,4 +1,4 @@
-name: Hugo Build Test
+name: Latest Hugo Version Build Test
 
 on:
     pull_request:

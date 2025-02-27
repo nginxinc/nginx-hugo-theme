@@ -1,0 +1,37 @@
+name: Build Hugo Docs with PR Theme
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-docs:
+    name: Build Hugo Docs with PR Theme
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout hugo theme
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.7.1
+        with:
+          fetch-depth: 0 # This is required for hugo Lastmod to function properly
+
+      - name: Clone documentation repo
+        run: |
+          git clone https://github.com/nginx/documentation.git docs
+
+      - name: Setup Go
+        uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5.0.2
+        with:
+          go-version: ">=1.23"
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
+        with:
+          hugo-version: "0.134.2"
+          extended: true
+
+      - name: Build Hugo site
+        working-directory: docs
+        run: |
+          hugo --gc -e production --baseURL="https://frontdoor-test-docs.nginx.com/nginx-hugo-theme/${{github.event.pull_request.number}}"

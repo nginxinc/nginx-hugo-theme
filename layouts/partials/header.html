@@ -6,11 +6,11 @@
     </a>
     {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
       <div class="navbar navbar-nav">
-            <!-- Standalone search box. -->
-        <div id="searchbox">
-          <!--div class="CoveoAnalytics" data-search-hub="HUB_ES_Nginx_Docs_And_Org"></div-->
-          <div class="CoveoSearchbox" data-placeholder='Search NGINX Docs...'></div>
-        </div>
+          <!-- Standalone search box. -->
+          <atomic-search-interface>
+            <atomic-search-box redirection-url="https://www.coveo.com/en/search" data-placeholder="Search NGINX Docs...">
+            </atomic-search-box>
+          </atomic-search-interface>
       </div>
     {{ end }}
     {{ if ( in .Site.Params.buildtype "package" ) }}

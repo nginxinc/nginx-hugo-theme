@@ -359,6 +359,8 @@ nav {
   position: sticky;
   top: 0;
   height: 100vh;
+  margin-top: -1rem;
+  padding-top: 1rem;
 }
 
 .sidebar .product-selector-button {
@@ -384,7 +386,8 @@ nav {
   position: absolute;
   top: 0;
   min-width: 80%;
-  margin-left: 46rem;
+  margin-top: 1rem;
+  margin-left: 44rem;
   padding: 1rem 1.5rem;
   background-color: white;
   border: black 1px solid;

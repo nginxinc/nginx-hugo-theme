@@ -41,6 +41,13 @@
   integrity="sha512-9/A9yVCU4GS6/iIwTRJKnan4Hf8gDKj3anwItN9QCsU8SixaT5xkjjWsZ/iq0TWaizhtqOLacadXJfxHlwYCcA=="
   crossorigin="anonymous" />{{ end }}
 
+<!-- load CSS Atomic CSS -->
+<link
+  rel="stylesheet"
+  href="https://static.cloud.coveo.com/atomic/v3.19.0/themes/coveo.css"
+  integrity="sha512-m2BufPi8Tc6H2jcQfDj/PIl5H57C9jeqhbDFgFXKTtOhoC4S7ULXmx74FseZ8WXpfdT9uyccMHDBJDrIZlrUUQ=="
+  crossorigin="anonymous"/>
+
 {{ $cssHeader := $css1 | minify | fingerprint "sha512"}}
 <link href="{{ $cssHeader.RelPermalink }}" rel="stylesheet" type="text/css" id="css1">
 

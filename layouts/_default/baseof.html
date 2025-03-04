@@ -57,7 +57,7 @@
       });
 
       // swap out v1 and v2 elements
-      const v1ElementIds = ["sidebar", "footer", "toc", "api"]
+      const v1ElementIds = ["sidebar", "footer", "toc", "api", "search-v1"]
 
       v1ElementIds.forEach((elementId) => {
         const element = document.getElementById(elementId);
@@ -170,9 +170,10 @@
   
     <section class="base-layout">
       <section class="breadcrumb-layout">
-        <div data-mf="true" id="searchbox" style="display:none;">
-          <div class="CoveoSearchbox-v2" data-placeholder='Search NGINX Docs...'></div>
-        </div>
+        <atomic-search-interface id="search-standalone" data-mf="true" style="display:none;">
+          <atomic-search-box redirection-url="/search.html">
+          </atomic-search-box>
+        </atomic-search-interface>
         {{ if not .IsHome }}
           {{ if not (in .Params.display_breadcrumb "false" ) }}
           {{ partial "breadcrumb" .}}  

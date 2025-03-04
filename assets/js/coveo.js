@@ -20,7 +20,39 @@ async function getsearchObj() {
   return response.json();
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
+async function atomicCoveo() {
+  await customElements.whenDefined('atomic-search-interface');
+  const searchInterface = document.querySelector('#search-v2');
+  const searchInterfaceStandalone =
+    document.querySelector('#search-standalone');
+  const token = localStorage.getItem('coveo_jwt_v1');
+  const org_id = localStorage.getItem('coveo_org_id_v1');
+  let searchObj = { token, org_id };
+
+  if (token === null || org_id === null || isJwtExpired(token)) {
+    searchObj = await getsearchObj();
+    localStorage.setItem('coveo_jwt_v1', searchObj.token);
+    localStorage.setItem('coveo_org_id_v1', searchObj.org_id);
+  }
+
+  if (searchInterface) {
+    await searchInterface.initialize({
+      accessToken: token,
+      organizationId: org_id,
+      renewAccessToken: () => {},
+    });
+    searchInterface.executeFirstSearch();
+  }
+
+  await searchInterfaceStandalone.initialize({
+    accessToken: token,
+    organizationId: org_id,
+    renewAccessToken: () => {},
+  });
+  searchInterfaceStandalone.executeFirstSearch();
+}
+
+async function legacyCoveo() {
   const token = localStorage.getItem('coveo_jwt_v1');
   const org_id = localStorage.getItem('coveo_org_id_v1');
   let searchObj = { token, org_id };
@@ -79,4 +111,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       },
     },
   });
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  if (localStorage.getItem('useNewTheme') === 'true') {
+    atomicCoveo();
+  } else {
+    legacyCoveo();
+  }
 });

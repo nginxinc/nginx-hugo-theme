@@ -997,6 +997,17 @@ blockquote p:last-child {
   }
 }
 
+/* Qualtrics */
+.QSIUserDefinedHTML {
+  width: 100% !important;
+  height: 700px;
+}
+
+div.QSIUserDefinedHTML * {
+  width: 100% !important;
+  height: 700px;
+}
+
 /* Logo */
 .f5-logo-footer {
   height: 32px;

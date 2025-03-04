@@ -790,7 +790,7 @@ blockquote p:last-child {
 }
 
 /* Tabs */
-.nav {
+.nav-tabs {
   list-style: none;
   display: flex;
   justify-content: start;

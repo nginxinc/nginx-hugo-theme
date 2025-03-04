@@ -1414,11 +1414,11 @@ summary {
 
 /* Qualtrics */
 .QSIUserDefinedHTML {
-  height: 700px;
+  height: 700px !important;
 }
 
 .QSIUserDefinedHTML * > div {
-  height: 700px;
+  height: 700px !important;
 }
 
 /* end custom-styles shortcode additions */

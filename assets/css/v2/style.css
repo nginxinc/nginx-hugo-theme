@@ -22,6 +22,7 @@
   --color-footer-text: #e2e2e2;
   --color-product-title: #8d8d8d;
   --color-table-divider: #cccccc;
+  --color-tabs-divider: #00000033;
   --color-codeblock-code-with-comment: #00963926;
 
   --sidebar-margin: 24px;
@@ -786,6 +787,88 @@ blockquote p:first-child {
 
 blockquote p:last-child {
   margin: 0 auto;
+}
+
+/* Tabs */
+.nav-tabs {
+  list-style: none;
+  display: flex;
+  justify-content: start;
+  border-bottom: 1px solid black;
+  position: relative;
+
+  /* Lines extend 1rem into gutter on both sides */
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+
+  > :not(:last-child) {
+    border-right: none;
+  }
+}
+
+.nav-item {
+  border: 1px solid var(--color-tabs-divider);
+  border-bottom: none;
+  padding: 10px;
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  .active {
+    color: black;
+  }
+}
+
+.nav-item:has(.active) {
+  /* Change the border colors of li that is has a child with a class "active" */
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+
+  /* Change the border of next child */
+  + li {
+    border-left: 1px solid black;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    border-bottom: 1px solid white;
+    bottom: -1px; /* Moves the line down 1px (aka the thickness of the border) */
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+}
+
+.nav-item:last-child:has(.active) {
+  /* If on last tab, change the right border since it does not have a next sibling */
+  border-right: 1px solid black;
+}
+
+.tab-content {
+  border-bottom: 1px solid black;
+
+  /* Lines extend 1rem into gutter on both sides */
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+
+  .tab-pane {
+    display: none;
+
+    /* Push the content 1rem right due to the gutter displacement */
+    margin-left: 1rem;
+  }
+
+  .tab-pane * {
+    margin-left: 0;
+  }
+
+  .active {
+    display: block !important;
+  }
 }
 
 /* Codeblocks */

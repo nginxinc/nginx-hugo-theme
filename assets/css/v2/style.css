@@ -791,24 +791,22 @@ blockquote p:last-child {
 
 /* Tabs */
 .nav-tabs {
-  list-style: none;
   display: flex;
-  justify-content: start;
-  border-bottom: 1px solid black;
-  position: relative;
+  flex-direction: column;
+  border: none;
+  list-style: none;
 
-  /* Lines extend 1rem into gutter on both sides */
-  width: calc(100% + 2rem);
-  margin-left: -1rem;
+  width: 100%;
+  margin-left: 0;
+  padding: 0;
 
   > :not(:last-child) {
-    border-right: none;
+    border-bottom: none;
   }
 }
 
 .nav-item {
-  border: 1px solid var(--color-tabs-divider);
-  border-bottom: none;
+  border: 1px solid black;
   padding: 10px;
   position: relative;
 
@@ -821,45 +819,9 @@ blockquote p:last-child {
   }
 }
 
-.nav-item:has(.active) {
-  /* Change the border colors of li that is has a child with a class "active" */
-  border-top: 1px solid black;
-  border-left: 1px solid black;
-
-  /* Change the border of next child */
-  + li {
-    border-left: 1px solid black;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    display: block;
-    border-bottom: 1px solid white;
-    bottom: -1px; /* Moves the line down 1px (aka the thickness of the border) */
-    left: 0;
-    width: 100%;
-    z-index: 9999;
-  }
-}
-
-.nav-item:last-child:has(.active) {
-  /* If on last tab, change the right border since it does not have a next sibling */
-  border-right: 1px solid black;
-}
-
 .tab-content {
-  border-bottom: 1px solid black;
-
-  /* Lines extend 1rem into gutter on both sides */
-  width: calc(100% + 2rem);
-  margin-left: -1rem;
-
   .tab-pane {
     display: none;
-
-    /* Push the content 1rem right due to the gutter displacement */
-    margin-left: 1rem;
   }
 
   .tab-pane * {
@@ -868,6 +830,69 @@ blockquote p:last-child {
 
   .active {
     display: block !important;
+  }
+}
+
+@media (min-width: 429px) {
+  /* iPhone 12+ Pro Max */
+  .nav-tabs {
+    flex-direction: row;
+    justify-content: start;
+    border-bottom: 1px solid black;
+    position: relative;
+
+    /* Lines extend 1rem into gutter on both sides */
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+
+    > :not(:last-child) {
+      border-right: none;
+    }
+  }
+
+  .nav-item {
+    border: 1px solid var(--color-tabs-divider);
+    border-bottom: none;
+  }
+
+  .nav-item:has(.active) {
+    /* Change the border colors of li that is has a child with a class "active" */
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+
+    /* Change the border of next child */
+    + li {
+      border-left: 1px solid black;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      border-bottom: 1px solid white;
+      bottom: -1px; /* Moves the line down 1px (aka the thickness of the border) */
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+    }
+  }
+
+  .nav-item:last-child:has(.active) {
+    /* If on last tab, change the right border since it does not have a next sibling */
+    border-right: 1px solid black;
+  }
+
+  .tab-content {
+    border-bottom: 1px solid black;
+
+    /* Lines extend 1rem into gutter on both sides */
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+
+    .tab-pane {
+      /* Push the content 1rem right due to the gutter displacement */
+      margin-left: 1rem;
+    }
   }
 }
 

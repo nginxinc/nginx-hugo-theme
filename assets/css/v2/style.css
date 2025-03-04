@@ -875,8 +875,12 @@ blockquote p:last-child {
 .highlight-mf {
   grid-column: 1 / -1 !important;
   position: relative;
-  margin-left: calc(var(--overflow-gutter-extension) / -2);
+  margin-left: 0;
   width: calc(100% + var(--overflow-gutter-extension));
+
+  &:has(.comment) {
+    margin-left: calc(var(--overflow-gutter-extension) / -1);
+  }
 
   code {
     font-weight: light;

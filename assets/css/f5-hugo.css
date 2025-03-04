@@ -1412,15 +1412,6 @@ summary {
   color: green;
 }
 
-/* Qualtrics */
-.QSIUserDefinedHTML {
-  height: 700px !important;
-}
-
-.QSIUserDefinedHTML * > div {
-  height: 700px !important;
-}
-
 /* end custom-styles shortcode additions */
 
 /* credit:
@@ -1662,12 +1653,15 @@ li.nav-item a.nav-link {
   font-weight:300;
 }
 
+/* Qualtrics */
 .QSIUserDefinedHTML {
   width: 83% !important;
+  height: 700px !important;
 }
 
 div.QSIUserDefinedHTML * {
   width: 100% !important;
+  height: 700px !important;
 }
 
 @media (max-width: 618px) {

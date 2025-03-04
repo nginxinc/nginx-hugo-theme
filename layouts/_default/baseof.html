@@ -106,19 +106,19 @@
       setTheme(localStorage.getItem("useNewTheme") === "true");
     });
 
-    function konami(callback) {
+    function gameCode(callback) {
       let kkeys = [];
       // up,up,down,down,left,right,left,right,B,A
-      const konami = "38,38,40,40,37,39,37,39,66,65";
+      const code = "38,38,40,40,37,39,37,39,66,65";
       return (event) => {
         kkeys.push(event.keyCode);
-        if (kkeys.toString().indexOf(konami) >= 0) {
+        if (kkeys.toString().indexOf(code) >= 0) {
           callback(event);
           kkeys = [];
         }
       };
     }
-    const handler = konami(() => {
+    const handler = gameCode(() => {
       mf();
     });
     window.addEventListener("keydown", handler);

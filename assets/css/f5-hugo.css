@@ -1412,6 +1412,15 @@ summary {
   color: green;
 }
 
+/* Qualtrics */
+.QSIUserDefinedHTML {
+  height: 700px;
+}
+
+.QSIUserDefinedHTML * > div {
+  height: 700px;
+}
+
 /* end custom-styles shortcode additions */
 
 /* credit:

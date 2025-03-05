@@ -39,7 +39,13 @@ async function atomicCoveo() {
     await searchInterface.initialize({
       accessToken: token,
       organizationId: org_id,
-      renewAccessToken: () => {},
+      preprocessRequest: (request, clientOrigin, metadata) => {
+        const body = JSON.parse(request.body);
+        body.q = `<@- ${body.q} -@>`;
+        request.body = JSON.stringify(body);
+
+        return request;
+      },
     });
     searchInterface.executeFirstSearch();
   }
@@ -47,7 +53,13 @@ async function atomicCoveo() {
   await searchInterfaceStandalone.initialize({
     accessToken: token,
     organizationId: org_id,
-    renewAccessToken: () => {},
+    preprocessRequest: (request, clientOrigin, metadata) => {
+      const body = JSON.parse(request.body);
+      body.q = `<@- ${body.q} -@>`;
+      request.body = JSON.stringify(body);
+
+      return request;
+    },
   });
   searchInterfaceStandalone.executeFirstSearch();
 }

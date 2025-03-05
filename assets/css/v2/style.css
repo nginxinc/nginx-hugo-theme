@@ -1000,12 +1000,12 @@ blockquote p:last-child {
 /* Qualtrics */
 .QSIUserDefinedHTML {
   width: 100% !important;
-  height: 100vh;
+  height: 100vh !important;
 }
 
 div.QSIUserDefinedHTML * {
   width: 100% !important;
-  height: 100vh;
+  height: 100vh !important;
 }
 
 /* Logo */

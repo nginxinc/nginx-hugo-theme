@@ -1655,12 +1655,12 @@ li.nav-item a.nav-link {
 
 .QSIUserDefinedHTML {
   width: 83% !important;
-  height: 100vh;
+  height: 100vh !important;
 }
 
 div.QSIUserDefinedHTML * {
   width: 100% !important;
-  height: 100vh;
+  height: 100vh !important;
 }
 
 @media (max-width: 618px) {

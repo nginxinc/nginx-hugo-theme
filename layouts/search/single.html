@@ -1,10 +1,10 @@
 {{ define "main" }}
 
-<div class="row flex-xl-nowrap">
+<div class="row flex-xl-nowrap" id="search-v1">
   <main class="col-md-10 content" role="main">
     <div class="container"><h1>{{ .Title}}</h1></div>
 
-    <div id="search" class="CoveoSearchInterface" data-enable-history="true">
+    <div id="search" class="CoveoSearchInterface" data-enable-history="true" >
       <div class="CoveoFolding"></div>
       <div class="CoveoAnalytics" data-search-hub="HUB_ES_Nginx_Docs_And_Org"></div>
       <div class="coveo-search-section" style="display: none;">
@@ -102,4 +102,73 @@
         </div>
       </div>
     </div>
+  </main>
+</div>
+
+<section class="main-layout" data-mf="true" style="display: none; margin-left: 2rem;" >
+  <atomic-search-interface id="search-v2">
+    <atomic-search-layout>
+      <!-- Search/Metadata Section -->
+      <atomic-layout-section section="search">
+        <div class="atomic-full-summary-and-sort">
+          <atomic-query-summary></atomic-query-summary>
+          <atomic-sort-dropdown>
+            <atomic-sort-expression label="relevance" expression="relevancy"></atomic-sort-expression>
+            <atomic-sort-expression label="most-recent" expression="date descending"></atomic-sort-expression>
+          </atomic-sort-dropdown>
+        </div>
+      </atomic-layout-section>
+
+      <!-- Facet Section -->
+      <atomic-layout-section section="facets">
+        <atomic-search-box style="display: none;">
+        </atomic-search-box>
+        <atomic-facet field="f5_product" label="Show by product"></atomic-facet>
+        <atomic-refine-toggle></atomic-refine-toggle>
+      </atomic-layout-section>
+
+      <!-- Main Section -->
+      <atomic-layout-section section="main">
+        <!-- Results -->
+        <atomic-layout-section section="results">
+          <atomic-no-results></atomic-no-results>
+          <atomic-result-list>
+            <atomic-result-template>
+              <template>
+                <!-- Title -->
+                <atomic-result-section-title>
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <atomic-result-link></atomic-result-link>
+                    <atomic-quickview></atomic-quickview>
+                  </div>
+                </atomic-result-section-title>
+
+                <!-- URL -->
+                <atomic-result-section-title-metadata>
+                  <atomic-result-printable-uri></atomic-result-printable-uri>
+                </atomic-result-section-title-metadata>
+                
+                <!-- Excerpt -->
+                <atomic-result-section-excerpt>
+                  <atomic-result-text field="excerpt"></atomic-result-text>
+                </atomic-result-section-excerpt>
+
+                <!-- Date -->
+                <atomic-result-section-bottom-metadata>
+                  Modification Date: <atomic-result-date format="MMM D, YYYY"></atomic-result-date>
+                </atomic-result-section-bottom-metadata>
+              </template>
+            </atomic-result-template>
+          </atomic-result-list> 
+        </atomic-layout-section>
+
+        <!-- Pagination -->
+        <atomic-layout-section section="pagination" style="margin-top: 2rem;">
+          <atomic-pager></atomic-pager>
+          <atomic-results-per-page></atomic-results-per-page>
+        </atomic-layout-section>
+      </atomic-layout-section>
+    </atomic-search-layout>
+  </atomic-search-interface>
+</section>
 {{ end }}

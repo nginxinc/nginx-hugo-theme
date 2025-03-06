@@ -1071,6 +1071,12 @@ blockquote p:last-child {
   }
 }
 
+.next-prev-icon {
+  display: flex;
+  list-style-type: none;
+  padding: 2%;
+}
+
 /* Logo */
 .f5-logo-footer {
   height: 32px;

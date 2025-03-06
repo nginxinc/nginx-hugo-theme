@@ -204,10 +204,7 @@ nav {
 
 .content-layout {
   display: grid;
-  grid-template-columns: var(--text-content-width-iphone-13) var(
-      --side-gutter-width
-    );
-  column-gap: var(--component-gap);
+  grid-template-columns: var(--text-content-width-iphone-13);
 }
 
 .docs-container {
@@ -217,12 +214,6 @@ nav {
 .sidebar-layout {
   display: flex;
   flex-direction: column;
-}
-
-@media (max-width: 1528px) {
-  .sidebar-layout {
-    display: none;
-  }
 }
 
 #searchbox {
@@ -271,13 +262,13 @@ nav {
   width: 100%;
 }
 
-@media (min-width: 1512px) {
-  /* Macbook Pro 14 */
-  .base-layout {
+@media (min-width: 1185px) {
+  .main-layout {
     display: grid;
-    grid-template-rows: repeat(2, auto);
+    grid-template-columns: var(--sidebar-width) var(
+        --text-content-width-iphone-13
+      );
     column-gap: var(--component-gap);
-    max-width: 100%;
   }
 
   .breadcrumb-layout {
@@ -285,6 +276,21 @@ nav {
     grid-template-columns: var(--sidebar-width) 1fr;
     column-gap: var(--component-gap);
     align-items: center;
+  }
+}
+@media (max-width: 1184px) {
+  .sidebar-layout {
+    display: none;
+  }
+}
+
+@media (min-width: 1512px) {
+  /* Macbook Pro 14 */
+  .base-layout {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    column-gap: var(--component-gap);
+    max-width: 100%;
   }
 
   .text-content {
@@ -727,8 +733,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
 /* content */
 main {
   flex: 1;
-  max-width: 50rem;
-  min-width: 40rem;
+  min-width: 30rem;
   margin: 2rem 2rem;
 }
 

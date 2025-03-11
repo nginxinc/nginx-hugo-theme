@@ -1074,7 +1074,7 @@ blockquote p:last-child {
 .next-prev-icon {
   display: flex;
   list-style-type: none;
-  padding: 2%;
+  padding: 0;
 }
 
 /* Logo */

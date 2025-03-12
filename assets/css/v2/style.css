@@ -384,6 +384,11 @@ nav {
   display: inline-block !important;
   width: 95vw;
   grid-column: 1 / -1;
+  --atomic-primary: var(--color-brand);
+  --atomic-border-radius-lg: 0;
+  --atomic-border-radius-md: 0;
+  --atomic-border-radius: 0;
+  --atomic-font-family: inherit;
 }
 
 atomic-search-box {

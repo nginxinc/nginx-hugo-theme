@@ -39,6 +39,7 @@ async function atomicCoveo() {
     await searchInterface.initialize({
       accessToken: token,
       organizationId: org_id,
+      analytics: { analyticsMode: 'legacy' },
       preprocessRequest: (request, clientOrigin, metadata) => {
         const body = JSON.parse(request.body);
         body.q = `<@- ${body.q} -@>`;
@@ -53,6 +54,7 @@ async function atomicCoveo() {
   await searchInterfaceStandalone.initialize({
     accessToken: token,
     organizationId: org_id,
+    analytics: { analyticsMode: 'legacy' },
     preprocessRequest: (request, clientOrigin, metadata) => {
       const body = JSON.parse(request.body);
       body.q = `<@- ${body.q} -@>`;

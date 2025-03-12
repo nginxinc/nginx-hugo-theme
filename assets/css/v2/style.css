@@ -870,17 +870,29 @@ blockquote p:last-child {
 }
 
 /* Tabs */
-.nav-tabs {
-  list-style: none;
-  display: flex;
-  justify-content: start;
-  border-bottom: 1px solid black;
+
+.tabs-container {
   position: relative;
   z-index: -1;
+  border-bottom: 1px solid black;
+  white-space: nowrap;
 
   /* Lines extend 1rem into gutter on both sides */
   width: calc(100% + 2rem);
   margin-left: -1rem;
+}
+
+.nav-tabs {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: calc(100% + 1px);
+  scrollbar-width: none;
+
+  list-style: none;
+  display: flex;
+  justify-content: start;
+  margin: 0 1rem;
+  padding: 0;
 
   > :not(:last-child) {
     border-right: none;
@@ -917,7 +929,7 @@ blockquote p:last-child {
     position: absolute;
     display: block;
     border-bottom: 1px solid white;
-    bottom: -1px; /* Moves the line down 1px (aka the thickness of the border) */
+    bottom: 0;
     left: 0;
     width: 100%;
     z-index: 9999;

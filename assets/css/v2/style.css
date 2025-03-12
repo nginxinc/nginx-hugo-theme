@@ -1078,9 +1078,12 @@ blockquote p:last-child {
 }
 
 /* Images */
+figure {
+  margin: 0;
+}
+
 .figure-bitmap {
-  border: solid 2px #42932d;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   display: inline-block;
   max-width: 100%;
 }

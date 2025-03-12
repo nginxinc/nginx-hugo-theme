@@ -388,6 +388,7 @@ nav {
   --atomic-border-radius-lg: 0;
   --atomic-border-radius-md: 0;
   --atomic-border-radius: 0;
+  --atomic-font-family: inherit;
 }
 
 atomic-search-box {

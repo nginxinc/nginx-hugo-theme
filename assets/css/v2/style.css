@@ -204,7 +204,7 @@ nav {
 
 .content-layout {
   display: grid;
-  grid-template-columns: var(--text-content-width-iphone-13);
+  grid-template-columns: var(--text-content-width-iphone-13) 1fr;
 }
 
 .docs-container {
@@ -246,12 +246,13 @@ nav {
 }
 
 .text-content {
-  grid-column-start: 1;
+  grid-column: 1 / -1;
   display: grid;
+  grid-template-columns: var(--text-content-width-iphone-13) 1fr;
 }
 
 .text-content > :not(.wide) {
-  grid-column: 1;
+  grid-column: 1 / -1;
 }
 
 .text-content .wide {
@@ -265,9 +266,7 @@ nav {
 @media (min-width: 1185px) {
   .main-layout {
     display: grid;
-    grid-template-columns: var(--sidebar-width) var(
-        --text-content-width-iphone-13
-      );
+    grid-template-columns: var(--sidebar-width) 1fr;
     column-gap: var(--component-gap);
   }
 
@@ -298,6 +297,10 @@ nav {
         --side-gutter-width
       );
     column-gap: var(--component-gap);
+  }
+
+  .text-content > :not(.wide) {
+    grid-column: 1;
   }
 
   .main-layout {

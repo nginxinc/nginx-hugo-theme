@@ -775,6 +775,9 @@ h2 {
 
 /* tables */
 table {
+  position: relative;
+  z-index: -1;
+
   td {
     padding: var(--table-row-space-between) 0;
   }

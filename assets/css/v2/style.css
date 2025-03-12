@@ -328,6 +328,7 @@ nav {
         --side-gutter-width
       );
     column-gap: var(--component-gap);
+    align-items: start;
   }
 }
 
@@ -861,6 +862,11 @@ blockquote p:first-child {
 
 blockquote p:last-child {
   margin: 0 auto;
+}
+
+blockquote.side-callout {
+  grid-column: 2 !important;
+  grid-row: span 2;
 }
 
 /* Tabs */

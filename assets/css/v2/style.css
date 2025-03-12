@@ -485,6 +485,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
   background-color: white;
   border: black 1px solid;
   box-shadow: 3px 3px 0px var(--color-shadow);
+  z-index: 9999;
 }
 
 .product-selector p {
@@ -841,6 +842,11 @@ blockquote {
   box-shadow: 3px 3px 0px var(--color-shadow);
 }
 
+blockquote.note {
+  position: relative;
+  z-index: -1;
+}
+
 blockquote.note:before {
   content: "Note";
   text-transform: uppercase;
@@ -870,6 +876,7 @@ blockquote p:last-child {
   justify-content: start;
   border-bottom: 1px solid black;
   position: relative;
+  z-index: -1;
 
   /* Lines extend 1rem into gutter on both sides */
   width: calc(100% + 2rem);
@@ -950,6 +957,7 @@ blockquote p:last-child {
   grid-column: 1 / -1 !important;
   position: relative;
   margin-left: 0;
+  z-index: -1;
   width: calc(100% + var(--overflow-gutter-extension));
 
   &:has(.comment) {

@@ -1110,6 +1110,17 @@ blockquote p:last-child {
   padding: 0;
 }
 
+/* Images */
+figure {
+  margin: 0;
+}
+
+.figure-bitmap {
+  margin-bottom: 0.625rem;
+  display: inline-block;
+  max-width: 100%;
+}
+
 /* Logo */
 .f5-logo-footer {
   height: 32px;

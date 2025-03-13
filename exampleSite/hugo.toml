@@ -18,3 +18,4 @@ maxAge = -1
       unsafe = true
     [markup.highlight]
       guessSyntax = true
+      noClasses = false

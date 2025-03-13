@@ -6,6 +6,7 @@
 {{ $css6 := resources.Get "css/coveo.css" }}
 {{ $css7 := resources.Get "css/v2/style.css" }}
 {{ $css8 := resources.Get "css/inline-overrides.css" }}
+{{ $css9 := resources.Get "css/v2/highlight.css" }}
 
 <!-- load v2 theme assets -->
 <link href="{{ $css7.RelPermalink }}" integrity="{{ $css7.Data.Integrity }}" rel="stylesheet" type="text/css" id="css7"
@@ -14,6 +15,9 @@
 {{ $cssInter := resources.Get "css/inter/inter.css" | fingerprint "sha512" }}
 <link href="{{ $cssInter.RelPermalink }}" integrity="{{ $cssInter.Data.Integrity }}" rel="stylesheet" type="text/css"
   id="cssInter">
+
+{{ $cssHighlight := $css9 | minify | fingerprint "sha512"}}
+<link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css" id="css9">
 <!-- end v2 theme assets -->
 
 

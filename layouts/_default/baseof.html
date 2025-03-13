@@ -48,7 +48,7 @@
         }
       });
 
-      const v2cssIds = ["css7"];
+      const v2cssIds = ["css7", "css9"];
       v2cssIds.forEach((cssId) => {
         const element = document.getElementById(cssId);
         if (element !== null) {
@@ -73,10 +73,6 @@
 
       document.querySelectorAll(".table-v1").forEach((table) => {
         table.style.display = isNewTheme ? "none" : "";
-      });
-
-      document.querySelectorAll(".highlight").forEach((codeblock) => {
-        codeblock.style.display = isNewTheme ? "none" : "";
       });
 
       const mfElements = ['[data-mf="true"]'];

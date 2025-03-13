@@ -973,6 +973,61 @@ blockquote p:last-child {
 }
 
 /* Codeblocks */
+.highlight {
+  grid-column: 1 / -1 !important;
+  width: 100%;
+  position: relative;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: 40% 60%;
+
+  pre.chroma {
+    grid-column: 1 / -1;
+  }
+
+  code .line {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-areas: "comment code";
+    position: relative;
+
+    .cl {
+      grid-column: 2 / -1;
+      grid-area: code;
+    }
+
+    .c1:not(:empty) {
+      position: relative;
+      display: inline-block;
+      white-space: normal;
+      margin-bottom: var(--codeblock-comment-space-between);
+      width: calc(100% - (var(--codeblock-comment-diff) * 2));
+      border: black var(--codeblock-border-thickness) solid;
+      box-shadow: 3px 3px 0px var(--color-shadow);
+      padding: 8px;
+      grid-column: 1;
+      grid-area: comment;
+    }
+
+    &:has(.c1:not(:empty)) .cl {
+      height: fit-content;
+      margin-bottom: var(--codeblock-comment-space-between);
+      background-color: var(--color-codeblock-code-with-comment);
+    }
+
+    &:has(.c1) .cl::before {
+      content: "";
+      border-left: none;
+      border-top: black var(--codeblock-border-thickness) solid;
+      left: calc(var(--codeblock-comment-diff) * -1);
+      width: calc(
+        var(--codeblock-horizontal-line-length) +
+        var(--codeblock-horizontal-line-overflow)
+      );
+    }
+  }
+}
+
 .highlight-mf {
   grid-column: 1 / -1 !important;
   position: relative;
@@ -1005,7 +1060,7 @@ blockquote p:last-child {
       " comment ";
   }
 
-  code .line:has(.comment) .code {
+  code .line:has(.comment) .code.c1 {
     display: inline-block;
     height: fit-content;
     white-space: pre-wrap;

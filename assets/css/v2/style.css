@@ -978,6 +978,17 @@ blockquote p:last-child {
 }
 
 /* Codeblocks */
+.highlight {
+  position: relative;
+  z-index: -1;
+
+  code .cl {
+    position: relative;
+    width: 100%;
+    white-space: pre-wrap;
+  }
+}
+
 .highlight-mf {
   grid-column: 1 / -1 !important;
   position: relative;

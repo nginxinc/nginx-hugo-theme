@@ -337,6 +337,7 @@ nav {
         --side-gutter-width
       );
     column-gap: var(--component-gap);
+    align-items: start;
   }
 }
 
@@ -788,6 +789,9 @@ h2 {
 
 /* tables */
 table {
+  position: relative;
+  z-index: -1;
+
   td {
     padding: var(--table-row-space-between) 0;
   }
@@ -880,6 +884,11 @@ blockquote p:first-child {
 
 blockquote p:last-child {
   margin: 0 auto;
+}
+
+blockquote.side-callout {
+  grid-column: 2 !important;
+  grid-row: span 2;
 }
 
 /* Tabs */

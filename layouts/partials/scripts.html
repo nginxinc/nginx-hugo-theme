@@ -60,7 +60,9 @@
 
 {{ end }}
 
-
+<!-- Load Codeblock javascript -->
+{{ $jsCodeblockV2 := resources.Get "js/codeblock-v2.js" | minify | fingerprint "sha512" }}
+<script src="{{ $jsCodeblockV2.RelPermalink }}" type="text/javascript" integrity="{{ $jsCodeblockV2.Data.Integrity }}"></script>
 
 <!-- Load Sidebar javascript -->
 {{ $jsSidebar := resources.Get "js/sidebar.js" | minify | fingerprint "sha512" }}

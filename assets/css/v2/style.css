@@ -982,19 +982,10 @@ blockquote p:last-child {
   position: relative;
   z-index: -1;
 
-  code .line {
+  code .cl {
     position: relative;
-
-    .c1 {
-      white-space: normal;
-    }
-  }
-
-  code.language-shell {
-    /* Special case for shell commands */
-    .cl {
-      white-space: normal;
-    }
+    width: 100%;
+    white-space: pre-wrap;
   }
 }
 

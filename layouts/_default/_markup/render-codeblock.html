@@ -1,0 +1,7 @@
+<div class="code-header">
+    <span class="code-type">{{ .Type }}</span>
+    <button onclick="copyToClipBoard(this)" class="code-copy-button" type="button">Copy</button>
+</div>
+
+{{ $result := transform.HighlightCodeBlock . }}
+{{ $result.Wrapped }}

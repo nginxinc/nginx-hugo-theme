@@ -75,6 +75,13 @@
         table.style.display = isNewTheme ? "none" : "";
       });
 
+      const notMfElements = ['[data-mf="false"]'];
+      notMfElements.forEach((elementId) => {
+        document.querySelectorAll(elementId).forEach((element) => {
+          element.style.display = isNewTheme ? "none" : "";
+        });
+      })
+
       const mfElements = ['[data-mf="true"]'];
       mfElements.forEach((elementId) => {
         document.querySelectorAll(elementId).forEach((element) => {

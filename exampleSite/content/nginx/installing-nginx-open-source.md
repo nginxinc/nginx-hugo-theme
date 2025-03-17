@@ -45,7 +45,7 @@ http {
     # Proxy settings
     server {
         listen 80;
-        server_name www.example.com;
+        server_name www.exampleklajsdlkajsldkjaslkdjalksdjalksdjalksjdlakjsdlaksjdlkajdlakjsdlakjwodijaosidjaowidjaosidjasldkjldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdldkjaslkdjalksdasldkjas.com;
 
         root /usr/share/nginx/html;
 
@@ -117,13 +117,6 @@ server {
 
 ```
 
-```js
-function hello() {
-  // this is a comment
-  console.log("Hello world!");
-  const thing = ["a", "string", "array"];
-}
-```
 
 This article explains how to install NGINX Open Source.
 
@@ -191,7 +184,7 @@ The package can be installed from:
 3. Install NGINX Open Source:
 
     ```shell
-    sudo yum install nginx
+    sudo yum install nginx sudo yum install nginx sudo yum install nginx sudo yum install nginx sudo yum install nginx
     ```
 
 4. Verify the installation:
@@ -262,8 +255,8 @@ The package can be installed from:
 
 7. Start NGINX Open Source:
 
-    ```shell
-    sudo nginx
+    ```js
+    console.log("hello")
     ```
 
 8. Verify that NGINX Open Source is up and running:

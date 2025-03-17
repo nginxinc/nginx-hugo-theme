@@ -1,0 +1,36 @@
+{{ $result := transform.HighlightCodeBlock . }}
+{{ $codeBlockId :=  printf "id-%x" (now.UnixNano) }}
+{{ $lines := split $result.Wrapped "\n" }}
+{{ $isSingleLine := eq (len $lines) 1 }}
+
+{{ if $isSingleLine  }}
+<div class="code-block" data-mf="true" style="display: none;">
+    <div class="code-header no-lang">
+        <button onclick="copyToClipBoard(this)" data-id-codeblock="{{ $codeBlockId }}" class="code-copy-button" type="button">Copy</button>
+    </div>
+    <div class="highlight-v2 single-line" id="{{ $codeBlockId }}">
+        {{ $result.Wrapped }}
+    </div>
+</div>
+{{ else }}
+
+<div class="code-block" data-mf="true" style="display: none;">
+    {{ if and (ne .Type "") (ne .Type "none") }}
+    <div class="code-header">
+        <span class="code-type">{{ .Type }}</span>
+        <button onclick="copyToClipBoard(this)" data-id-codeblock="{{ $codeBlockId }}" class="code-copy-button" type="button">Copy</button>
+    </div>
+    {{ else }}
+    <div class="code-header no-lang">
+        <button onclick="copyToClipBoard(this)" data-id-codeblock="{{ $codeBlockId }}" class="code-copy-button" type="button">Copy</button>
+    </div>
+    {{ end }}
+    <div class="highlight-v2" id="{{ $codeBlockId }}">
+        {{ $result.Wrapped }}
+    </div>
+</div>
+
+{{ end }}
+<div id="code-block-v1" data-mf="false">
+{{ $result.Wrapped }}
+</div>

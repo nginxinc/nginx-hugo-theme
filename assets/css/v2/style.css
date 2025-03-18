@@ -966,11 +966,7 @@ blockquote.side-callout {
 }
 
 .tab-content {
-  border-bottom: 1px solid black;
-
-  /* Lines extend 1rem into gutter on both sides */
-  width: calc(100% + 2rem);
-  margin-left: -1rem;
+  position: relative;
 
   .tab-pane {
     display: none;
@@ -979,13 +975,19 @@ blockquote.side-callout {
     margin-left: 1rem;
   }
 
-  .tab-pane * {
-    margin-left: 0;
-  }
-
   .active {
     display: block !important;
   }
+}
+
+.tab-content::after {
+  /* Bottom Horizontal Line for Tabs */
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid black;
+  left: calc(-1 * var(--overflow-gutter-extension));
+  bottom: 0;
+  width: calc(100% + (2 * var(--overflow-gutter-extension)));
 }
 
 /* Codeblocks */
@@ -1004,6 +1006,16 @@ blockquote.side-callout {
   grid-column: 1;
 }
 
+.code-block .code-header:not(:has(.code-type)) {
+  /* Remove margin for codeblocks without a type */
+  margin-top: -1.5rem;
+}
+
+li .code-block {
+  /* For indented code blocks, move 1rem back to align code with text from heading */
+  margin-left: -1rem;
+}
+
 .icon-code-copy {
   background-color: #f2f2f2;
   border: none;
@@ -1016,11 +1028,12 @@ blockquote.side-callout {
 
 .highlight-v2 {
   padding: 0 1rem 0 0;
-  margin: 0 -1rem 1rem -1rem;
+  margin: 0 0 1rem 0;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   overflow-x: scroll;
   scrollbar-width: none;
+  width: calc(100% + var(--overflow-gutter-extension));
 }
 
 .highlight-v2.single-line {
@@ -1029,7 +1042,7 @@ blockquote.side-callout {
   padding: 0 1rem 0 0;
   border: 1px solid #cccccc;
   overflow-x: scroll;
-  width: calc(100% + (2 * var(--overflow-gutter-extension)));
+  width: calc(100% + var(--overflow-gutter-extension));
 }
 
 .code-header {

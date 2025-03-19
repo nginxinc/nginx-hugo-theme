@@ -707,7 +707,10 @@ atomic-search-layout atomic-layout-section[section="search"] {
   position: relative;
 }
 
-.sidebar .sidebar-navigation .parent-collapsible-content::before {
+.sidebar
+  .sidebar-navigation
+  .parent-collapsible-content
+  li:not(:only-child)::before {
   content: "";
   position: absolute;
   border-left: black 1px solid;
@@ -717,7 +720,11 @@ atomic-search-layout atomic-layout-section[section="search"] {
 }
 
 /* First Sidebar Nav Horizontal Lines */
-.sidebar .sidebar-navigation .parent-collapsible-content .parent-box::before {
+.sidebar
+  .sidebar-navigation
+  .parent-collapsible-content
+  li:not(:only-child)
+  .parent-box::before {
   content: "";
   display: block;
   border-top: black 1px solid;

@@ -9,6 +9,8 @@ toc: true
 weight: 200
 ---
 
+![hero-graphic](/hero-graphic.webp)
+
 ```nginx
 
 # Global Configuration

@@ -1027,19 +1027,26 @@ li .code-block {
 }
 
 .highlight-v2 {
-  padding: 0 1rem 0 0;
   margin: 0 0 1rem 0;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   overflow-x: scroll;
   scrollbar-width: none;
   width: calc(100% + var(--overflow-gutter-extension));
+
+  background-image: linear-gradient(to right, white, white),
+    linear-gradient(to right, white, white),
+    linear-gradient(to right, rgba(165, 165, 165, 0.25), rgba(255, 255, 255, 0)),
+    linear-gradient(to left, rgba(165, 165, 165, 0.25), rgba(255, 255, 255, 0));
+  background-position: left center, right center, left center, right center;
+  background-repeat: no-repeat;
+  background-size: 12px 100%, 12px 100%, 10px 100%, 10px 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .highlight-v2.single-line {
   display: flex;
   align-items: center;
-  padding: 0 1rem 0 0;
   border: 1px solid #cccccc;
   overflow-x: scroll;
   width: calc(100% + var(--overflow-gutter-extension));
@@ -1094,9 +1101,11 @@ figure {
   margin: 0;
 }
 
+img,
 .figure-bitmap {
   margin-bottom: 0.625rem;
   display: inline-block;
+  width: 100%;
   max-width: 100%;
 }
 

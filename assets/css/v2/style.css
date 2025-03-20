@@ -1014,8 +1014,11 @@ blockquote.side-callout {
   }
 }
 
-.code-block {
+.code-container {
   grid-column: 1;
+  display: flex;
+  flex-direction: row;
+  position: relative;
 }
 
 .code-block .code-header:not(:has(.code-type)) {
@@ -1028,40 +1031,18 @@ li .code-block {
   margin-left: -1rem;
 }
 
-.icon-code-copy {
-  background-color: #f2f2f2;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
-  color: #000;
-}
-
 .highlight-v2 {
-  margin: 0 0 1rem 0;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   overflow-x: scroll;
   scrollbar-width: none;
   width: calc(100% + var(--overflow-gutter-extension));
-
-  background-image: linear-gradient(to right, white, white),
-    linear-gradient(to right, white, white),
-    linear-gradient(to right, rgba(165, 165, 165, 0.25), rgba(255, 255, 255, 0)),
-    linear-gradient(to left, rgba(165, 165, 165, 0.25), rgba(255, 255, 255, 0));
-  background-position: left center, right center, left center, right center;
-  background-repeat: no-repeat;
-  background-size: 12px 100%, 12px 100%, 10px 100%, 10px 100%;
-  background-attachment: local, local, scroll, scroll;
 }
 
 .highlight-v2.single-line {
   display: flex;
   align-items: center;
   border: 1px solid #cccccc;
-  overflow-x: scroll;
-  width: calc(100% + var(--overflow-gutter-extension));
 }
 
 .code-header {
@@ -1075,12 +1056,18 @@ li .code-block {
 
 .code-type {
   text-transform: uppercase;
-  border: 1px solid #cccccc;
-  border-bottom: 1px solid white;
-  padding: .25rem 1rem; /* Padding for button content */
+  padding: .25rem 0.25rem; /* Padding for button content */
   font-size: 12px; /* Font size */
   z-index: 9999;
-  margin-bottom: -1px;
+  position: absolute;
+  background-color: white;
+  margin: -12px 0 0 1rem;
+}
+
+.code-container:hover {
+  .code-copy-button {
+    display: block;
+  }
 }
 
 .code-copy-button {
@@ -1091,6 +1078,14 @@ li .code-block {
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   color: #000;
+  order: 2;
+  display: none;
+}
+
+.code-copy-button {
+  position: absolute;
+  right: 8px;
+  margin-top: 8px;
 }
 
 .code-copy-button:hover {

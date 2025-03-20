@@ -774,7 +774,12 @@ p {
 .breadcrumb ol {
   list-style: none;
   padding: 0;
-  display: flex;
+  display: block;
+
+  > * {
+    display: inline;
+    line-height: 25px;
+  }
 }
 
 .breadcrumb li:after {

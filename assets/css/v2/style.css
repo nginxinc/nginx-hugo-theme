@@ -502,7 +502,6 @@ atomic-search-layout atomic-layout-section[section="search"] {
   background-color: white;
   border: black 1px solid;
   box-shadow: 3px 3px 0px var(--color-shadow);
-  z-index: 9999;
 }
 
 .product-selector p {
@@ -906,16 +905,33 @@ blockquote.side-callout {
 }
 
 /* Tabs */
-
 .tabs-container {
-  position: relative;
-  z-index: -1;
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
   white-space: nowrap;
 
   /* Lines extend 1rem into gutter on both sides */
   width: calc(100% + 2rem);
   margin-left: -1rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+
+  * {
+    flex-grow: 0;
+  }
+
+  & > :last-child {
+    /* Extend the last child */
+    flex-grow: 1;
+  }
+}
+
+.tabs-line {
+  display: block;
+  background-color: white;
+  border-bottom: 1px solid black;
+  width: 2rem;
 }
 
 .nav-tabs {
@@ -927,7 +943,7 @@ blockquote.side-callout {
   list-style: none;
   display: flex;
   justify-content: start;
-  margin: 0 1rem;
+  margin: 0;
   padding: 0;
 
   > :not(:last-child) {
@@ -937,9 +953,8 @@ blockquote.side-callout {
 
 .nav-item {
   border: 1px solid var(--color-tabs-divider);
-  border-bottom: none;
+  border-bottom: 1px solid black;
   padding: 10px;
-  position: relative;
 
   a {
     text-decoration: none;
@@ -954,21 +969,11 @@ blockquote.side-callout {
   /* Change the border colors of li that is has a child with a class "active" */
   border-top: 1px solid black;
   border-left: 1px solid black;
+  border-bottom: none;
 
   /* Change the border of next child */
   + li {
     border-left: 1px solid black;
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    display: block;
-    border-bottom: 1px solid white;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999;
   }
 }
 
@@ -978,7 +983,8 @@ blockquote.side-callout {
 }
 
 .tab-content {
-  position: relative;
+  border-bottom: 1px solid black;
+  margin-left: calc(-1 * var(--overflow-gutter-extension));
 
   .tab-pane {
     display: none;
@@ -990,16 +996,6 @@ blockquote.side-callout {
   .active {
     display: block !important;
   }
-}
-
-.tab-content::after {
-  /* Bottom Horizontal Line for Tabs */
-  content: "";
-  position: absolute;
-  border-bottom: 1px solid black;
-  left: calc(-1 * var(--overflow-gutter-extension));
-  bottom: 0;
-  width: calc(100% + (2 * var(--overflow-gutter-extension)));
 }
 
 /* Codeblocks */
@@ -1014,11 +1010,8 @@ blockquote.side-callout {
   }
 }
 
-.code-container {
-  grid-column: 1;
-  display: flex;
-  flex-direction: row;
-  position: relative;
+.code-block {
+  position: static;
 }
 
 .code-block .code-header:not(:has(.code-type)) {
@@ -1036,13 +1029,13 @@ li .code-block {
   border-bottom: 1px solid #cccccc;
   overflow-x: scroll;
   scrollbar-width: none;
-  width: calc(100% + var(--overflow-gutter-extension));
 }
 
 .highlight-v2.single-line {
   display: flex;
   align-items: center;
   border: 1px solid #cccccc;
+  overflow-x: scroll;
 }
 
 .code-header {
@@ -1078,13 +1071,9 @@ li .code-block {
   font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   color: #000;
-  order: 2;
   display: none;
-}
-
-.code-copy-button {
   position: absolute;
-  right: 8px;
+  right: calc(25% + 2rem);
   margin-top: 8px;
 }
 

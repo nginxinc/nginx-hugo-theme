@@ -3,6 +3,7 @@
 {{- $tabs := .Scratch.Get "tabs" -}}
 {{- if .Inner -}}{{- /* We don't use the inner content, but Hugo will complain if we don't reference it. */ -}}{{- end -}}
 <div class="tabs-container">
+	<span class="tabs-line"></span>
 	<ul class="nav nav-tabs" id="{{ $tab_set_id }}" role="tablist">
 		{{- range $i, $e := $tabs -}}
 		{{- $id := printf "%s-%d" $tab_set_id $i -}}
@@ -13,6 +14,7 @@
 		{{- end -}}
 	{{- end -}}
 	</ul>
+	<span class="tabs-line"></span>
 </div>
 <div class="tab-content" id="{{ $tab_set_id }}">
 {{- range $i, $e := $tabs -}}

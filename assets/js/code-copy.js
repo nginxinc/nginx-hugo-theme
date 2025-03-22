@@ -1,31 +1,77 @@
 function CopyCode(clipboard) {
-  document.querySelectorAll('.highlight').forEach((codeBlock) => {
-    const button = document.createElement('button');
-    button.className = 'code-copy';
-    button.type = 'button';
-    button.innerHTML = '<i class="fas fa-copy"></i> Copy';
+	document.querySelectorAll('.highlight').forEach((codeBlock) => {
+		const button = document.createElement('button');
+		button.className = 'code-copy';
+		button.type = 'button';
+		button.innerHTML = '<i class="fas fa-copy"></i> Copy';
 
-    button.addEventListener('click', async () => {
-      try {
-        await clipboard.writeText(
-          codeBlock.textContent
-            .replace(/^\s*\d+\s/gm, '') // remove line numbers
-            .replace(/^\s*|\s*$/g, '') // remove carriage returns at top and bottom of block
-        );
+		button.addEventListener('click', async () => {
+			console.log('Copy button pressed for a code block.');
 
-        button.blur(); /* Chrome fix */
-        button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        setTimeout(() => {
-          button.innerHTML = '<i class="fas fa-copy"></i> Copy';
-        }, 2000);
-      } catch (error) {
-        button.innerHTML = '<i class="fas fa-exclamation"></i> Error';
-        console.error(error);
-      }
-    });
+			try {
+				let codeText = codeBlock.textContent
+					.replace(/^\s*\d+\s/gm, '') // Remove line numbers
+					.replace(/^\s*|\s*$/g, ''); // Trim whitespace at top/bottom
 
-    codeBlock.parentNode.insertBefore(button, codeBlock);
-  });
+				// Find nested <code> element
+				const codeElement = codeBlock.querySelector('code');
+				if (codeElement) {
+					const classAttr = codeElement.getAttribute('class') || '';
+					const dataLangAttr = codeElement.getAttribute('data-lang') || '';
+
+					if (
+						classAttr.includes('language-bash') ||
+						classAttr.includes('language-console') ||
+						dataLangAttr === 'bash' ||
+						dataLangAttr === 'console'
+					) {
+						console.log('Detected a shell code block:', { classAttr, dataLangAttr });
+
+						console.log('Before comment removal:', codeText);
+
+						codeText = codeText
+							.split('\n')
+							.map(line => {
+								let cleanedLine = line.trim();
+
+								// Remove `$` (non-root) or `#` (root) command indicators
+								if (/^[$#]\s?/.test(cleanedLine)) {
+									console.log(`Detected command prompt indicator: ${cleanedLine}`);
+									cleanedLine = cleanedLine.replace(/^[$#]\s?/, ''); // Remove `$` or `#`
+								}
+
+								// Remove inline comments that come *after* a command
+								const withoutComments = cleanedLine.replace(/\s+#.*/, '');
+								if (cleanedLine.includes('#') && cleanedLine !== withoutComments) {
+									console.log(`Removing inline comment: ${cleanedLine} → ${withoutComments}`);
+								}
+
+								return withoutComments;
+							})
+							.filter(line => line.trim() !== '') // Remove empty lines
+							.join('\n');
+
+						console.log('After comment removal:', codeText);
+					}
+				} else {
+					console.log('No nested <code> element found in:', codeBlock);
+				}
+
+				await clipboard.writeText(codeText);
+				button.blur(); /* Chrome fix */
+				button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+				setTimeout(() => {
+					button.innerHTML = '<i class="fas fa-copy"></i> Copy';
+				}, 2000);
+				console.log('Code successfully copied to clipboard.');
+			} catch (error) {
+				button.innerHTML = '<i class="fas fa-exclamation"></i> Error';
+				console.error('Copy error:', error);
+			}
+		});
+
+		codeBlock.parentNode.insertBefore(button, codeBlock);
+	});
 }
 
 CopyCode(navigator.clipboard);

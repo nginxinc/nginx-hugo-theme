@@ -218,6 +218,8 @@ nav {
 .sidebar-layout {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 9999;
 }
 
 #searchbox {
@@ -1053,10 +1055,14 @@ li .code-block {
   text-transform: uppercase;
   padding: .25rem 0.25rem; /* Padding for button content */
   font-size: 12px; /* Font size */
-  z-index: 9999;
+  z-index: 999;
   position: absolute;
   background-color: white;
   margin: -12px 0 0 1rem;
+}
+
+.code-container {
+  position: relative;
 }
 
 .code-container:hover {
@@ -1075,8 +1081,8 @@ li .code-block {
   color: #000;
   display: none;
   position: absolute;
-  right: calc(25% + 2rem);
   margin-top: 8px;
+  right: 1rem;
 }
 
 .code-copy-button:hover {

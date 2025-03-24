@@ -937,30 +937,17 @@ blockquote.side-callout {
 .tabs-container {
   /* border-bottom: 1px solid black; */
   white-space: nowrap;
+  position: relative;
 
-  /* Lines extend 1rem into gutter on both sides */
-  width: calc(100% + 2rem);
-  margin-left: -1rem;
-
-  display: flex;
-  flex-direction: row;
-  align-items: end;
-
-  * {
-    flex-grow: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    border-bottom: 1px solid black;
+    bottom: 0;
+    right: 0;
+    width: 2rem;
   }
-
-  & > :last-child {
-    /* Extend the last child */
-    flex-grow: 1;
-  }
-}
-
-.tabs-line {
-  display: block;
-  background-color: white;
-  border-bottom: 1px solid black;
-  width: 2rem;
 }
 
 .nav-tabs {
@@ -973,11 +960,51 @@ blockquote.side-callout {
   display: flex;
   justify-content: start;
   margin: 0;
-  padding: 0;
+  padding: 0 2rem;
+  position: relative;
 
   > :not(:last-child) {
     border-right: none;
   }
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    border-bottom: 1px solid black;
+    bottom: 0;
+    left: 0;
+    width: 2rem;
+  }
+
+  &::after {
+    content: "";
+    position: relative;
+    display: block;
+    border-bottom: 1px solid black;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  --scrollbar-width: 1px;
+  --mask-height: 32px;
+  --mask-image-content: linear-gradient(
+    to right,
+    transparent,
+    black var(--mask-height),
+    black calc(100% - var(--mask-height)),
+    transparent
+  );
+
+  --mask-size-content: 100% calc(100% - var(--scrollbar-width));
+
+  --mask-image-scrollbar: linear-gradient(black, black);
+  --mask-size-scrollbar: 100% var(--scrollbar-width);
+  mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+  mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+  mask-position: 0 0, 0 100%;
+  mask-repeat: no-repeat, no-repeat;
 }
 
 .nav-item {

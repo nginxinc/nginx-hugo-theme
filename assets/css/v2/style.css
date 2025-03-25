@@ -953,7 +953,7 @@ blockquote.side-callout {
 .nav-tabs {
   overflow-x: scroll;
   overflow-y: hidden;
-  height: calc(100% + 1px);
+  height: 100%;
   scrollbar-width: none;
 
   list-style: none;

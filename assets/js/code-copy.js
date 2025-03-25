@@ -7,12 +7,45 @@ function CopyCode(clipboard) {
 
     button.addEventListener('click', async () => {
       try {
-        await clipboard.writeText(
-          codeBlock.textContent
-            .replace(/^\s*\d+\s/gm, '') // remove line numbers
-            .replace(/^\s*|\s*$/g, '') // remove carriage returns at top and bottom of block
-        );
+        let codeText = codeBlock.textContent
+          .replace(/^\s*\d+\s/gm, '') // Remove line numbers
+          .replace(/^\s*|\s*$/g, ''); // Trim whitespace at top/bottom
 
+        // Find nested <code> element
+        const codeElement = codeBlock.querySelector('code');
+        if (codeElement) {
+          const classAttr = codeElement.getAttribute('class') || '';
+          const dataLangAttr = codeElement.getAttribute('data-lang') || '';
+
+          if (
+            classAttr.includes('language-bash') ||
+            classAttr.includes('language-console') ||
+            dataLangAttr === 'bash' ||
+            dataLangAttr === 'console'
+          ) {
+            codeText = codeText
+              .split('\n')
+              .map((line) => {
+                let cleanedLine = line.trim();
+
+                // Remove `$` (non-root) or `#` (root) command indicators
+                if (/^[$#]\s?/.test(cleanedLine)) {
+                  cleanedLine = cleanedLine.replace(/^[$#]\s?/, ''); // Remove `$` or `#`
+                }
+
+                // Remove inline comments that come *after* a command
+                const withoutComments = cleanedLine.replace(/\s+#.*/, '');
+
+                return withoutComments;
+              })
+              .filter((line) => line.trim() !== '') // Remove empty lines
+              .join('\n');
+          }
+        } else {
+          console.warn('No nested <code> element found in:', codeBlock);
+        }
+
+        await clipboard.writeText(codeText);
         button.blur(); /* Chrome fix */
         button.innerHTML = '<i class="fas fa-check"></i> Copied!';
         setTimeout(() => {
@@ -20,7 +53,7 @@ function CopyCode(clipboard) {
         }, 2000);
       } catch (error) {
         button.innerHTML = '<i class="fas fa-exclamation"></i> Error';
-        console.error(error);
+        console.error('Copy error:', error);
       }
     });
 

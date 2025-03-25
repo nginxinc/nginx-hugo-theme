@@ -532,6 +532,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
   max-height: 100vh;
   overflow: hidden;
   scrollbar-gutter: stable;
+  scrollbar-width: none;
 }
 
 .sidebar .scrollbar-container:hover {
@@ -701,7 +702,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
 
 .sidebar .sidebar-navigation ul li .partial {
   margin-top: 0;
-  top: calc(50% - 3.5px);
+  top: 5px;
   left: -13px;
 }
 
@@ -710,16 +711,23 @@ atomic-search-layout atomic-layout-section[section="search"] {
   position: relative;
 }
 
-.sidebar
-  .sidebar-navigation
-  .parent-collapsible-content
-  li:not(:only-child)::before {
+.sidebar .sidebar-navigation .parent-collapsible-content:first-child::before {
   content: "";
   position: absolute;
   border-left: black 1px solid;
   left: -24px;
   top: 10px;
   height: calc(100% - 9px - 10px);
+}
+
+.sidebar
+  .sidebar-navigation
+  .parent-collapsible-content
+  li:not(:only-child)
+  a
+  + :not(:has(#TableOfContents))
+  li::before {
+  border: none;
 }
 
 /* First Sidebar Nav Horizontal Lines */
@@ -749,6 +757,22 @@ atomic-search-layout atomic-layout-section[section="search"] {
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
+}
+
+/* Table of Contents */
+#TableOfContents {
+  /* Close all TOC on sidebar */
+  display: none;
+}
+
+.collapsible-content li ul li:has(.current) > nav {
+  /* Open TOC for current page */
+  display: block !important;
+}
+
+#TableOfContents li {
+  position: relative;
+  list-style: square;
 }
 
 /* content */

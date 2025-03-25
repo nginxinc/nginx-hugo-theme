@@ -1,6 +1,5 @@
 // Tightly coupled to `render-codeblock.html` for element targeting
-const copyToClipBoard = ((clipboard) => async (button) => {
-  const codeBlockId = button.getAttribute('data-id-codeblock');
+const copyToClipBoard = ((clipboard) => async (button, codeBlockId) => {
   const codeBlock = document
     .getElementById(codeBlockId)
     .getElementsByClassName('highlight')[0];

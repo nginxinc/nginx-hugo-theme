@@ -20,9 +20,11 @@
                 <span class="box-link partial"></span>              
             {{ end }}
             <a href="{{ .Permalink }}" style="{{if eq $currentUrl .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a>
-            {{- with .TableOfContents -}}
-                {{- . -}}
-            {{- end -}}
+            {{ if eq $currentUrl .Permalink }}   
+                {{- with .TableOfContents -}}
+                    {{- . -}}
+                {{- end -}}
+            {{ end }}
         {{ end }}
     </li>
     {{ end }}

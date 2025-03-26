@@ -21,7 +21,7 @@
   --color-footer: #1d1d1d;
   --color-footer-text: #e2e2e2;
   --color-product-title: #8d8d8d;
-  --color-table-divider: #cccccc;
+  --color-divider: #cccccc;
   --color-tabs-divider: #00000033;
   --color-codeblock-code-with-comment: #00963926;
 
@@ -851,7 +851,7 @@ table {
   tr::after {
     content: "";
     position: absolute;
-    border-bottom: var(--table-line-height) solid var(--color-table-divider);
+    border-bottom: var(--table-line-height) solid var(--color-divider);
     bottom: 0;
     left: calc(-1 * var(--overflow-gutter-extension));
     width: calc(100% + (2 * var(--overflow-gutter-extension)));
@@ -885,9 +885,9 @@ table td:first-child {
 }
 
 table hr {
-  color: var(--color-table-divider);
+  color: var(--color-divider);
   border: none;
-  border-bottom: var(--table-line-height) solid var(--color-table-divider);
+  border-bottom: var(--table-line-height) solid var(--color-divider);
 }
 
 /* callouts */
@@ -1189,7 +1189,7 @@ figure {
 /* HR Lines */
 hr {
   width: 100%;
-  border: 1px solid var(--color-table-divider);
+  border: 1px solid var(--color-divider);
 }
 
 /* FILTHY HACKS BEGIN */

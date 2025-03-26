@@ -255,6 +255,7 @@ nav {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: var(--text-content-width-iphone-13) 1fr;
+  grid-auto-rows: max-content;
 }
 
 .text-content > :not(.wide) {

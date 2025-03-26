@@ -1186,6 +1186,12 @@ figure {
   width: 156px;
 }
 
+/* HR Lines */
+hr {
+  width: 100%;
+  border: 1px solid var(--color-table-divider);
+}
+
 /* FILTHY HACKS BEGIN */
 
 /* Override logo with black text version */

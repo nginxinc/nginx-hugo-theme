@@ -473,7 +473,6 @@ atomic-search-layout atomic-layout-section[section="search"] {
   width: 24rem;
   position: sticky;
   top: 0;
-  height: 100vh;
   margin-top: -1rem;
   padding-top: 1rem;
 }

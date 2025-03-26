@@ -11,7 +11,7 @@
   /* base rem = 16px by default, left as percentage for screen readers */
   font-size: 100%;
 
-  --color-brand: #009639;
+  --color-brand: 56.6% 0.194 147.7;
   --color-brand-300: #a6daba;
   --color-brand-200: #ccead7;
   --color-brand-100: #f2faf5;
@@ -391,7 +391,7 @@ nav {
   display: inline-block !important;
   width: 95vw;
   grid-column: 1 / -1;
-  --atomic-primary: var(--color-brand);
+  --atomic-primary: oklch(var(--color-brand));
   --atomic-border-radius-lg: 0;
   --atomic-border-radius-md: 0;
   --atomic-border-radius: 0;
@@ -481,7 +481,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--color-brand);
+  background-color: oklch(var(--color-brand));
   color: var(--color-brand-100);
   border: none;
   font-size: 1.25rem;
@@ -692,7 +692,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
 }
 
 .sidebar .sidebar-navigation ul li .current {
-  background-color: var(--color-brand);
+  background-color: oklch(var(--color-brand));
   z-index: 999;
 }
 
@@ -815,7 +815,13 @@ p {
 }
 
 a {
-  color: var(--color-brand);
+  color: oklch(var(--color-brand));
+  text-decoration-color: oklch(var(--color-brand) / 0.3);
+  transition: text-decoration-color 0.15s ease-in-out;
+}
+
+a:hover {
+  text-decoration-color: oklch(var(--color-brand) / 0.8);
 }
 
 h1 {

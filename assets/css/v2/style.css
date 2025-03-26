@@ -898,6 +898,16 @@ blockquote {
 
   /* solid 3px drop shadow */
   box-shadow: 3px 3px 0px var(--color-shadow);
+
+  &:has(.code-block) .code-block:not(:has(.single-line)) {
+    /* Removes negative margins from multi-line codeblocks */
+    margin: 0;
+  }
+
+  &:has(.code-block) .code-block:has(.single-line) .highlight-v2.single-line {
+    /* Remove border from single line codeblocks in callouts */
+    border: none;
+  }
 }
 
 blockquote.note {

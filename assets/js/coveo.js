@@ -21,10 +21,8 @@ async function getsearchObj() {
 }
 
 async function atomicCoveo() {
+  /* Fetch the credentials */
   await customElements.whenDefined('atomic-search-interface');
-  const searchInterface = document.querySelector('#search-v2');
-  const searchInterfaceStandalone =
-    document.querySelector('#search-standalone');
   const token = localStorage.getItem('coveo_jwt_v1');
   const org_id = localStorage.getItem('coveo_org_id_v1');
   let searchObj = { token, org_id };
@@ -35,8 +33,15 @@ async function atomicCoveo() {
     localStorage.setItem('coveo_org_id_v1', searchObj.org_id);
   }
 
-  if (searchInterface) {
-    await searchInterface.initialize({
+  /* Initialize the interfaces with credentials */
+  const searchPageInterface = document.querySelector('#search-v2');
+  const searchBarHeader = document.querySelector('#search-standalone-header');
+  const searchBarSidebar = document.querySelector('#search-standalone-sidebar');
+  const sidebar = document.querySelector('#sidebar-layout');
+  let searchbar;
+
+  if (searchPageInterface) {
+    await searchPageInterface.initialize({
       accessToken: token,
       organizationId: org_id,
       analytics: { analyticsMode: 'legacy' },
@@ -48,22 +53,29 @@ async function atomicCoveo() {
         return request;
       },
     });
-    searchInterface.executeFirstSearch();
+    searchPageInterface.executeFirstSearch();
+  } else {
+    // If there is a searchbar, only initialize the searchbar for the sidebar.
+    if (sidebar) {
+      searchbar = searchBarSidebar;
+    } else {
+      searchbar = searchBarHeader;
+    }
+
+    await searchbar.initialize({
+      accessToken: token,
+      organizationId: org_id,
+      analytics: { analyticsMode: 'legacy' },
+      preprocessRequest: (request, clientOrigin, metadata) => {
+        const body = JSON.parse(request.body);
+        body.q = `<@- ${body.q} -@>`;
+        request.body = JSON.stringify(body);
+
+        return request;
+      },
+    });
+    searchbar.executeFirstSearch();
   }
-
-  await searchInterfaceStandalone.initialize({
-    accessToken: token,
-    organizationId: org_id,
-    analytics: { analyticsMode: 'legacy' },
-    preprocessRequest: (request, clientOrigin, metadata) => {
-      const body = JSON.parse(request.body);
-      body.q = `<@- ${body.q} -@>`;
-      request.body = JSON.stringify(body);
-
-      return request;
-    },
-  });
-  searchInterfaceStandalone.executeFirstSearch();
 }
 
 async function legacyCoveo() {

@@ -26,7 +26,6 @@ const copyToClipBoard = ((clipboard) => async (button, codeBlockId) => {
 
 const updateButtonState = (button, message, revertDelay, disable = false) => {
   button.innerHTML = message;
-  $(button).css('box-shadow', '0px 2px 0px #009639');
 
   if (disable) {
     button.disabled = true;
@@ -35,7 +34,6 @@ const updateButtonState = (button, message, revertDelay, disable = false) => {
   if (revertDelay) {
     setTimeout(() => {
       button.innerHTML = 'Copy';
-      $(button).css('box-shadow', '0px 2px 0px var(--color-codeblock-shadow)');
       button.disabled = false;
     }, revertDelay);
   }

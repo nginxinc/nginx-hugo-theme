@@ -1147,26 +1147,25 @@ li .code-block {
 .code-copy-button {
   background-color: white;
   border: 1px solid black;
-  padding: 5px 10px;
+  padding: 4px 6px;
   cursor: pointer;
-  font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   color: #000;
-  /* display: none; */
+  display: none;
   position: absolute;
   margin-top: 8px;
   right: 1rem;
-  --color-codeblock-shadow: #d2d2d2;
-  box-shadow: 0px 2px 0px var(--color-codeblock-shadow);
+  --color-codeblock-shadow: 0% 0 0;
+  box-shadow: 0px 2px 0px oklch(var(--color-codeblock-shadow) / 0.15);
 }
 
 .code-copy-button:hover {
-  --color-codeblock-shadow: #0096394d;
+  box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.3);
 }
 
 .code-copy-button:focus {
   outline: none;
-  --color-codeblock-shadow: #009639;
+  box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.8);
 }
 
 .next-prev-icon {

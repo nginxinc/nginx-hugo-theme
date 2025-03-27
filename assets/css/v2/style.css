@@ -486,7 +486,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
   border: none;
   font-size: 1.25rem;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem; /* 1rem to vertically align with searchbar text */
   cursor: pointer;
 }
 
@@ -508,6 +508,16 @@ atomic-search-layout atomic-layout-section[section="search"] {
   box-shadow: 3px 3px 0px var(--color-shadow);
 }
 
+button:has(~ .product-selector[style*="block"])
+  > .product-selector-button-icon {
+  transition: transform 0.25s ease-in-out;
+  transform: rotate(180deg);
+}
+
+button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
+  transition: transform 0.25s ease-in-out;
+  transform: rotate(0deg);
+}
 .product-selector p {
   font-size: 0.75rem;
   color: var(--color-product-title);

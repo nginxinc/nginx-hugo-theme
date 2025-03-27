@@ -1155,6 +1155,7 @@ li .code-block {
   position: absolute;
   margin-top: 8px;
   right: 1rem;
+  z-index: 1;
   --color-codeblock-shadow: 0% 0 0;
   box-shadow: 0px 2px 0px oklch(var(--color-codeblock-shadow) / 0.15);
 }

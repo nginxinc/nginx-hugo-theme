@@ -38,7 +38,6 @@ async function atomicCoveo() {
   const searchBarHeader = document.querySelector('#search-standalone-header');
   const searchBarSidebar = document.querySelector('#search-standalone-sidebar');
   const sidebar = document.querySelector('#sidebar-layout');
-  let searchbar;
 
   if (searchPageInterface) {
     await searchPageInterface.initialize({
@@ -53,29 +52,42 @@ async function atomicCoveo() {
         return request;
       },
     });
-    searchPageInterface.executeFirstSearch();
+    await searchPageInterface.executeFirstSearch();
   } else {
-    // If there is a searchbar, only initialize the searchbar for the sidebar.
     if (sidebar) {
-      searchbar = searchBarSidebar;
-    } else {
-      searchbar = searchBarHeader;
+      await searchBarSidebar.initialize({
+        accessToken: token,
+        organizationId: org_id,
+        analytics: { analyticsMode: 'legacy' },
+        preprocessRequest: (request, clientOrigin, metadata) => {
+          const body = JSON.parse(request.body);
+          body.q = `<@- ${body.q} -@>`;
+          request.body = JSON.stringify(body);
+
+          return request;
+        },
+      });
+      await searchBarSidebar.executeFirstSearch();
     }
-
-    await searchbar.initialize({
-      accessToken: token,
-      organizationId: org_id,
-      analytics: { analyticsMode: 'legacy' },
-      preprocessRequest: (request, clientOrigin, metadata) => {
-        const body = JSON.parse(request.body);
-        body.q = `<@- ${body.q} -@>`;
-        request.body = JSON.stringify(body);
-
-        return request;
-      },
-    });
-    searchbar.executeFirstSearch();
   }
+
+  /* Initialize the header searchbar*/
+  await searchBarHeader.initialize({
+    accessToken: token,
+    organizationId: org_id,
+    analytics: { analyticsMode: 'legacy' },
+    preprocessRequest: (request, clientOrigin, metadata) => {
+      const body = JSON.parse(request.body);
+      body.q = `<@- ${body.q} -@>`;
+      request.body = JSON.stringify(body);
+
+      return request;
+    },
+  });
+
+  searchBarHeader.style.display =
+    sidebar || searchPageInterface ? 'none' : 'block';
+  await searchBarHeader.executeFirstSearch();
 }
 
 async function legacyCoveo() {
@@ -144,5 +156,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     atomicCoveo();
   } else {
     legacyCoveo();
+  }
+});
+
+window.addEventListener('resize', (event) => {
+  const searchBarHeader = document.querySelector('#search-standalone-header');
+  const searchPageInterface = document.querySelector('#search-v2');
+  const searchPageSearchbar = document.querySelector(
+    '#search-standalone-searchpage'
+  );
+  const sidebar = document.querySelector('#sidebar-layout');
+
+  if (!sidebar && !searchPageInterface) {
+    // Show when there is no sidebar or on the search page
+    searchBarHeader.style.display = 'block';
+  } else if (sidebar && sidebar.offsetWidth === 0) {
+    // Show when there is a sidebar but is hidden due to resizing
+    searchBarHeader.style.display = 'block';
+  } else if (searchPageInterface && searchPageSearchbar.offsetWidth === 0) {
+    // Show when on the search page but is "sidebar" searchbar is hidden
+    searchBarHeader.style.display = 'block';
+  } else {
+    // Go back to default state
+    searchBarHeader.style.display = 'none';
   }
 });

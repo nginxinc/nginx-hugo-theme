@@ -85,8 +85,6 @@ async function atomicCoveo() {
     },
   });
 
-  searchBarHeader.style.display =
-    sidebar || searchPageInterface ? 'none' : 'block';
   await searchBarHeader.executeFirstSearch();
 }
 
@@ -156,28 +154,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     atomicCoveo();
   } else {
     legacyCoveo();
-  }
-});
-
-window.addEventListener('resize', (event) => {
-  const searchBarHeader = document.querySelector('#search-standalone-header');
-  const searchPageInterface = document.querySelector('#search-v2');
-  const searchPageSearchbar = document.querySelector(
-    '#search-standalone-searchpage'
-  );
-  const sidebar = document.querySelector('#sidebar-layout');
-
-  if (!sidebar && !searchPageInterface) {
-    // Show when there is no sidebar or on the search page
-    searchBarHeader.style.display = 'block';
-  } else if (sidebar && sidebar.offsetWidth === 0) {
-    // Show when there is a sidebar but is hidden due to resizing
-    searchBarHeader.style.display = 'block';
-  } else if (searchPageInterface && searchPageSearchbar.offsetWidth === 0) {
-    // Show when on the search page but is "sidebar" searchbar is hidden
-    searchBarHeader.style.display = 'block';
-  } else {
-    // Go back to default state
-    searchBarHeader.style.display = 'none';
   }
 });

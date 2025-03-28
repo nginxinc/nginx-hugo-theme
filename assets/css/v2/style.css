@@ -482,6 +482,7 @@ atomic-search-layout atomic-layout-section[section="search"] {
   display: flex;
   flex-direction: column;
   width: 24rem;
+  max-height: 100vh;
   position: sticky;
   top: 0;
   margin-top: -1rem;
@@ -551,7 +552,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 .sidebar .scrollbar-container {
   width: 100%;
   max-height: 100vh;
-  overflow: hidden;
+  overflow: scroll;
   scrollbar-gutter: stable;
   scrollbar-width: none;
 }
@@ -790,7 +791,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   display: block !important;
 }
 
-#TableOfContents li {
+#TableOfContents li:not(:empty) {
   position: relative;
   list-style: square;
 }

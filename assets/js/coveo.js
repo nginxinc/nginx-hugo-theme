@@ -21,10 +21,8 @@ async function getsearchObj() {
 }
 
 async function atomicCoveo() {
+  /* Fetch the credentials */
   await customElements.whenDefined('atomic-search-interface');
-  const searchInterface = document.querySelector('#search-v2');
-  const searchInterfaceStandalone =
-    document.querySelector('#search-standalone');
   const token = localStorage.getItem('coveo_jwt_v1');
   const org_id = localStorage.getItem('coveo_org_id_v1');
   let searchObj = { token, org_id };
@@ -35,8 +33,14 @@ async function atomicCoveo() {
     localStorage.setItem('coveo_org_id_v1', searchObj.org_id);
   }
 
-  if (searchInterface) {
-    await searchInterface.initialize({
+  /* Initialize the interfaces with credentials */
+  const searchPageInterface = document.querySelector('#search-v2');
+  const searchBarHeader = document.querySelector('#search-standalone-header');
+  const searchBarSidebar = document.querySelector('#search-standalone-sidebar');
+  const sidebar = document.querySelector('#sidebar-layout');
+
+  if (searchPageInterface) {
+    await searchPageInterface.initialize({
       accessToken: token,
       organizationId: org_id,
       analytics: { analyticsMode: 'legacy' },
@@ -48,10 +52,27 @@ async function atomicCoveo() {
         return request;
       },
     });
-    searchInterface.executeFirstSearch();
+    await searchPageInterface.executeFirstSearch();
+  } else {
+    if (sidebar) {
+      await searchBarSidebar.initialize({
+        accessToken: token,
+        organizationId: org_id,
+        analytics: { analyticsMode: 'legacy' },
+        preprocessRequest: (request, clientOrigin, metadata) => {
+          const body = JSON.parse(request.body);
+          body.q = `<@- ${body.q} -@>`;
+          request.body = JSON.stringify(body);
+
+          return request;
+        },
+      });
+      await searchBarSidebar.executeFirstSearch();
+    }
   }
 
-  await searchInterfaceStandalone.initialize({
+  /* Initialize the header searchbar*/
+  await searchBarHeader.initialize({
     accessToken: token,
     organizationId: org_id,
     analytics: { analyticsMode: 'legacy' },
@@ -63,7 +84,8 @@ async function atomicCoveo() {
       return request;
     },
   });
-  searchInterfaceStandalone.executeFirstSearch();
+
+  await searchBarHeader.executeFirstSearch();
 }
 
 async function legacyCoveo() {

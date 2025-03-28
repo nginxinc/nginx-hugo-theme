@@ -1,6 +1,6 @@
 ---
-description: Test Product code blocks
-title: Test Product code blocks
+description: Code Blocks - with root and non-root
+title: Code Blocks - with root and non-root
 weight: 200
 ---
 

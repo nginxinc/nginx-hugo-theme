@@ -36,7 +36,7 @@
   --sidebar-width: 24rem;
   --sidebar-line-width: 11.5px;
   --side-gutter-width: 20rem;
-  --table-top-bottom-spacing: 3rem;
+  --table-top-bottom-spacing: 1rem;
   --table-row-space-between: 1.5rem;
   --table-min-column-spacing-narrow: 1.5rem;
   --table-min-column-spacing-wide: 0.75rem;
@@ -55,9 +55,35 @@
   --codeblock-line-box-side-length: 4px;
   --component-gap: 3.5rem;
   --overflow-gutter-extension: 1rem;
+
+  --flow-gap: 1rem;
 }
-body {
+
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
+  padding: 0;
 }
 
 @supports (font-variation-settings: normal) {
@@ -89,6 +115,22 @@ h6,
 /* header */
 p {
   font-weight: 400;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+}
+
+ul li,
+ol li {
+  margin-bottom: 0.5rem;
+}
+
+ul li:last-child,
+ol li:last-child {
+  margin-bottom: 0;
 }
 
 /* layout */
@@ -261,6 +303,7 @@ nav {
   grid-template-columns: var(--text-content-width-iphone-13) 1fr;
   margin-top: 2rem;
   grid-auto-rows: max-content;
+  grid-gap: var(--flow-gap);
 }
 
 .text-content > :not(.wide) {
@@ -793,7 +836,7 @@ main {
 }
 
 p {
-  margin: 0 0 1.5rem 0;
+  margin: 0;
   line-height: 1.5rem;
 }
 
@@ -836,12 +879,12 @@ a:hover {
 
 h1 {
   font-size: 2rem;
-  margin: 0 0 2rem 0;
+  margin: 0 0 1rem 0;
 }
 
 h2 {
   font-size: 1.5rem;
-  margin: 0 0 1rem 0;
+  margin: 1rem 0 .75rem 0;
 }
 
 /* tables */
@@ -910,7 +953,7 @@ table hr {
 blockquote {
   border: 1px solid var(--color-foreground);
   padding: 1rem;
-  margin: 0 -1rem;
+  margin: 1rem -1rem;
 
   /* solid 3px drop shadow */
   box-shadow: 3px 3px 0px var(--color-shadow);
@@ -957,6 +1000,15 @@ blockquote p:last-child {
 blockquote.side-callout {
   grid-column: 2 !important;
   grid-row: span 2;
+}
+
+blockquote > div > * {
+  margin: 0 0 var(--flow-gap) 0;
+}
+
+blockquote ol,
+blockquote ul {
+  margin: 0 0 1rem 1rem;
 }
 
 /* Tabs */
@@ -1037,6 +1089,7 @@ blockquote.side-callout {
   border: 1px solid var(--color-tabs-divider);
   border-bottom: 1px solid black;
   padding: 10px;
+  margin-bottom: 0;
 
   a {
     text-decoration: none;
@@ -1066,6 +1119,7 @@ blockquote.side-callout {
 
 .tab-content {
   border-bottom: 1px solid black;
+  padding-bottom: 1rem;
 
   .tab-pane {
     display: none;
@@ -1096,17 +1150,13 @@ blockquote.side-callout {
   margin-top: -1.5rem;
 }
 
-li .code-block {
-  /* For indented code blocks, move 1rem back to align code with text from heading */
-  margin-left: -1rem;
-}
-
 .highlight-v2 {
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   overflow-x: scroll;
   scrollbar-width: none;
   line-height: 1.3rem;
+  padding: 1rem 0;
 }
 
 .highlight-v2.single-line {
@@ -1138,6 +1188,11 @@ li .code-block {
 
 .code-container {
   position: relative;
+}
+
+ol .code-container,
+ul .code-container {
+  margin-top: 0.75rem;
 }
 
 .code-container:hover {

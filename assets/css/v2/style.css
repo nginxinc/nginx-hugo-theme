@@ -1106,6 +1106,7 @@ li .code-block {
   border-bottom: 1px solid #cccccc;
   overflow-x: scroll;
   scrollbar-width: none;
+  line-height: 1.3rem;
 }
 
 .highlight-v2.single-line {
@@ -1113,6 +1114,7 @@ li .code-block {
   align-items: center;
   border: 1px solid #cccccc;
   overflow-x: scroll;
+  line-height: 1;
 }
 
 .code-header {

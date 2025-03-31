@@ -607,7 +607,7 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   position: absolute;
   top: 0;
   min-width: 80%;
-  margin-top: 7.375rem;
+  margin-top: 8.375rem;
   margin-left: 44rem;
   padding: 1rem 1.5rem;
   background-color: white;
@@ -617,12 +617,12 @@ body:not(:has(.main-layout)) header atomic-search-interface {
 
 button:has(~ .product-selector[style*="block"])
   > .product-selector-button-icon {
-  transition: transform 0.25s ease-in-out;
-  transform: rotate(180deg);
+  transition: transform 0.1s ease-in-out;
+  transform: rotate(90deg);
 }
 
 button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
-  transition: transform 0.25s ease-in-out;
+  transition: transform 0.1s ease-in-out;
   transform: rotate(0deg);
 }
 .product-selector p {

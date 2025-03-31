@@ -6,7 +6,7 @@
   font-feature-settings: "liga" on, "calt" on;
 
   /* fallback to slightly thinner font on browsers without variable 'wght' support */
-  font-weight: 400;
+  font-weight: 350;
 
   /* base rem = 16px by default, left as percentage for screen readers */
   font-size: 100%;
@@ -120,12 +120,19 @@ p {
 ul,
 ol {
   padding: 0;
-  margin: 0;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 ul li,
 ol li {
-  margin-bottom: 0.5rem;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  padding: 0 0 0 1rem;
 }
 
 ul li:last-child,
@@ -963,7 +970,7 @@ table hr {
 blockquote {
   border: 1px solid var(--color-foreground);
   padding: 1rem;
-  margin: 1rem -1rem;
+  margin: 0 -1rem;
 
   /* solid 3px drop shadow */
   box-shadow: 3px 3px 0px var(--color-shadow);
@@ -1138,6 +1145,10 @@ blockquote ul {
   .active {
     display: block !important;
   }
+}
+
+.tab-content > div > * {
+  margin: 0 0 var(--flow-gap) 0;
 }
 
 /* Codeblocks */

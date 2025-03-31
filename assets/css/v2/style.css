@@ -140,9 +140,34 @@ header {
   .header-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+    > ul {
+      padding: 0;
+    }
+
+    @media (max-width: 700px) {
+      a,
+      ul {
+        width: 50%;
+      }
+
+      li {
+        float: right;
+      }
+
+      div {
+        order: 3;
+        width: 100%;
+
+        #search-standalone-header {
+          margin-top: 1rem;
+        }
+      }
+    }
   }
 
   ul {
@@ -255,6 +280,7 @@ nav {
   grid-template-columns: var(--text-content-width-iphone-13) 1fr;
   grid-template-rows: var(--breadcrumb-max-height) 1fr;
   z-index: 1;
+  margin-top: 2rem;
 }
 
 .docs-container {
@@ -363,7 +389,6 @@ nav {
         --side-gutter-width
       );
     column-gap: var(--component-gap);
-    margin-top: 2rem;
   }
 
   .content-layout .side-gutter {
@@ -445,6 +470,9 @@ atomic-search-interface {
   height: fit-content;
   margin-bottom: 2rem;
   margin-top: 2rem;
+}
+
+#search-standalone-sidebar {
   min-height: 54px;
   max-height: 54px;
 }
@@ -518,6 +546,30 @@ atomic-search-layout atomic-layout-section[section="search"] {
 
 #atomic-search-box-xqtsq-popup {
   z-index: 9999;
+}
+
+header atomic-search-interface {
+  /* Hide by default */
+  display: none;
+}
+
+body:not(:has(.main-layout)) header atomic-search-interface {
+  /* Show on landing pages */
+  display: block;
+}
+
+@media (max-width: 1184px) {
+  /* Show on pages with sidebar if it is hidden */
+  body:has(.sidebar-layout) header atomic-search-interface {
+    display: block;
+  }
+}
+
+@media (max-width: 1023px) {
+  /* Show on search page with facet if it is hidden */
+  body:has(atomic-search-layout) header atomic-search-interface {
+    display: block;
+  }
 }
 
 /* Sidebar */

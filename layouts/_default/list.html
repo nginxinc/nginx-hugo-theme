@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="row flex-xl-nowrap">
+<div class="row flex-xl-nowrap" id="list-v1">
   <nav class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none">
     {{ partial "sidebar.html" . }}
   </nav>
@@ -7,4 +7,47 @@
     {{ partial "list-main" . }} 
   </main>
 </div>
+
+{{/*  mf list page  */}}
+
+<main class="content col d-block align-top content-has-toc" role="main" data-mf="true" style="display: none">
+<section class="main-layout">
+  <div class="sidebar-layout">
+    <nav data-mf="true" id="sidebar-v2" class="sidebar" style="display:none;">
+      {{ partial "sidebar-v2.html" . }}
+    </nav>
+  </div>
+
+
+
+  <section class="content-layout" data-mf="true" style="display: none">
+    <section class="breadcrumb-layout">
+      {{ if not .IsHome }}
+        {{ if not (in .Params.display_breadcrumb "false" ) }}
+        {{ partial "breadcrumb" .}}
+        {{ end }}
+      {{ end }}
+    </section>
+    <div class="text-content list-page">
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+
+      <hr>
+      {{ if .Page.Lastmod }}
+      <div class="last-modified">
+        Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
+      </div>
+      {{ end }}
+
+      </main>
+
+    </div>
+  </section>
+</section>
+
+
+
+</section>
+</main>
 {{ end }}
+

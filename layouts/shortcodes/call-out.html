@@ -2,9 +2,9 @@
 {{ $sideOption := "side-callout" }}
 {{ $inlineOption := "inline-callout" }}
 
-<!-- Add default option for callouts that are "inline" if one is not provided -->
-{{ if and (not (strings.Contains $class $inlineOption)) (not (strings.Contains $class $sideOption)) }}
-{{ $class = printf "%s %s" $class $inlineOption }}
+<!-- Add default option for callouts that are "sideline" if one is not provided -->
+{{ if and (not (strings.Contains $class $sideOption)) (not (strings.Contains $class $inlineOption)) }}
+{{ $class = printf "%s %s" $class $sideOption }}
 {{ end }}
 
 <!-- Blockquote element with a class that is the first parameter passed to the shortcode -->

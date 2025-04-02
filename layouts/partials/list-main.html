@@ -11,7 +11,7 @@
             {{ end }}
         </div>
     </div>
-
+    {{ if lt .WordCount 1 }}
     <section class="col-md-12 col-xl-12 py-md-3 pl-md-5" id="section-content-list">
         
         <div class="row">
@@ -29,6 +29,7 @@
             </div> 
         </div> 
     </section>
+    {{ end }}
 </div>
 
 

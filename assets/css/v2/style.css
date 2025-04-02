@@ -1304,6 +1304,15 @@ code {
   font-family: 'JetBrainsMono', monospace;
 }
 
+/* Inline Code */
+code:not(pre code) {
+  border: solid 1px #ccc;
+  border-radius: 4px;
+  padding: 0 0.25rem;
+  background-color: #f9f9f9;
+  font-size: 0.875rem;
+}
+
 .highlight {
   padding: 0 1rem 0 1rem;
   position: relative;

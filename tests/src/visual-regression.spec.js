@@ -5,7 +5,11 @@ test.describe('Testing old theme', () => {
     page,
   }) => {
     const currentPlus = 'nginx/installing-nginx-open-source/';
-    await page.goto(`/${currentPlus}`, { waitUntil: 'networkidle' });
+    await page.goto(`/${currentPlus}`);
+    await expect(
+      await page.locator('data-testid=base-layout').count()
+    ).toBeTruthy();
+
     await page.waitForFunction(() => window.scrollY === 0);
     await expect(page).toHaveScreenshot('example-site-screenshot.png', {
       fullPage: true,

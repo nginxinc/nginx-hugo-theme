@@ -25,6 +25,12 @@
   --color-divider: #cccccc;
   --color-tabs-divider: #00000033;
   --color-codeblock-code-with-comment: #00963926;
+  --color-callout-warning-primary: 0.65 0.188 24;
+  --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
+  --color-callout-caution-primary: 0.8 0.1613 71.21;
+  --color-callout-caution-shadow: 0.8 0.1613 71.21 / 20%;
+  --color-callout-important-primary: 0.36 0 0;
+  --color-callout-important-shadow: 0.23 0 0 / 7.06%;
 
   --code-copy-icon-height: 1rem;
   --code-copy-icon-width: 1rem;
@@ -1106,6 +1112,56 @@ blockquote > div > * {
 blockquote ol,
 blockquote ul {
   margin: 0 0 1rem 1rem;
+}
+
+blockquote.call-out {
+  padding: 0.5rem;
+
+  strong {
+    display: block;
+    padding: 0.25rem 0.5rem;
+    margin: -0.5rem 0 0.5rem -0.5rem;
+    width: calc(100% + 1rem);
+    font-weight: 500;
+  }
+
+  p {
+    padding: 0.5rem;
+  }
+
+  br {
+    display: none;
+  }
+}
+
+blockquote.caution {
+  --color-shadow: oklch(var(--color-callout-caution-shadow));
+  border: 1px solid oklch(var(--color-callout-caution-primary));
+
+  strong {
+    background-color: oklch(var(--color-callout-caution-shadow));
+    border-bottom: 1px solid oklch(var(--color-callout-caution-primary));
+  }
+}
+
+blockquote.warning {
+  --color-shadow: oklch(var(--color-callout-warning-shadow));
+  border: 1px solid oklch(var(--color-callout-warning-primary));
+
+  strong {
+    background-color: oklch(var(--color-callout-warning-shadow));
+    border-bottom: 1px solid oklch(var(--color-callout-warning-primary));
+  }
+}
+
+blockquote.important {
+  --color-shadow: oklch(var(--color-callout-important-shadow));
+  border: 1px solid oklch(var(--color-callout-important-primary));
+
+  strong {
+    background-color: oklch(var(--color-callout-important-shadow));
+    border-bottom: 1px solid oklch(var(--color-callout-important-primary));
+  }
 }
 
 /* Tabs */

@@ -18,8 +18,6 @@
     </nav>
   </div>
 
-
-
   <section class="content-layout" data-mf="true" style="display: none">
     <section class="breadcrumb-layout">
       {{ if not .IsHome }}
@@ -31,6 +29,14 @@
     <div class="text-content list-page">
       <h1>{{ .Title }}</h1>
       {{ .Content }}
+
+      {{ if  (lt .WordCount 1)  }}
+      {{ range .Pages.ByWeight }}
+      <h2>
+          <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
+      </h2>
+      {{ end }}
+      {{end}}
 
       <hr>
       {{ if .Page.Lastmod }}

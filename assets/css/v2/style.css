@@ -1117,16 +1117,12 @@ blockquote ul {
 blockquote.call-out {
   padding: 0.5rem;
 
-  strong {
+  .call-out-type {
     display: block;
     padding: 0.25rem 0.5rem;
     margin: -0.5rem 0 0.5rem -0.5rem;
     width: calc(100% + 1rem);
     font-weight: 500;
-  }
-
-  p {
-    padding: 0.5rem;
   }
 
   br {
@@ -1138,7 +1134,7 @@ blockquote.caution {
   --color-shadow: oklch(var(--color-callout-caution-shadow));
   border: 1px solid oklch(var(--color-callout-caution-primary));
 
-  strong {
+  .call-out-type {
     background-color: oklch(var(--color-callout-caution-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-caution-primary));
   }
@@ -1148,7 +1144,7 @@ blockquote.warning {
   --color-shadow: oklch(var(--color-callout-warning-shadow));
   border: 1px solid oklch(var(--color-callout-warning-primary));
 
-  strong {
+  .call-out-type {
     background-color: oklch(var(--color-callout-warning-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-warning-primary));
   }
@@ -1158,7 +1154,7 @@ blockquote.important {
   --color-shadow: oklch(var(--color-callout-important-shadow));
   border: 1px solid oklch(var(--color-callout-important-primary));
 
-  strong {
+  .call-out-type {
     background-color: oklch(var(--color-callout-important-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-important-primary));
   }

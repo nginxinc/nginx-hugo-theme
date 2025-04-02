@@ -1,6 +1,6 @@
 baseURL = 'https://nginx.org'
 languageCode = 'en-us'
-title = 'nginx-hugo-theme example site'
+title = 'Example Site'
 
 
 [module]

@@ -1114,6 +1114,10 @@ blockquote ul {
   white-space: nowrap;
   position: relative;
 
+  /* Move to gutter */
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+
   &::after {
     content: "";
     position: absolute;
@@ -1217,6 +1221,12 @@ blockquote ul {
 .tab-content {
   border-bottom: 1px solid black;
   padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  /* Move to gutter */
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
 
   .tab-pane {
     display: none;
@@ -1359,8 +1369,11 @@ figure {
 
 /* HR Lines */
 hr {
-  width: 100%;
-  border-top: 1px solid var(--color-divider);
+  /* Move to gutter */
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+
+  border: 1px solid var(--color-divider);
 }
 
 /* FILTHY HACKS BEGIN */

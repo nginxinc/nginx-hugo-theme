@@ -1,5 +1,41 @@
-/* webfonts */
+/* Regular */
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 400; /* regular weight */
+  src: url('../fonts/jetbrainsmono/JetBrainsMono-Light.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: italic;
+  font-weight: 400;
+  src: url('../fonts/jetbrainsmono/JetBrainsMono-Italic.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/jetbrainsmono/JetBrainsMono-SemiBold.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: italic;
+  font-weight: 700;
+  src: url('../fonts/jetbrainsmono/JetBrainsMono-BoldItalic.woff2') format('woff2');
+  font-display: swap;
+}
+
 :root {
+  /* webfonts */
   font-family: "Inter var", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif;
@@ -11,6 +47,8 @@
   /* base rem = 16px by default, left as percentage for screen readers */
   font-size: 100%;
 
+  /* MARK: Variables
+  */
   --color-brand: 56.6% 0.194 147.7;
   --color-brand-300: #a6daba;
   --color-brand-200: #ccead7;
@@ -18,7 +56,8 @@
   --color-background: #ffffff;
   --color-foreground: #000000;
   --color-shadow: #d2d2d2;
-  --color-codeblock-shadow: #d2d2d2;
+  --color-codeblock-border: #888;
+  --color-codeblock-shadow: #e5e5e5;
   --color-footer: #1d1d1d;
   --color-footer-text: #e2e2e2;
   --color-product-title: #8d8d8d;
@@ -67,7 +106,8 @@
   --flow-gap: 1rem;
 }
 
-/* reset */
+/* MARK: Reset
+*/
 html,
 body,
 p,
@@ -134,7 +174,8 @@ h6 {
   scroll-margin-top: 1.5rem;
 }
 
-/* header */
+/* MARK: Header
+*/
 p {
   font-weight: 350;
 }
@@ -162,7 +203,8 @@ ol li:last-child {
   margin-bottom: 0;
 }
 
-/* layout */
+/* MARK: Layout
+*/
 header {
   margin: 2rem 2rem 0 2rem;
 
@@ -235,7 +277,8 @@ header {
   }
 }
 
-/* footer */
+/* MARK: Footer
+*/
 footer {
   background-color: var(--color-footer);
   padding: 2.5rem;
@@ -299,7 +342,8 @@ nav {
   }
 }
 
-/* main content */
+/* MARK: Main content
+*/
 .docs-container * {
   box-sizing: border-box;
 }
@@ -327,15 +371,6 @@ nav {
   width: 24rem;
   display: none;
   grid-column: 1;
-}
-
-/* main content */
-.docs-container * {
-  box-sizing: border-box;
-}
-
-.docs-container {
-  min-width: 100%;
 }
 
 .breadcrumb-layout {
@@ -456,7 +491,8 @@ nav {
   display: flex;
 }
 
-/* Coveo */
+/* MARK: Coveo
+*/
 #search-v2 {
   display: inline-block !important;
   width: 95vw;
@@ -574,7 +610,8 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   }
 }
 
-/* Sidebar */
+/* MARK: Sidebar
+*/
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -893,7 +930,8 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   list-style: square;
 }
 
-/* content */
+/* MARK: Content
+*/
 main {
   flex: 1;
   min-width: 20rem;
@@ -952,7 +990,8 @@ h2 {
   margin: 1rem 0 .75rem 0;
 }
 
-/* tables */
+/* MARK: Tables
+*/
 table {
   position: relative;
   z-index: -1;
@@ -1014,7 +1053,8 @@ table hr {
   border-bottom: var(--table-line-height) solid var(--color-divider);
 }
 
-/* callouts */
+/* MARK: Callouts
+*/
 blockquote {
   border: 1px solid var(--color-foreground);
   padding: 1rem;
@@ -1026,11 +1066,6 @@ blockquote {
   &:has(.code-block) .code-block:not(:has(.single-line)) {
     /* Removes negative margins from multi-line codeblocks */
     margin: 0;
-  }
-
-  &:has(.code-block) .code-block:has(.single-line) .highlight-v2.single-line {
-    /* Remove border from single line codeblocks in callouts */
-    border: none;
   }
 }
 
@@ -1129,7 +1164,8 @@ blockquote.important {
   }
 }
 
-/* Tabs */
+/* MARK: Tabs
+*/
 .tabs-container {
   /* border-bottom: 1px solid black; */
   white-space: nowrap;
@@ -1262,7 +1298,12 @@ blockquote.important {
   margin: 0 0 var(--flow-gap) 0;
 }
 
-/* Codeblocks */
+/* MARK: Codeblocks
+*/
+code {
+  font-family: 'JetBrainsMono', monospace;
+}
+
 .highlight {
   padding: 0 1rem 0 1rem;
   position: relative;
@@ -1283,18 +1324,22 @@ blockquote.important {
 }
 
 .highlight-v2 {
-  border-top: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
+  border: 1px solid var(--color-codeblock-border);
   overflow-x: scroll;
   scrollbar-width: none;
-  line-height: 1.3rem;
+  line-height: 150%;
   padding: 1rem 0;
+  /* margin: 1.5rem 0 0.25rem 0; */
+}
+
+.highlight code {
+  font-size: 0.875rem;
 }
 
 .highlight-v2.single-line {
   display: flex;
   align-items: center;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--color-codeblock-border);
   overflow-x: scroll;
   line-height: 1;
 }
@@ -1309,22 +1354,29 @@ blockquote.important {
 }
 
 .code-type {
+  display: inline-block;
+  height: 1.5rem;
+  border-top: 1px solid var(--color-codeblock-border);
+  border-left: 1px solid var(--color-codeblock-border);
+  border-right: 1px solid var(--color-codeblock-border);
   text-transform: uppercase;
-  padding: .25rem 0.25rem; /* Padding for button content */
-  font-size: 12px; /* Font size */
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
   z-index: 999;
-  position: absolute;
+  /* position: absolute; */
   background-color: white;
-  margin: -12px 0 0 1rem;
+  margin: 0 0 -1px 0;
+  /* box-shadow: 2px 2px 0px var(--color-shadow); */
+
 }
 
 .code-container {
-  position: relative;
+  box-shadow: 2px 2px 0px var(--color-codeblock-shadow);
 }
 
-ol .code-container,
-ul .code-container {
-  margin-top: 0.75rem;
+ol .code-block,
+ul .code-block {
+  margin: 0.75rem 0;
 }
 
 .code-container:hover {
@@ -1364,7 +1416,8 @@ ul .code-container {
   padding: 0;
 }
 
-/* Images */
+/* MARK: Images
+*/
 figure {
   margin: 0;
 }

@@ -1,6 +1,6 @@
 ---
 description: Code Blocks - With root and non-root
-title: Code Blocks - With root and non-root
+title: With root and non-root
 weight: 200
 ---
 

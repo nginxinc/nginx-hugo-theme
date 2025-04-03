@@ -5,7 +5,7 @@
 
 {{- if $isSingleLine  -}}
 <div class="code-block" data-mf="true" style="display: none;">
-    <div class="code-container">
+    <div class="code-container chroma">
         <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button" type="button">Copy</button>
         <div class="highlight-v2 single-line" id="{{ $codeBlockId }}">
             {{ $result.Wrapped }}
@@ -15,9 +15,9 @@
 {{- else -}}
 <div class="code-block" data-mf="true" style="display: none;">
     {{- if and (ne .Type "") (ne .Type "none") -}}
-        <span class="code-type">{{ .Type }}</span>
+        <span class="code-type chroma">{{ .Type }}</span>
     {{- end -}}
-    <div class="code-container">
+    <div class="code-container chroma">
         <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button multi-line" type="button">Copy</button>
         <div class="highlight-v2" id="{{ $codeBlockId }}">
             {{ $result.Wrapped }}

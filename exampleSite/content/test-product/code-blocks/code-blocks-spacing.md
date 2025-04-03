@@ -1,6 +1,6 @@
 ---
 description: Code Blocks - Spacing and OL/UL
-title: Code Blocks - Spacing and OL/UL
+title: Spacing and OL/UL
 weight: 200
 ---
 
@@ -23,6 +23,17 @@ sudo rm -rf /
 #### `h4` - Header
 ```shell
 sudo rm -rf /
+```
+
+```shell
+# single line with a comment
+```
+
+```shell
+multiline
+shell commands
+
+# with a comment
 ```
 
 ## Order List with single line code block

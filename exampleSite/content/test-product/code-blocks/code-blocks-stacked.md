@@ -1,6 +1,6 @@
 ---
 description: Code Blocks - Stacked
-title: Code Blocks - Stacked
+title: Stacked
 weight: 200
 ---
 

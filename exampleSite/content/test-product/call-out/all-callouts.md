@@ -63,3 +63,8 @@ This is a Warning callout. There was previously a bug with **bold text** that we
 {{<call-out "warning" "Custom warning title">}}
 This is a Warning callout with a custom title. There was previously a bug with **bold text** that we should be aware of and continue to check for. This callout was invoked with the `<call-out>` shortcode with the `.warning` class, and a custom title.
 {{</call-out>}}
+
+
+{{<note>}}
+This is a note. In oldframe it should have `note:` in bold, at the start.
+{{</note>}}

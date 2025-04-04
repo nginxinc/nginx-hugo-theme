@@ -30,3 +30,17 @@ weight: 200
   - Add the instances in a separate operation.
   
   Your instances should synchronize with your desired configuration within 30 seconds. {{< /note >}}
+
+
+## Callout within list
+
+1. Open the JSON Web Token file you downloaded from [MyF5](https://my.f5.com/manage/s/subscriptions) and copy its contents. 
+
+   {{<call-out "tip" "Copying the JWT token" "" >}} Make sure there are **no extra characters or spaces** when copying the contents of the JWT token: they can invalidate the token and cause 401 errors during authentication.{{</call-out>}}
+
+2. Log in to the Docker registry using the contents of the JSON Web Token file:
+
+   ```bash
+   docker login private-registry.nginx.com --username=<JWT_CONTENTS> --password=none
+   ```
+

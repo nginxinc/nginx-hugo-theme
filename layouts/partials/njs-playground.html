@@ -1,0 +1,88 @@
+<h3>Request Builder</h3>
+<div class="request-builder" id="request-builder"></div>
+<h3>NJS Function</h3>
+<div class="njs-function" id="editor"></div>
+<button id="run-btn">Simulate Request</button>
+<pre id="result"></pre>
+<script>
+    var require = { paths: { vs: 'https://unpkg.com/monaco-editor@0.52.2/min/vs' } };
+</script>
+<script src="https://unpkg.com/monaco-editor@0.52.2/min/vs/loader.js"></script>
+
+<script type="module">
+    import { getQuickJS } from "https://esm.sh/quickjs-emscripten@0.31.0";
+
+    // Fetch the example js files, set by shortcode usage
+    const exampleResponse = await fetch("/njs/{{ .exampleRequest }}");
+    if (!exampleResponse.ok) {
+        throw new Error(`Failed to fetch {{ .exampleRequest }}: ${exampleResponse.status}`);
+    }
+    const exampleRequestCode = await exampleResponse.text();
+
+    const exampleNJSResponse = await fetch("/njs/{{ .exampleNJS }}");
+    if (!exampleResponse.ok) {
+        throw new Error(`Failed to fetch {{ .exampleRequest }}: ${exampleNJSResponse.status}`);
+    }
+    const exampleNJSCode = await exampleNJSResponse.text();
+
+    const fnCaller = `
+const requestConverter = (request) => {
+    return {
+        ...request,
+        requestText: request.body,
+        return: (status, value) => (JSON.stringify({status, value})),
+    }
+}
+    {{ .fnName }}(requestConverter(exampleRequest))
+    `;
+
+    (async () => {
+        const QuickJS = await getQuickJS();
+
+        let editor, requestBuilder;
+        const theme = "Visual Studio";
+
+        // Initialize Monaco Editor
+        require(["vs/editor/editor.main"], () => {
+            editor = monaco.editor.create(document.getElementById("editor"), {
+                value: exampleNJSCode,
+                language: "javascript",
+                theme
+            });
+
+            requestBuilder = monaco.editor.create(document.getElementById("request-builder"), {
+                value: exampleRequestCode,
+                language: "javascript",
+                theme
+            });
+        });
+
+
+
+        const runCode = async () => {
+            const vm = QuickJS.newContext();
+
+            if (!vm) {
+                alert("QuickJS is loading, please wait a moment.");
+                return;
+            }
+            const requestSrc = requestBuilder.getValue();
+            const src = editor.getValue();
+            const result = vm.evalCode(requestSrc + src + fnCaller);
+            const resultEl = document.getElementById("result");
+
+            if (result.error) {
+                resultEl.textContent = "Error:\n" + JSON.stringify(vm.dump(result.error));
+                result.error.dispose();
+            } else {
+                resultEl.textContent = "Output:\n" + vm.dump(result.value);
+                result.value.dispose();
+            }
+            vm.dispose();
+        };
+
+        document.getElementById("run-btn").onclick = runCode;
+    })();
+
+
+</script>

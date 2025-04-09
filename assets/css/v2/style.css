@@ -1429,3 +1429,30 @@ hr {
     visibility: hidden;
   }
 }
+
+/* NJS Hackathon stuff */
+.request-builder {
+  height: 20rem;
+  width: var(--grid-content);
+  border: 1px solid #cccccc;
+}
+
+.njs-function {
+  height: 20rem;
+  width: var(--grid-content);
+  border: 1px solid #cccccc;
+}
+
+#run-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.njs-output {
+  padding: var(--flow-gap);
+  background-color: #fff;
+  white-space: pre-wrap;
+  min-height: 40px;
+  border: 1px solid #ccc;
+  font-family: monospace;
+}

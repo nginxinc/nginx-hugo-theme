@@ -1,9 +1,7 @@
-{{ $exampleRequest := .Get "exampleRequest" }}
 {{ $exampleNJS := .Get "exampleNJS" }}
 {{ $fnName := .Get "fnName" }}
 {{ partial "njs-playground.html" (
     dict
-     "exampleRequest" $exampleRequest
      "exampleNJS" $exampleNJS
      "fnName" $fnName
      )}}

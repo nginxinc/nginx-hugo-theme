@@ -9,12 +9,6 @@ function echo(r) {
 		requestText,
 	} = r;
 
-	// Get request body (if applicable)
-	let body = "";
-	if (requestBuffer !== "" || !Array.isArray(requestBuffer)) {
-		body = Buffer.from(requestBuffer).toString();
-	}
-
 	// Construct the echo response (JSON format)
 	const response = {
 		method,
@@ -26,7 +20,7 @@ function echo(r) {
 		version: httpVersion,
 	};
 
-	r.return(200, JSON.stringify(response));
+	return r.return(200, JSON.stringify(response));
 }
 
 // uncomment for us in NJS

@@ -4,10 +4,8 @@ title: Echo Server
 weight: 100
 ---
 
-## Basic Example
-To use njs in nginx:
-- [install](https://nginx.org/en/docs/njs/install.html) njs scripting language
-- create an njs script file, for example, http.js. See [reference](Reference) for the list of njs properties and methods.
+This example demonstrates how to create a simple echo endpoint.  
+The endpoint returns the details of the request sent to NGINX as JSON.  
 
 ```nginx
 load_module modules/ngx_http_js_module.so;
@@ -28,4 +26,4 @@ http {
 ```
 
 
-{{< njs-playground exampleRequest=exampleRequestEcho.js exampleNJS=echo.js fnName=echo >}}
+{{< njs-playground exampleNJS=echo.js fnName=echo >}}

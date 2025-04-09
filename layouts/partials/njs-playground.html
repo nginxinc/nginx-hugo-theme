@@ -1,5 +1,29 @@
 <h3>Request Builder</h3>
-<div class="request-builder" id="request-builder"></div>
+<div class="request-builder">
+    <label for="method">HTTP Method:</label>
+    <select id="method">
+        <option value="GET">GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+        <option value="PATCH">PATCH</option>
+        <option value="OPTIONS">OPTIONS</option>
+        <option value="HEAD">HEAD</option>
+    </select>
+
+    <label for="url">URI:</label>
+    <input id="url" type="text" placeholder="/echo">
+
+    <label for="bodyJSON">JSON Body:</label>
+    <textarea id="bodyJSON" rows="8" placeholder='{"example":"value"}'></textarea>
+
+    <label>Headers:</label>
+    <div id="headers-container">
+        <!-- Dynamic header entries go here -->
+    </div>
+    <button id="add-header">Add Header</button>
+
+</div>
 <h3>NJS Function</h3>
 <div class="njs-function" id="editor"></div>
 <button id="run-btn">Simulate Request</button>
@@ -12,29 +36,83 @@
 <script type="module">
     import { getQuickJS } from "https://esm.sh/quickjs-emscripten@0.31.0";
 
-    // Fetch the example js files, set by shortcode usage
-    const exampleResponse = await fetch("/njs/{{ .exampleRequest }}");
-    if (!exampleResponse.ok) {
-        throw new Error(`Failed to fetch {{ .exampleRequest }}: ${exampleResponse.status}`);
+    // Request builder stuff
+    const methodEl = document.getElementById('method');
+    const urlEl = document.getElementById('url');
+    const bodyEl = document.getElementById('bodyJSON');
+    const headersContainerEl = document.getElementById('headers-container');
+    const addHeaderBtn = document.getElementById('add-header');
+    debugger;
+    // Initialize headers with one empty pair
+    addHeaderField();
+
+    addHeaderBtn.addEventListener('click', addHeaderField);
+
+    function addHeaderField() {
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'header-row';
+
+        const keyInput = document.createElement('input');
+        keyInput.type = 'text';
+        keyInput.placeholder = 'Header Name (e.g., Content-Type)';
+
+        const valueInput = document.createElement('input');
+        valueInput.type = 'text';
+        valueInput.placeholder = 'Header Value (e.g., application/json)';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'X';
+        removeBtn.type = 'button';
+        removeBtn.onclick = () => headersContainerEl.removeChild(headerDiv);
+
+        headerDiv.appendChild(keyInput);
+        headerDiv.appendChild(valueInput);
+        headerDiv.appendChild(removeBtn);
+
+        headersContainerEl.appendChild(headerDiv);
     }
-    const exampleRequestCode = await exampleResponse.text();
+
+    function buildRequestObject() {
+        const headers = {};
+        const headerRows = headersContainerEl.querySelectorAll('.header-row');
+
+        headerRows.forEach(row => {
+            const inputs = row.querySelectorAll('input');
+            const key = inputs[0].value.trim();
+            const val = inputs[1].value.trim();
+            if (key && val) {
+                headers[key] = val;
+            }
+        });
+
+        let bodyContent;
+        try {
+            bodyContent = bodyEl.value ? JSON.parse(bodyEl.value) : null;
+            debugger;
+        } catch (e) {
+            alert('Invalid JSON in body');
+            return;
+        }
+
+        const requestObject = {
+            method: methodEl.value,
+            uri: urlEl.value,
+            headersIn: headers,
+            body: bodyContent
+        };
+
+        return requestObject;
+    }
+
+    //
 
     const exampleNJSResponse = await fetch("/njs/{{ .exampleNJS }}");
-    if (!exampleResponse.ok) {
+    if (!exampleNJSResponse.ok) {
         throw new Error(`Failed to fetch {{ .exampleRequest }}: ${exampleNJSResponse.status}`);
     }
     const exampleNJSCode = await exampleNJSResponse.text();
 
-    const fnCaller = `
-const requestConverter = (request) => {
-    return {
-        ...request,
-        requestText: request.body,
-        return: (status, value) => (JSON.stringify({status, value})),
-    }
-}
-    {{ .fnName }}(requestConverter(exampleRequest))
-    `;
+
 
     (async () => {
         const QuickJS = await getQuickJS();
@@ -47,16 +125,12 @@ const requestConverter = (request) => {
             editor = monaco.editor.create(document.getElementById("editor"), {
                 value: exampleNJSCode,
                 language: "javascript",
-                theme
-            });
-
-            requestBuilder = monaco.editor.create(document.getElementById("request-builder"), {
-                value: exampleRequestCode,
-                language: "javascript",
-                theme
+                theme,
+                minimap: {
+                    enabled: false
+                }
             });
         });
-
 
 
         const runCode = async () => {
@@ -66,9 +140,23 @@ const requestConverter = (request) => {
                 alert("QuickJS is loading, please wait a moment.");
                 return;
             }
-            const requestSrc = requestBuilder.getValue();
+
             const src = editor.getValue();
-            const result = vm.evalCode(requestSrc + src + fnCaller);
+            const requestObject = buildRequestObject();
+            const fnCaller = `
+            const exampleRequest = ${JSON.stringify(requestObject)};
+            const requestConverter = (request) => {
+                return {
+                    ...request,
+                    requestText: request.body,
+                    return: (status, value) => (JSON.stringify({status, value})),
+                }
+            }
+                {{ .fnName }}(requestConverter(exampleRequest))
+                `;
+
+
+            const result = vm.evalCode(src + fnCaller);
             const resultEl = document.getElementById("result");
 
             if (result.error) {

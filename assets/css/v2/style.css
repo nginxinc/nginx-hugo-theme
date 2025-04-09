@@ -1,36 +1,38 @@
 /* Regular */
 @font-face {
-  font-family: 'JetBrainsMono';
+  font-family: "JetBrainsMono";
   font-style: normal;
   font-weight: 400; /* regular weight */
-  src: url('../fonts/jetbrainsmono/JetBrainsMono-Light.woff2') format('woff2');
+  src: url("../fonts/jetbrainsmono/JetBrainsMono-Light.woff2") format("woff2");
   font-display: swap;
 }
 
 /* Italic */
 @font-face {
-  font-family: 'JetBrainsMono';
+  font-family: "JetBrainsMono";
   font-style: italic;
   font-weight: 400;
-  src: url('../fonts/jetbrainsmono/JetBrainsMono-Italic.woff2') format('woff2');
+  src: url("../fonts/jetbrainsmono/JetBrainsMono-Italic.woff2") format("woff2");
   font-display: swap;
 }
 
 /* Bold */
 @font-face {
-  font-family: 'JetBrainsMono';
+  font-family: "JetBrainsMono";
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/jetbrainsmono/JetBrainsMono-SemiBold.woff2') format('woff2');
+  src: url("../fonts/jetbrainsmono/JetBrainsMono-SemiBold.woff2")
+    format("woff2");
   font-display: swap;
 }
 
 /* Bold Italic */
 @font-face {
-  font-family: 'JetBrainsMono';
+  font-family: "JetBrainsMono";
   font-style: italic;
   font-weight: 700;
-  src: url('../fonts/jetbrainsmono/JetBrainsMono-BoldItalic.woff2') format('woff2');
+  src: url("../fonts/jetbrainsmono/JetBrainsMono-BoldItalic.woff2")
+    format("woff2");
   font-display: swap;
 }
 
@@ -1301,7 +1303,7 @@ blockquote.important {
 /* MARK: Codeblocks
 */
 code {
-  font-family: 'JetBrainsMono', monospace;
+  font-family: "JetBrainsMono", monospace;
 }
 
 /* Inline Code */
@@ -1376,7 +1378,6 @@ code:not(pre code) {
   background-color: white;
   margin: 0 0 -1px 0;
   /* box-shadow: 2px 2px 0px var(--color-shadow); */
-
 }
 
 .code-container {

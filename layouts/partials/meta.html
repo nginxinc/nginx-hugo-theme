@@ -39,7 +39,7 @@
 
 
 {{/* set custom CSP to load styles and scripts with special handling for GTM scripts (requires unsafe-inline) and Dev Portal page(s) (requires 'unsafe-eval') */}}
-<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline'
     https://consent.trustarc.com/ https://mktg.tags.f5.com/basic/prod/utag.sync.js https://static.cloud.coveo.com/ https://*.f5.com/
     https://*.netlify.app https://gist.github.com
     https://tag.demandbase.com/pscSDsz4.min.js
@@ -54,6 +54,8 @@
     https://f5networksnginxdocs.122.2o7.net/
     https://*.siteintercept.qualtrics.com/SIE/?Q_ZID=*
     https://siteintercept.qualtrics.com/
+    https://esm.sh/
+    https://unpkg.com/
     {{ if in .Params.doctypes "devportal" }} 'unsafe-eval' {{end}};
     worker-src 'self' blob:">
 {{/* end */}}

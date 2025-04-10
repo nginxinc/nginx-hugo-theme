@@ -21,7 +21,7 @@
     <div id="headers-container">
         <!-- Dynamic header entries go here -->
     </div>
-    <button id="add-header">Add Header</button>
+    <button id="add-header" class="green">Add Header</button>
 
 </div>
 <h3>NJS Function</h3>
@@ -148,7 +148,7 @@
                 return {
                     ...request,
                     requestText: request.body,
-                    return: (status, value) => (JSON.stringify({status, value})),
+                    return: (status, value) => (JSON.stringify({status, value}, null, 2)),
                     headersOut: {},
                 }
             }

@@ -1439,6 +1439,7 @@ hr {
     padding: 6px;
     margin-top: 5px;
     margin-bottom: 15px;
+    border: darkgrey 1px solid;
   }
   .header-row {
     display: flex;
@@ -1469,6 +1470,15 @@ hr {
     outline: none;
     box-shadow: 0px 2px 0px oklch(0.65 0.188 24 / 0.8);
   }
+
+  button:hover.green {
+    box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.3);
+  }
+
+  button:focus.green {
+    outline: none;
+    box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.8);
+  }
 }
 
 .njs-function {
@@ -1478,8 +1488,26 @@ hr {
 }
 
 #run-btn {
-  padding: 8px 16px;
-  font-size: 16px;
+  height: 29px;
+  margin-top: 5px;
+  background-color: white;
+  border: 1px solid black;
+  padding: 4px 6px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #000;
+  z-index: 1;
+  --color-codeblock-shadow: 0% 0 0;
+  box-shadow: 0px 2px 0px oklch(var(--color-codeblock-shadow) / 0.15);
+}
+
+#run-btn:hover {
+  box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.3);
+}
+
+#run-btn:focus {
+  outline: none;
+  box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.8);
 }
 
 .njs-output {

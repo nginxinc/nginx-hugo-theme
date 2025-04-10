@@ -2,5 +2,5 @@ function hello(r) {
     return r.return(200, "Hello world!");
 }
 
-// uncomment for us in NJS
+// uncomment for use in NJS
 // export default { hello }

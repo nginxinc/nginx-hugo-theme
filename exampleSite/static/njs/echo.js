@@ -23,5 +23,5 @@ function echo(r) {
 	return r.return(200, JSON.stringify(response));
 }
 
-// uncomment for us in NJS
+// uncomment for use in NJS
 // export default { echo }

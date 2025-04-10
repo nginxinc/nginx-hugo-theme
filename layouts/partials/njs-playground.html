@@ -12,7 +12,7 @@
     </select>
 
     <label for="url">URI:</label>
-    <input id="url" type="text" placeholder="/echo">
+    <input id="url" type="text" placeholder="/api">
 
     <label for="bodyJSON">JSON Body:</label>
     <textarea id="bodyJSON" rows="8" placeholder='{"example":"value"}'></textarea>
@@ -42,6 +42,7 @@
     const bodyEl = document.getElementById('bodyJSON');
     const headersContainerEl = document.getElementById('headers-container');
     const addHeaderBtn = document.getElementById('add-header');
+
     // Initialize headers with one empty pair
     addHeaderField();
 
@@ -95,7 +96,7 @@
         const requestObject = {
             method: methodEl.value,
             uri: urlEl.value,
-            headersIn: headers,
+            headersIn: headers || {},
             body: bodyContent
         };
 
@@ -148,6 +149,7 @@
                     ...request,
                     requestText: request.body,
                     return: (status, value) => (JSON.stringify({status, value})),
+                    headersOut: {},
                 }
             }
                 {{ .fnName }}(requestConverter(exampleRequest))

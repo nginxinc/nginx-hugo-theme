@@ -20,7 +20,7 @@ function echo(r) {
 		version: httpVersion,
 	};
 
-	return r.return(200, JSON.stringify(response));
+	return r.return(200, response);
 }
 
 // uncomment for use in NJS

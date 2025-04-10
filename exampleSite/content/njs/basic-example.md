@@ -4,9 +4,7 @@ title: Basic Example
 weight: 100
 ---
 
-
-To use njs in nginx:
-- [install](https://nginx.org/en/docs/njs/install.html) njs scripting language
+In this example, the client sends a request to `/`, which calls the `hello` njs function. By default, the function returns status code `200` and the message `Hello World`.
 
 
 ```nginx

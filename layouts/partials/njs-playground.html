@@ -42,7 +42,6 @@
     const bodyEl = document.getElementById('bodyJSON');
     const headersContainerEl = document.getElementById('headers-container');
     const addHeaderBtn = document.getElementById('add-header');
-    debugger;
     // Initialize headers with one empty pair
     addHeaderField();
 
@@ -88,7 +87,6 @@
         let bodyContent;
         try {
             bodyContent = bodyEl.value ? JSON.parse(bodyEl.value) : null;
-            debugger;
         } catch (e) {
             alert('Invalid JSON in body');
             return;

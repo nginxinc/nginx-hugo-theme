@@ -11,4 +11,4 @@ Below you will find NJS examples, which you can tweak and run in your browser.
 
 - [Basic Example](basic-example) - Return "Hello!" for all requests
 - [Echo Server](echo-server) - Returns a `JSON` version of the request you just sent
-- [Magic AI](magic-ai-thing) - WIP - Something to do with AI
+- [Choose Upstream](choose-upstream) - Selects an upstream based on query param content

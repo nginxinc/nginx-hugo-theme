@@ -1,4 +1,4 @@
-function choose_upstream(r) {
+function chooseUpstream(r) {
     let backend;
   
     let uriParts = r.headersIn['X-Original-URI'].split('?');
@@ -30,4 +30,4 @@ function choose_upstream(r) {
 }
 
 // uncomment for us in NJS
-// export default { choose_upstream };
+// export default { chooseUpstream };

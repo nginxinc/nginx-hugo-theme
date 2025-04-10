@@ -9,7 +9,6 @@ function echo(r) {
 		requestText,
 	} = r;
 
-	// Construct the echo response (JSON format)
 	const response = {
 		method,
 		uri,

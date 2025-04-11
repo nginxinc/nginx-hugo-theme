@@ -1,7 +1,7 @@
 ---
 title: Short Page
 description: "Short Page"
-weight: 200
+weight: 500
 ---
 
 See the NGINX Gateway Fabric technical specifications page:

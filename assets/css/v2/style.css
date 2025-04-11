@@ -83,11 +83,11 @@
   --code-copy-icon-height: 1rem;
   --code-copy-icon-width: 1rem;
   --breadcrumb-max-height: 54px;
-  --sidebar-margin: 24px;
+  --sidebar-margin: 1.5rem;
   --sidebar-line-box-side-length: 8px;
   --sidebar-line-box-top: 6px;
   --sidebar-line-box-left: 12px;
-  --sidebar-width: 24rem;
+  --sidebar-width: 22rem;
   --sidebar-line-width: 11.5px;
   --side-gutter-width: 20rem;
   --table-top-bottom-spacing: 1rem;
@@ -617,12 +617,18 @@ body:not(:has(.main-layout)) header atomic-search-interface {
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 24rem;
+  width: var(--sidebar-width);
   max-height: 100vh;
   position: sticky;
   top: 0;
-  margin-top: -1rem;
-  padding-top: 1rem;
+  padding: 1rem 1rem 0 1rem;
+}
+
+/* reset */
+.sidebar ul,
+.sidebar li {
+  margin: 0;
+  padding: 0;
 }
 
 .sidebar .product-selector-button {
@@ -647,9 +653,9 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   display: none;
   position: absolute;
   top: 0;
-  min-width: 80%;
+  min-width: 20rem;
   margin-top: 8.375rem;
-  margin-left: 44rem;
+  margin-left: calc(var(--sidebar-width) + 20rem);
   padding: 1rem 1.5rem;
   background-color: white;
   border: black 1px solid;
@@ -688,17 +694,14 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 .sidebar .scrollbar-container {
   width: 100%;
   max-height: 100vh;
-  overflow: scroll;
+  overflow: auto;
   scrollbar-gutter: stable;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  font-size: 0.875rem;
 }
 
 .sidebar .scrollbar-container:hover {
   overflow: auto;
-}
-
-.sidebar .sidebar-navigation {
-  margin-left: var(--sidebar-margin);
 }
 
 /* removes the built in ul padding/margin */
@@ -708,20 +711,12 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   list-style-type: none;
 }
 
-.sidebar ul :not(.sidebar-navigation) ul {
-  padding-left: 16px;
-}
-
-.sidebar .sidebar-navigation li {
-  margin-bottom: 16px;
-}
-
 .sidebar .sidebar-navigation a {
   text-decoration: none;
-  color: black;
 }
 
 .sidebar .sidebar-navigation .collapsible-header {
+  display: block;
   cursor: pointer;
 }
 
@@ -752,162 +747,38 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   display: block;
 }
 
-/* Every other Sidebar Partial Vertical Line */
-.toggle-checkbox:checked ~ .collapsible-content::before {
-  content: "";
-  position: absolute;
-  border-left: black 1px solid;
-  left: -8.5px;
-  top: -22.5px;
-  height: calc(100% + 13.5px);
+ul.collapsible-content {
+  padding: 0.25rem 0;
 }
 
-/* Every other Sidebar Partial Horizontal Lines */
-.toggle-checkbox:checked ~ .collapsible-content li {
-  position: relative;
+li.parent-collapsible-content-item {
+  padding: 0.5rem 0 0.4rem 0;
+  font-weight: 450;
+
+  a,
+  label {
+    color: black;
+    display: block;
+  }
 }
 
-.collapsible-content .box::after {
-  content: "";
-  position: absolute;
-  border-top: black 1px solid;
-  left: -11.5px;
-  width: var(--sidebar-line-width);
-  top: 50%;
+ul.collapsible-content > li > a,
+#TableOfContents ul > li > a {
+  padding: 0.25rem 0.75rem;
+  margin: 2px 0.5rem 2px 0;
+  border-radius: 5px;
+
+  color: oklch(0 0 0 / 0.75);
+
+  &.current {
+    color: oklch(var(--color-brand) / 1);
+    background-color: oklch(var(--color-brand) / 0.1);
+  }
 }
 
-.collapsible-content .opened::after {
-  content: "";
-  position: absolute;
-  border-top: black 1px solid;
-  left: -12.5px;
-  width: var(--sidebar-line-width);
-  top: 50%;
-}
-
-.collapsible-content .box-link::after {
-  content: "";
-  position: absolute;
-  border-top: black 1px solid;
-  left: -11.5px;
-  width: var(--sidebar-line-width);
-  top: 50%;
-}
-
-.selected {
-  font-weight: 800;
-}
-
-.sidebar .sidebar-navigation li:first-child {
-  margin-top: 16px;
-}
-
-.sidebar .sidebar-navigation ul li .parent-box-link {
-  content: "";
-  background-color: black;
-  position: absolute;
-  width: 1px;
-  height: var(--sidebar-line-box-side-length);
-  margin-top: var(--sidebar-line-box-top);
-  left: calc(0px - var(--sidebar-line-box-left));
-}
-
-.sidebar .sidebar-navigation ul li .box-link {
-  content: "";
-  background-color: black;
-  position: absolute;
-  width: 1px;
-  height: var(--sidebar-line-box-side-length);
-  margin-top: var(--sidebar-line-box-top);
-  left: var(--sidebar-line-box-left);
-}
-
-.sidebar .sidebar-navigation ul li .parent-box {
-  content: "";
-  display: inline-block;
-  width: var(--sidebar-line-box-side-length);
-  height: var(--sidebar-line-box-side-length);
-  vertical-align: middle;
-  margin-left: -12px;
-  margin-top: -4px;
-}
-
-.sidebar .sidebar-navigation ul li .box {
-  content: "";
-  position: absolute;
-  width: var(--sidebar-line-box-side-length);
-  height: var(--sidebar-line-box-side-length);
-  margin-top: var(--sidebar-line-box-top);
-  left: var(--sidebar-line-box-left);
-}
-
-.sidebar .sidebar-navigation ul li .expand {
-  background-color: black;
-}
-
-.sidebar .sidebar-navigation ul li .opened {
-  border: black 1px solid;
-}
-
-.sidebar .sidebar-navigation ul li .current {
-  background-color: oklch(var(--color-brand));
-}
-
-.sidebar .sidebar-navigation ul li .partial-box {
-  margin-left: -24px;
-}
-
-.sidebar .sidebar-navigation ul li .partial {
-  margin-top: 0;
-  top: 5px;
-  left: -13px;
-}
-
-/* First Sidebar Nav Vertical Line */
-.sidebar .sidebar-navigation .parent-collapsible-content {
-  position: relative;
-}
-
-.sidebar .sidebar-navigation .parent-collapsible-content:first-child::before {
-  content: "";
-  position: absolute;
-  border-left: black 1px solid;
-  left: -24px;
-  top: 10px;
-  height: calc(100% - 9px - 10px);
-}
-
-.sidebar
-  .sidebar-navigation
-  .parent-collapsible-content
-  li:not(:only-child)
-  a
-  + :not(:has(#TableOfContents))
-  li::before {
-  border: none;
-}
-
-/* First Sidebar Nav Horizontal Lines */
-.sidebar
-  .sidebar-navigation
-  .parent-collapsible-content
-  li:not(:only-child)
-  .parent-box::before {
-  content: "";
-  display: block;
-  border-top: black 1px solid;
-  margin-left: -12px;
-  margin-top: 50%;
-  width: var(--sidebar-line-width);
-}
-
-.parent-collapsible-content .parent-box-link::after {
-  content: "";
-  position: absolute;
-  border-top: black 1px solid;
-  left: -11.5px;
-  width: var(--sidebar-line-width);
-  top: 50%;
+ul.collapsible-content .current,
+ul.parent-collapsible-content .current {
+  font-weight: 600;
 }
 
 .row {
@@ -917,9 +788,8 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 }
 
 /* Table of Contents */
-#TableOfContents {
-  /* Close all TOC on sidebar */
-  display: none;
+#TableOfContents ul {
+  padding: 0 0 0.5rem 0.75rem;
 }
 
 .collapsible-content li ul li:has(.current) > nav {
@@ -928,8 +798,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 }
 
 #TableOfContents li:not(:empty) {
-  position: relative;
-  list-style: square;
+  list-style: none;
 }
 
 /* MARK: Content
@@ -937,7 +806,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 main {
   flex: 1;
   min-width: 20rem;
-  margin: 0 2rem 2rem 2rem;
+  margin: 0 2rem 2rem 0;
 }
 
 p {

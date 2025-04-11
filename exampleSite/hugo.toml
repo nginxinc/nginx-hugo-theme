@@ -1,6 +1,7 @@
 baseURL = 'https://nginx.org'
 languageCode = 'en-us'
 title = 'Example Site'
+enableGitInfo = true
 
 
 [module]
@@ -19,3 +20,7 @@ maxAge = -1
     [markup.highlight]
       guessSyntax = true
       noClasses = false
+
+[params]
+  github_repo = "https://github.com/nginxinc/nginx-hugo-theme"
+  github_subdir = "exampleSite"

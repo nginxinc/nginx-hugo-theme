@@ -39,7 +39,7 @@
   
         {{ if .Page.Lastmod }}
         <div class="last-modified">
-          Last modified {{ .Page.Lastmod.Format "January 2, 2006" }}
+          {{ partial "page-meta-links" . }}
         </div>
         {{ end }}
 

@@ -3,6 +3,7 @@
 description: All Callouts
 title: All Callouts
 weight: 100
+toc: true
 ---
 
 
@@ -18,12 +19,12 @@ This is a plain callout with a title. It has a [link](#plain-callouts) to a head
 {{</call-out>}}
 
 {{<before-you-begin>}}
-This is a plain callout with a default title for its type. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<before-you-begin>`.
+This is a plain `callout` with a default title for its type. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<before-you-begin>`.
 {{</before-you-begin>}}
 
 ## Side Callouts
 
-Naturally, callouts should contain less text within them than the text it lives next to. We do this for several reasons. Firstly, it looks weird to have a big empty space in the primary content area. Secondly, if you have more text in the callout, then it stops being a callout. I have asked an LLM to lengthen this passage.
+Naturally, callouts should `contain` less text within them than the text it lives next to. We do this for several reasons. Firstly, it looks `weird` to have a big empty space in the primary content area. Secondly, if you have more text in the callout, then it stops being a callout. I have asked an LLM to lengthen this passage.
 
 {{<call-out "side-callout">}}
 This is a plain side callout with no title. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<call-out>` with the `.side-callout` class.

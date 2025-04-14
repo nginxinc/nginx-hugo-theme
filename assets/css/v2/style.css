@@ -75,6 +75,7 @@
 
   /* vars for the primary grid setup */
   --grid-sidebar: 24rem;
+  --grid-sidebar-gutter: 3rem;
   --grid-content: minmax(34rem, 50rem);
   --grid-content-mobile: minmax(20rem, 50rem);
   --grid-side-callout: minmax(18rem, 26rem);
@@ -353,9 +354,8 @@ nav {
 .content-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: var(--breadcrumb-max-height) 1fr;
+  grid-template-rows: 1fr;
   z-index: 1;
-  margin-top: 2rem;
 }
 
 .docs-container {
@@ -427,6 +427,7 @@ nav {
 
 @media (min-width: 88em) {
   .base-layout {
+    --grid-column-gutter: 4.5rem;
     display: grid;
     grid-template-rows: repeat(2, auto);
     column-gap: var(--grid-column-gutter);
@@ -435,6 +436,7 @@ nav {
 
   .text-content {
     grid-template-columns: var(--grid-content) var(--grid-side-callout);
+    grid-template-rows: 70px auto;
     column-gap: var(--grid-column-gutter);
   }
 
@@ -445,12 +447,19 @@ nav {
   .main-layout {
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr;
-    column-gap: var(--grid-column-gutter);
+    column-gap: var(--grid-sidebar-gutter);
   }
 
   .content-layout {
     display: grid;
-    grid-template-columns: var(--grid-content) var(--grid-side-callout);
+    grid-template-columns: 1fr minmax(
+        auto,
+        calc(
+          var(--grid-content) +
+          var(--grid-side-callout) +
+          var(--grid-column-gutter)
+        )
+      ) 1fr;
     column-gap: var(--grid-column-gutter);
   }
 
@@ -470,6 +479,11 @@ nav {
   hr {
     margin: 1rem 0;
   }
+}
+
+/* Handles different flow-gap of list page  */
+.list-page.text-content {
+  grid-template-rows: calc(70px + var(--flow-gap)) auto;
 }
 
 .api {

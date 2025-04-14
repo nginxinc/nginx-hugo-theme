@@ -22,14 +22,14 @@
     </div>
 
     <section class="content-layout">
-      <section class="breadcrumb-layout" data-mf="true" style="display: none;">
-        {{ if not .IsHome }}
-          {{ if not (in .Params.display_breadcrumb "false" ) }}
-          {{ partial "breadcrumb" .}}  
-          {{ end }}
-        {{ end }}
-      </section>
       <div class="text-content">
+        <section class="breadcrumb-layout" data-mf="true" style="display: none;">
+          {{ if not .IsHome }}
+            {{ if not (in .Params.display_breadcrumb "false" ) }}
+            {{ partial "breadcrumb" .}}  
+            {{ end }}
+          {{ end }}
+        </section>
         <h1>{{ .Title }}</h1>
         {{ .Content }}
         {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}

@@ -996,7 +996,7 @@ h2 {
 */
 table {
   position: relative;
-  z-index: -1;
+  z-index: 0;
 
   td {
     padding: var(--table-row-space-between) 0;
@@ -1327,6 +1327,15 @@ code:not(pre code) {
 
 .code-block {
   position: relative;
+
+  tr::after {
+    display: none;
+  }
+
+  .line .w {
+    /* White-space */
+    text-decoration: none !important;
+  }
 }
 
 .code-block .code-header:not(:has(.code-type)) {

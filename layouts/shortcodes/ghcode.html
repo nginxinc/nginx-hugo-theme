@@ -1,11 +1,26 @@
 {{ $file := .Get 0 }}
 {{ $params := .Get 1 }}
+{{ $codeBlockId :=  printf "id-%x" (now.UnixNano) }}
 {{ with resources.GetRemote $file }}
   {{ with .Err }}
     {{ errorf "%s" . }}
   {{ else }}
     {{ $lang := path.Ext $file | strings.TrimPrefix "." }}
-    {{ highlight .Content $lang $params }}
+    <div id="code-block-v1" data-mf="false">
+      {{ highlight .Content $lang $params }}
+    </div>
+    
+    <div class="code-block" data-mf="true" style="display: none;">
+      {{- if and (ne $lang "") (ne $lang "none") -}}
+          <span class="code-type chroma">{{ $lang }}</span>
+      {{- end -}}
+      <div class="code-container chroma">
+          <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button multi-line" type="button">Copy</button>
+          <div class="highlight-v2" id="{{ $codeBlockId }}">
+            {{ highlight .Content $lang $params }}
+          </div>
+      </div>
+  </div>
   {{ end }}
 {{ else }}
   {{ errorf "Unable to load github content from %s from %q" $file .Position}}

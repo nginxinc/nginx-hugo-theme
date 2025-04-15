@@ -1469,6 +1469,18 @@ hr {
   border: 1px solid var(--color-divider);
 }
 
+.feather {
+  width: 1.8ch;
+  height: 1.8ch;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: square;
+  vertical-align: sub;
+  margin: 0;
+}
+
 /* FILTHY HACKS BEGIN */
 
 /* Override logo with black text version */

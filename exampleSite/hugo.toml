@@ -24,3 +24,4 @@ maxAge = -1
 [params]
   github_repo = "https://github.com/nginxinc/nginx-hugo-theme"
   github_subdir = "exampleSite"
+  enable_last_modified = true

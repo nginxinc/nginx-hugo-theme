@@ -29,7 +29,9 @@
   {{ $viewURL := printf "%s/tree/%s" $gh_repo $gh_repo_path -}}
   {{ $editURL := printf "%s/edit/%s" $gh_repo $gh_repo_path -}}
   {{ $issuesURL := printf "%s/issues/new?title=%s&template=2-bug_report.md" $gh_repo (safeURL $.Title ) -}}
+  {{ if $.Param "enable_last_modified" -}}
   <div> Last modified {{ .Page.Lastmod.Format "January 2, 2006" }} </div>
+  {{ end -}}
   <div>
     <a href="{{ $viewURL }}" class="" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> View source</a>
   </div>

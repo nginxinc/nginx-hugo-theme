@@ -1,0 +1,70 @@
+{{- /* Extract parameters with defaults and validation */ -}}
+{{ $class := .class | default "" }}
+{{ $title := .title | default "" }}
+{{ $icon  := .icon  | default "" }}
+{{ $inlineParam := .inline | default "false" | lower }}
+
+{{ if not (in (slice "true" "false") $inlineParam) }}
+  {{ errorf "Invalid parameter 'inline'='%s' passed to blockquote partial from '%s'. Allowed values: true, false" $inlineParam .Page.Path }}
+{{ end }}
+
+{{/*  Figure out inline/side and set class accordingly  */}}
+{{ $inline := eq $inlineParam "true" }}
+{{ $sideOption := "side-callout" }}
+{{ $inlineOption := "inline-callout" }}
+
+{{ if $inline }}
+  {{ $class = printf "%s %s" $class $sideOption }}
+{{ else }}
+  {{ $class = printf "%s %s" $class $inlineOption }}
+{{ end }}
+
+
+
+{{/*  Old frame callout  */}}
+<blockquote class="{{ $class }}" data-mf="false">
+  <div>
+    {{ with $icon }}
+      <i class="{{ . }}"></i>
+    {{ end }}
+    <strong>{{ $title }}</strong>
+    {{ .content | markdownify }}
+  </div>
+</blockquote>
+
+
+{{/*  Render a different block, if "loud" callouts are used  */}}
+{{ $specialTitles := slice "Caution" "Warning" "Deprecated" "Important" }}
+{{ $isSpecialTitle := in $specialTitles $title }}
+{{ if $isSpecialTitle }}
+  {{/*  Loud callouts  */}}
+  <blockquote class="{{ $class }}" data-mf="true" style="display: none;">
+    <div>
+      {{ with $icon }}
+        <i class="{{ . }}"></i>
+      {{ end }}
+      <div class="call-out-type">
+       {{ $title }}
+      </div>
+      <div class="special-content">
+        {{ .content | markdownify }}
+      </div>
+    </div>
+  </blockquote>
+  
+{{ else }}
+
+{{/*  "Generic" mf callout  */}}
+
+{{ $cleanTitle := strings.TrimSuffix ":" $title}}
+
+<blockquote class="{{ $class }} note" data-mf="true" style="display: none;" data-title="{{ $cleanTitle }}">
+  <div>
+    {{ with $icon }}
+      <i class="{{ . }}"></i>
+    {{ end }}
+    {{ .content | markdownify }}
+  </div>
+</blockquote>
+
+{{ end }}

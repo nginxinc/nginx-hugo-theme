@@ -1,3 +1,8 @@
-<blockquote class="tip">
-  <div><strong>Tip:</strong><br/> {{ .Inner | markdownify }}</div>
-</blockquote>
+{{ partial "callout.html" (dict
+"class" "tip"
+"title" "Tip:"
+"icon"  ""
+"inline" "false"
+"content" .Inner
+) }}
+{{ warnf "'<tip></tip>' is being deprecated. Use generic 'call-out' shortcode instead."}}

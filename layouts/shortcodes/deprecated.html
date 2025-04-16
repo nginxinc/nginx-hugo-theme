@@ -1,3 +1,7 @@
-<blockquote class="warning call-out">
-  <div><strong class="call-out-type">Deprecated</strong><br/> {{ .Inner | markdownify }}</div>
-</blockquote>
+{{ partial "callout.html" (dict
+"class" "warning call-out"
+"title" "Deprecated"
+"icon"  ""
+"inline" "false"
+"content" .Inner
+) }}

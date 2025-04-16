@@ -1,3 +1,8 @@
-<blockquote class="note">
-  <div><strong>Note:</strong><br/> {{ .Inner | markdownify }}</div>
-</blockquote>
+{{ partial "callout.html" (dict
+"class" "note"
+"title" "Note:"
+"icon"  ""
+"inline" "false"
+"content" .Inner
+) }}
+{{ warnf "'<note></note>' is being deprecated. Use generic 'call-out' shortcode instead."}}

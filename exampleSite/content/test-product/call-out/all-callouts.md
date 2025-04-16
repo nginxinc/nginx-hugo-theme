@@ -65,6 +65,23 @@ This is a Warning callout with a custom title. There was previously a bug with *
 {{</call-out>}}
 
 
+
+
+## Old "plain" callouts
+The following will not have special styling, but are pre-existing shortcodes.
+
 {{<note>}}
-This is a note. In oldframe it should have `note:` in bold, at the start.
+This is `<note>`. In oldframe it should have `note:` in bold, at the start.
 {{</note>}}
+
+{{<tip>}}
+This is `<tip>`. In oldframe it should have `tip:` in bold, at the start.
+{{</tip>}}
+
+{{<before-you-begin>}}
+This is `<before-you-begin>`.
+{{</before-you-begin>}}
+
+{{<see-also>}}
+This is `<see-also>`.
+{{</see-also>}}

@@ -1,23 +1,45 @@
-{{ $class := .Get 0 }}
+{{/*  
+
+Usage:
+{{<call-out title="Custom title" icon="fa fa-check-circle" inline="true">}}
+This callout uses the icon check-circle. **This should be an inline callout.**
+{{</call-out>}}
+
+Backwards compatibility usage:
+{{<call-out "warning" "Custom title""fa fa-check-circle" "true">}}
+This callout uses the icon check-circle. **This should be an inline callout.**
+{{</call-out>}}
+
+Depends on `callout.html` partial.
+
+*/}}
+
+{{ $class := .Get 0 | default (.Get "class") | default "" }}
+{{ $title := .Get 1 | default (.Get "title") | default "" }}
+{{ $icon := .Get 2 | default (.Get "icon") | default "" }}
+
+{{/*  Handle different versions of booleans  */}}
+{{ $inlineParam := (.Get 3) | default (.Get "inline") | default "false" | lower }}
+{{- /* Validate the parameter strictly */ -}}
+{{ if not (in (slice "true" "false") $inlineParam) }}
+  {{ warnf "The '<call-out>' Shortcode parameter 'inline' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $inlineParam}}
+{{ end }}
+
+{{ $inline := eq $inlineParam "true" }}
+
 {{ $sideOption := "side-callout" }}
 {{ $inlineOption := "inline-callout" }}
 
-<!-- Add default option for callouts that are "sideline" if one is not provided -->
-{{ if and (not (strings.Contains $class $sideOption)) (not (strings.Contains $class $inlineOption)) }}
-{{ $class = printf "%s %s" $class $sideOption }}
+{{ if $inline }}
+  {{ $class = printf "%s %s" $class $inlineOption }}
+{{ else }}
+  {{ $class = printf "%s %s" $class $sideOption }}
 {{ end }}
 
-<!-- Blockquote element with a class that is the first parameter passed to the shortcode -->
-<blockquote class="{{ $class }}">
-   <div>
-     <!-- Check if the third parameter (icon class) is provided -->
-     {{ with .Get 2 }}
-       <!-- If the icon class is provided, render an <i> element with the given class -->
-       <i class="{{ . }}"></i>
-     {{ end }}
-     <!-- Render the second parameter (title) as a strong element -->
-     <strong>{{ .Get 1 }}</strong><br/>
-     <!-- Render the inner content of the shortcode, converting it from Markdown to HTML -->
-     {{ .Inner | markdownify }}
-   </div>
- </blockquote>
+{{ partial "callout.html" (dict
+    "class" $class
+    "title" $title
+    "icon"  $icon
+    "inline" $inline
+    "content" .Inner
+) }}

@@ -1,3 +1,7 @@
-<blockquote class="important call-out">
-  <div><strong class="call-out-type">Important</strong><br/> {{ .Inner | markdownify }}</div>
-</blockquote>
+{{ partial "callout.html" (dict
+"class" "important call-out"
+"title" "Important"
+"icon"  ""
+"inline" "false"
+"content" .Inner
+) }}

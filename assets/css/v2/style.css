@@ -1091,8 +1091,7 @@ blockquote.note {
 }
 
 blockquote.note:before {
-  content: "Note";
-  text-transform: uppercase;
+  content: attr(data-title);
   font-size: 1rem;
   font-weight: 600;
   font-variation-settings: "wght" 600;

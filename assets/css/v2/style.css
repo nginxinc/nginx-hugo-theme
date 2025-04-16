@@ -1083,6 +1083,10 @@ blockquote {
     /* Removes negative margins from multi-line codeblocks */
     margin: 0;
   }
+
+  .callout-content {
+    margin: 0;
+  }
 }
 
 blockquote.note {
@@ -1134,14 +1138,16 @@ li > blockquote {
 }
 
 blockquote.call-out {
-  padding: 0.5rem;
+  --padding: 0.75rem;
+  padding: var(--padding);
 
   .call-out-type {
     display: block;
-    padding: 0.25rem 0.5rem;
-    margin: -0.5rem 0 0.5rem -0.5rem;
-    width: calc(100% + 1rem);
     font-weight: 500;
+    margin: calc(-1 * var(--padding)) calc(-1 * var(--padding)) var(--padding)
+      calc(-1 * var(--padding));
+
+    padding: 0.25rem var(--padding);
   }
 
   br {
@@ -1157,6 +1163,9 @@ blockquote.caution {
     background-color: oklch(var(--color-callout-caution-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-caution-primary));
   }
+  .call-out-type .feather {
+    color: oklch(var(--color-callout-caution-primary));
+  }
 }
 
 blockquote.warning {
@@ -1166,6 +1175,9 @@ blockquote.warning {
   .call-out-type {
     background-color: oklch(var(--color-callout-warning-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-warning-primary));
+  }
+  .call-out-type .feather {
+    color: oklch(var(--color-callout-warning-primary));
   }
 }
 

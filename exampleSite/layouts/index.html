@@ -1,16 +1,83 @@
 {{ define "main" }}
+{{ $nginxProducts := slice 
+    (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
+    (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
+    (dict "title" "NGINX Instance Manager" "url" "/nginx-instance-manager" "type" "nginx-one")
+    (dict "title" "NGINX Ingress Controller" "url" "/nginx-ingress-controller" "type" "nginx-one")
+    (dict "title" "NGINX Gateway Fabric" "url" "/nginx-gateway-fabric" "type" "nginx-one")
+    (dict "title" "NGINX Open Source" "url" "https://nginx.org/en/docs/" "type" "nginx-one")
+    (dict "title" "NGINX Agent" "url" "/nginx-agent" "type" "nginx-one")
+    (dict "title" "NGINX App Protect WAF" "url" "/nginx-app-protect-waf" "type" "nginx-app-protect")
+    (dict "title" "NGINX App Protect DoS" "url" "/nginx-app-protect-dos" "type" "nginx-app-protect")
+    (dict "title" "NGINX as a Service for Azure" "url" "/nginxaas/azure/" "type" "nginx-as-a-service")
+    (dict "title" "NGINX Unit" "url" "https://unit.nginx.org/" "type" "nginx-other")
+}}
 
-<h1>Homepage Example</h1>
-<p>
-    <ul>
-        <li>
-            <a href="{{ relref . "nginx" }}">NGINX and NGINX Plus</a>
-        </li>
-        <li>
-            <a href="{{ relref . "test-product" }}">Test Product</a>
-        </li>
-    </ul>
-</p>
+{{ $nginxCategories := 
+    (dict
+        "nginx-one" "NGINX One"
+        "nginx-app-protect" "NGINX App Protect" 
+        "nginx-as-a-service" "NGINX as a Service"
+        "nginx-other" "Other NGINX Projects"
+    )
+}}
 
+<div class="main">
+<div class="home-layout">
+    <h1>Documentation</h1>
+    <p>This is a short call to action to explore our examples and guides.</p>
+    
+    <div class="cta">
+        <a href="https://nginx.org" class="get-started-button">Get started with NGINX One →</a> or <a href="#products">explore all products</a>.    
+    </div>
+    
+    <div class="jump-links">
+        <ul>
+            <h3>Instance management</h3>
+            <li><a href="https://docs.nginx.com/nginx-one/how-to/certificates/manage-certificates/">Manage certificates<span class="tiny-pill">One</span></a></li>
+            <li><a href="#">Role-based access control</a></li>
+            <li><a href="#">Create a new data plane key</a></li>
+        </ul>
+        <ul>
+            <h3>Kubernetes</h3>
+            <li><a href="https://docs.nginx.com/nginx-one/how-to/certificates/manage-certificates/">Manage certificates</a></li>
+            <li><a href="#">Role-based access control</a></li>
+            <li><a href="#">Create a new data plane key</a></li>
+        </ul>
+        <ul>
+            <h3>Load balancing</h3>
+            <li><a href="#">NGINX HTTP Load Balancing</a></li>
+            <li><a href="#">NGINX TCP and UDP Load Balancing</a></li>
+            <li><a href="#">GSLB with NS1 and NGINX Plus<span class="tiny-pill">N+</span></a></li>
+        </ul>
+    </div>
 
+    <p>The F5 NGINX One Console makes it easy to manage NGINX instances across locations and environments. The console lets you monitor and control your NGINX fleet from one place—you can check configurations, track performance metrics, identify security vulnerabilities, manage SSL certificates, and more.</p>
+
+    <div id="products">
+        <h2>All products</h2>
+        {{ $groupedProducts := dict 
+            "nginx-one" (where $nginxProducts "type" "nginx-one")
+            "nginx-app-protect" (where $nginxProducts "type" "nginx-app-protect")
+            "nginx-as-a-service" (where $nginxProducts "type" "nginx-as-a-service")
+            "nginx-other" (where $nginxProducts "type" "nginx-other")
+        }}
+        {{ $orderedKeys := slice "nginx-one" "nginx-app-protect" "nginx-as-a-service" "nginx-other" }}
+        {{ range $orderedKeys }}
+        {{ $type := . }}
+        {{ $products := index $groupedProducts $type }}
+            <div class="product-grid">
+                <p>{{ index $nginxCategories $type }}</p>
+                <ul>
+                {{ range $products }}
+                    <li>
+                        <a href="{{ .url }}">{{ .title }}</a>
+                    </li>
+                {{ end }}
+                </ul>
+            </div>
+        {{ end }}
+    </div>
+</div>
+</div>
 {{end}}

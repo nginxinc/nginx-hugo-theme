@@ -60,7 +60,6 @@
   --color-shadow: #d2d2d2;
   --color-codeblock-border: #888;
   --color-codeblock-shadow: #e5e5e5;
-  --color-codeblock-highlight: #fffed9;
   --color-footer: #1d1d1d;
   --color-footer-text: #e2e2e2;
   --color-product-title: #8d8d8d;
@@ -281,6 +280,86 @@ header {
   }
 }
 
+/* MARK: Home page
+*/
+.home-layout {
+  display: grid;
+  grid-template-columns: var(--grid-content);
+  margin: 4rem 2rem;
+
+  row-gap: var(--flow-gap);
+}
+
+.home-layout h1 {
+  margin: 0;
+}
+
+.cta {
+  margin: 1rem 0;
+}
+
+.jump-links {
+  display: flex;
+  column-gap: 2.5rem;
+
+  margin: 1rem 0;
+}
+
+.jump-links ul {
+  list-style: none;
+}
+
+.get-started-button {
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #000;
+  margin-top: 8px;
+  z-index: 1;
+  --color-codeblock-shadow: 0% 0 0;
+  box-shadow: 0px 2px 0px oklch(var(--color-codeblock-shadow) / 0.15);
+
+  text-decoration: none;
+}
+
+#products {
+  margin: 2rem 0 0 0;
+}
+
+.product-grid {
+  margin: 1.5rem 0 0 0;
+}
+
+.product-grid ul {
+  list-style: none;
+}
+
+.tiny-pill {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 800;
+
+  margin: 0 0.25rem;
+  vertical-align: 2px;
+
+  border-radius: 3px;
+  padding: 0 2px;
+  background-color: oklch(var(--color-brand) / 0.8);
+  color: var(--color-background);
+}
+
+.get-started-button:hover {
+  box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.3);
+}
+
+.get-started-button:focus {
+  outline: none;
+  box-shadow: 0px 2px 0px oklch(var(--color-brand) / 0.8);
+}
+
 /* MARK: Footer
 */
 footer {
@@ -437,7 +516,7 @@ nav {
 
   .text-content {
     grid-template-columns: var(--grid-content) var(--grid-side-callout);
-    grid-template-rows: 70px max-content;
+    grid-template-rows: 70px auto;
     column-gap: var(--grid-column-gutter);
   }
 
@@ -484,7 +563,7 @@ nav {
 
 /* Handles different flow-gap of list page  */
 .list-page.text-content {
-  grid-template-rows: calc(70px + var(--flow-gap)) max-content;
+  grid-template-rows: calc(70px + var(--flow-gap)) auto;
 }
 
 .api {
@@ -505,7 +584,7 @@ nav {
 }
 
 .main {
-  display: flex;
+  margin: 0 auto;
 }
 
 /* MARK: Coveo
@@ -1459,12 +1538,6 @@ ul .code-block {
   display: flex;
   list-style-type: none;
   padding: 0;
-}
-
-.highlight code .hl {
-  width: fit-content;
-  min-width: 100%;
-  background-color: var(--color-codeblock-highlight);
 }
 
 /* MARK: Images

@@ -60,6 +60,7 @@
   --color-shadow: #d2d2d2;
   --color-codeblock-border: #888;
   --color-codeblock-shadow: #e5e5e5;
+  --color-codeblock-highlight: #fffed9;
   --color-footer: #1d1d1d;
   --color-footer-text: #e2e2e2;
   --color-product-title: #8d8d8d;
@@ -1458,6 +1459,12 @@ ul .code-block {
   display: flex;
   list-style-type: none;
   padding: 0;
+}
+
+.highlight code .hl {
+  width: fit-content;
+  min-width: 100%;
+  background-color: var(--color-codeblock-highlight);
 }
 
 /* MARK: Images

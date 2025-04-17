@@ -436,7 +436,7 @@ nav {
 
   .text-content {
     grid-template-columns: var(--grid-content) var(--grid-side-callout);
-    grid-template-rows: 70px auto;
+    grid-template-rows: 70px max-content;
     column-gap: var(--grid-column-gutter);
   }
 
@@ -483,7 +483,7 @@ nav {
 
 /* Handles different flow-gap of list page  */
 .list-page.text-content {
-  grid-template-rows: calc(70px + var(--flow-gap)) auto;
+  grid-template-rows: calc(70px + var(--flow-gap)) max-content;
 }
 
 .api {

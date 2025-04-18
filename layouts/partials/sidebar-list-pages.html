@@ -1,6 +1,17 @@
 {{ $currentUrl := .currentUrl }}
 {{ $context := .context }}
 <ul class="collapsible-content">
+    <!-- Add Overview link if there's a custom landing page for the section -->
+    {{- with $context -}}
+    {{- if gt (.WordCount) 0 -}}
+    <li>
+        {{- if eq $currentUrl .Permalink -}}                      
+        <span class="box partial" id="current-page"></span>                 
+        {{- end -}}    
+        <a href="{{ .Permalink }}" class="{{if eq $currentUrl .Permalink}}current{{end}}">Overview</a>
+    </li>
+    {{- end -}}
+    {{- end -}}
     {{ range $context.Pages.ByWeight }}
     <li>
         {{ if eq .Kind "section" }}
@@ -15,11 +26,11 @@
             {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $currentUrl) }}
         {{ else if eq .Kind "page" }}
             {{ if eq $currentUrl .Permalink }}                      
-                <span class="box current partial" id="current-page"></span>                 
+                <span class="box partial" id="current-page"></span>                 
             {{ else }}                     
                 <span class="box-link partial"></span>              
             {{ end }}
-            <a href="{{ .Permalink }}" style="{{if eq $currentUrl .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a>
+            <a href="{{ .Permalink }}" class="{{if eq $currentUrl .Permalink}}current{{end}}">{{ .Title }} </a>
             {{ if eq $currentUrl .Permalink }}   
                 {{- with .TableOfContents -}}
                     {{- . -}}

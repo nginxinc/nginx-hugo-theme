@@ -28,7 +28,7 @@
     <p>This is a short call to action to explore our examples and guides.</p>
     
     <div class="cta">
-        <a href="https://nginx.org" class="get-started-button">Get started with NGINX One →</a> or <a href="#products">explore all products</a>.    
+        <a href="/test-product/" class="get-started-button">Get started with Test Product →</a> or <a href="#products">explore all products</a>.    
     </div>
     
     <div class="jump-links">
@@ -52,7 +52,7 @@
         </ul>
     </div>
 
-    <p>The F5 NGINX One Console makes it easy to manage NGINX instances across locations and environments. The console lets you monitor and control your NGINX fleet from one place—you can check configurations, track performance metrics, identify security vulnerabilities, manage SSL certificates, and more.</p>
+    <p>The NGINX One Console makes it easy to manage NGINX instances across locations and environments. The console lets you monitor and control your NGINX fleet from one place—you can check configurations, track performance metrics, identify security vulnerabilities, manage SSL certificates, and more.</p>
 
     <div id="products">
         <h2>All products</h2>
@@ -67,11 +67,11 @@
         {{ $type := . }}
         {{ $products := index $groupedProducts $type }}
             <div class="product-grid">
-                <p>{{ index $nginxCategories $type }}</p>
+                <p class="product-title">{{ index $nginxCategories $type }}</p>
                 <ul>
                 {{ range $products }}
                     <li>
-                        <a href="{{ .url }}">{{ .title }}</a>
+                        <a class="product-tile" href="{{ .url }}">{{ .title }}</a>
                     </li>
                 {{ end }}
                 </ul>

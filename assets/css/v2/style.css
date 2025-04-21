@@ -51,12 +51,14 @@
 
   /* MARK: Variables
   */
+
   --color-brand: 56.6% 0.194 147.7;
   --color-brand-300: #a6daba;
   --color-brand-200: #ccead7;
   --color-brand-100: #f2faf5;
   --color-background: #ffffff;
-  --color-foreground: #000000;
+  --color-foreground: rgb(45, 48, 45);
+  --color-foreground-heavy: rgb(16, 16, 16);
   --color-shadow: #d2d2d2;
   --color-codeblock-border: #888;
   --color-codeblock-shadow: #e5e5e5;
@@ -76,6 +78,7 @@
   /* vars for the primary grid setup */
   --grid-sidebar: 24rem;
   --grid-sidebar-gutter: 3rem;
+  --grid-home: minmax(34rem, 60rem);
   --grid-content: minmax(34rem, 50rem);
   --grid-content-mobile: minmax(20rem, 50rem);
   --grid-side-callout: minmax(18rem, 26rem);
@@ -168,6 +171,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* MARK: Global styles
+*/
+body {
+  color: var(--color-foreground);
+}
+
 h1,
 h2,
 h3,
@@ -175,11 +184,11 @@ h4,
 h5,
 h6 {
   scroll-margin-top: 1.5rem;
+  color: var(--color-foreground-heavy);
 }
 
-/* MARK: Header
-*/
 p {
+  line-height: 1.6rem;
   font-weight: 350;
 }
 
@@ -206,10 +215,10 @@ ol li:last-child {
   margin-bottom: 0;
 }
 
-/* MARK: Layout
+/* MARK: Header
 */
 header {
-  margin: 2rem 2rem 0 2rem;
+  padding: 1rem 2rem;
 
   .header-container {
     display: flex;
@@ -280,11 +289,38 @@ header {
   }
 }
 
+/* Override logo with black text version */
+.navbar-brand {
+  --logo-height: 2.5rem;
+  height: var(--logo-height);
+  display: block;
+
+  /* non-tiling background logo */
+  background-image: url(/images/icons/NGINX-Product-icon.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left center;
+  text-decoration: none;
+
+  &::after {
+    content: "NGINX Docs";
+    font-size: calc(var(--logo-height) * 0.6);
+    font-weight: 600;
+    color: var(--color-foreground-heavy);
+    margin: 0.3rem calc(var(--logo-height) * 1.2);
+    display: inline-block;
+  }
+
+  img {
+    display: none;
+  }
+}
+
 /* MARK: Home page
 */
 .home-layout {
   display: grid;
-  grid-template-columns: var(--grid-content);
+  grid-template-columns: var(--grid-home);
   margin: 4rem 2rem;
 
   row-gap: var(--flow-gap);
@@ -301,12 +337,19 @@ header {
 .jump-links {
   display: flex;
   column-gap: 2.5rem;
+  justify-content: space-between;
 
   margin: 1rem 0;
 }
 
 .jump-links ul {
+  margin: 1rem 0 0 0;
+
   list-style: none;
+}
+
+.jump-links li {
+  margin: 0.75rem 0 0 0;
 }
 
 .get-started-button {
@@ -317,7 +360,7 @@ header {
   font-size: 1.25rem;
   font-weight: 400;
   color: #000;
-  margin-top: 8px;
+  margin: 0.5rem 0.5rem 0 0;
   z-index: 1;
   --color-codeblock-shadow: 0% 0 0;
   box-shadow: 0px 2px 0px oklch(var(--color-codeblock-shadow) / 0.15);
@@ -335,6 +378,27 @@ header {
 
 .product-grid ul {
   list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 1rem;
+}
+
+.product-grid li {
+  padding: 0;
+  margin: 0;
+}
+
+.product-grid li a.product-tile {
+  display: block;
+  border: 1px solid var(--color-divider);
+  padding: 1rem;
+  /* margin: 0 0 0 -1rem; */
+}
+
+.product-grid p.product-title {
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .tiny-pill {
@@ -1036,7 +1100,6 @@ main {
 
 p {
   margin: 0;
-  line-height: 1.5rem;
 }
 
 .breadcrumb {
@@ -1067,13 +1130,13 @@ p {
 }
 
 a {
-  color: oklch(var(--color-brand));
-  text-decoration-color: oklch(var(--color-brand) / 0.3);
-  transition: text-decoration-color 0.15s ease-in-out;
+  color: oklch(var(--color-brand) / 0.8);
+  text-decoration-color: oklch(var(--color-brand) / 0.2);
 }
 
 a:hover {
   text-decoration-color: oklch(var(--color-brand) / 0.8);
+  transition: text-decoration-color 0.15s ease-in-out;
 }
 
 h1 {
@@ -1585,27 +1648,6 @@ hr {
   vertical-align: sub;
   margin: 0;
 }
-
-/* FILTHY HACKS BEGIN */
-
-/* Override logo with black text version */
-.navbar-brand {
-  height: 3.5rem;
-  display: block;
-
-  /* non-tiling background logo */
-  background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: left center;
-  width: 200px; /* Adjust the width as needed to fit the logo */
-
-  img {
-    display: none;
-  }
-}
-
-/* FILTHY HACKS END */
 
 /* Hidden temporarily */
 

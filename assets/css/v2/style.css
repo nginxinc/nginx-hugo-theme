@@ -1007,6 +1007,66 @@ h2 {
   margin: 1rem 0 .75rem 0;
 }
 
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  .headerlink::before {
+    display: block !important;
+  }
+}
+
+h2:has(a),
+h3:has(a),
+h4:has(a),
+h5:has(a),
+h6:has(a) {
+  width: calc(100% + 1rem);
+  margin-left: -1rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+h2:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h3:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h4:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h5:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h6:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+.headerlink::before {
+  position: absolute;
+  content: "#";
+  margin-left: -1.5rem;
+  opacity: 20%;
+  display: none;
+  top: 0;
+}
+
 /* MARK: Tables
 */
 table {

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   function expandToCurrentPage() {
-    const currentPage = document.getElementById('current-page');
+    const currentPage = document.getElementById('collapsible-link-current');
     if (currentPage) {
       let parentLabel = currentPage.closest('li');
       while (parentLabel) {

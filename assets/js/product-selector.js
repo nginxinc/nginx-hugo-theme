@@ -1,5 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const productSelectorContent = document.getElementById('product-selector');
+  const hideSidebarBreakpoint = 88 * 16;
+  let productSelectorContent;
+
+  if (window.innerWidth < hideSidebarBreakpoint) {
+    productSelectorContent = document.getElementById('scrollbar-container');
+  } else {
+    productSelectorContent = document.getElementById('product-selector');
+  }
+
   const productSelectorButton = document.getElementById(
     'product-selector-button'
   );
@@ -21,7 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('click', (event) => {
     /* Greedy Logic to hide the product selector when something other than the button is clicked. Assumes everything has an id containing "product-selector" */
-    if (!event.target.id.includes('product-selector')) {
+    if (
+      !event.target.id.includes('product-selector') &&
+      !event.target.id.includes('collapsible') &&
+      !event.target.id.includes('toggle')
+    ) {
       productSelectorContent.style.display = 'none';
       productSelectorButton.classList.remove('remove-bottom-radius');
     }

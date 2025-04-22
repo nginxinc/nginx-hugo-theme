@@ -175,7 +175,7 @@ h3,
 h4,
 h5,
 h6 {
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 6.5rem;
 }
 
 /* MARK: Header
@@ -364,10 +364,30 @@ nav {
 }
 
 .sidebar-layout {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 2;
+  grid-column: 1;
+  position: sticky;
+  top: 0;
+  padding: 2rem;
+  margin-left: -2rem;
+  background-color: white;
+  width: calc(100% + 4rem);
+  z-index: 999;
+
+  .sidebar {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .scrollbar-container {
+    display: none;
+  }
+
+  .scrollbar-container,
+  .product-selector-button {
+    min-width: 20rem;
+    max-width: 50rem;
+    width: 100%;
+  }
 }
 
 #searchbox {
@@ -420,10 +440,6 @@ nav {
     grid-template-rows: repeat(2, auto);
     column-gap: var(--grid-column-gutter);
   }
-
-  .sidebar-layout {
-    display: none;
-  }
 }
 
 @media (min-width: 88em) {
@@ -466,6 +482,17 @@ nav {
 
   .content-layout .side-gutter {
     grid-column-start: 2;
+  }
+
+  .sidebar-layout {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+
+    .scrollbar-container {
+      display: block !important;
+    }
   }
 }
 
@@ -617,6 +644,10 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   /* Show on pages with sidebar if it is hidden */
   body:has(.sidebar-layout) header atomic-search-interface {
     display: block;
+  }
+
+  body:has(.sidebar-layout) #sidebar-v2 atomic-search-interface {
+    display: none;
   }
 }
 
@@ -1122,6 +1153,13 @@ blockquote p:last-child {
   blockquote.side-callout {
     grid-column: 2 !important;
     align-self: start;
+  }
+
+  .sidebar-layout {
+    .scrollbar-container,
+    .product-selector-button {
+      max-width: 100%;
+    }
   }
 }
 

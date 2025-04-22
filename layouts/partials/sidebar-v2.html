@@ -57,26 +57,26 @@
         </div>
     {{ end }}
 </div>
-<div class="scrollbar-container">
+<div class="scrollbar-container" id="scrollbar-container">
     <div class="sidebar-navigation">
-        <ul class="parent-collapsible-content">
+        <ul class="parent-collapsible-content" id="parent-collapsible-content">
         {{ range .FirstSection.Pages.ByWeight }}
-            <li class="parent-collapsible-content-item">
+            <li class="parent-collapsible-content-item" id="parent-collapsible-content-item">
                 {{ if eq .Kind "section" }}
                     <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
-                    <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
+                    <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header" id="collapsible-header">
                         {{ if .Pages }}
-                            <span class="parent-box expand"></span>
-                            <span class="parent-box opened"></span>
+                            <span class="parent-box expand" id="toggle-expand"></span>
+                            <span class="parent-box opened" id="toggle-opened"></span>
                         {{ end }}
                         {{ .Title }} 
                     </label>
                     {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $.Permalink) }}
                 {{ else if eq .Kind "page" }}
                     {{ if eq $.Permalink .Permalink }}                      
-                        <span class="parent-box current"></span>                 
+                        <span class="parent-box current" id="collapsible-link-current"></span>                 
                     {{ else }}                     
-                        <span class="parent-box-link"></span>              
+                        <span class="parent-box-link" id="collapsible-link-option"></span>              
                     {{ end }}
                     <a href="{{ .Permalink }}" style="{{if eq $.Permalink .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a> 
                 {{ end }}

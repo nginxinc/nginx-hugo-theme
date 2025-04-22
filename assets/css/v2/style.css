@@ -1473,7 +1473,7 @@ figure {
   margin: 0;
 }
 
-.md__image > img,
+img,
 .figure-bitmap {
   margin-bottom: 0.625rem;
   display: inline-block;

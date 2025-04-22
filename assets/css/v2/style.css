@@ -1339,6 +1339,8 @@ code:not(pre code) {
   padding: 0 0.25rem;
   background-color: #f9f9f9;
   font-size: 0.875rem;
+  display: inline-block;
+  white-space: pre-wrap;
 }
 
 .highlight {

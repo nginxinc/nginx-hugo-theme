@@ -1012,6 +1012,8 @@ h3:target,
 h4:target,
 h5:target,
 h6:target {
+  color: var(--color-brand);
+
   .headerlink::before {
     display: block !important;
   }
@@ -1031,6 +1033,10 @@ h6:has(a) {
 h2:has(a):hover {
   .headerlink::before {
     display: block;
+  }
+
+  .headerlink {
+    text-decoration-color: oklch(var(--color-brand) / 0.3);
   }
 }
 
@@ -1058,13 +1064,17 @@ h6:has(a):hover {
   }
 }
 
+.headerlink {
+  text-decoration-color: transparent;
+}
+
 .headerlink::before {
   position: absolute;
   content: "#";
   margin-left: -1.5rem;
   opacity: 20%;
   display: none;
-  top: 0;
+  bottom: 0;
 }
 
 /* MARK: Tables

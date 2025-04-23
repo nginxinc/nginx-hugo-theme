@@ -6,7 +6,7 @@
   </nav>
 
   {{$content := .Content}}
-  {{$pattern := `<i[^>]*class=["'][^"']*(?:fas?|fa-solid|fa-regular|fa-brands)\s+fa-([^"'\s]+)[^"']*["'][^>]*?(?:\s+style=["']([^"']*)["'])?[^>]*></i>`}}
+  {{$pattern := `<i[^>]*class=["'][^"']*(?:fas?|fa-solid|fa-regular|fa-brands|far)\s+fa-([^"'\s]+)[^"']*["'][^>]*?(?:\s+style=["']([^"']*)["'])?[^>]*></i>`}}
   {{$matches := findRE $pattern $content}}
 
   {{range $matches}}
@@ -19,7 +19,29 @@
       {{$iconName = index (index $submatches 0) 1}}
       {{$styleAttr = index (index $submatches 0) 2}}
 
-      {{ $iconMappings := dict "bug-slash" "bug-off" "circle-info" "info" "file-circle-plus" "file-plus"}}
+      {{- $iconMappings := dict 
+        "bug-slash" "bug-off" 
+        "circle-info" "info" 
+        "info-circle" "info"
+        "file-circle-plus" "file-plus"
+        "check-circle" "circle-check" 
+        "heartbeat" "heart-pulse"
+        "code-branch" "git-branch"
+        "desktop" "monitor"
+        "certificate" "badge"
+        "cogs" "cog"
+        "shield-alt" "shield-half"
+        "memory" "cpu"
+        "hdd" "hard-drive"
+        "exclamation-triangle" "triangle-alert"
+        "triangle-exclamation" "triangle-alert"
+        "tachometer-alt" "circle-gauge"
+        "circle-exclamation" "circle-alert"
+        "arrow-up-right-from-square" "external-link"
+        "pen-to-square" "square-pen"
+        "flask" "flask-conical"
+      -}}
+
       {{ with index $iconMappings $iconName }}
           {{$iconName = .}}
       {{ end }}

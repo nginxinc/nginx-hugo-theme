@@ -937,6 +937,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   display: none;
 }
 
+.current ~ nav,
 .collapsible-content li ul li:has(.current) > nav {
   /* Open TOC for current page */
   display: block !important;

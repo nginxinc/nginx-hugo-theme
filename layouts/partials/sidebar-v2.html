@@ -79,6 +79,11 @@
                         <span class="parent-box-link"></span>              
                     {{ end }}
                     <a href="{{ .Permalink }}" style="{{if eq $.Permalink .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a> 
+                    {{ if eq  $.Permalink .Permalink }} 
+                        {{- with .TableOfContents -}}
+                            {{- . -}}
+                        {{- end -}}
+                    {{ end }}
                 {{ end }}
             </li>
         {{ end }}

@@ -1582,6 +1582,18 @@ hr {
   margin: 0;
 }
 
+.lucide {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: square;
+  vertical-align: sub;
+  margin: 0;
+}
+
 /* FILTHY HACKS BEGIN */
 
 /* Override logo with black text version */
@@ -1602,7 +1614,6 @@ hr {
 }
 
 /* FILTHY HACKS END */
-
 /* Hidden temporarily */
 
 .code-copy {

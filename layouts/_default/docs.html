@@ -5,6 +5,30 @@
     {{ partial "sidebar.html" . }}
   </nav>
 
+  {{$content := .Content}}
+  {{$pattern := `<i[^>]*class=["'][^"']*(?:fas?|fa-solid|fa-regular|fa-brands)\s+fa-([^"'\s]+)[^"']*["'][^>]*?(?:\s+style=["']([^"']*)["'])?[^>]*></i>`}}
+  {{$matches := findRE $pattern $content}}
+
+  {{range $matches}}
+    {{$currentMatch := .}}
+    {{$iconName := ""}}
+    {{$styleAttr := ""}}
+
+    {{$submatches := findRESubmatch $pattern $currentMatch}}
+    {{if gt (len $submatches) 0}}
+      {{$iconName = index (index $submatches 0) 1}}
+      {{$styleAttr = index (index $submatches 0) 2}}
+
+      {{$iconHTML := partial "lucide" (dict 
+          "context" $ 
+          "icon" $iconName
+          "style" $styleAttr
+      )}}
+
+      {{$content = replace $content $currentMatch $iconHTML}}
+    {{end}}
+  {{end}}
+  
   
   {{if (.Params.catalog) }}
   <main class="content content-has-toc" role="main">
@@ -31,7 +55,7 @@
           {{ end }}
         </section>
         <h1>{{ .Title }}</h1>
-        {{ .Content }}
+        {{ $content | safeHTML }}
         {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
         {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
 

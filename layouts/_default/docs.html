@@ -52,10 +52,12 @@
           "style" $styleAttr
       )}}
 
-      {{$content = replace $content $currentMatch $iconHTML}}
+      {{ $modifiedMatch := replaceRE `>` ` data-mf=false>` $currentMatch 1}}
+      {{ $modifiedMFIcon := printf "%s %s" $modifiedMatch $iconHTML  }}
+      {{$content = replace $content $currentMatch $modifiedMFIcon}}
+
     {{end}}
   {{end}}
-  
   
   {{if (.Params.catalog) }}
   <main class="content content-has-toc" role="main">

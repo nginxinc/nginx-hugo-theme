@@ -19,6 +19,11 @@
       {{$iconName = index (index $submatches 0) 1}}
       {{$styleAttr = index (index $submatches 0) 2}}
 
+      {{ $iconMappings := dict "bug-slash" "bug-off" "circle-info" "info" "file-circle-plus" "file-plus"}}
+      {{ with index $iconMappings $iconName }}
+          {{$iconName = .}}
+      {{ end }}
+
       {{$iconHTML := partial "lucide" (dict 
           "context" $ 
           "icon" $iconName

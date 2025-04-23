@@ -1,5 +1,5 @@
 {{- /* Usage: */ -}}
 {{- /* (dict "context" . "icon" "circle") */ -}}
-<svg class="lucide" style="{{ .style }}">
+<svg class="lucide" style="{{ .style | safeCSS }}">
     <use href="/images/lucide-sprite.svg#{{ .icon }}"></use>
 </svg>

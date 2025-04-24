@@ -367,10 +367,9 @@ nav {
   grid-column: 1;
   position: sticky;
   top: 0;
-  padding: 2rem;
-  margin-left: -2rem;
+  padding-top: 2rem;
   background-color: white;
-  width: calc(100% + 4rem);
+  width: 100%;
   z-index: 999;
 
   .sidebar {
@@ -551,7 +550,6 @@ nav {
 atomic-search-interface {
   height: fit-content;
   margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 
 #search-standalone-sidebar {

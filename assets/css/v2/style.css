@@ -346,6 +346,93 @@ nav {
   }
 }
 
+/* MARK: Homepage
+*/
+
+.homepage {
+  margin: 0 2rem;
+
+  .homepage-heading {
+    grid-column: 1 / -1;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 2rem 0rem;
+  }
+
+  .homepage-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 500px));
+    gap: 1.5rem;
+    padding: 1rem;
+    justify-content: center;
+    max-width: 98rem;
+    margin: 0 auto;
+
+    .homepage-heading {
+      grid-column: 1 / -1;
+      margin: 1rem 0rem;
+    }
+  }
+
+  a {
+    color: var(--color-foreground);
+    text-decoration-color: var(--color-background);
+
+    &:hover {
+      text-decoration-color: var(--color-background);
+    }
+  }
+
+  /* Styling for items */
+  .homepage-item {
+    background: #fff;
+    border: 1px solid var(--color-codeblock-border);
+    box-shadow: 3px 3px 0px var(--color-shadow);
+    height: 7rem;
+    padding: 1rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+      text-decoration-color: var(--color-background);
+      border: 1px solid oklch(var(--color-brand) / 0.8);
+    }
+  }
+
+  .homepage-item-heading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .homepage-item-logo {
+    margin-right: 0.5rem;
+  }
+
+  .homepage-item-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .homepage-item-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    /* Hack to make text line-up with logos */
+    transform: translateY(-6px);
+  }
+
+  .homepage-item-content {
+    line-height: 1.5rem;
+  }
+}
+
 /* MARK: Main content
 */
 .docs-container * {
@@ -502,10 +589,6 @@ nav {
   .content-layout {
     grid-template-columns: 1fr var(--side-gutter-width);
   }
-}
-
-.main {
-  display: flex;
 }
 
 /* MARK: Coveo

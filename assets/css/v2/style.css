@@ -1014,6 +1014,26 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   align-items: flex-start;
 }
 
+/* Details/Summary */
+details summary {
+  color: oklch(var(--color-brand));
+  transition: text-decoration-color 0.15s ease-in-out;
+  text-decoration: underline;
+  text-decoration-color: oklch(var(--color-brand) / 0.3);
+
+  & ~ * {
+    margin-top: 1rem;
+  }
+}
+
+details summary:hover {
+  text-decoration-color: oklch(var(--color-brand) / 0.8);
+}
+
+details:hover {
+  cursor: pointer;
+}
+
 /* Table of Contents */
 #TableOfContents {
   /* Close all TOC on sidebar */
@@ -1096,7 +1116,7 @@ h3:target,
 h4:target,
 h5:target,
 h6:target {
-  color: var(--color-brand);
+  color: oklch(var(--color-brand));
 
   .headerlink::before {
     display: block !important;

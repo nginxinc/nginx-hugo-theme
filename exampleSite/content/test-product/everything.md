@@ -64,3 +64,9 @@ This won't render anything.
 
 {{< see-also >}}See also!{{< /see-also >}}
 
+
+## details
+<details open>
+    <summary>Learn how to pin NGINX Plus to a specific version</summary>
+    And this is the content on how to do so.
+</details>

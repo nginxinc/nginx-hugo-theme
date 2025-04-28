@@ -67,6 +67,6 @@ This won't render anything.
 
 ## details
 <details open>
-    <summary style="font-weight:bold;">Learn how to pin NGINX Plus to a specific version</summary>
+    <summary>Learn how to pin NGINX Plus to a specific version</summary>
     And this is the content on how to do so.
 </details>

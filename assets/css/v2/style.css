@@ -1026,9 +1026,12 @@ details summary {
   }
 }
 
+details summary:hover {
+  text-decoration-color: oklch(var(--color-brand) / 0.8);
+}
+
 details:hover {
   cursor: pointer;
-  text-decoration-color: oklch(var(--color-brand) / 0.8);
 }
 
 /* Table of Contents */

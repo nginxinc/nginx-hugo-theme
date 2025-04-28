@@ -356,7 +356,8 @@ a.other-products-card:hover {
 
 .card-img,
 .card-img-top {
-  width: max-content;
+  flex: 0;
+  width: auto;
   max-height: 40px;
   color: var(--nginx-green);
   margin-right: 5px;

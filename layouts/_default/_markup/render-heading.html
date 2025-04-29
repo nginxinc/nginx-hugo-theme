@@ -7,7 +7,9 @@ id="{{ .Anchor | safeURL }}">
     </a>
 </div> 
 
-<a class="headerlink float-right" data-mf="true" style="display: none;" href="#{{ .Anchor | safeURL }}" title="{{ .Text | safeHTML }}">
+<div data-mf="true">
+<a class="headerlink float-right" href="#{{ .Anchor | safeURL }}" title="{{ .Text | safeHTML }}">
     {{ .Text | safeHTML }}
 </a>
+</div>
 </h{{ .Level }}>

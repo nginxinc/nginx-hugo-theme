@@ -70,3 +70,8 @@ This won't render anything.
     <summary>Learn how to pin NGINX Plus to a specific version</summary>
     And this is the content on how to do so.
 </details>
+
+## [Heading with link](https://nginx.org/)
+
+This is some text, under a heading with a link.
+There was a bug, where if a heading had a link in it, it would get duplicated in old frame.

@@ -696,7 +696,7 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   display: block;
 }
 
-@media (max-width: 1184px) {
+@media (max-width: 88rem) {
   /* Show on pages with sidebar if it is hidden */
   body:has(.sidebar-layout) header atomic-search-interface {
     display: block;

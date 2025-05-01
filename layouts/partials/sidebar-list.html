@@ -1,0 +1,61 @@
+{{ $currentUrl := .currentUrl }}
+{{ $firstSection := .firstSection }}
+{{ $currentPage := .currentPage }}
+
+{{ with $firstSection }}
+<ul class="sidebar__ul">
+  {{ range .Pages.ByWeight }}
+    {{- $onPage := eq $currentUrl .Permalink -}}
+    {{- $isAncestor := .IsAncestor $currentPage -}}
+    {{- $shouldExpand := or $onPage $isAncestor -}}
+    {{- $sectionID := printf "section-%s" (urlize .Permalink) -}}
+
+    {{ if eq .Kind "section" }}
+      <li class="sidebar__section">
+        <button
+          class="sidebar__toggle"
+          aria-expanded="{{ $shouldExpand }}"
+          aria-controls="{{ $sectionID }}"
+        >
+          {{ .Title }}
+        </button>
+
+        <div
+          id="{{ $sectionID }}"
+          class="sidebar__children"
+          {{ if not $shouldExpand }}hidden{{ end }}
+        >
+          {{ partial "sidebar-list.html" (dict
+            "firstSection" . "currentUrl" $currentUrl "currentPage" $currentPage)
+          }}
+        </div>
+      </li>
+
+    {{ else if eq .Kind "page" }}
+      <li class="sidebar__page">
+        <a
+          href="{{ .Permalink }}"
+          class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
+          {{ if $onPage }}aria-current="page"{{ end }}
+        >
+          {{ .Title }}
+        </a>
+        {{ if $onPage }}
+          {{ with .TableOfContents }}
+            <div class="sidebar__toc" id="TableOfContents">{{ . }}</div>
+          {{ end }}
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ end }}
+</ul>
+{{ end }}
+
+
+{{/*  {{ if gt (.WordCount) 0 }}
+<ul>
+  <li>
+    <a href="{{ .Permalink }}" style="color: purple; {{if $onPage}}font-weight: bold;{{end}}">{{ .Title }} - Overview</a>
+  </li>
+</ul>
+{{ end }}  */}}

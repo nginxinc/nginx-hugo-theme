@@ -21,72 +21,12 @@
 {{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
 {{ $productName := index $productMap $productIdentifier }}
 
-<atomic-search-interface id="search-standalone-sidebar" data-mf="true" style="display:none;">
-    <atomic-search-box redirection-url="/search.html">
-    </atomic-search-box>
-</atomic-search-interface>
-<button class="product-selector-button" id="product-selector-button">
-    {{/* product name and selector */}}
-    <div class="product-selector-name" id="product-selector-name">{{ $productName }}</div>
-    <div class="product-selector-button-icon" id="product-selector-button-icon">
-        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg" id="product-selector-chevron-icon">
-            <path d="M1 13L7 7L0.999999 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="product-selector-chevron-icon"/>
-        </svg>     
-    </div>
-</button>
-<div class="product-selector" id="product-selector">
-    {{ $groupedProducts := dict 
-        "nginx-one" (where $nginxProducts "type" "nginx-one")
-        "nginx-app-protect" (where $nginxProducts "type" "nginx-app-protect")
-        "nginx-as-a-service" (where $nginxProducts "type" "nginx-as-a-service")
-        "nginx-other" (where $nginxProducts "type" "nginx-other")
-    }}
-    {{ $orderedKeys := slice "nginx-one" "nginx-app-protect" "nginx-as-a-service" "nginx-other" }}
-    {{ range $orderedKeys }}
-    {{ $type := . }}
-    {{ $products := index $groupedProducts $type }}
-        <div class="product-selector-content" id="product-selector-content">
-            <p id="product-selector-content-product-group-name">{{ $type | humanize | title | upper }}</p>
-            <ul id="product-selector-content-product-container">
-            {{ range $products }}
-                <li id="product-selector-content-product-name">
-                    <a id="product-selector-content-product-link" href="{{ .url }}">{{ .title }}</a>
-                </li>
-            {{ end }}
-            </ul>
-        </div>
-    {{ end }}
-</div>
-<div class="scrollbar-container">
-    <div class="sidebar-navigation">
-        <ul class="parent-collapsible-content">
-        {{ range .FirstSection.Pages.ByWeight }}
-            <li class="parent-collapsible-content-item">
-                {{ if eq .Kind "section" }}
-                    <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
-                    <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
-                        {{ if .Pages }}
-                            <span class="parent-box expand"></span>
-                            <span class="parent-box opened"></span>
-                        {{ end }}
-                        {{ .Title }} 
-                    </label>
-                    {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $.Permalink) }}
-                {{ else if eq .Kind "page" }}
-                    {{ if eq $.Permalink .Permalink }}                      
-                        <span class="parent-box current"></span>                 
-                    {{ else }}                     
-                        <span class="parent-box-link"></span>              
-                    {{ end }}
-                    <a href="{{ .Permalink }}" style="{{if eq $.Permalink .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a> 
-                    {{ if eq  $.Permalink .Permalink }} 
-                        {{- with .TableOfContents -}}
-                            {{- . -}}
-                        {{- end -}}
-                    {{ end }}
-                {{ end }}
-            </li>
-        {{ end }}
-        </ul>
+<div class="sidebar__container">
+    <div class="sidebar__content">
+        {{ partial "sidebar-list.html" (dict
+        "firstSection" .FirstSection
+        "currentUrl" .Permalink
+        "currentPage" .
+      ) }}
     </div>
 </div>

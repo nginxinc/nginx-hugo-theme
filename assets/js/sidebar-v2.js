@@ -1,17 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-  function expandToCurrentPage() {
-    const currentPage = document.getElementById('current-page');
-    if (currentPage) {
-      let parentLabel = currentPage.closest('li');
-      while (parentLabel) {
-        const checkbox = parentLabel.querySelector('.toggle-checkbox');
-        if (checkbox) {
-          checkbox.checked = true;
-        }
-        parentLabel = parentLabel.closest('ul').closest('li');
-      }
-    }
-  }
+  const toggles = document.querySelectorAll('.sidebar__toggle');
 
-  expandToCurrentPage();
+  toggles.forEach((toggle) => {
+    const parent = toggle.closest('li.sidebar__section');
+    const children = parent.querySelector('.sidebar__children');
+
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !isExpanded);
+      children.hidden = isExpanded;
+    });
+  });
 });

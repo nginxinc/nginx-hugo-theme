@@ -1,8 +1,11 @@
 {{ $htmlTable := .Inner | markdownify }}
 {{ $class := .Get 0 }}
-{{ $old := "<table>" }}
-{{ $new := printf "<table class=\"%s %s\">" $class "table-v1" }}
-{{ $htmlTable := replace $htmlTable $old $new }}
+{{ $oldTable := "<table>" }}
+{{ $newTable := printf "<table class=\"%s %s\">" $class "table-v1" }}
+{{ $oldP := "<p>" }}
+{{ $newP := printf "<p class=\"%s\">" "table-v1"}}
+{{ $htmlTable := replace $htmlTable $oldTable $newTable }}
+{{ $htmlTable := replace $htmlTable $oldP $newP }}
 {{ $htmlTable | safeHTML }}
 
 <!-- Add default option for table of "narrow" if one is not provided -->

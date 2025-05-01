@@ -1365,6 +1365,16 @@ blockquote.important {
   }
 }
 
+li:has(> div > blockquote) {
+  blockquote {
+    margin: 0;
+  }
+
+  div:has(blockquote) {
+    margin-bottom: 0.5rem;
+  }
+}
+
 /* MARK: Tabs
 */
 .tabs-container {

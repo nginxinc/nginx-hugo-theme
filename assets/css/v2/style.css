@@ -52,23 +52,25 @@
   /* MARK: Variables
   */
   --color-brand: 56.6% 0.194 147.7;
-  --color-brand-300: #a6daba;
-  --color-brand-200: #ccead7;
-  --color-brand-100: #f2faf5;
-  --color-background: #ffffff;
-  --color-foreground: #000000;
+  --color-brand-300: 0.84 0.0699 157.51;
+  --color-brand-200: 0.91 0.0406 157.72;
+  --color-brand-100: 0.98 0.0107 158.85;
+  --color-background: 1 0 0;
+  --color-foreground: 0 0 0;
   --color-bg-dark: 0 0 0;
   --color-bg-light: 1 0 0;
-  --color-shadow: #d2d2d2;
-  --color-codeblock-border: #888;
-  --color-codeblock-shadow: #e5e5e5;
-  --color-codeblock-highlight: #fffed9;
-  --color-footer: #1d1d1d;
-  --color-footer-text: #e2e2e2;
-  --color-product-title: #8d8d8d;
-  --color-divider: #cccccc;
-  --color-tabs-divider: #00000033;
-  --color-codeblock-code-with-comment: #00963926;
+  --color-shadow: 0.86 0 0;
+  --color-black: 0 0 0; /* NEED TO BE REMOVED */
+  --color-white: 1 0 0; /* NEED TO BE REMOVED */
+  --color-codeblock-border: 0.63 0 0;
+  --color-codeblock-shadow: 0.92 0 0;
+  --color-codeblock-highlight: 0.99 0.0479 105.97;
+  --color-footer: 0.23 0 0;
+  --color-footer-text: 0.91 0 0;
+  --color-product-title: 0.64 0 0;
+  --color-divider: 0.85 0 0;
+  --color-tabs-divider: 0 0 0 / 20%;
+  --color-codeblock-code-with-comment: 0.59 0.1712 147.69 / 14.9%;
   --color-callout-warning-primary: 0.65 0.188 24;
   --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
   --color-callout-caution-primary: 0.8 0.1613 71.21;
@@ -255,7 +257,7 @@ header {
     position: absolute;
     background-color: oklch(var(--color-bg-light));
     border: oklch(var(--color-black)) 1px solid;
-    box-shadow: 3px 3px 0px var(--color-shadow);
+    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     z-index: 1;
     right: 0;
     display: none;
@@ -292,7 +294,7 @@ main {
 /* MARK: Footer
 */
 footer {
-  background-color: var(--color-footer);
+  background-color: oklch(var(--color-footer));
   padding: 2.5rem;
   margin-top: auto;
 }
@@ -313,7 +315,7 @@ footer {
 
 .footer-f5-trademark p {
   margin: 0;
-  color: var(--color-footer-text);
+  color: oklch(var(--color-footer-text));
 }
 
 .footer-useful-links {
@@ -323,7 +325,7 @@ footer {
 }
 
 .footer-useful-links a {
-  color: var(--color-footer-text);
+  color: oklch(var(--color-footer-text));
   text-decoration: none;
 }
 
@@ -383,19 +385,19 @@ nav {
   }
 
   a {
-    color: var(--color-foreground);
-    text-decoration-color: var(--color-background);
+    color: oklch(var(--color-foreground));
+    text-decoration-color: oklch(var(--color-background));
 
     &:hover {
-      text-decoration-color: var(--color-background);
+      text-decoration-color: oklch(var(--color-background));
     }
   }
 
   /* Styling for items */
   .homepage-item {
     background: oklch(var(--color-bg-light));
-    border: 1px solid var(--color-codeblock-border);
-    box-shadow: 3px 3px 0px var(--color-shadow);
+    border: 1px solid oklch(var(--color-codeblock-border));
+    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     height: 7rem;
     padding: 1rem 2rem 2rem 2rem;
     display: flex;
@@ -405,7 +407,7 @@ nav {
 
     &:hover {
       box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-      text-decoration-color: var(--color-background);
+      text-decoration-color: oklch(var(--color-background));
       border: 1px solid oklch(var(--color-brand) / 0.8);
     }
   }
@@ -739,7 +741,7 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   padding: 1rem 1.5rem;
   background-color: oklch(var(--color-bg-light));
   border: oklch(var(--color-black)) 1px solid;
-  box-shadow: 3px 3px 0px var(--color-shadow);
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
 }
 
 button:has(~ .product-selector[style*="block"])
@@ -754,7 +756,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 }
 .product-selector p {
   font-size: 0.75rem;
-  color: var(--color-product-title);
+  color: oklch(var(--color-product-title));
   display: inline;
 }
 
@@ -944,7 +946,7 @@ p {
 }
 
 .breadcrumb {
-  color: var(--color-foreground);
+  color: oklch(var(--color-foreground));
   text-decoration: none;
   font-size: 0.875rem;
   margin: 0;
@@ -1083,7 +1085,7 @@ table {
   tr::after {
     content: "";
     position: absolute;
-    border-bottom: var(--table-line-height) solid var(--color-divider);
+    border-bottom: var(--table-line-height) solid oklch(var(--color-divider));
     bottom: 0;
     left: calc(-1 * var(--overflow-gutter-extension));
     width: calc(100% + (2 * var(--overflow-gutter-extension)));
@@ -1117,20 +1119,20 @@ table td:first-child {
 }
 
 table hr {
-  color: var(--color-divider);
+  color: oklch(var(--color-divider));
   border: none;
-  border-bottom: var(--table-line-height) solid var(--color-divider);
+  border-bottom: var(--table-line-height) solid oklch(var(--color-divider));
 }
 
 /* MARK: Callouts
 */
 blockquote {
-  border: 1px solid var(--color-foreground);
+  border: 1px solid oklch(var(--color-foreground));
   padding: 1rem;
   margin: 0 -1rem;
 
   /* solid 3px drop shadow */
-  box-shadow: 3px 3px 0px var(--color-shadow);
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
 
   &:has(.code-block) .code-block:not(:has(.single-line)) {
     /* Removes negative margins from multi-line codeblocks */
@@ -1157,7 +1159,7 @@ blockquote.note:before {
   margin: -1.625rem 0 0 -0.25rem;
   padding: 0 0.25rem;
   display: block;
-  background-color: var(--color-background);
+  background-color: oklch(var(--color-background));
   z-index: 999;
 }
 
@@ -1337,7 +1339,7 @@ li:has(> div > blockquote) {
 }
 
 .nav-item {
-  border: 1px solid var(--color-tabs-divider);
+  border: 1px solid oklch(var(--color-tabs-divider));
   border-bottom: 1px solid oklch(var(--color-black));
   padding: 10px;
   margin-bottom: 0;
@@ -1452,7 +1454,7 @@ a:has(code:not(pre code)) {
 }
 
 .highlight-v2 {
-  border: 1px solid var(--color-codeblock-border);
+  border: 1px solid oklch(var(--color-codeblock-border));
   overflow-x: scroll;
   scrollbar-width: none;
   line-height: 150%;
@@ -1467,7 +1469,7 @@ a:has(code:not(pre code)) {
 .highlight-v2.single-line {
   display: flex;
   align-items: center;
-  border: 1px solid var(--color-codeblock-border);
+  border: 1px solid oklch(var(--color-codeblock-border));
   overflow-x: scroll;
   line-height: 1;
 }
@@ -1484,9 +1486,9 @@ a:has(code:not(pre code)) {
 .code-type {
   display: inline-block;
   height: 1.5rem;
-  border-top: 1px solid var(--color-codeblock-border);
-  border-left: 1px solid var(--color-codeblock-border);
-  border-right: 1px solid var(--color-codeblock-border);
+  border-top: 1px solid oklch(var(--color-codeblock-border));
+  border-left: 1px solid oklch(var(--color-codeblock-border));
+  border-right: 1px solid oklch(var(--color-codeblock-border));
   text-transform: uppercase;
   padding: 0.15rem 0.5rem;
   font-size: 0.75rem;
@@ -1496,7 +1498,7 @@ a:has(code:not(pre code)) {
 }
 
 .code-container {
-  box-shadow: 2px 2px 0px var(--color-codeblock-shadow);
+  box-shadow: 2px 2px 0px oklch(var(--color-codeblock-shadow));
 }
 
 ol .code-block,
@@ -1522,7 +1524,7 @@ ul .code-block {
   margin-top: 8px;
   right: 1rem;
   z-index: 1;
-  --color-codeblock-shadow: 0% 0 0;
+  --color-codeblock-shadow: 0 0 0;
   box-shadow: 0px 2px 0px oklch(var(--color-codeblock-shadow) / 0.15);
 }
 
@@ -1544,7 +1546,7 @@ ul .code-block {
 .highlight code .hl {
   width: fit-content;
   min-width: 100%;
-  background-color: var(--color-codeblock-highlight);
+  background-color: oklch(var(--color-codeblock-highlight));
 }
 
 /* MARK: Images
@@ -1580,7 +1582,7 @@ hr {
   width: calc(100% + 2rem);
   margin-left: -1rem;
 
-  border: 1px solid var(--color-divider);
+  border: 1px solid oklch(var(--color-divider));
 }
 
 .feather {

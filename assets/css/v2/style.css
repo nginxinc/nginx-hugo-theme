@@ -453,9 +453,20 @@ nav {
 .sidebar-layout {
   display: flex;
   flex-direction: column;
+  position: relative; /* required for absolute-positioned pseudo element */
   z-index: 2;
-  border-right: 1px solid var(--color-divider);
   min-height: 100vh;
+}
+
+/* this is the complete, corrected CSS you can directly copy/paste clearly: */
+.sidebar-layout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background-color: var(--color-divider);
 }
 
 #searchbox {
@@ -810,6 +821,16 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   text-align: left;
   padding: 0.25rem 0.5rem;
   border-radius: 5px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: oklch(var(--color-brand) / 0.06);
+    color: oklch(var(--color-brand) / 1);
+  }
+}
+
+.sidebar__container button.sidebar__toggle--ancestor {
+  font-weight: 600;
 }
 
 .sidebar__chevron {
@@ -837,6 +858,12 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   border-radius: 5px;
   color: oklch(0 0 0 / 0.75);
   text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background-color: oklch(var(--color-brand) / 0.08);
+    color: oklch(var(--color-brand));
+  }
 }
 
 .sidebar__link--current {
@@ -848,10 +875,15 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 
 .sidebar__toc {
   #TableOfContents {
-    padding: 0.25rem 0.75rem;
-    margin: 2px 0.5rem 2px 0;
-    border-radius: 5px;
+    padding: 0 0.75rem 0 0;
+    margin: 0.5rem 0.25rem 0.5rem 0.8rem;
+    border-left: 1px solid var(--color-divider);
     color: oklch(0 0 0 / 0.75);
+
+    a {
+      color: oklch(0 0 0 / 0.75);
+      text-decoration: none;
+    }
 
     &:empty {
       display: none;
@@ -859,6 +891,14 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 
     li {
       padding: 0.25rem 0.75rem;
+    }
+
+    li:first-child {
+      padding-top: 0;
+    }
+
+    li:last-child {
+      padding-bottom: 0;
     }
   }
 }

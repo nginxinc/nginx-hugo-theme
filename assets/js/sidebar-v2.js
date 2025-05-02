@@ -1,14 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const toggles = document.querySelectorAll('.sidebar__toggle');
+document.addEventListener('click', (e) => {
+  const toggle = e.target.closest('.sidebar__toggle');
+  if (toggle) {
+    const chevron = toggle.querySelector('.sidebar__chevron');
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    const panel = document.getElementById(toggle.getAttribute('aria-controls'));
 
-  toggles.forEach((toggle) => {
-    const parent = toggle.closest('li.sidebar__section');
-    const children = parent.querySelector('.sidebar__children');
+    // Toggle the expanded state
+    toggle.setAttribute('aria-expanded', String(!expanded));
 
-    toggle.addEventListener('click', () => {
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', !isExpanded);
-      children.hidden = isExpanded;
-    });
-  });
+    // Toggle visibility of the content
+    if (panel) {
+      panel.hidden = expanded;
+    }
+
+    // Toggle chevron direction class
+    if (chevron) {
+      chevron.classList.toggle('sidebar__chevron--open', !expanded);
+    }
+  }
 });

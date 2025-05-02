@@ -9,28 +9,27 @@
     {{- $isAncestor := .IsAncestor $currentPage -}}
     {{- $shouldExpand := or $onPage $isAncestor -}}
     {{- $sectionID := printf "section-%s" (urlize .Permalink) -}}
-
     {{ if eq .Kind "section" }}
-      <li class="sidebar__section">
-        <button
-          class="sidebar__toggle"
-          aria-expanded="{{ $shouldExpand }}"
-          aria-controls="{{ $sectionID }}"
-        >
-          {{ .Title }}
-        </button>
-
-        <div
-          id="{{ $sectionID }}"
-          class="sidebar__children"
-          {{ if not $shouldExpand }}hidden{{ end }}
-        >
-          {{ partial "sidebar-list.html" (dict
-            "firstSection" . "currentUrl" $currentUrl "currentPage" $currentPage)
-          }}
-        </div>
-      </li>
-
+    <li class="sidebar__section">
+      <button
+        class="sidebar__toggle"
+        aria-expanded="{{ $shouldExpand }}"
+        aria-controls="{{ $sectionID }}"
+      >
+        <span class="sidebar__chevron {{ if $shouldExpand }}sidebar__chevron--open{{ end }}">
+          {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
+        </span>
+        <span class="sidebar__toggle-text">{{ .Title }}</span>
+      </button>
+      <div
+        id="{{ $sectionID }}"
+        class="sidebar__children"
+        {{ if not $shouldExpand }}hidden{{ end }}
+      >
+        {{ partial "sidebar-list.html" (dict 
+          "firstSection" . "currentUrl" $currentUrl "currentPage" $currentPage) }}
+      </div>
+    </li>
     {{ else if eq .Kind "page" }}
       <li class="sidebar__page">
         <a
@@ -46,6 +45,7 @@
           {{ end }}
         {{ end }}
       </li>
+      
     {{ end }}
   {{ end }}
 </ul>

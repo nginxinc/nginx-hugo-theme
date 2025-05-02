@@ -794,6 +794,10 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   font-size: 0.875rem;
 }
 
+.sidebar__container {
+  width: var(--sidebar-width);
+}
+
 .sidebar__container button {
   padding: 0.25rem 0.75rem;
 }
@@ -820,7 +824,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   width: 100%;
   text-align: left;
   padding: 0.25rem 0.5rem;
-  border-radius: 5px;
+  border-radius: 5px 0 5px 0;
   font-weight: 500;
 
   &:hover {
@@ -849,13 +853,14 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 
 .sidebar__toggle:has(.sidebar__chevron) {
   padding-left: .4rem;
+  margin-left: -1rem;
 }
 
 .sidebar__link {
   display: block;
   padding: 0.25rem 0.75rem;
-  margin: 2px 0.5rem 2px 0;
-  border-radius: 5px;
+  margin: 2px 0 2px 0;
+  border-radius: 5px 0 5px 0;
   color: oklch(0 0 0 / 0.75);
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -870,7 +875,9 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   color: oklch(var(--color-brand) / 1);
   background-color: oklch(var(--color-brand) / 0.1);
   font-weight: 600;
-  width: fit-content;
+  display: block; /* Make it stretch horizontally clearly */
+  width: auto; /* reset width clearly */
+  box-sizing: border-box;
 }
 
 .sidebar__toc {

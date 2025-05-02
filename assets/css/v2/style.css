@@ -456,7 +456,6 @@ nav {
   z-index: 2;
   border-right: 1px solid var(--color-divider);
   min-height: 100vh;
-  overflow-y: auto;
 }
 
 #searchbox {
@@ -758,6 +757,19 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 
 /* MARK: Sidebar
 */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 22rem;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+  margin-top: 0rem;
+  padding-top: 1rem;
+  align-items: start;
+  overflow-y: auto;
+}
 
 /* Reset/Renormalize lists to remove default browser styling */
 .sidebar__container,

@@ -17,10 +17,10 @@
           aria-expanded="{{ $shouldExpand }}"
           aria-controls="{{ $sectionID }}"
         >
+          <span class="sidebar__toggle-text">{{ .Title }}</span>
           <span class="sidebar__chevron {{ if $shouldExpand }}sidebar__chevron--open{{ end }}">
             {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
           </span>
-          <span class="sidebar__toggle-text">{{ .Title }}</span>
         </button>
         <div
           id="{{ $sectionID }}"

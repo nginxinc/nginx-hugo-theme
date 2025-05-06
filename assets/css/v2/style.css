@@ -885,12 +885,14 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
     }
   }
 
-  .sidebar__link--current {
+  .sidebar__link--current,
+  .sidebar__toggle.sidebar__link--current {
     color: oklch(var(--color-brand) / 1);
     background-color: oklch(var(--color-brand) / 0.1);
     font-weight: 600;
-    display: block; /* Make it stretch horizontally clearly */
-    width: auto; /* reset width clearly */
+    display: flex;
+    justify-self: stretch;
+    width: auto;
     box-sizing: border-box;
   }
 
@@ -900,6 +902,10 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
       margin: 0.5rem 0.25rem 0.5rem 0.8rem;
       border-left: 1px solid var(--color-divider);
       color: oklch(0 0 0 / 0.75);
+
+      &[hidden] {
+        display: none;
+      }
 
       a {
         color: oklch(0 0 0 / 0.75);

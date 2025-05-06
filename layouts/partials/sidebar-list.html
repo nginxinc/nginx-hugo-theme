@@ -33,20 +33,32 @@
         </div>
       </li>
 
-    {{ else if eq .Kind "page" }}
+      {{ else if eq .Kind "page" }}
       <li class="sidebar__page">
-        <a
-          href="{{ .Permalink }}"
-          class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
-          {{ if $onPage }}aria-current="page"{{ end }}
-        >
-          {{ .Title }}
-        </a>
-
-        {{ if $onPage }}
-          {{ with .TableOfContents }}
-            <div class="sidebar__toc" id="TableOfContents">{{ . }}</div>
-          {{ end }}
+        {{- $pageHasTOC := (and $onPage .TableOfContents) -}}
+        {{- $tocID := printf "toc-%s" (urlize .Permalink) -}}
+        {{- if $pageHasTOC }}
+          <button
+            class="sidebar__toggle sidebar__link sidebar__link--current"
+            aria-expanded="true"
+            aria-controls="{{ $tocID }}"
+          >
+            <span>{{ .Title }}</span>
+            <span class="sidebar__chevron sidebar__chevron--open">
+              {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
+            </span>
+          </button>
+          <div id="{{ $tocID }}" class="sidebar__toc">
+            {{ .TableOfContents }}
+          </div>
+        {{ else }}
+          <a
+            href="{{ .Permalink }}"
+            class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
+            {{ if $onPage }}aria-current="page"{{ end }}
+          >
+            {{ .Title }}
+          </a>
         {{ end }}
       </li>
     {{ end }}

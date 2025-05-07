@@ -53,22 +53,6 @@ async function atomicCoveo() {
       },
     });
     await searchPageInterface.executeFirstSearch();
-  } else {
-    if (sidebar) {
-      await searchBarSidebar.initialize({
-        accessToken: token,
-        organizationId: org_id,
-        analytics: { analyticsMode: 'legacy' },
-        preprocessRequest: (request, clientOrigin, metadata) => {
-          const body = JSON.parse(request.body);
-          body.q = `<@- ${body.q} -@>`;
-          request.body = JSON.stringify(body);
-
-          return request;
-        },
-      });
-      await searchBarSidebar.executeFirstSearch();
-    }
   }
 
   /* Initialize the header searchbar*/

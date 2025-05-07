@@ -576,6 +576,11 @@ nav {
   .content-layout .side-gutter {
     grid-column-start: 2;
   }
+
+  .navbar atomic-search-interface {
+    margin: 0;
+    display: block;
+  }
 }
 
 .list-page {
@@ -708,11 +713,6 @@ atomic-search-layout atomic-layout-section[section="search"] {
   z-index: 9999;
 }
 
-header atomic-search-interface {
-  /* Hide by default */
-  display: none;
-}
-
 body:not(:has(.main-layout)) header atomic-search-interface {
   /* Show on landing pages */
   display: block;
@@ -789,7 +789,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   position: sticky;
   top: 0;
   margin-top: 0rem;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
   align-items: start;
   overflow-y: auto;
   color: var(--color-foreground);

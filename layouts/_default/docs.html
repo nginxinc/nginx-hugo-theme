@@ -69,14 +69,15 @@
     
   <section class="main-layout">
     <div class="sidebar-layout" id="sidebar-layout">
-      <nav data-mf="true" id="sidebar-v2" class="sidebar" style="display:none;">
+      <button class="sidebar-mobile-toggle" style="display: none;" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
+      <nav data-mf="true" id="sidebar-v2" class="sidebar">
         {{ partial "sidebar-v2.html" . }}
       </nav>
     </div>
 
     <section id="maincontent" class="content-layout">
       <div data-cms-edit="content" class="text-content">
-        <section class="breadcrumb-layout" data-mf="true" style="display: none;">
+        <section class="breadcrumb-layout wide" data-mf="true" style="display: none;">
           {{ if not .IsHome }}
             {{ if not (in .Params.display_breadcrumb "false" ) }}
             {{ partial "breadcrumb" .}}  

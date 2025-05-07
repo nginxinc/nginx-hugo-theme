@@ -91,6 +91,7 @@
   --sidebar-line-box-left: 12px;
   --sidebar-width: 22rem;
   --sidebar-line-width: 11.5px;
+  --sidebar-mobile-top-displacement: 3rem;
   --side-gutter-width: 20rem;
   --table-top-bottom-spacing: 1rem;
   --table-row-space-between: 1.5rem;
@@ -264,6 +265,10 @@ header {
 
   .dropdown-content ul {
     padding: 20px 10px;
+  }
+
+  .nav-item-explore {
+    margin: 0;
   }
 
   .navbar-button {
@@ -526,8 +531,74 @@ nav {
     column-gap: var(--grid-column-gutter);
   }
 
-  .sidebar-layout {
-    display: none;
+  body:has(#sidebar-v2[style*="block"]) {
+    /* Disable scrolling in main content + hide footer if the sidebar is visible */
+    overflow-y: hidden;
+
+    .sidebar-layout {
+      position: absolute;
+      height: 100%;
+    }
+
+    footer {
+      display: none;
+    }
+
+    .sidebar-layout .sidebar-mobile-toggle {
+      display: flex !important;
+      align-items: center;
+      position: sticky;
+      top: 1rem;
+      margin-top: 2rem;
+      padding: 0.5rem;
+      color: white;
+      background-color: oklch(var(--color-brand));
+    }
+  }
+
+  .breadcrumb .sidebar-mobile-toggle {
+    display: inline !important;
+    padding: 0;
+  }
+
+  .sidebar-mobile-toggle {
+    background-color: transparent;
+    border: none;
+
+    .lucide {
+      margin-right: 1rem;
+    }
+  }
+
+  .main-layout {
+    /* Mobile support for sidebar */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .sidebar-layout {
+      min-height: fit-content;
+      background: white;
+      z-index: 3;
+      width: calc(100% + 4rem);
+      margin-left: -2rem;
+
+      &::before {
+        display: none;
+      }
+
+      nav {
+        width: 100%;
+        display: none;
+        padding: 0;
+        top: var(--sidebar-mobile-top-displacement);
+        max-height: calc(100vh - var(--sidebar-mobile-top-displacement));
+
+        .sidebar__container {
+          width: 100%;
+        }
+      }
+    }
   }
 
   main {
@@ -936,6 +1007,16 @@ p {
   line-height: 1.5rem;
 }
 
+.breadcrumb-layout {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: white;
+  width: calc(100% + 4rem);
+  margin-left: -2rem;
+  padding: 1rem 2rem;
+}
+
 .breadcrumb {
   color: var(--color-foreground);
   text-decoration: none;
@@ -1163,7 +1244,7 @@ blockquote p:last-child {
 }
 
 /* Maintain the split column for as long as possible */
-@media (min-width: 67rem) {
+@media (min-width: 88rem) {
   blockquote.side-callout {
     grid-column: 2 !important;
     align-self: start;

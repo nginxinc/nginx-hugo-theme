@@ -13,6 +13,7 @@
 <main class="content col d-block align-top content-has-toc" role="main" data-mf="true" style="display: none">
 <section class="main-layout">
   <div class="sidebar-layout" id="sidebar-layout">
+    <button class="sidebar__mobile__toggle" style="display: none;" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
     <nav data-mf="true" id="sidebar-v2" class="sidebar" style="display:none;">
       {{ partial "sidebar-v2.html" . }}
     </nav>
@@ -20,7 +21,7 @@
 
   <section id="maincontent" class="content-layout" data-mf="true" style="display: none">
     <div data-cms-edit="content" class="text-content list-page">
-      <section class="breadcrumb-layout">
+      <section class="breadcrumb-layout wide">
         {{ if not .IsHome }}
           {{ if not (in .Params.display_breadcrumb "false" ) }}
           {{ partial "breadcrumb" .}}

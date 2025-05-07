@@ -817,6 +817,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 
   .sidebar__content {
     padding: 0.5rem 0 0.4rem 0;
+    margin-right: 0.25rem;
   }
 
   .sidebar__ul {
@@ -837,7 +838,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
     width: 100%;
     text-align: left;
     padding: 0.25rem 0.5rem;
-    border-radius: 5px 0 5px 0;
+    border-radius: 5px 0 0 5px;
     font-weight: 500;
     color: var(--color-foreground);
 
@@ -874,7 +875,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
     display: block;
     padding: 0.25rem 0.75rem;
     margin: 2px 0 2px 0;
-    border-radius: 5px 0 5px 0;
+    border-radius: 5px 0 0 5px;
     color: oklch(0 0 0 / 0.75);
     text-decoration: none;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -908,7 +909,6 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
       }
 
       a {
-        color: oklch(0 0 0 / 0.75);
         text-decoration: none;
       }
 
@@ -1604,6 +1604,31 @@ hr {
   stroke-linejoin: square;
   vertical-align: sub;
   margin: 0;
+}
+
+/* MARK: Accessibility
+*/
+
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--color-foreground);
+  z-index: 1000;
+  text-decoration: none;
+  border-radius: 0;
+  box-shadow: 3px 3px 0px var(--color-shadow);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.skip-link:focus {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* FILTHY HACKS BEGIN */

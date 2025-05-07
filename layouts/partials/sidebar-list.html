@@ -1,23 +1,31 @@
 {{ $currentUrl := .currentUrl }}
-{{ $firstSection := .firstSection }}
 {{ $currentPage := .currentPage }}
+{{ $firstSection := .firstSection }}
+{{ $idPrefix := .idPrefix }}
 
 {{ with $firstSection }}
 <ul class="sidebar__ul">
-  {{ range .Pages.ByWeight }}
-    {{- $onPage := eq $currentUrl .Permalink -}}
-    {{- $isAncestor := .IsAncestor $currentPage -}}
+  {{ $pages := .Pages.ByWeight }}
+  {{ range $index, $p := $pages }}
+    {{- $onPage := eq $currentUrl $p.Permalink -}}
+    {{- $isAncestor := $p.IsAncestor $currentPage -}}
     {{- $shouldExpand := or $onPage $isAncestor -}}
-    {{- $sectionID := printf "section-%s" (urlize .Permalink) -}}
+    {{/*  These variables are used to create a unique id to be attached to every link
+    that accessibility users can correctly "Skip Table Of Contents"  */}}
+    {{- $sectionID := printf "%ssection-%s" $idPrefix (urlize $p.Permalink) -}}
+    {{- $linkID := printf "%slink-%s" $idPrefix (urlize $p.Permalink) -}}
+    {{- $nextIndex := add $index 1 -}}
+    {{- $nextLink := index $pages $nextIndex -}}
 
-    {{ if eq .Kind "section" }}
+    {{ if eq $p.Kind "section" }}
       <li class="sidebar__section">
         <button
+          id="{{ $linkID }}"
           class="sidebar__toggle {{ if $isAncestor }}sidebar__toggle--ancestor{{ end }}"
           aria-expanded="{{ $shouldExpand }}"
           aria-controls="{{ $sectionID }}"
         >
-          <span class="sidebar__toggle-text">{{ .Title }}</span>
+          <span class="sidebar__toggle-text">{{ $p.Title }}</span>
           <span class="sidebar__chevron {{ if $shouldExpand }}sidebar__chevron--open{{ end }}">
             {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
           </span>
@@ -28,44 +36,56 @@
           {{ if not $shouldExpand }}hidden{{ end }}
         >
           {{ partial "sidebar-list.html" (dict
-            "firstSection" . "currentUrl" $currentUrl "currentPage" $currentPage)
-          }}
+            "firstSection" $p
+            "currentUrl" $currentUrl
+            "currentPage" $currentPage
+            "idPrefix" (printf "%s%s-" $idPrefix (urlize $p.Title))
+          ) }}
         </div>
       </li>
 
-      {{ else if eq .Kind "page" }}
+    {{ else if eq $p.Kind "page" }}
+      {{- $tocHasItems := (in $p.TableOfContents "<li>") -}}
+      {{- $pageHasTOC := (and $onPage $tocHasItems $p.Params.toc) -}}
+      {{- $tocID := printf "%stoc-%s" $idPrefix (urlize $p.Permalink) -}}
       <li class="sidebar__page">
-        {{- $pageHasTOC := (and $onPage .TableOfContents) -}}
-        {{- $tocID := printf "toc-%s" (urlize .Permalink) -}}
-        {{- if $pageHasTOC }}
+        {{ if $pageHasTOC }}
           <button
             class="sidebar__toggle sidebar__link sidebar__link--current"
             aria-expanded="true"
             aria-controls="{{ $tocID }}"
+            id="{{ $linkID }}"
           >
-            <span>{{ .Title }}</span>
+            <span>{{ $p.Title }}</span>
             <span class="sidebar__chevron sidebar__chevron--open">
               {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
             </span>
           </button>
           <div id="{{ $tocID }}" class="sidebar__toc">
-            {{ .TableOfContents }}
+            {{ if $nextLink }}
+              {{- $nextLinkID := printf "%slink-%s" $idPrefix (urlize $nextLink.Permalink) -}}
+              <a class="skip-link" href="#{{ $nextLinkID }}">Skip Table of Contents</a>
+            {{ else }}
+              <a class="skip-link" href="#maincontent">Skip Table of Contents</a>
+            {{ end }}
+              {{ $p.TableOfContents }}
           </div>
         {{ else }}
           <a
-            href="{{ .Permalink }}"
+            href="{{ $p.Permalink }}"
+            id="{{ $linkID }}"
             class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
             {{ if $onPage }}aria-current="page"{{ end }}
           >
-            {{ .Title }}
+            {{ $p.Title }}
           </a>
         {{ end }}
       </li>
     {{ end }}
+
   {{ end }}
 </ul>
 {{ end }}
-
 
 {{/*  {{ if gt (.WordCount) 0 }}
 <ul>

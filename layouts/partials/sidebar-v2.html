@@ -23,10 +23,12 @@
 
 <div class="sidebar__container">
     <div class="sidebar__content">
+        <a class="skip-link" href="#maincontent">Skip Navigation</a>
         {{ partial "sidebar-list.html" (dict
         "firstSection" .FirstSection
         "currentUrl" .Permalink
         "currentPage" .
+        "idPrefix" ""
       ) }}
     </div>
 </div>

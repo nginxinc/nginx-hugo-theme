@@ -1,6 +1,7 @@
 <nav aria-label="breadcrumb" class="breadcrumb navbar">
     <div class="nav flex-md-row">
         <ol class="breadcrumb">
+            <button class="sidebar-mobile-toggle" aria-expanded="false" style="display: none;">{{ partial "lucide" (dict "context" . "icon" "align-justify") }}</button>
             <li><a href="/" alt="NGINX Docs Home">Home</a></li>
             {{- define "breadcrumb" -}}
             {{- with .Parent -}}

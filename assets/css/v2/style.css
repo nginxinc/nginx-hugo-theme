@@ -91,7 +91,7 @@
   --sidebar-line-box-left: 12px;
   --sidebar-width: 22rem;
   --sidebar-line-width: 11.5px;
-  --sidebar-mobile-top-displacement: 3rem;
+  --sidebar-mobile-top-displacement: 5rem;
   --side-gutter-width: 20rem;
   --table-top-bottom-spacing: 1rem;
   --table-row-space-between: 1.5rem;
@@ -550,6 +550,8 @@ nav {
       position: sticky;
       top: 1rem;
       margin-top: 2rem;
+      margin-left: 2rem;
+      margin-right: 2rem;
       padding: 0.5rem;
       color: white;
       background-color: oklch(var(--color-brand));
@@ -579,7 +581,7 @@ nav {
     .sidebar-layout {
       min-height: fit-content;
       background: white;
-      z-index: 3;
+      z-index: 999;
       width: calc(100% + 4rem);
       margin-left: -2rem;
 
@@ -590,9 +592,9 @@ nav {
       nav {
         width: 100%;
         display: none;
-        padding: 0;
         top: var(--sidebar-mobile-top-displacement);
         max-height: calc(100vh - var(--sidebar-mobile-top-displacement));
+        padding: 0 2rem;
 
         .sidebar__container {
           width: 100%;

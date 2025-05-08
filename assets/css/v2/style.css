@@ -725,13 +725,6 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   }
 }
 
-@media (max-width: 1023px) {
-  /* Show on search page with facet if it is hidden */
-  body:has(atomic-search-layout) header atomic-search-interface {
-    display: block;
-  }
-}
-
 /* MARK: Product Selector
 */
 

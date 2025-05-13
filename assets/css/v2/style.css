@@ -459,12 +459,11 @@ nav {
 .sidebar-layout {
   display: flex;
   flex-direction: column;
-  position: relative; /* required for absolute-positioned pseudo element */
+  position: relative;
   z-index: 2;
-  min-height: 100vh;
+  min-height: 74vh;
 }
 
-/* this is the complete, corrected CSS you can directly copy/paste clearly: */
 .sidebar-layout::before {
   content: "";
   position: absolute;
@@ -785,9 +784,9 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   padding-top: 1.5rem;
   align-items: start;
   overflow-y: auto;
+  overflow-x: hidden;
   color: var(--color-foreground);
 
-  /* Reset/Renormalize lists to remove default browser styling */
   .sidebar__container,
   .sidebar__container button,
   .sidebar__container ul,
@@ -1481,10 +1480,8 @@ a:has(code:not(pre code)) {
   padding: 0.15rem 0.5rem;
   font-size: 0.75rem;
   z-index: 999;
-  /* position: absolute; */
   background-color: white;
   margin: 0 0 -1px 0;
-  /* box-shadow: 2px 2px 0px var(--color-shadow); */
 }
 
 .code-container {
@@ -1636,7 +1633,7 @@ hr {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: left center;
-  width: 200px; /* Adjust the width as needed to fit the logo */
+  width: 200px;
 
   img {
     display: none;

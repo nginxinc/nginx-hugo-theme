@@ -2,7 +2,6 @@
 {{ $currentPage := .currentPage }}
 {{ $firstSection := .firstSection }}
 {{ $idPrefix := .idPrefix }}
-
 {{ with $firstSection }}
 <ul class="sidebar__ul">
   {{ $pages := .Pages.ByWeight }}
@@ -10,13 +9,10 @@
     {{- $onPage := eq $currentUrl $p.Permalink -}}
     {{- $isAncestor := $p.IsAncestor $currentPage -}}
     {{- $shouldExpand := or $onPage $isAncestor -}}
-    {{/*  These variables are used to create a unique id to be attached to every link
-    that accessibility users can correctly "Skip Table Of Contents"  */}}
     {{- $sectionID := printf "%ssection-%s" $idPrefix (urlize $p.Permalink) -}}
     {{- $linkID := printf "%slink-%s" $idPrefix (urlize $p.Permalink) -}}
     {{- $nextIndex := add $index 1 -}}
     {{- $nextLink := index $pages $nextIndex -}}
-
     {{ if eq $p.Kind "section" }}
       <li class="sidebar__section">
         <button
@@ -35,6 +31,20 @@
           class="sidebar__children"
           {{ if not $shouldExpand }}hidden{{ end }}
         >
+        {{ if and .Content (gt (len .Pages) 0) }}
+            <ul>
+              <li class="sidebar__page">
+                <a
+                  href="{{ $p.Permalink }}"
+                  class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
+                  {{ if $onPage }}aria-current="page"{{ end }}
+                >
+                  Overview
+                </a>
+              </li>
+            </ul>
+          {{ end }}
+
           {{ partial "sidebar-list.html" (dict
             "firstSection" $p
             "currentUrl" $currentUrl
@@ -43,7 +53,6 @@
           ) }}
         </div>
       </li>
-
     {{ else if eq $p.Kind "page" }}
       {{- $tocHasItems := (in $p.TableOfContents "<li>") -}}
       {{- $pageHasTOC := (and $onPage $tocHasItems $p.Params.toc) -}}
@@ -82,15 +91,6 @@
         {{ end }}
       </li>
     {{ end }}
-
   {{ end }}
 </ul>
 {{ end }}
-
-{{/*  {{ if gt (.WordCount) 0 }}
-<ul>
-  <li>
-    <a href="{{ .Permalink }}" style="color: purple; {{if $onPage}}font-weight: bold;{{end}}">{{ .Title }} - Overview</a>
-  </li>
-</ul>
-{{ end }}  */}}

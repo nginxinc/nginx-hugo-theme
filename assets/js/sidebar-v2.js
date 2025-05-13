@@ -16,19 +16,3 @@ document.addEventListener('click', (e) => {
     }
   }
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  const sidebar = document.querySelector('.sidebar__ul');
-
-  if (!sidebar) return;
-
-  const activeLink = sidebar.querySelector('.sidebar__link--current');
-
-  if (activeLink) {
-    activeLink.scrollIntoView({
-      behavior: 'auto',
-      block: 'center',
-      inline: 'nearest',
-    });
-  }
-});

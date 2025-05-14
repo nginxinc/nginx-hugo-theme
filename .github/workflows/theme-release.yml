@@ -1,0 +1,53 @@
+name: Slack notification for new theme release
+
+on: 
+  release: 
+    types: 
+      - published
+
+permissions:
+  contents: read
+
+jobs:
+    release-notification:
+        runs-on: ubuntu-latest
+        permissions:
+          contents: read
+          actions: read # for 8398a7/action-slack
+          checks: read
+        steps:
+          - name: Send notification
+            uses:  8398a7/action-slack@1750b5085f3ec60384090fb7c52965ef822e869e # v3.18.0
+            with:
+                status: custom
+                custom_payload: |
+                  {
+                      username: 'Github',
+                      mention: 'channel',
+                      attachments: [{
+                        title: `New theme release - ${{ github.event.release.name }}`,
+                        color: '#009223',
+                        fields: [{
+                          title: 'Preview',
+                          value: `SOME PREVIEW LINK`,
+                          short: false
+                        },
+                        {
+                          title: 'Tag',
+                          value: `${{ github.event.release.tag_name }}`,
+                          short: true
+                        },
+                        {
+                          title: 'Author',
+                          value: `${{ github.event.release.author.login }}`,
+                          short: true
+                        },
+                        {
+                          title: 'URL',
+                          value: `${{ github.event.release.html_url }}`,
+                          short: true
+                        }]
+                      }]
+                  }
+            env:
+              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

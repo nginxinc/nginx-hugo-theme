@@ -1,9 +1,10 @@
 name: Slack notification for new theme release
 
 on: 
-  release: 
-    types: 
-      - published
+  workflow_run:
+    workflows:
+      - "documentation preview"
+    types: [completed]
 
 permissions:
   contents: read
@@ -11,6 +12,7 @@ permissions:
 jobs:
     release-notification:
         runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.event == 'release' }}
         permissions:
           contents: read
           actions: read # for 8398a7/action-slack

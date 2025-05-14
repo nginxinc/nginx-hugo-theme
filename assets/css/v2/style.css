@@ -912,6 +912,12 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
         padding: 0.25rem 0.75rem;
       }
 
+      /* handles bug in hugo where non-rendered headers cause empty li */
+      /* https://github.com/gohugoio/hugo/issues/7128 */
+      li:empty {
+        display: none;
+      }
+
       li:first-child {
         padding-top: 0;
       }

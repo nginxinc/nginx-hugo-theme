@@ -6,8 +6,14 @@ repos:
         entry: scripts/lint-commit.sh
         stages: [ commit-msg ]
         language: system
+
       - id: run-biome
         name: Check for linting and formatting for source code using Biome
         entry: scripts/run-biome.sh
         stages: [ pre-commit ]
         language: system
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.26.0
+    hooks:
+      - id: gitleaks

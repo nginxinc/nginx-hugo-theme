@@ -57,26 +57,24 @@
   --color-brand-100: 0.98 0.0107 158.85;
   --color-background: 1 0 0;
   --color-foreground: 0 0 0;
-  --color-bg-dark: 0 0 0;
-  --color-bg-light: 1 0 0;
   --color-shadow: 0.86 0 0;
-  --color-black: 0 0 0; /* NEED TO BE REMOVED */
-  --color-white: 1 0 0; /* NEED TO BE REMOVED */
+  --color-inline_codeblock-border: 0.85 0 0;
+  --color-inline_codeblock-background: 0.98 0 0;
   --color-codeblock-border: 0.63 0 0;
   --color-codeblock-shadow: 0.92 0 0;
+  --color-codeblock-background: 1 0 0;
   --color-codeblock-highlight: 0.99 0.0479 105.97;
   --color-footer: 0.23 0 0;
   --color-footer-text: 0.91 0 0;
   --color-product-title: 0.64 0 0;
-  --color-divider: 0.85 0 0;
-  --color-tabs-divider: 0 0 0 / 20%;
-  --color-codeblock-code-with-comment: 0.59 0.1712 147.69 / 14.9%;
-  --color-callout-warning-primary: 0.65 0.188 24;
+  --color-tabs-inactive-border: 0 0 0 / 20%;
+  --color-callout-warning: 0.65 0.188 24;
   --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
-  --color-callout-caution-primary: 0.8 0.1613 71.21;
+  --color-callout-caution: 0.8 0.1613 71.21;
   --color-callout-caution-shadow: 0.8 0.1613 71.21 / 20%;
-  --color-callout-important-primary: 0.36 0 0;
+  --color-callout-important: 0.36 0 0;
   --color-callout-important-shadow: 0.23 0 0 / 7.06%;
+  --color-divider: 0.85 0 0;
 
   /* vars for the primary grid setup */
   --grid-sidebar: 24rem;
@@ -255,15 +253,15 @@ header {
 
   .dropdown-content {
     position: absolute;
-    background-color: oklch(var(--color-bg-light));
-    border: oklch(var(--color-black)) 1px solid;
+    background-color: oklch(var(--color-background));
+    border: oklch(var(--color-foreground)) 1px solid;
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     z-index: 1;
     right: 0;
     display: none;
     width: 400px;
     max-width: 80vw;
-    margin-right: 2.5rem;
+    margin-right: 2rem;
   }
 
   .dropdown-content ul {
@@ -395,7 +393,7 @@ nav {
 
   /* Styling for items */
   .homepage-item {
-    background: oklch(var(--color-bg-light));
+    background: oklch(var(--color-background));
     border: 1px solid oklch(var(--color-codeblock-border));
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     height: 7rem;
@@ -648,12 +646,12 @@ atomic-search-interface {
 atomic-search-box {
   &::part(wrapper) {
     border-radius: 0;
-    border-color: oklch(var(--color-black));
+    border-color: oklch(var(--color-foreground));
   }
 
   &::part(suggestions-wrapper) {
     border-radius: 0;
-    border-color: oklch(var(--color-black));
+    border-color: oklch(var(--color-foreground));
     width: calc(100% + 2px);
     margin-left: -1px;
   }
@@ -739,8 +737,8 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   margin-top: 8.375rem;
   margin-left: 44rem;
   padding: 1rem 1.5rem;
-  background-color: oklch(var(--color-bg-light));
-  border: oklch(var(--color-black)) 1px solid;
+  background-color: oklch(var(--color-background));
+  border: oklch(var(--color-foreground)) 1px solid;
   box-shadow: 3px 3px 0px oklch(var(--color-shadow));
 }
 
@@ -768,7 +766,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 
 .product-selector a {
   text-decoration: none;
-  color: oklch(var(--color-black));
+  color: oklch(var(--color-foreground));
   font-size: 1rem;
 }
 
@@ -1048,7 +1046,7 @@ h6:has(a):hover {
 .headerlink {
   text-decoration: none;
 
-  color: oklch(var(--color-black));
+  color: oklch(var(--color-foreground));
 }
 
 .headerlink::before {
@@ -1211,38 +1209,38 @@ blockquote.call-out {
 }
 
 blockquote.caution {
-  --color-shadow: oklch(var(--color-callout-caution-shadow));
-  border: 1px solid oklch(var(--color-callout-caution-primary));
+  --color-shadow: var(--color-callout-caution-shadow);
+  border: 1px solid oklch(var(--color-callout-caution));
 
   .call-out-type {
     background-color: oklch(var(--color-callout-caution-shadow));
-    border-bottom: 1px solid oklch(var(--color-callout-caution-primary));
+    border-bottom: 1px solid oklch(var(--color-callout-caution));
   }
   .call-out-type .feather {
-    color: oklch(var(--color-callout-caution-primary));
+    color: oklch(var(--color-callout-caution));
   }
 }
 
 blockquote.warning {
-  --color-shadow: oklch(var(--color-callout-warning-shadow));
-  border: 1px solid oklch(var(--color-callout-warning-primary));
+  --color-shadow: var(--color-callout-warning-shadow);
+  border: 1px solid oklch(var(--color-callout-warning));
 
   .call-out-type {
     background-color: oklch(var(--color-callout-warning-shadow));
-    border-bottom: 1px solid oklch(var(--color-callout-warning-primary));
+    border-bottom: 1px solid oklch(var(--color-callout-warning));
   }
   .call-out-type .feather {
-    color: oklch(var(--color-callout-warning-primary));
+    color: oklch(var(--color-callout-warning));
   }
 }
 
 blockquote.important {
-  --color-shadow: oklch(var(--color-callout-important-shadow));
-  border: 1px solid oklch(var(--color-callout-important-primary));
+  --color-shadow: var(--color-callout-important-shadow);
+  border: 1px solid oklch(var(--color-callout-important));
 
   .call-out-type {
     background-color: oklch(var(--color-callout-important-shadow));
-    border-bottom: 1px solid oklch(var(--color-callout-important-primary));
+    border-bottom: 1px solid oklch(var(--color-callout-important));
   }
 }
 
@@ -1271,7 +1269,7 @@ li:has(> div > blockquote) {
     content: "";
     position: absolute;
     display: block;
-    border-bottom: 1px solid oklch(var(--color-black));
+    border-bottom: 1px solid oklch(var(--color-foreground));
     bottom: 0;
     right: 0;
     width: 2rem;
@@ -1296,20 +1294,22 @@ li:has(> div > blockquote) {
   }
 
   &::before {
+    /* Horizontal line before tab blocks */
     content: "";
     position: absolute;
     display: block;
-    border-bottom: 1px solid oklch(var(--color-black));
+    border-bottom: 1px solid oklch(var(--color-foreground));
     bottom: 0;
     left: 0;
     width: 2rem;
   }
 
   &::after {
+    /* Horizontal line after tab blocks */
     content: "";
     position: relative;
     display: block;
-    border-bottom: 1px solid oklch(var(--color-black));
+    border-bottom: 1px solid oklch(var(--color-foreground));
     bottom: 0;
     left: 0;
     width: 100%;
@@ -1320,16 +1320,16 @@ li:has(> div > blockquote) {
   --mask-image-content: linear-gradient(
     to right,
     transparent,
-    oklch(var(--color-black)) var(--mask-height),
-    oklch(var(--color-black)) calc(100% - var(--mask-height)),
+    oklch(var(--color-foreground)) var(--mask-height),
+    oklch(var(--color-foreground)) calc(100% - var(--mask-height)),
     transparent
   );
 
   --mask-size-content: 100% calc(100% - var(--scrollbar-width));
 
   --mask-image-scrollbar: linear-gradient(
-    oklch(var(--color-black)),
-    oklch(var(--color-black))
+    oklch(var(--color-foreground)),
+    oklch(var(--color-foreground))
   );
   --mask-size-scrollbar: 100% var(--scrollbar-width);
   mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
@@ -1339,8 +1339,8 @@ li:has(> div > blockquote) {
 }
 
 .nav-item {
-  border: 1px solid oklch(var(--color-tabs-divider));
-  border-bottom: 1px solid oklch(var(--color-black));
+  border: 1px solid oklch(var(--color-tabs-inactive-border));
+  border-bottom: 1px solid oklch(var(--color-foreground));
   padding: 10px;
   margin-bottom: 0;
 
@@ -1349,29 +1349,29 @@ li:has(> div > blockquote) {
   }
 
   .active {
-    color: oklch(var(--color-black));
+    color: oklch(var(--color-foreground));
   }
 }
 
 .nav-item:has(.active) {
   /* Change the border colors of li that is has a child with a class "active" */
-  border-top: 1px solid oklch(var(--color-black));
-  border-left: 1px solid oklch(var(--color-black));
+  border-top: 1px solid oklch(var(--color-foreground));
+  border-left: 1px solid oklch(var(--color-foreground));
   border-bottom: none;
 
   /* Change the border of next child */
   + li {
-    border-left: 1px solid oklch(var(--color-black));
+    border-left: 1px solid oklch(var(--color-foreground));
   }
 }
 
 .nav-item:last-child:has(.active) {
   /* If on last tab, change the right border since it does not have a next sibling */
-  border-right: 1px solid oklch(var(--color-black));
+  border-right: 1px solid oklch(var(--color-foreground));
 }
 
 .tab-content {
-  border-bottom: 1px solid oklch(var(--color-black));
+  border-bottom: 1px solid oklch(var(--color-foreground));
   padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1399,12 +1399,12 @@ code {
   font-family: "JetBrainsMono", monospace;
 }
 
-/* Inline Code */
+/* Inline Codeblock */
 code:not(pre code) {
-  border: solid 1px #ccc;
+  border: solid 1px oklch(var(--color-inline_codeblock-border));
   border-radius: 0.25rem;
   padding: 0 0.25rem;
-  background-color: #f9f9f9;
+  background-color: oklch(var(--color-inline_codeblock-background));
   font-size: 0.875rem;
 }
 
@@ -1425,6 +1425,7 @@ a:has(code:not(pre code)) {
   text-decoration: none;
 }
 
+/* Regular Codeblock */
 .highlight {
   padding: 0 1rem 0 1rem;
   position: relative;
@@ -1513,12 +1514,12 @@ ul .code-block {
 }
 
 .code-copy-button {
-  background-color: oklch(var(--color-bg-light));
-  border: 1px solid oklch(var(--color-black));
+  background-color: oklch(var(--color-background));
+  border: 1px solid oklch(var(--color-foreground));
   padding: 4px 6px;
   cursor: pointer;
   font-size: 12px;
-  color: #000;
+  color: oklch(var(--color-foreground));
   display: none;
   position: absolute;
   margin-top: 8px;

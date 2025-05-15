@@ -52,27 +52,29 @@
   /* MARK: Variables
   */
   --color-brand: 56.6% 0.194 147.7;
-  --color-brand-300: #a6daba;
-  --color-brand-200: #ccead7;
-  --color-brand-100: #f2faf5;
-  --color-background: #ffffff;
-  --color-foreground: #000000;
-  --color-shadow: #d2d2d2;
-  --color-codeblock-border: #888;
-  --color-codeblock-shadow: #e5e5e5;
-  --color-codeblock-highlight: #fffed9;
-  --color-footer: #1d1d1d;
-  --color-footer-text: #e2e2e2;
-  --color-product-title: #8d8d8d;
-  --color-divider: #cccccc;
-  --color-tabs-divider: #00000033;
-  --color-codeblock-code-with-comment: #00963926;
-  --color-callout-warning-primary: 0.65 0.188 24;
+  --color-brand-300: 0.84 0.0699 157.51;
+  --color-brand-200: 0.91 0.0406 157.72;
+  --color-brand-100: 0.98 0.0107 158.85;
+  --color-background: 1 0 0;
+  --color-foreground: 0 0 0;
+  --color-shadow: 0.86 0 0;
+  --color-inline_codeblock-border: 0.85 0 0;
+  --color-inline_codeblock-background: 0.98 0 0;
+  --color-codeblock-border: 0.63 0 0;
+  --color-codeblock-shadow: 0.92 0 0;
+  --color-codeblock-background: 1 0 0;
+  --color-codeblock-highlight: 0.99 0.0479 105.97;
+  --color-footer: 0.23 0 0;
+  --color-footer-text: 0.91 0 0;
+  --color-product-title: 0.64 0 0;
+  --color-tabs-inactive-border: 0 0 0 / 20%;
+  --color-callout-warning: 0.65 0.188 24;
   --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
-  --color-callout-caution-primary: 0.8 0.1613 71.21;
+  --color-callout-caution: 0.8 0.1613 71.21;
   --color-callout-caution-shadow: 0.8 0.1613 71.21 / 20%;
-  --color-callout-important-primary: 0.36 0 0;
+  --color-callout-important: 0.36 0 0;
   --color-callout-important-shadow: 0.23 0 0 / 7.06%;
+  --color-divider: 0.85 0 0;
 
   /* vars for the primary grid setup */
   --grid-sidebar: 24rem;
@@ -251,15 +253,15 @@ header {
 
   .dropdown-content {
     position: absolute;
-    background-color: white;
-    border: black 1px solid;
-    box-shadow: 3px 3px 0px var(--color-shadow);
+    background-color: oklch(var(--color-background));
+    border: oklch(var(--color-foreground)) 1px solid;
+    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     z-index: 1;
     right: 0;
     display: none;
     width: 400px;
     max-width: 80vw;
-    margin-right: 2.5rem;
+    margin-right: 2rem;
   }
 
   .dropdown-content ul {
@@ -290,7 +292,7 @@ main {
 /* MARK: Footer
 */
 footer {
-  background-color: var(--color-footer);
+  background-color: oklch(var(--color-footer));
   padding: 2.5rem;
   margin-top: auto;
 }
@@ -311,7 +313,7 @@ footer {
 
 .footer-f5-trademark p {
   margin: 0;
-  color: var(--color-footer-text);
+  color: oklch(var(--color-footer-text));
 }
 
 .footer-useful-links {
@@ -321,7 +323,7 @@ footer {
 }
 
 .footer-useful-links a {
-  color: var(--color-footer-text);
+  color: oklch(var(--color-footer-text));
   text-decoration: none;
 }
 
@@ -381,19 +383,19 @@ nav {
   }
 
   a {
-    color: var(--color-foreground);
-    text-decoration-color: var(--color-background);
+    color: oklch(var(--color-foreground));
+    text-decoration-color: oklch(var(--color-background));
 
     &:hover {
-      text-decoration-color: var(--color-background);
+      text-decoration-color: oklch(var(--color-background));
     }
   }
 
   /* Styling for items */
   .homepage-item {
-    background: #fff;
-    border: 1px solid var(--color-codeblock-border);
-    box-shadow: 3px 3px 0px var(--color-shadow);
+    background: oklch(var(--color-background));
+    border: 1px solid oklch(var(--color-codeblock-border));
+    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     height: 7rem;
     padding: 1rem 2rem 2rem 2rem;
     display: flex;
@@ -403,7 +405,7 @@ nav {
 
     &:hover {
       box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-      text-decoration-color: var(--color-background);
+      text-decoration-color: oklch(var(--color-background));
       border: 1px solid oklch(var(--color-brand) / 0.8);
     }
   }
@@ -644,12 +646,12 @@ atomic-search-interface {
 atomic-search-box {
   &::part(wrapper) {
     border-radius: 0;
-    border-color: black;
+    border-color: oklch(var(--color-foreground));
   }
 
   &::part(suggestions-wrapper) {
     border-radius: 0;
-    border-color: black;
+    border-color: oklch(var(--color-foreground));
     width: calc(100% + 2px);
     margin-left: -1px;
   }
@@ -735,9 +737,9 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   margin-top: 8.375rem;
   margin-left: 44rem;
   padding: 1rem 1.5rem;
-  background-color: white;
-  border: black 1px solid;
-  box-shadow: 3px 3px 0px var(--color-shadow);
+  background-color: oklch(var(--color-background));
+  border: oklch(var(--color-foreground)) 1px solid;
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
 }
 
 button:has(~ .product-selector[style*="block"])
@@ -752,7 +754,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 }
 .product-selector p {
   font-size: 0.75rem;
-  color: var(--color-product-title);
+  color: oklch(var(--color-product-title));
   display: inline;
 }
 
@@ -764,7 +766,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
 
 .product-selector a {
   text-decoration: none;
-  color: black;
+  color: oklch(var(--color-foreground));
   font-size: 1rem;
 }
 
@@ -942,7 +944,7 @@ p {
 }
 
 .breadcrumb {
-  color: var(--color-foreground);
+  color: oklch(var(--color-foreground));
   text-decoration: none;
   font-size: 0.875rem;
   margin: 0;
@@ -1044,7 +1046,7 @@ h6:has(a):hover {
 .headerlink {
   text-decoration: none;
 
-  color: black;
+  color: oklch(var(--color-foreground));
 }
 
 .headerlink::before {
@@ -1081,7 +1083,7 @@ table {
   tr::after {
     content: "";
     position: absolute;
-    border-bottom: var(--table-line-height) solid var(--color-divider);
+    border-bottom: var(--table-line-height) solid oklch(var(--color-divider));
     bottom: 0;
     left: calc(-1 * var(--overflow-gutter-extension));
     width: calc(100% + (2 * var(--overflow-gutter-extension)));
@@ -1115,20 +1117,20 @@ table td:first-child {
 }
 
 table hr {
-  color: var(--color-divider);
+  color: oklch(var(--color-divider));
   border: none;
-  border-bottom: var(--table-line-height) solid var(--color-divider);
+  border-bottom: var(--table-line-height) solid oklch(var(--color-divider));
 }
 
 /* MARK: Callouts
 */
 blockquote {
-  border: 1px solid var(--color-foreground);
+  border: 1px solid oklch(var(--color-foreground));
   padding: 1rem;
   margin: 0 -1rem;
 
   /* solid 3px drop shadow */
-  box-shadow: 3px 3px 0px var(--color-shadow);
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
 
   &:has(.code-block) .code-block:not(:has(.single-line)) {
     /* Removes negative margins from multi-line codeblocks */
@@ -1155,7 +1157,7 @@ blockquote.note:before {
   margin: -1.625rem 0 0 -0.25rem;
   padding: 0 0.25rem;
   display: block;
-  background-color: var(--color-background);
+  background-color: oklch(var(--color-background));
   z-index: 999;
 }
 
@@ -1207,38 +1209,38 @@ blockquote.call-out {
 }
 
 blockquote.caution {
-  --color-shadow: oklch(var(--color-callout-caution-shadow));
-  border: 1px solid oklch(var(--color-callout-caution-primary));
+  --color-shadow: var(--color-callout-caution-shadow);
+  border: 1px solid oklch(var(--color-callout-caution));
 
   .call-out-type {
     background-color: oklch(var(--color-callout-caution-shadow));
-    border-bottom: 1px solid oklch(var(--color-callout-caution-primary));
+    border-bottom: 1px solid oklch(var(--color-callout-caution));
   }
   .call-out-type .feather {
-    color: oklch(var(--color-callout-caution-primary));
+    color: oklch(var(--color-callout-caution));
   }
 }
 
 blockquote.warning {
-  --color-shadow: oklch(var(--color-callout-warning-shadow));
-  border: 1px solid oklch(var(--color-callout-warning-primary));
+  --color-shadow: var(--color-callout-warning-shadow);
+  border: 1px solid oklch(var(--color-callout-warning));
 
   .call-out-type {
     background-color: oklch(var(--color-callout-warning-shadow));
-    border-bottom: 1px solid oklch(var(--color-callout-warning-primary));
+    border-bottom: 1px solid oklch(var(--color-callout-warning));
   }
   .call-out-type .feather {
-    color: oklch(var(--color-callout-warning-primary));
+    color: oklch(var(--color-callout-warning));
   }
 }
 
 blockquote.important {
-  --color-shadow: oklch(var(--color-callout-important-shadow));
-  border: 1px solid oklch(var(--color-callout-important-primary));
+  --color-shadow: var(--color-callout-important-shadow);
+  border: 1px solid oklch(var(--color-callout-important));
 
   .call-out-type {
     background-color: oklch(var(--color-callout-important-shadow));
-    border-bottom: 1px solid oklch(var(--color-callout-important-primary));
+    border-bottom: 1px solid oklch(var(--color-callout-important));
   }
 }
 
@@ -1267,7 +1269,7 @@ li:has(> div > blockquote) {
     content: "";
     position: absolute;
     display: block;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid oklch(var(--color-foreground));
     bottom: 0;
     right: 0;
     width: 2rem;
@@ -1292,20 +1294,22 @@ li:has(> div > blockquote) {
   }
 
   &::before {
+    /* Horizontal line before tab blocks */
     content: "";
     position: absolute;
     display: block;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid oklch(var(--color-foreground));
     bottom: 0;
     left: 0;
     width: 2rem;
   }
 
   &::after {
+    /* Horizontal line after tab blocks */
     content: "";
     position: relative;
     display: block;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid oklch(var(--color-foreground));
     bottom: 0;
     left: 0;
     width: 100%;
@@ -1316,14 +1320,17 @@ li:has(> div > blockquote) {
   --mask-image-content: linear-gradient(
     to right,
     transparent,
-    black var(--mask-height),
-    black calc(100% - var(--mask-height)),
+    oklch(var(--color-foreground)) var(--mask-height),
+    oklch(var(--color-foreground)) calc(100% - var(--mask-height)),
     transparent
   );
 
   --mask-size-content: 100% calc(100% - var(--scrollbar-width));
 
-  --mask-image-scrollbar: linear-gradient(black, black);
+  --mask-image-scrollbar: linear-gradient(
+    oklch(var(--color-foreground)),
+    oklch(var(--color-foreground))
+  );
   --mask-size-scrollbar: 100% var(--scrollbar-width);
   mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
   mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
@@ -1332,8 +1339,8 @@ li:has(> div > blockquote) {
 }
 
 .nav-item {
-  border: 1px solid var(--color-tabs-divider);
-  border-bottom: 1px solid black;
+  border: 1px solid oklch(var(--color-tabs-inactive-border));
+  border-bottom: 1px solid oklch(var(--color-foreground));
   padding: 10px;
   margin-bottom: 0;
 
@@ -1342,29 +1349,29 @@ li:has(> div > blockquote) {
   }
 
   .active {
-    color: black;
+    color: oklch(var(--color-foreground));
   }
 }
 
 .nav-item:has(.active) {
   /* Change the border colors of li that is has a child with a class "active" */
-  border-top: 1px solid black;
-  border-left: 1px solid black;
+  border-top: 1px solid oklch(var(--color-foreground));
+  border-left: 1px solid oklch(var(--color-foreground));
   border-bottom: none;
 
   /* Change the border of next child */
   + li {
-    border-left: 1px solid black;
+    border-left: 1px solid oklch(var(--color-foreground));
   }
 }
 
 .nav-item:last-child:has(.active) {
   /* If on last tab, change the right border since it does not have a next sibling */
-  border-right: 1px solid black;
+  border-right: 1px solid oklch(var(--color-foreground));
 }
 
 .tab-content {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid oklch(var(--color-foreground));
   padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1392,12 +1399,12 @@ code {
   font-family: "JetBrainsMono", monospace;
 }
 
-/* Inline Code */
+/* Inline Codeblock */
 code:not(pre code) {
-  border: solid 1px #ccc;
+  border: solid 1px oklch(var(--color-inline_codeblock-border));
   border-radius: 0.25rem;
   padding: 0 0.25rem;
-  background-color: #f9f9f9;
+  background-color: oklch(var(--color-inline_codeblock-background));
   font-size: 0.875rem;
 }
 
@@ -1418,6 +1425,7 @@ a:has(code:not(pre code)) {
   text-decoration: none;
 }
 
+/* Regular Codeblock */
 .highlight {
   padding: 0 1rem 0 1rem;
   position: relative;
@@ -1447,7 +1455,7 @@ a:has(code:not(pre code)) {
 }
 
 .highlight-v2 {
-  border: 1px solid var(--color-codeblock-border);
+  border: 1px solid oklch(var(--color-codeblock-border));
   overflow-x: scroll;
   scrollbar-width: none;
   line-height: 150%;
@@ -1462,7 +1470,7 @@ a:has(code:not(pre code)) {
 .highlight-v2.single-line {
   display: flex;
   align-items: center;
-  border: 1px solid var(--color-codeblock-border);
+  border: 1px solid oklch(var(--color-codeblock-border));
   overflow-x: scroll;
   line-height: 1;
 }
@@ -1479,19 +1487,19 @@ a:has(code:not(pre code)) {
 .code-type {
   display: inline-block;
   height: 1.5rem;
-  border-top: 1px solid var(--color-codeblock-border);
-  border-left: 1px solid var(--color-codeblock-border);
-  border-right: 1px solid var(--color-codeblock-border);
+  border-top: 1px solid oklch(var(--color-codeblock-border));
+  border-left: 1px solid oklch(var(--color-codeblock-border));
+  border-right: 1px solid oklch(var(--color-codeblock-border));
   text-transform: uppercase;
   padding: 0.15rem 0.5rem;
   font-size: 0.75rem;
   z-index: 999;
-  background-color: white;
+  background-color: oklch(var(--color-bg-light));
   margin: 0 0 -1px 0;
 }
 
 .code-container {
-  box-shadow: 2px 2px 0px var(--color-codeblock-shadow);
+  box-shadow: 2px 2px 0px oklch(var(--color-codeblock-shadow));
 }
 
 ol .code-block,
@@ -1506,18 +1514,18 @@ ul .code-block {
 }
 
 .code-copy-button {
-  background-color: white;
-  border: 1px solid black;
+  background-color: oklch(var(--color-background));
+  border: 1px solid oklch(var(--color-foreground));
   padding: 4px 6px;
   cursor: pointer;
   font-size: 12px;
-  color: #000;
+  color: oklch(var(--color-foreground));
   display: none;
   position: absolute;
   margin-top: 8px;
   right: 1rem;
   z-index: 1;
-  --color-codeblock-shadow: 0% 0 0;
+  --color-codeblock-shadow: 0 0 0;
   box-shadow: 0px 2px 0px oklch(var(--color-codeblock-shadow) / 0.15);
 }
 
@@ -1539,7 +1547,7 @@ ul .code-block {
 .highlight code .hl {
   width: fit-content;
   min-width: 100%;
-  background-color: var(--color-codeblock-highlight);
+  background-color: oklch(var(--color-codeblock-highlight));
 }
 
 /* MARK: Images
@@ -1575,7 +1583,7 @@ hr {
   width: calc(100% + 2rem);
   margin-left: -1rem;
 
-  border: 1px solid var(--color-divider);
+  border: 1px solid oklch(var(--color-divider));
 }
 
 .feather {

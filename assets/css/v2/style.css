@@ -473,7 +473,7 @@ nav {
   bottom: 0;
   right: 0;
   width: 1px;
-  background-color: var(--color-divider);
+  background-color: oklch(var(--color-divider));
 }
 
 #searchbox {
@@ -1617,15 +1617,15 @@ hr {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: oklch(var(--color-background));
+  color: oklch(var(--color-foreground));
   padding: 1rem 1rem;
   font-size: 1rem;
-  border: 2px solid var(--color-foreground);
+  border: 2px solid oklch(var(--color-foreground));
   z-index: 1000;
   text-decoration: none;
   border-radius: 0;
-  box-shadow: 3px 3px 0px var(--color-shadow);
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
   opacity: 0;
   pointer-events: none;
 }

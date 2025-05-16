@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 
-<head>  
+<head>
   <style>
     body {
       /* Hide entire body for first paint. This suppresses flicker when theme is loading. */
@@ -11,7 +11,7 @@
       flex-direction: column;
     }
   </style>
-  
+
   <noscript>
     <style>
       /* Styles when JavaScript is disabled. Fallsback to old theme. */
@@ -20,7 +20,7 @@
       }
     </style>
   </noscript>
-  
+
 
 
   <script>
@@ -56,42 +56,9 @@
         }
       });
 
-      // swap out v1 and v2 elements
-      const v1ElementIds = ["sidebar", "footer", "toc", "api", "search-v1", "breadcrumb-v1", "list-v1"]
-
-      v1ElementIds.forEach((elementId) => {
-        const element = document.getElementById(elementId);
-        if (element !== null) {
-          element.style.display = isNewTheme ? "none" : "";
-        }
-
-        const trustarc = document.getElementById("teconsent-v1");
-        if (trustarc) {
-          trustarc.id = isNewTheme ? "teconsent-v1" : "teconsent";
-        }
-      });
 
       document.querySelectorAll(".table-v1").forEach((table) => {
         table.style.display = isNewTheme ? "none" : "";
-      });
-
-      const notMfElements = ['[data-mf="false"]'];
-      notMfElements.forEach((elementId) => {
-        document.querySelectorAll(elementId).forEach((element) => {
-          element.style.display = isNewTheme ? "none" : "";
-        });
-      })
-
-      const mfElements = ['[data-mf="true"]'];
-      mfElements.forEach((elementId) => {
-        document.querySelectorAll(elementId).forEach((element) => {
-          element.style.display = isNewTheme ? "" : "none";
-
-          const trustarc = document.getElementById("teconsent-v2");
-          if (trustarc) {
-            trustarc.id = isNewTheme ? "teconsent" : "teconsent-v2";
-          }
-        });
       });
 
       document.getElementById("body").style.visibility = "visible";
@@ -131,61 +98,61 @@
   {{ block "head" . }}
 
   {{ partial "meta.html" . }}
-  
+
   {{ partial "favicon.html" . }}
-  
+
   {{ partial "styles.html" . }}
-  
+
   {{ if in .Params.doctypes "devportal" }}
   {{ partial "devportal/style.html" . }}
   {{ end }}
-  
+
   {{ if fileExists "/layouts/partials/head_custom.html" }}
   {{ partial "head_custom.html" . }}
   {{ end }}
-  
+
   {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
-        
+
   {{ partial "trustarc.html" . }}
-  
+
   {{ partial "tealium-profile.html" . }}
-  
+
   {{ end }}
-  
+
   {{ end }}
-  
+
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K5HG9JT');</script>
-  
+
   </head>
-  
+
   <body id="body">
     {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
   {{ partial "universal-tag.html" . }}
     {{ end }}
-  
+
     <header>
       {{ block "header" . }}{{end}}
     </header>
-  
+
     <section class="base-layout" data-testid="base-layout">
-      <section id="breadcrumb-v1">
+      <section id="breadcrumb-v1" data-mf="false">
         {{ if not .IsHome }}
           {{ if not (in .Params.display_breadcrumb "false" ) }}
-          {{ partial "breadcrumb" .}}  
+          {{ partial "breadcrumb" .}}
           {{ end }}
         {{ end }}
       </section>
-  
+
       <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
         {{ block "main" . }}{{ end }}
       </div>
   </section>
 
-    <footer id="footer">
+    <footer id="footer" data-mf="false">
       {{ block "footer" . }}
       {{ partial "footer.html" . }}
       {{ end }}
@@ -196,7 +163,7 @@
       {{ partial "footer-v2.html" . }}
       {{ end }}
     </footer>
-  {{ partial "scripts.html" . }} 
+  {{ partial "scripts.html" . }}
   <div id="consent_blackbar"></div>
 </body>
 </html>

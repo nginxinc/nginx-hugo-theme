@@ -1,3 +1,11 @@
+[data-mf="true"] {
+  display: block !important;
+}
+
+[data-mf="false"] {
+  display: none !important;
+}
+
 /* Regular */
 @font-face {
   font-family: "JetBrainsMono";

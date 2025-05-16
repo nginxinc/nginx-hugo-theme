@@ -1,0 +1,96 @@
+/* MARK: Reset
+*/
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .breadcrumb {
+    font-variation-settings: "wght" 500;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.breadcrumb {
+  font-weight: 500;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  scroll-margin-top: 1.5rem;
+}
+
+/* MARK: Header
+*/
+p {
+  font-weight: 350;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+ul li,
+ol li {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  padding: 0 0 0 1rem;
+}
+
+ul li:last-child,
+ol li:last-child {
+  margin-bottom: 0;
+}

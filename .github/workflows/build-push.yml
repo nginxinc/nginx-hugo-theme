@@ -1,0 +1,30 @@
+name: build preview
+
+on: 
+  release: 
+    types: 
+      - published
+  pull_request:
+    branches:
+      - "*"
+
+env:
+    REPO_OWNER: "nginx"
+    REPO_NAME: "documentation"
+
+jobs:
+    deploy-example-site:
+      uses: nginxinc/docs-actions/.github/workflows/docs-build-push.yml@9c59fab05a8131f4d691ba6ea2b6a119f3ef832a # v1.0.7
+      with:
+        production_url_path: "/nginx-hugo-theme"
+        preview_url_path: "/previews/nginx-hugo-theme"
+        docs_source_path: "public"
+        docs_build_path: "./exampleSite"
+        doc_type: "hugo"
+        environment: "preview"
+        force_hugo_theme_version: ""
+        auto_deploy_branch: "main"
+        auto_deploy_env: "prod"
+      secrets:
+        AZURE_CREDENTIALS: ${{secrets.AZURE_CREDENTIALS_DOCS}}
+        AZURE_KEY_VAULT: ${{secrets.AZURE_KEY_VAULT_DOCS}}

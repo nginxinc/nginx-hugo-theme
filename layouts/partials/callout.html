@@ -24,9 +24,9 @@
 {{/*  Old frame callout  */}}
 <blockquote class="{{ $class }}" data-mf="false">
   <div>
-    {{ with $icon }}
+    {{- with $icon -}}
       <i class="{{ . }}"></i>
-    {{ end }}
+    {{- end -}}
     <strong>{{ $title }}</strong>
     {{ .content | markdownify }}
   </div>
@@ -59,7 +59,7 @@
     </div>
   </blockquote>
 </div>
-  
+
 {{ else }}
 
 {{/*  "Generic" mf callout  */}}
@@ -68,9 +68,9 @@
 
 <blockquote class="{{ $class }} note" data-mf="true" style="display: none;" data-title="{{ $cleanTitle }}">
   <div class="callout-content">
-    {{ with $icon }}
+    {{- with $icon -}}
       <i class="{{ . }}"></i>
-    {{ end }}
+    {{- end -}}
     <div class="callout-content">
     {{ .content | markdownify }}
     </div>

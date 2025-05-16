@@ -8,6 +8,22 @@ weight: 200
 
 {{<tabs name="common_steps_for_nginx_oss_and_plus">}}
 
+{{%tab name="Call Outs"%}}
+
+{{<call-out "caution call-out" "Deprecated documentation notice" "fa fa-exclamation-triangle" >}}
+This is a callout with an icon.
+{{</call-out>}}
+
+{{<caution>}}
+This is a Caution callout. There was previously a bug with **bold text** that we should be aware of and continue to check for. This callout was invoked with the `<caution>` shortcode. It has no custom title.
+{{</caution>}}
+
+{{<call-out "" "Custom title">}}
+This is a plain callout with a title. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<call-out>` with a custom title parameter.
+{{</call-out>}}
+
+{{%/tab%}}
+
 {{%tab name="Ordered List With Code Block types"%}}
 
 1. Create the `/etc/ssl/nginx` directory:
@@ -40,6 +56,8 @@ nginx -s reload
 ```
 
 {{%/tab%}}
+
+
 {{</tabs>}}
 
 

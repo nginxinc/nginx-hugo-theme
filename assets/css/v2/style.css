@@ -935,6 +935,26 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   }
 }
 
+/* Details/Summary */
+details summary {
+  color: oklch(var(--color-brand));
+  transition: text-decoration-color 0.15s ease-in-out;
+  text-decoration: underline;
+  text-decoration-color: oklch(var(--color-brand) / 0.3);
+
+  & ~ * {
+    margin-top: 1rem;
+  }
+}
+
+details summary:hover {
+  text-decoration-color: oklch(var(--color-brand) / 0.8);
+}
+
+details:hover {
+  cursor: pointer;
+}
+
 /* MARK: Content
 */
 

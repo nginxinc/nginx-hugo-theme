@@ -57,9 +57,10 @@
       });
 
 
-      document.querySelectorAll(".table-v1").forEach((table) => {
-        table.style.display = isNewTheme ? "none" : "";
-      });
+      const trustarc = document.getElementById("teconsent-v1");
+        if (trustarc) {
+          trustarc.id = isNewTheme ? "teconsent-v1" : "teconsent";
+        }
 
       document.getElementById("body").style.visibility = "visible";
     };

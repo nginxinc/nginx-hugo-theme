@@ -15,6 +15,6 @@
   {{ $class = printf "%s %s" $class $narrowOption }}
 {{ end }}
 
-<div data-mf="true" style="display: none;" class="table-v2 {{ $class }}">
+<div data-mf="true" class="table-v2 {{ $class }}">
     {{ .Inner | markdownify }}
 </div>

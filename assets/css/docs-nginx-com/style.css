@@ -1,11 +1,11 @@
 /*copy from nginx-theme.css */
 
 [data-mf="false"] {
-  display: block !important;
+  display: revert;
 }
 
 [data-mf="true"] {
-  display: none !important;
+  display: none;
 }
 
 big,

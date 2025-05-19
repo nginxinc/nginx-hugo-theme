@@ -1,9 +1,9 @@
 [data-mf="true"] {
-  display: block !important;
+  display: revert;
 }
 
 [data-mf="false"] {
-  display: none !important;
+  display: none;
 }
 
 /* Regular */

@@ -11,7 +11,7 @@
           <!--div class="CoveoAnalytics" data-search-hub="HUB_ES_Nginx_Docs_And_Org"></div-->
           <div class="CoveoSearchbox" data-placeholder='Search NGINX Docs...'></div>
         </div>
-        <atomic-search-interface id="search-standalone-header" data-mf="true" style="display:none;">
+        <atomic-search-interface id="search-standalone-header" data-mf="true">
           <atomic-search-box redirection-url="/search.html">
           </atomic-search-box>
         </atomic-search-interface>
@@ -29,8 +29,8 @@
       </ul>
     </div>
     {{ end }}
-    
-    {{ $f5Sites := slice 
+
+    {{ $f5Sites := slice
       (dict "title" "DevCentral" "url" "https://community.f5.com/" "description" "Connect & learn in our hosted community")
       (dict "title" "MyF5" "url" "https://my.f5.com/" "description" "Your key to everything F5, including support, registration keys, and subscriptions")
       (dict "title" "NGINX" "url" "https://nginx.org/" "description" "Learn more about NGINX Open Source and read the community blog")

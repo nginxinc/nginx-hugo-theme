@@ -26,7 +26,7 @@
 
     <section id="maincontent" class="content-layout">
       <div data-cms-edit="content" class="text-content">
-        <section class="breadcrumb-layout wide" data-mf="true" style="display: none;">
+        <section class="breadcrumb-layout wide"">
           {{ if not .IsHome }}
             {{ if not (in .Params.display_breadcrumb "false" ) }}
             {{ partial "breadcrumb" .}}

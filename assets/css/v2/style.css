@@ -688,10 +688,14 @@ nav {
 }
 
 .api {
-  margin: 2rem 0 2rem 2rem;
-  width: 100%;
+  margin: 0 0 1rem 1rem;
   .row {
     display: grid !important;
+  }
+
+  .breadcrumb-layout {
+    width: auto;
+    margin-top: 2rem;
   }
 
   .nginx-docs-api-container {

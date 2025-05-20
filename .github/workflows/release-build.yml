@@ -1,0 +1,24 @@
+name: Build preview on documentation repo upon release publish
+
+on: 
+  release: 
+    types: 
+      - published
+
+env:
+  OWNER: nginx
+  REPO: nginx-hugo-theme
+
+jobs:
+  trigger-documentation-build:
+    runs-on: ubuntu-latest
+    steps: 
+     - name: Trigger 'Build and deploy' workflow in 'documentation' repo
+       run: |
+        curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.F5_CLA_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ env.OWNER }}/${{ env.REPO }}/dispatches" \
+            -d "{"event_type": "trigger-preview-build", "client_payload": {"environment": "preview", "hugo_theme_override": "", "author": "${{ github.event.release.author }}", "tag_name": "${{ github.event.release.tag_name }}", "release_name": "${{ github.event.release.name }}"}}"

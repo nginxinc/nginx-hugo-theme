@@ -34,7 +34,7 @@
       {{- with .Params.banner -}}
         {{- if .enabled -}}
           <div class="banner banner-{{ .type }}">
-            Some banner
+            {{ partial .md . }}
           </div>
         {{- end -}}
       {{- end -}}

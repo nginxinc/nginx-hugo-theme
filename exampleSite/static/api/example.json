@@ -1,0 +1,98 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Simple Book API",
+      "version": "v1",
+      "description": "A simple API to manage books."
+    },
+    "paths": {
+      "/books": {
+        "get": {
+          "summary": "Get all books",
+          "responses": {
+            "200": {
+              "description": "List of books",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Book"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Add a new book",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Book added"
+            }
+          }
+        }
+      },
+      "/books/{id}": {
+        "get": {
+          "summary": "Get a book by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Book found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Book"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Book not found"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Book": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "author": {
+              "type": "string"
+            }
+          },
+          "required": ["id", "title", "author"]
+        }
+      }
+    }
+  }
+  

@@ -31,6 +31,14 @@
       <h1>{{ .Title }}</h1>
       {{ .Content }}
 
+      {{- with .Params.banner -}}
+        {{- if .enabled -}}
+          <div class="banner banner-{{ .type }}">
+            Some banner
+          </div>
+        {{- end -}}
+      {{- end -}}
+
       {{ if  (lt .WordCount 1)  }}
       {{ range .Pages.ByWeight }}
       <h2>

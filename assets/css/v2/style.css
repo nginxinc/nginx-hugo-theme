@@ -699,8 +699,9 @@ nav {
   }
 
   .nginx-docs-api-container {
-    grid-column: 1 / -1 !important;
+    grid-column: 1 / -1;
     max-width: 100% !important;
+    margin-top: 2rem;
   }
 
   .content-layout {

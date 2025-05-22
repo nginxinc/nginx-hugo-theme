@@ -6,7 +6,7 @@ on:
       - published
 
 env:
-  OWNER: nginx
+  OWNER: nginxinc
   REPO: nginx-hugo-theme
 
 jobs:

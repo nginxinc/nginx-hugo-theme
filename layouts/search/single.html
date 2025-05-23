@@ -1,13 +1,13 @@
 {{ define "main" }}
 
-<div class="row flex-xl-nowrap" id="search-v1">
+<div class="row flex-xl-nowrap" id="search-v1" data-mf="false">
   <main class="col-md-10 content" role="main">
     <div class="container"><h1>{{ .Title}}</h1></div>
 
     <div id="search" class="CoveoSearchInterface" data-enable-history="true" >
       <div class="CoveoFolding"></div>
       <div class="CoveoAnalytics" data-search-hub="HUB_ES_Nginx_Docs_And_Org"></div>
-      <div class="coveo-search-section" style="display: none;">
+      <div data-mf="true" class="coveo-search-section">
         <div class="CoveoSearchbox" data-enable-omnibox="true"></div>
       </div>
       <div class="coveo-main-section">
@@ -145,7 +145,7 @@
                 <atomic-result-section-title-metadata>
                   <atomic-result-printable-uri></atomic-result-printable-uri>
                 </atomic-result-section-title-metadata>
-                
+
                 <!-- Excerpt -->
                 <atomic-result-section-excerpt>
                   <atomic-result-text field="excerpt"></atomic-result-text>
@@ -157,7 +157,7 @@
                 </atomic-result-section-bottom-metadata>
               </template>
             </atomic-result-template>
-          </atomic-result-list> 
+          </atomic-result-list>
         </atomic-layout-section>
 
         <!-- Pagination -->

@@ -1,0 +1,7 @@
+{{- $type := .Get 0 | default (.Get "type") | default "" -}}
+{{- $title := .Get 1 | default (.Get "title") | default "" -}}
+<blockquote class="{{ $type }}">
+    <i class="fa-solid fa-triangle-exclamation"></i><strong>{{ $title }}</strong>
+    <br>
+    {{- .Inner | markdownify -}}
+</blockquote>

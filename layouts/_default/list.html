@@ -33,8 +33,9 @@
 
       {{- with .Params.banner -}}
         {{- if .enabled -}}
+          {{- $bannerPage := site.GetPage .md -}}
           <div class="banner banner-{{ .type }}">
-            {{ partial .md . }}
+            {{ $bannerPage.Content }}
           </div>
         {{- end -}}
       {{- end -}}

@@ -66,9 +66,30 @@ This won't render anything.
 
 
 ## details
+<details>
+    <summary>Learn how to pin NGINX Plus to a specific version, closed by default</summary>
+
+And this is the content on how to do so.
+</details>
+
 <details open>
-    <summary>Learn how to pin NGINX Plus to a specific version</summary>
-    And this is the content on how to do so.
+    <summary>example dynamic-agent.conf</summary>
+
+{{<note>}}
+Default location in Linux environments: `/var/lib/nginx-agent/agent-dynamic.conf`
+
+Default location in FreeBSD environments: `/var/db/nginx-agent/agent-dynamic.conf`
+{{</note>}}
+
+```yaml
+# Dynamic configuration file for NGINX Agent.
+
+instance_group: my-instance-group
+tags:
+  - dev
+  - qa
+```
+
 </details>
 
 ## [Heading with link](https://nginx.org/)

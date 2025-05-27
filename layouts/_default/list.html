@@ -31,14 +31,7 @@
       <h1>{{ .Title }}</h1>
       {{ .Content }}
 
-      {{- with .Params.banner -}}
-        {{- if .enabled -}}
-          {{- $bannerPage := site.GetPage .md -}}
-          <div class="banner banner-{{ .type }}">
-            {{ $bannerPage.Content }}
-          </div>
-        {{- end -}}
-      {{- end -}}
+      {{ partial "banner" .}}
 
       {{ if  (lt .WordCount 1)  }}
       {{ range .Pages.ByWeight }}

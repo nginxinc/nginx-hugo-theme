@@ -1,0 +1,22 @@
+{{- with .Params.banner -}}
+  {{- if .enabled -}}
+    <!-- Gather the dates and default to beginning or end of time if frontmatter is not provided -->
+    {{- $currentDate :=  now | dateFormat "2006-01-02" -}}
+    {{- $startDate := index . "start-date" | default "0001-01-01" -}}
+    {{- $endDate := index . "end-date" | default "9999-12-31" -}}
+    
+    <!-- Checks that the current date is within bounds-->
+    {{- if and (ge $currentDate $startDate) (le $currentDate $endDate) -}}
+      {{- if isset . "md" -}}
+          <!-- Show markdown if "md" is provided -->
+          {{- $bannerPage := site.GetPage .md -}}
+          <div class="banner banner-{{ .type }}">
+            {{ $bannerPage.Content }}
+          </div>
+      {{- else -}}
+          <!-- Show default banner if "md" is NOT provided -->
+        
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

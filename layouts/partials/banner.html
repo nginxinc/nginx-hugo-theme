@@ -9,9 +9,9 @@
     {{- if and (ge $currentDate $startDate) (le $currentDate $endDate) -}}
       {{- if isset . "md" -}}
           <!-- Show markdown if "md" is provided -->
-          {{- $bannerPage := site.GetPage .md -}}
+          {{- $bannerPage := readFile .md -}}
           <div class="banner banner-{{ .type }}">
-            {{ $bannerPage.Content }}
+            {{ $bannerPage | markdownify }}
           </div>
       {{- else -}}
           <!-- Show error to writers if "md" is NOT provided -->

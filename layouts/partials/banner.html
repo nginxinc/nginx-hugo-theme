@@ -14,8 +14,8 @@
             {{ $bannerPage.Content }}
           </div>
       {{- else -}}
-          <!-- Show default banner if "md" is NOT provided -->
-        
+          <!-- Show error to writers if "md" is NOT provided -->
+          {{ errorf "Required front matter parameter 'md' is missing or empty for banner." }}
       {{- end -}}
     {{- end -}}
   {{- end -}}

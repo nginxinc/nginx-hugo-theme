@@ -31,7 +31,7 @@
       <h1>{{ .Title }}</h1>
       {{ .Content }}
 
-      {{ partial "banner" .}}
+      {{ partial "banner" . }}
 
       {{ if  (lt .WordCount 1)  }}
       {{ range .Pages.ByWeight }}

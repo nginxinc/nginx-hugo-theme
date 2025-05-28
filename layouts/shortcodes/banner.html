@@ -1,7 +1,9 @@
 {{- $type := .Get 0 | default (.Get "type") | default "" -}}
 {{- $title := .Get 1 | default (.Get "title") | default "" -}}
-<blockquote class="{{ $type }}">
-    <i class="fa-solid fa-triangle-exclamation"></i><strong>{{ $title }}</strong>
-    <br>
-    {{- .Inner | markdownify -}}
-</blockquote>
+{{ partial "callout.html" (dict
+    "class" $type
+    "title" $title
+    "icon"  "fa-solid fa-triangle-exclamation"
+    "inline" true
+    "content" .Inner
+) }}

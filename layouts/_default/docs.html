@@ -5,59 +5,8 @@
     {{ partial "sidebar.html" . }}
   </nav>
 
-  {{$content := .Content}}
-  {{$pattern := `<i[^>]*class=["'][^"']*(?:fas?|fa-solid|fa-regular|fa-brands|far)\s+fa-([^"'\s]+)[^"']*["'][^>]*?(?:\s+style=["']([^"']*)["'])?[^>]*></i>`}}
-  {{$matches := findRE $pattern $content}}
-
-  {{range $matches}}
-    {{$currentMatch := .}}
-    {{$iconName := ""}}
-    {{$styleAttr := ""}}
-
-    {{$submatches := findRESubmatch $pattern $currentMatch}}
-    {{if gt (len $submatches) 0}}
-      {{$iconName = index (index $submatches 0) 1}}
-      {{$styleAttr = index (index $submatches 0) 2}}
-
-      {{- $iconMappings := dict 
-        "bug-slash" "bug-off" 
-        "circle-info" "info" 
-        "info-circle" "info"
-        "file-circle-plus" "file-plus"
-        "check-circle" "circle-check" 
-        "heartbeat" "heart-pulse"
-        "code-branch" "git-branch"
-        "desktop" "monitor"
-        "certificate" "badge"
-        "cogs" "cog"
-        "shield-alt" "shield-half"
-        "memory" "cpu"
-        "hdd" "hard-drive"
-        "exclamation-triangle" "triangle-alert"
-        "triangle-exclamation" "triangle-alert"
-        "tachometer-alt" "circle-gauge"
-        "circle-exclamation" "circle-alert"
-        "arrow-up-right-from-square" "external-link"
-        "pen-to-square" "square-pen"
-        "flask" "flask-conical"
-      -}}
-
-      {{ with index $iconMappings $iconName }}
-          {{$iconName = .}}
-      {{ end }}
-
-      {{$iconHTML := partial "lucide" (dict 
-          "context" $ 
-          "icon" $iconName
-          "style" $styleAttr
-      )}}
-
-      {{ $modifiedMatch := replaceRE `>` ` data-mf=false>` $currentMatch 1}}
-      {{ $modifiedMFIcon := printf "%s %s" $modifiedMatch $iconHTML  }}
-      {{$content = replace $content $currentMatch $modifiedMFIcon}}
-
-    {{end}}
-  {{end}}
+  <!-- Replace icons -->
+  {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
   
   {{if (.Params.catalog) }}
   <main class="content content-has-toc" role="main">

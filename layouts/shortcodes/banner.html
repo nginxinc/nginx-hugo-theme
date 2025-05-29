@@ -1,0 +1,9 @@
+{{- $type := .Get 0 | default (.Get "type") | default "" -}}
+{{- $title := .Get 1 | default (.Get "title") | default "" -}}
+{{ partial "callout.html" (dict
+    "class" $type
+    "title" $title
+    "icon"  "fa-solid fa-triangle-exclamation"
+    "inline" true
+    "content" .Inner
+) }}

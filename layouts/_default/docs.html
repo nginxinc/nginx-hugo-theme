@@ -15,7 +15,7 @@
   {{ else }}
   <main class="content col d-block align-top content-no-toc" role="main">
   {{ end }}
-    
+
   <section class="main-layout">
     <div class="sidebar-layout" id="sidebar-layout">
       <button class="sidebar__mobile__toggle" aria-expanded="false" data-mf="true">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
@@ -33,6 +33,7 @@
             {{ end }}
           {{ end }}
         </section>
+        {{ partial "banner" .}}
         <h1>{{ .Title }}</h1>
         {{ $content | safeHTML }}
         {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}

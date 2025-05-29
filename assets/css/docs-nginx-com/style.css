@@ -1,5 +1,13 @@
 /*copy from nginx-theme.css */
 
+[data-mf="false"] {
+  display: revert;
+}
+
+[data-mf="true"] {
+  display: none;
+}
+
 big,
 html,
 small {
@@ -2248,4 +2256,3 @@ text-decoration: none;
 }
 
 /*======END GDPR2==================*/
-

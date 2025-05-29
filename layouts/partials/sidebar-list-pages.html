@@ -4,23 +4,23 @@
     {{ range $context.Pages.ByWeight }}
     <li>
         {{ if eq .Kind "section" }}
-            <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox" style="display: none;">
+            <input type="checkbox" id="toggle-{{ .File.UniqueID }}" class="toggle-checkbox">
             <label for="toggle-{{ .File.UniqueID }}" class="collapsible-header">
                 {{ if .Pages }}
                     <span class="box expand partial-box"></span>
                     <span class="box opened partial-box"></span>
                 {{ end }}
-                {{ .Title }} 
+                {{ .Title }}
             </label>
             {{ partial "sidebar-list-pages.html" (dict "context" . "currentUrl" $currentUrl) }}
         {{ else if eq .Kind "page" }}
-            {{ if eq $currentUrl .Permalink }}                      
-                <span class="box current partial" id="current-page"></span>                 
-            {{ else }}                     
-                <span class="box-link partial"></span>              
+            {{ if eq $currentUrl .Permalink }}
+                <span class="box current partial" id="current-page"></span>
+            {{ else }}
+                <span class="box-link partial"></span>
             {{ end }}
             <a href="{{ .Permalink }}" style="{{if eq $currentUrl .Permalink}}font-weight: bold;{{end}}">{{ .Title }} </a>
-            {{ if eq $currentUrl .Permalink }}   
+            {{ if eq $currentUrl .Permalink }}
                 {{- with .TableOfContents -}}
                     {{- . -}}
                 {{- end -}}

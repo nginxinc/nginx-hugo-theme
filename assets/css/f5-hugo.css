@@ -793,6 +793,10 @@ redoc {
   overscroll-behavior-y: none;
 }
 
+.nginx-docs-api-container {
+    width: 100%;
+}
+
 .nginx-docs-api-container button {
   border-color: inherit;
   box-shadow: none !important;

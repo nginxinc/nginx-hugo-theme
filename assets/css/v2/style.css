@@ -728,11 +728,6 @@ atomic-search-interface {
   margin-top: 2rem;
 }
 
-#search-standalone-sidebar {
-  min-height: 54px;
-  max-height: 54px;
-}
-
 atomic-search-box {
   &::part(wrapper) {
     border-radius: 0;
@@ -751,6 +746,16 @@ atomic-search-box {
   }
 }
 
+atomic-refine-toggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  atomic-refine-toggle {
+    display: block;
+  }
+}
+
 atomic-query-summary {
   /* Show duration */
   &::part(duration) {
@@ -761,6 +766,7 @@ atomic-query-summary {
 atomic-search-layout {
   grid-template-areas:
     "atomic-section-search"
+    "atomic-section-facets"
     "atomic-section-main"
     "." !important;
 

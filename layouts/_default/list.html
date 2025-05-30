@@ -29,16 +29,18 @@
         {{ end }}
       </section>
       <h1>{{ .Title }}</h1>
-      {{ .Content }}
 
       {{ partial "banner" . }}
 
       {{ if  (lt .WordCount 1)  }}
+      {{ .Content }}
       {{ range .Pages.ByWeight }}
       <h2>
           <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
       </h2>
       {{ end }}
+      {{ else }}
+      {{ partial "custom-landing-page" . }}
       {{end}}
 
       <hr>

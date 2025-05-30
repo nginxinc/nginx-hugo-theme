@@ -1,0 +1,13 @@
+{{ $cards := .Scratch.Get "cards" }}
+{{ range .Pages.ByWeight }}
+{{ $title := .Title }}
+  <h2>
+    <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ $title }}</a>
+  </h2>
+  {{ range $cards }}
+    {{ if eq .title $title }}
+        <p style="margin-left: 1rem;">{{ .content }}</p>
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ .Content }}

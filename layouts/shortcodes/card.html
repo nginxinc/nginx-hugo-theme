@@ -1,0 +1,12 @@
+{{- $current := .Page.Scratch.Get "cards" | default (slice) -}}
+{{- $newCard := dict "title" (.Get "title") "content" (.Inner) -}}
+{{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
+
+{{- if .Get "title" -}}
+  {{- if .Get "titleUrl" -}}
+   <h2 style="padding: 0;"><a href="{{- .Get "titleUrl" -}}">{{- .Get "title" -}}</a></h2>
+  {{- else -}}
+    <h2 style="padding: 0;">{{- .Get "title" -}}</h2>
+  {{- end -}}
+{{ end }}
+<p>{{- .Inner -}}</p>

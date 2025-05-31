@@ -1,9 +1,6 @@
 name: build preview
 
 on: 
-  release: 
-    types: 
-      - published
   pull_request:
     branches:
       - "*"

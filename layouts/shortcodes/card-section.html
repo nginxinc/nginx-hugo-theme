@@ -4,6 +4,9 @@
 {{ if not (in (slice "true" "false") $showAsCards) }}
   {{ warnf "The '<card-section>' Shortcode parameter 'showAsCards' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $showAsCards}}
 {{ end }}
+{{- $current := .Page.Scratch.Get "showAsCards" | default (dict) -}}
+{{- $newShowAsCards := dict (.Get "title" | default "main") ($showAsCards) -}}
+{{- .Page.Scratch.Set "showAsCards" (merge $current ($newShowAsCards)) -}}
 {{ $class := "card-grid wide"}}
 {{- /* Validate that the parent is card-layout */ -}}
 {{ if eq .Parent.Name "card-layout"}}

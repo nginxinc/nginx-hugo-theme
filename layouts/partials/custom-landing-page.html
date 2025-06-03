@@ -1,6 +1,8 @@
 {{ $cards := .Scratch.Get "cards" }}
+{{ $showAsCards := index (.Scratch.Get "showAsCards") "main" }}
 {{ $class := "card-grid wide"}}
-<div>
+
+<div class="{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">
   {{ range .Pages.ByWeight }}
   {{ $title := .Title }}
     <div class="card">

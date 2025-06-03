@@ -1,7 +1,6 @@
 {{- $current := .Page.Scratch.Get "cards" | default (slice) -}}
 {{- $newCard := dict "title" (.Get "title") "content" (.Inner) -}}
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
-
 {{- /* Validate that the parent is card-section */ -}}
 {{ if eq .Parent.Name "card-section"}}
   <div class="card">

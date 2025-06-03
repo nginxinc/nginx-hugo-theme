@@ -2,11 +2,18 @@
 {{- $newCard := dict "title" (.Get "title") "content" (.Inner) -}}
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
 
-{{- if .Get "title" -}}
-  {{- if .Get "titleUrl" -}}
-   <h2 style="padding: 0;"><a href="{{- .Get "titleUrl" -}}">{{- .Get "title" -}}</a></h2>
-  {{- else -}}
-    <h2 style="padding: 0;">{{- .Get "title" -}}</h2>
-  {{- end -}}
+{{- /* Validate that the parent is card-section */ -}}
+{{ if eq .Parent.Name "card-section"}}
+  <div class="card">
+    {{- if .Get "title" -}}
+      {{- if .Get "titleUrl" -}}
+        <h2 class="card-title"><a href="{{- .Get "titleUrl" -}}">{{- .Get "title" -}}</a></h2>
+      {{- else -}}
+        <h2 class="card-title">{{- .Get "title" -}}</h2>
+      {{- end -}}
+    {{ end }}
+    <p>{{- .Inner -}}</p>
+  </div>
+{{ else }}
+  {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}
 {{ end }}
-<p>{{- .Inner -}}</p>

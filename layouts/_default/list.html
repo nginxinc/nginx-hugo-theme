@@ -32,16 +32,17 @@
 
       {{ partial "banner" . }}
 
-      {{ if  (lt .WordCount 1)  }}
-      {{ .Content }}
-      {{ range .Pages.ByWeight }}
-      <h2>
-          <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
-      </h2>
-      {{ end }}
+      {{ $hasCustomContent := .Params.hasCustomContent | default false }}
+      {{ if $hasCustomContent }} 
+        {{ partial "custom-landing-page" . }}
       {{ else }}
-      {{ partial "custom-landing-page" . }}
-      {{end}}
+        {{ .Content }}
+        {{ range .Pages.ByWeight }}
+        <h2>
+            <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
+        </h2>
+        {{ end }}
+      {{ end }}
 
       <hr>
       {{ if .Page.Lastmod }}

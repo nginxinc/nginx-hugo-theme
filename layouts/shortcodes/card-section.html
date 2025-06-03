@@ -1,7 +1,18 @@
-<div class="card-section">
-  {{- if .Get "title" -}}
-    <strong>{{- .Get "title" -}}</strong>
-    <div style="padding-left: 1rem;">{{- .Inner -}}</div>    
-  {{ end }}
-</div>
-<br><br>
+{{- /* Handle different versions of booleans */ -}}
+{{ $showAsCards := .Get 0 | default (.Get "showAsCards") | default "false"}}
+{{- /* Validate the parameter strictly */ -}}
+{{ if not (in (slice "true" "false") $showAsCards) }}
+  {{ warnf "The '<card-section>' Shortcode parameter 'showAsCards' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $showAsCards}}
+{{ end }}
+{{ $class := "card-grid wide"}}
+{{- /* Validate that the parent is card-layout */ -}}
+{{ if eq .Parent.Name "card-layout"}}
+  <div class="card-section">
+    {{- if .Get "title" -}}
+      <strong class="card-section-title">{{- .Get "title" -}}</strong>
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{- .Inner -}}</div>    
+    {{ end }}
+  </div>
+{{ else }}
+  {{ errorf "The '<card-section>' must be nested directly inside the shortcode '<card-layout>'. Please see the exampleSite for an example of usage." }}
+{{ end }}

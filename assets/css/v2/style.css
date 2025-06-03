@@ -674,7 +674,6 @@ nav {
 
   h2 {
     font-size: 1.5rem;
-    margin: 1rem 0 0rem 0;
   }
 
   hr {
@@ -1186,6 +1185,35 @@ h6:has(a):hover {
   display: none;
   bottom: 0;
   color: oklch(var(--color-brand));
+}
+
+/* Landing page cards */
+
+.text-content .card-layout {
+  grid-column: 1 / -1;
+
+  .card-section {
+    margin-bottom: 1rem;
+
+    strong {
+      font-weight: 500;
+    }
+  }
+}
+
+/* Optional grid layout */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 500px));
+  gap: 1.5rem;
+  margin-top: 1rem;
+
+  .card {
+    border: 1px solid oklch(var(--color-codeblock-border));
+    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+    padding: 1rem 2rem 2rem 2rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* MARK: Tables

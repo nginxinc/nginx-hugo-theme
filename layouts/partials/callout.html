@@ -13,10 +13,10 @@
 {{ $sideOption := "side-callout" }}
 {{ $inlineOption := "inline-callout" }}
 
+{{ $gridLayout := "last-third"}}
+
 {{ if $inline }}
-  {{ $class = printf "%s %s" $class $sideOption }}
-{{ else }}
-  {{ $class = printf "%s %s" $class $inlineOption }}
+  {{ $gridLayout = "first-two-thirds" }}
 {{ end }}
 
 
@@ -47,7 +47,7 @@
 {{ if $isSpecialTitle }}
   {{/*  Loud callouts  */}}
   <div>
-  <blockquote class="{{ $class }}" data-mf="true" style="display: none;">
+  <blockquote class="{{ $class }}" data-grid="{{ $gridLayout }}" data-mf="true" style="display: none;">
     <div>
       <div class="call-out-type">
         {{ partial "feather" (dict "context" . "icon" $icon) .}}
@@ -66,7 +66,7 @@
 
 {{ $cleanTitle := strings.TrimSuffix ":" $title}}
 
-<blockquote class="{{ $class }} note" data-mf="true" style="display: none;" data-title="{{ $cleanTitle }}">
+<blockquote class="{{ $class }} note" data-mf="true" data-grid="{{ $gridLayout }}" style="display: none;" data-title="{{ $cleanTitle }}">
   <div class="callout-content">
     {{- with $icon -}}
       <i class="{{ . }}"></i>

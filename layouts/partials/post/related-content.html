@@ -5,7 +5,7 @@
 {{ if $.Scratch.Get "has_related" }}
   <aside>
     <heade><strong>Related Content</strong></header>
-    <hr>
+        <hr class="content__hr">
     <ul>
       {{ $num_to_show := .Site.Params.related_content_limit | default 7 }}
       {{ range first $num_to_show (where (where .Site.Pages ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}

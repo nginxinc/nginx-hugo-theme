@@ -1208,7 +1208,7 @@ h6:has(a):hover {
   gap: 1.5rem;
   margin-top: 1rem;
 
-  .card {
+  .card-container {
     border: 1px solid oklch(var(--color-codeblock-border));
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     padding: 1rem 2rem 2rem 2rem;

@@ -8,7 +8,7 @@ hasCustomContent: true
   <!-- If there is no "title" for <card-section>, it is implied it is the main content section and not a new content section -->
   {{< card-section >}}
     {{< card title="Call Out usages" >}}
-      Examples for <call-out> shortcode
+      Examples for call-out shortcode
     {{</ card >}}
     {{< card title="Code Block usages" >}}
       Examples for codeblock shortcode

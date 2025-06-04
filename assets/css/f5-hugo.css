@@ -423,6 +423,16 @@ h3.card-title {
   font-weight: 400;
 }
 
+/* Landing page cards */
+.text-content .card-layout {
+  .card-section {
+    margin-bottom: 1rem;
+
+    strong {
+      font-weight: 500;
+    }
+  }
+}
 #f5-related,
 #nginx-products {
   width: 100%;

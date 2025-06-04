@@ -3,7 +3,7 @@
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
 {{- /* Validate that the parent is card-section */ -}}
 {{ if eq .Parent.Name "card-section"}}
-  <div class="card">
+  <div class="card-container" style="display: none;" data-mf="true">
     {{- if .Get "title" -}}
       {{- if .Get "titleUrl" -}}
         <h2 class="card-title"><a href="{{- .Get "titleUrl" -}}">{{- .Get "title" -}}</a></h2>
@@ -12,6 +12,17 @@
       {{- end -}}
     {{ end }}
     <p>{{- .Inner -}}</p>
+  </div>
+  <div class="col-md-5 card" data-mf="false">
+    <div class="card-body">
+      <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+        {{- if .Get "icon" -}}
+          <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ .Get "icon" }}.png"/>
+        {{- end -}}
+        <a href="{{- .Get "titleUrl" -}}">{{- .Get "title" -}}</a>
+      </h3>
+      <p>{{- .Inner -}}</p>
+    </div>
   </div>
 {{ else }}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}

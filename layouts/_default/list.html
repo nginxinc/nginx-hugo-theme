@@ -34,7 +34,9 @@
 
       {{ $hasCustomContent := .Params.hasCustomContent | default false }}
       {{ if $hasCustomContent }} 
-        {{ partial "custom-landing-page" . }}
+        {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
+        {{ .Page.Scratch.Set "custom-landing-page-context" . }}
+        {{ .Content }}
       {{ else }}
         {{ .Content }}
         {{ range .Pages.ByWeight }}

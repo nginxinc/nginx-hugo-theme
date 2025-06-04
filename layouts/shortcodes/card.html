@@ -1,29 +1,38 @@
+{{- $title := .Get "title" -}}
+{{- $titleUrl := .Get "titleUrl" | default "/" -}} 
+{{- $icon := .Get "icon" | default "NGINX-product-icon" -}}
 {{- $current := .Page.Scratch.Get "cards" | default (slice) -}}
-{{- $newCard := dict "title" (.Get "title") "content" (.Inner) -}}
+{{- $newCard := dict "title" ($title) "content" (.Inner) -}}
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
 {{- /* Validate that the parent is card-section */ -}}
-{{ if eq .Parent.Name "card-section"}}
+{{- if eq .Parent.Name "card-section" -}}
   <div class="card-container" style="display: none;" data-mf="true">
-    {{- if .Get "title" -}}
-      {{- if .Get "titleUrl" -}}
-        <h2 class="card-title"><a href="{{- .Get "titleUrl" -}}">{{- .Get "title" -}}</a></h2>
+    {{- if $title -}}
+      {{- if $titleUrl -}}
+        <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
       {{- else -}}
-        <h2 class="card-title">{{- .Get "title" -}}</h2>
+        <h2 class="card-title">{{- $title -}}</h2>
       {{- end -}}
-    {{ end }}
+    {{- else -}}
+      {{ errorf "Mainframe: Missing param 'title'" }}
+    {{- end -}}
     <p>{{- .Inner -}}</p>
   </div>
   <div class="col-md-5 card" data-mf="false">
     <div class="card-body">
       <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
-        {{- if .Get "icon" -}}
-          <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ .Get "icon" }}.png"/>
+        {{- if $icon -}}
+          <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $icon }}.png"/>
         {{- end -}}
-        <a href="{{- .Get "titleUrl" -}}">{{- .Get "title" -}}</a>
+        {{- if ($title) -}}
+          <a href="{{- $titleUrl -}}">{{- $title -}}</a>
+        {{- else -}}
+          {{ errorf "Old theme: Missing param 'title'" }}
+        {{- end -}}
       </h3>
       <p>{{- .Inner -}}</p>
     </div>
   </div>
-{{ else }}
+{{- else -}}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}
-{{ end }}
+{{- end -}}

@@ -1,0 +1,28 @@
+{{ $title := .Get "title" }}
+{{ $showAsCardsParam := .Get "showAsCards" | default "false"}}
+{{- /* Validate the parameter strictly */ -}}
+{{- if not (in (slice "true" "false") $showAsCardsParam) -}}
+  {{- warnf "The '<card-section>' Shortcode parameter 'showAsCards' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $showAsCardsParam -}}
+{{- end -}}
+{{- $showAsCards := cond (eq $showAsCardsParam "true") "true" "false" -}}
+{{- $current := .Page.Scratch.Get "showAsCards" | default (dict) -}}
+{{- $newShowAsCards := dict ($title | default "main") ($showAsCards) -}}
+{{- .Page.Scratch.Set "showAsCards" (merge $current ($newShowAsCards)) -}}
+{{- $class := "card-grid wide" -}}
+{{- /* Validate that the parent is card-layout */ -}}
+{{ if eq .Parent.Name "card-layout"}}
+  <div class="card-section" data-mf="true" style="display: none;">
+    {{- if $title -}}
+      <strong class="card-section-title">{{- $title -}}</strong>
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{- .Inner -}}</div>    
+    {{ end }}
+  </div>
+  <div class="row" data-mf="false">
+    {{- if $title -}}
+        <strong class="card-section-title">{{- $title -}}</strong>
+        <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }} card-deck">{{- .Inner -}}</div>    
+    {{ end }}
+  </div>
+{{ else }}
+  {{ errorf "The '<card-section>' must be nested directly inside the shortcode '<card-layout>'. Please see the exampleSite for an example of usage." }}
+{{ end }}

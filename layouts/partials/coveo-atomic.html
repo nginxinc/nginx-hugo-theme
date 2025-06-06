@@ -1,7 +1,12 @@
 <atomic-search-interface id="search-v2">
     <atomic-search-layout>
       <!-- Search/Metadata Section -->
-      <atomic-layout-section section="search">
+      {{ if .Params.searchOnPage }}
+        <atomic-layout-section section="search">
+          <atomic-search-box></atomic-search-box>
+        </atomic-layout-section>
+      {{ end }}
+      <atomic-layout-section section="status">
         <div class="atomic-full-summary-and-sort">
           <atomic-refine-toggle></atomic-refine-toggle>
           <atomic-query-summary></atomic-query-summary>

@@ -6,7 +6,7 @@
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
 {{- /* Validate that the parent is card-section */ -}}
 {{- if eq .Parent.Name "card-section" -}}
-  <div class="card-container" style="display: none;" data-mf="true">
+  <div class="card-container">
     {{- if $title -}}
       {{- if $titleUrl -}}
         <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
@@ -17,21 +17,6 @@
       {{ errorf "Mainframe: Missing param 'title'" }}
     {{- end -}}
     <p>{{- .Inner -}}</p>
-  </div>
-  <div class="col-md-5 card" data-mf="false">
-    <div class="card-body">
-      <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
-        {{- if $icon -}}
-          <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $icon }}.png"/>
-        {{- end -}}
-        {{- if ($title) -}}
-          <a href="{{- $titleUrl -}}">{{- $title -}}</a>
-        {{- else -}}
-          {{ errorf "Old theme: Missing param 'title'" }}
-        {{- end -}}
-      </h3>
-      <p>{{- .Inner -}}</p>
-    </div>
   </div>
 {{- else -}}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}

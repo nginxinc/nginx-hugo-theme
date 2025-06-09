@@ -1,14 +1,5 @@
 {{ define "main" }}
-
-<div class="row flex-xl-nowrap" id="search-v1">
-  <main class="col-md-10 content" role="main">
-    <div class="container"><h1>{{ .Title}}</h1></div>
-
-    {{ partial "coveo-legacy.html" .}}
-  </main>
-</div>
-
-<section class="main-layout" data-mf="true" style="display: none; margin-left: 2rem;" >
+<section class="main-layout" style="margin-left: 2rem;" >
   {{ partial "coveo-atomic.html" .}}
 </section>
 {{ end }}

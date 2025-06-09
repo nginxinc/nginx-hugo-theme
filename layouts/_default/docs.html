@@ -1,10 +1,6 @@
 {{ define "main" }}
 <div class="docs-container row override-sidebar-collapse">
 <div class="docs-container row override-sidebar-collapse">
-  <nav id="sidebar" class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top">
-    {{ partial "sidebar.html" . }}
-  </nav>
-
   <!-- Replace icons -->
   {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
   
@@ -18,15 +14,15 @@
 
   <section class="main-layout">
     <div class="sidebar-layout" id="sidebar-layout">
-      <button class="sidebar__mobile__toggle" aria-expanded="false" data-mf="true">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
-      <nav data-mf="true" id="sidebar-v2" class="sidebar">
+      <button class="sidebar__mobile__toggle" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
+      <nav id="sidebar-v2" class="sidebar">
         {{ partial "sidebar-v2.html" . }}
       </nav>
     </div>
 
     <section id="maincontent" class="content-layout">
       <div data-cms-edit="content" class="text-content">
-        <section class="breadcrumb-layout wide" data-mf="true" style="display: none;">
+        <section class="breadcrumb-layout wide">
           {{ if not .IsHome }}
             {{ if not (in .Params.display_breadcrumb "false" ) }}
             {{ partial "breadcrumb" .}}  

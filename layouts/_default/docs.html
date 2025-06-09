@@ -14,7 +14,7 @@
 
   <section class="main-layout">
     <div class="sidebar-layout" id="sidebar-layout">
-      <button class="sidebar__mobile__toggle" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
+      <button class="sidebar__mobile__toggle" aria-label="sidebar__mobile__toggle" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
       <nav id="sidebar-v2" class="sidebar">
         {{ partial "sidebar-v2.html" . }}
       </nav>

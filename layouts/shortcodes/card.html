@@ -16,7 +16,7 @@
     {{- else -}}
       {{ errorf "Mainframe: Missing param 'title'" }}
     {{- end -}}
-    <p>{{- .Inner -}}</p>
+    {{ .Inner }}
   </div>
 {{- else -}}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}

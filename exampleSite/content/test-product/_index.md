@@ -23,5 +23,11 @@ hasCustomContent: true
     {{< card title="NGINX Plus" titleUrl="/nginx/" >}}
       Installing NGINX
     {{</ card >}}
+    {{< card title="NGINX Plus" titleUrl="/nginx/" >}}
+      Installing NGINX
+    {{</ card >}}
+    {{< card title="Test Product" titleUrl="/test-product/" sizeOption="long" >}}
+      Test Product
+    {{</ card >}}
   {{</ card-section >}}
 {{</ card-layout >}}

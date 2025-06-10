@@ -1,12 +1,13 @@
 {{- $title := .Get "title" -}}
 {{- $titleUrl := .Get "titleUrl" | default "/" -}} 
 {{- $icon := .Get "icon" | default "NGINX-product-icon" -}}
+{{- $sizeOption := .Get "sizeOption" | default "short" -}}
 {{- $current := .Page.Scratch.Get "cards" | default (slice) -}}
 {{- $newCard := dict "title" ($title) "content" (.Inner) -}}
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
 {{- /* Validate that the parent is card-section */ -}}
 {{- if eq .Parent.Name "card-section" -}}
-  <div class="card-container" style="display: none;" data-mf="true">
+  <div class="card-container {{ $sizeOption }}" style="display: none;" data-mf="true">
     {{- if $title -}}
       {{- if $titleUrl -}}
         <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>

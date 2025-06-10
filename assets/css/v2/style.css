@@ -732,7 +732,7 @@ atomic-search-interface {
   margin-top: 2rem;
 }
 
-atomic-search-box {
+.header-search-box {
   &::part(wrapper) {
     border-radius: 0;
     border-color: oklch(var(--color-foreground));
@@ -770,15 +770,15 @@ atomic-query-summary {
 atomic-search-layout {
   grid-template-areas:
     "atomic-section-search"
+    "atomic-section-status"
     "atomic-section-facets"
-    "atomic-section-main"
-    "." !important;
+    "atomic-section-main";
 
   grid-template-columns: minmax(50%, 100%) !important;
 
   @media (min-width: 1024px) {
     grid-template-areas:
-      ".                     atomic-section-search"
+      "atomic-section-search atomic-section-status"
       "atomic-section-facets atomic-section-main  "
       "atomic-section-facets .                    " !important;
 
@@ -787,10 +787,17 @@ atomic-search-layout {
   }
 }
 
-atomic-search-layout atomic-layout-section[section="search"] {
+atomic-search-layout atomic-layout-section[section="status"] {
   /* Override Coveo's width to be full */
   max-width: 100%;
+  display: block;
+  width: 100%;
+}
+
+atomic-search-layout atomic-layout-section[section="search"] {
+  /* Override Coveo's width to be full */
   width: 100% !important;
+  max-width: 100% !important;
 }
 
 .atomic-full-summary-and-sort {

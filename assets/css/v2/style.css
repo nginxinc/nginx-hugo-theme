@@ -1067,7 +1067,7 @@ p {
 .breadcrumb-layout {
   position: relative;
   background-color: white;
-  width: calc(100% + 4rem);
+  /* width: calc(100% + 4rem); */
   margin-left: -2rem;
   padding: 1rem 2rem;
 
@@ -1710,6 +1710,14 @@ ul .code-block {
   width: fit-content;
   min-width: 100%;
   background-color: oklch(var(--color-codeblock-highlight));
+}
+
+/* MARK: Catalog
+*/
+.catalog {
+  .catalog__table {
+    padding-bottom: 2rem;
+  }
 }
 
 /* MARK: Images

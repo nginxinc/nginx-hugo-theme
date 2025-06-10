@@ -3,7 +3,7 @@
 <div class="docs-container row override-sidebar-collapse">
   <!-- Replace icons -->
   {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
-  
+
   {{if (.Params.catalog) }}
   <main class="content content-has-toc" role="main">
   {{ else if and (gt .WordCount 200 ) (.Params.toc) }}
@@ -25,7 +25,7 @@
         <section class="breadcrumb-layout wide">
           {{ if not .IsHome }}
             {{ if not (in .Params.display_breadcrumb "false" ) }}
-            {{ partial "breadcrumb" .}}  
+            {{ partial "breadcrumb" .}}
             {{ end }}
           {{ end }}
         </section>
@@ -36,7 +36,7 @@
         {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
 
         <hr>
-  
+
         {{ if .Page.Lastmod }}
         <div class="last-modified">
           {{ partial "page-meta-links" . }}
@@ -48,14 +48,7 @@
 
         {{ partial "previous-next-links-in-section-with-title.html" . }}
         </main>
-        {{ if and (gt .WordCount 200 ) (.Params.toc) }}
-          {{ if (add  (len (findRE "<h3" .Content)) (len (findRE "<h2" .Content))) }}
-            <div id="toc" class="col-md-3 d-none d-xl-block d-print-none nginx-toc align-top">
-            {{ partial "toc.html" . }}
-            </div>
-          {{ end }}
-        {{ end }}
-        
+
       </div>
     </section>
   </section>

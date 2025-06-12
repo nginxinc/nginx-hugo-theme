@@ -1,4 +1,5 @@
 {{ $title := .Get "title" }}
+{{ $isFeaturedSectionParam := .Get "isFeaturedSection" | default "false" }}
 {{ $showAsCardsParam := .Get "showAsCards" | default "false"}}
 {{- /* Validate the parameter strictly */ -}}
 {{- if not (in (slice "true" "false") $showAsCardsParam) -}}
@@ -8,13 +9,20 @@
 {{- $current := .Page.Scratch.Get "showAsCards" | default (dict) -}}
 {{- $newShowAsCards := dict ($title | default "main") ($showAsCards) -}}
 {{- .Page.Scratch.Set "showAsCards" (merge $current ($newShowAsCards)) -}}
-{{- $class := "card-grid wide" -}}
+{{- /* Limit the cards if it is a featured section */ -}}
+{{- if not (in (slice "true" "false") $isFeaturedSectionParam) -}}
+  {{- warnf "The '<card-section>' Shortcode parameter 'isFeaturedSection' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFeaturedSectionParam -}}
+{{- end -}}
+{{- $isFeaturedSection := cond (eq $isFeaturedSectionParam "true") "true" "false" -}}
+{{- $class := "card-grid" -}}
 {{- /* Validate that the parent is card-layout */ -}}
 {{ if eq .Parent.Name "card-layout"}}
-  <div class="card-section" data-mf="true" style="display: none;">
+  <div class="card-section {{if eq $isFeaturedSection "true"}}featured-section{{ end }}">
     {{- if $title -}}
       <strong class="card-section-title">{{- $title -}}</strong>
       <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{- .Inner -}}</div>    
+    {{ else }}
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{ .Inner }}</div>    
     {{ end }}
   </div>
   <div class="row" data-mf="false">

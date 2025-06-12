@@ -1,18 +1,34 @@
 {{- $title := .Get "title" -}}
 {{- $titleUrl := .Get "titleUrl" | default "/" -}} 
-{{- $icon := .Get "icon" | default "NGINX-product-icon" -}}
+{{- $icon := .Get "icon" | default "book-open" -}}
+{{- $brandIcon := .Get "brandIcon" -}}
+{{- $isFeaturedParam := .Get "isFeatured" | default "false" }}
+{{- /* Validate the parameter strictly */ -}}
+{{- if not (in (slice "true" "false") $isFeaturedParam) -}}
+  {{- warnf "The '<card>' Shortcode parameter 'isFeatured' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFeaturedParam -}}
+{{- end -}}
+{{- $isFeatured := cond (eq $isFeaturedParam "true") "true" "false" -}}
 {{- $current := .Page.Scratch.Get "cards" | default (slice) -}}
 {{- $newCard := dict "title" ($title) "content" (.Inner) -}}
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
-{{- /* Validate that the parent is card-section */ -}}
-{{- if eq .Parent.Name "card-section" -}}
-  <div class="card-container" style="display: none;" data-mf="true">
+{{- /* Validate that the parent is card-section and under 3 cards */ -}}
+{{- if (eq .Parent.Name "card-section") -}}
+  <div class="card-container {{ if eq $isFeatured "true" }}featured-card{{ end }}">
     {{- if $title -}}
-      {{- if $titleUrl -}}
-        <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
-      {{- else -}}
-        <h2 class="card-title">{{- $title -}}</h2>
-      {{- end -}}
+      <div class="card-header">
+        {{- if $brandIcon -}}
+          <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}.svg">
+        {{- else -}}
+          {{- if $icon -}}
+            {{ partial "lucide" (dict "context" . "icon" $icon) }}
+          {{- end -}}
+        {{- end -}}
+        {{- if $titleUrl -}}
+          <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
+        {{- else -}}
+          <h2 class="card-title">{{- $title -}}</h2>
+        {{- end -}}
+      </div>
     {{- else -}}
       {{ errorf "Mainframe: Missing param 'title'" }}
     {{- end -}}

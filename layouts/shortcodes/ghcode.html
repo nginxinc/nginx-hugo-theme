@@ -5,12 +5,8 @@
   {{ with .Err }}
     {{ errorf "%s" . }}
   {{ else }}
-    {{ $lang := path.Ext $file | strings.TrimPrefix "." }}
-    <div id="code-block-v1" data-mf="false">
-      {{ highlight .Content $lang $params }}
-    </div>
-    
-    <div class="code-block" data-mf="true" style="display: none;">
+    {{ $lang := path.Ext $file | strings.TrimPrefix "." }}    
+    <div class="code-block">
       {{- if and (ne $lang "") (ne $lang "none") -}}
           <span class="code-type chroma">{{ $lang }}</span>
       {{- end -}}

@@ -17,7 +17,6 @@ hasCustomContent: true
       Examples for codeblock shortcode
     {{</ card >}}
   {{</ card-section >}}
-
   # Other Products on ExampleSite
   {{< card-section title="NGINX" showAsCards="true" >}}
     {{< card title="NGINX Plus" titleUrl="/nginx/" >}}

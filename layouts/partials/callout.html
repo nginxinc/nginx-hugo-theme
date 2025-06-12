@@ -19,20 +19,6 @@
   {{ $class = printf "%s %s" $class $inlineOption }}
 {{ end }}
 
-
-
-{{/*  Old frame callout  */}}
-<blockquote class="{{ $class }}" data-mf="false">
-  <div>
-    {{- with $icon -}}
-      <i class="{{ . }}"></i>
-    {{- end -}}
-    <strong>{{ $title }}</strong>
-    {{ .content | markdownify }}
-  </div>
-</blockquote>
-
-
 {{/*  Render a different block, if "loud" callouts are used  */}}
 {{ $specialTitles := slice "Caution" "Warning" "Deprecated" "Important" }}
 {{ $specialTitleIcons := dict
@@ -47,7 +33,7 @@
 {{ if $isSpecialTitle }}
   {{/*  Loud callouts  */}}
   <div>
-  <blockquote class="{{ $class }}" data-mf="true" style="display: none;">
+  <blockquote class="{{ $class }}">
     <div>
       <div class="call-out-type">
         {{ partial "feather" (dict "context" . "icon" $icon) .}}
@@ -66,7 +52,7 @@
 
 {{ $cleanTitle := strings.TrimSuffix ":" $title}}
 
-<blockquote class="{{ $class }} note" data-mf="true" style="display: none;" data-title="{{ $cleanTitle }}">
+<blockquote class="{{ $class }} note" data-title="{{ $cleanTitle }}">
   <div class="callout-content">
     {{- with $icon -}}
       <i class="{{ . }}"></i>

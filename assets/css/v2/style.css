@@ -233,7 +233,7 @@ header {
     @media (max-width: 700px) {
       a,
       ul {
-        width: 50%;
+        width: calc(50% - 1rem);
       }
 
       li {

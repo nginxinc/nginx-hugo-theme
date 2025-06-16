@@ -1429,9 +1429,12 @@ li:has(> div > blockquote) {
   .tab-labels {
     display: flex;
     position: relative;
-    flex-wrap: wrap;
-    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    white-space: nowrap;
     margin: 0;
+    padding-left: 2rem;
 
     > :not(:last-child) {
       border-right: none;
@@ -1444,6 +1447,7 @@ li:has(> div > blockquote) {
       color: oklch(var(--color-brand));
       padding: 10px;
       margin: 0;
+      position: relative;
 
       label {
         cursor: pointer;
@@ -1465,19 +1469,23 @@ li:has(> div > blockquote) {
     }
   }
 
-  .tab-labels:before {
+  .tab-labels::before {
     content: "";
-    position: relative;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
     width: 2rem;
     border-bottom: 1px solid oklch(var(--color-foreground));
   }
 
-  .tab-labels:after {
+  .tab-labels::after {
     content: "";
     position: relative;
     bottom: 0;
     left: 0;
-    flex-grow: 1;
+    right: 0;
+    width: 100%;
     border-bottom: 1px solid oklch(var(--color-foreground));
   }
 }

@@ -1419,140 +1419,67 @@ li:has(> div > blockquote) {
 /* MARK: Tabs
 */
 .tabs-container {
-  /* border-bottom: 1px solid black; */
-  white-space: nowrap;
-  position: relative;
-
-  /* Move to gutter */
   width: calc(100% + 2rem);
   margin-left: -1rem;
 
-  &::after {
-    content: "";
-    position: absolute;
-    display: block;
-    border-bottom: 1px solid oklch(var(--color-foreground));
-    bottom: 0;
-    right: 0;
-    width: 2rem;
-  }
-}
-
-.nav-tabs {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  height: 100%;
-  scrollbar-width: none;
-
-  list-style: none;
-  display: flex;
-  justify-content: start;
-  margin: 0;
-  padding: 0 2rem;
-  position: relative;
-
-  > :not(:last-child) {
-    border-right: none;
-  }
-
-  &::before {
-    /* Horizontal line before tab blocks */
-    content: "";
-    position: absolute;
-    display: block;
-    border-bottom: 1px solid oklch(var(--color-foreground));
-    bottom: 0;
-    left: 0;
-    width: 2rem;
-  }
-
-  &::after {
-    /* Horizontal line after tab blocks */
-    content: "";
-    position: relative;
-    display: block;
-    border-bottom: 1px solid oklch(var(--color-foreground));
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  --scrollbar-width: 1px;
-  --mask-height: 32px;
-  --mask-image-content: linear-gradient(
-    to right,
-    transparent,
-    oklch(var(--color-foreground)) var(--mask-height),
-    oklch(var(--color-foreground)) calc(100% - var(--mask-height)),
-    transparent
-  );
-
-  --mask-size-content: 100% calc(100% - var(--scrollbar-width));
-
-  --mask-image-scrollbar: linear-gradient(
-    oklch(var(--color-foreground)),
-    oklch(var(--color-foreground))
-  );
-  --mask-size-scrollbar: 100% var(--scrollbar-width);
-  mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
-  mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
-  mask-position: 0 0, 0 100%;
-  mask-repeat: no-repeat, no-repeat;
-}
-
-.nav-item {
-  border: 1px solid oklch(var(--color-tabs-inactive-border));
-  border-bottom: 1px solid oklch(var(--color-foreground));
-  padding: 10px;
-  margin-bottom: 0;
-
-  a {
-    text-decoration: none;
-  }
-
-  .active {
-    color: oklch(var(--color-foreground));
-  }
-}
-
-.nav-item:has(.active) {
-  /* Change the border colors of li that is has a child with a class "active" */
-  border-top: 1px solid oklch(var(--color-foreground));
-  border-left: 1px solid oklch(var(--color-foreground));
-  border-bottom: none;
-
-  /* Change the border of next child */
-  + li {
-    border-left: 1px solid oklch(var(--color-foreground));
-  }
-}
-
-.nav-item:last-child:has(.active) {
-  /* If on last tab, change the right border since it does not have a next sibling */
-  border-right: 1px solid oklch(var(--color-foreground));
-}
-
-.tab-content {
-  border-bottom: 1px solid oklch(var(--color-foreground));
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  /* Move to gutter */
-  width: calc(100% + 2rem);
-  margin-left: -1rem;
-
-  .tab-pane {
+  input[type="radio"] {
     display: none;
   }
 
-  .active {
-    display: block !important;
-  }
-}
+  .tab-labels {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0;
 
-.tab-content > div > * {
-  margin: 0 0 var(--flow-gap) 0;
+    > :not(:last-child) {
+      border-right: none;
+    }
+
+    li {
+      list-style: none;
+      border: 1px solid oklch(var(--color-tabs-inactive-border));
+      border-bottom: 1px solid oklch(var(--color-foreground));
+      color: oklch(var(--color-brand));
+      padding: 10px;
+      margin: 0;
+
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .tab-content {
+    display: none;
+    margin-top: 1rem;
+    margin-left: 0;
+    width: 100%;
+
+    padding: 1rem;
+    border-bottom: 1px solid oklch(var(--color-foreground));
+
+    & > * {
+      margin: 0 0 var(--flow-gap) 0;
+    }
+  }
+
+  .tab-labels:before {
+    content: "";
+    position: relative;
+    width: 2rem;
+    border-bottom: 1px solid oklch(var(--color-foreground));
+  }
+
+  .tab-labels:after {
+    content: "";
+    position: relative;
+    bottom: 0;
+    left: 0;
+    flex-grow: 1;
+    border-bottom: 1px solid oklch(var(--color-foreground));
+  }
 }
 
 /* MARK: Codeblocks

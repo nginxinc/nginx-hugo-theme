@@ -1,51 +1,64 @@
 {{- .Page.Scratch.Add "tabset-counter" 1 -}}
 {{- $tab_set_id := .Get "name" | default (printf "tabset-%s-%d" (.Page.RelPermalink) (.Page.Scratch.Get "tabset-counter") ) | anchorize -}}
 {{- $tabs := .Scratch.Get "tabs" -}}
-{{- if .Inner -}}{{- /* We don't use the inner content, but Hugo will complain if we don't reference it. */ -}}{{- end -}}
-<div class="tabs-container">
-	<ul class="nav nav-tabs" id="{{ $tab_set_id }}" role="tablist">
-		{{- range $i, $e := $tabs -}}
-		{{- $id := printf "%s-%d" $tab_set_id $i -}}
-		{{- if (eq $i 0) -}}
-			<li class="nav-item"><a data-toggle="tab" class="nav-link active" href="#{{ $id }}" role="tab" aria-controls="{{ $id }}" aria-selected="true">{{- trim .name " " -}}</a></li>
-		{{ else }}
-			<li class="nav-item"><a data-toggle="tab" class="nav-link" href="#{{ $id }}" role="tab" aria-controls="{{ $id }}">{{- trim .name " " -}}</a></li>
-		{{- end -}}
+{{- if .Inner -}}
+  <div class="tabs-container" id="{{ $tab_set_id }}">
+    {{- range $i, $e := $tabs -}}
+	  {{- $id := printf "%s-tab%d" $tab_set_id $i -}}
+      {{- if eq $i 0 -}}
+        <input type="radio" name="{{$tab_set_id}}" id="{{$id}}" aria-hidden="true" checked="checked">
+      {{- else -}}
+        <input type="radio" name="{{$tab_set_id}}" id="{{$id}}" aria-hidden="true">
+      {{- end -}}  
 	{{- end -}}
+	<ul class="tab-labels" role="tablist" id="{{ $tab_set_id }}">
+	  {{- range $i, $e := $tabs -}}
+	  	{{- $id := printf "%s-tab%d" $tab_set_id $i -}}
+		<li>
+		  {{- if eq $i 0 -}}
+			<label class="tab-label" role="tab" id="{{$id}}" for="{{$id}}" aria-controls="{{ $id }}" aria-selected="true" tabindex="0">
+			  {{- trim .name " " -}}
+			</label>
+		  {{- else -}}
+			<label class="tab-label" role="tab" id="{{$id}}" for="{{$id}}" aria-controls="{{ $id }}" tabindex="0">
+			  {{- trim .name " " -}}
+			</label>
+		  {{- end -}}
+		</li>
+	  {{- end -}}
 	</ul>
-</div>
-<div class="tab-content" id="{{ $tab_set_id }}">
-{{- range $i, $e := $tabs -}}
-{{- $id := printf "%s-%d" $tab_set_id $i -}}
-{{- if (eq $i 0) -}}
-  <div id="{{ $id }}" class="tab-pane show active" role="tabpanel" aria-labelledby="{{ $id }}">
-{{ else }}
-  <div id="{{ $id }}" class="tab-pane" role="tabpanel" aria-labelledby="{{ $id }}">
+	<div class="tabs-content">
+	  {{- range $i, $e := $tabs -}}
+	    {{- $id := printf "%s-panel%d" $tab_set_id $i -}}
+		<div class="tab-content" role="tabpanel" id="{{ $tab_set_id }}-panel{{ $i }}" aria-labelledby="{{ $id }}">
+		  {{ with .content }}
+			{{ . }}
+		  {{ end }}
+		</div> 
+	  {{- end -}}
+	</div> 
+  </div>
 {{ end }}
-	{{- with .content -}}
-		{{- . -}}
-	{{- else -}}
-		{{- if eq $.Page.BundleType "leaf" -}}
-			{{- /* find the file somewhere inside the bundle. Note the use of double asterisk */ -}}
-			{{- with $.Page.Resources.GetMatch (printf "**%s*" .include) -}}
-				{{- if ne .ResourceType "page" -}}
-				{{- /* Assume it is a file that needs code highlighting. */ -}}
-				{{- $codelang := $e.codelang | default ( path.Ext .Name | strings.TrimPrefix ".") -}}
-				{{- highlight .Content $codelang "" -}}
-				{{- else -}}
-					{{- .Content -}}
-				{{- end -}}
-			{{- end -}}
-		{{- else -}}
-		{{- $path := path.Join $.Page.File.Dir .include -}}
-		{{- $page := site.GetPage "page" $path -}}
-		{{- with $page -}}
-			{{- .Content -}}
-		{{- else -}}
-		{{- errorf "[%s] tabs include not found for path %q" site.Language.Lang $path -}}
-		{{- end -}}
-		{{- end -}}
-	{{- end -}}
-</div>
-{{- end -}}
-</div>
+<style>
+  {{- range $i, $e := $tabs -}}
+  	.tabs-container input[type="radio"]:checked:nth-of-type({{ add $i 1 }}) ~ .tab-labels li:nth-of-type({{ add $i 1 }}) {
+	  border: none;
+      border-top: 1px solid oklch(var(--color-foreground));
+      border-left: 1px solid oklch(var(--color-foreground));
+      border-bottom: none;
+      color: oklch(var(--color-foreground));
+
+	  + li {
+		border-left: 1px solid oklch(var(--color-foreground));
+	  }
+
+	  &:last-of-type {
+      	border-right: 1px solid oklch(var(--color-foreground));
+      }
+	}
+
+	.tabs-container input[type="radio"]:checked:nth-of-type({{ add $i 1 }}) ~ .tabs-content div:nth-of-type({{ add $i 1 }}) {
+	  display: block;
+	}
+  {{- end -}}
+</style>

@@ -3,34 +3,8 @@
 {{ $class := "card-grid wide"}}
 
 <div class="{{ if eq $showAsCards "true" }}{{ $class }}{{ end }}">
-  <!-- Old frame -->
-  <section data-mf="false">
-    <div class="row">
-      <div class="card-deck">
-        {{ range .Pages.GroupBy "Section" }}
-          {{ range .Pages.ByWeight }}
-            {{ $title := .Title }}
-            <div class="col-md-5 card">
-                <div class="card-body">
-                  <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
-                      <i class="fas fa-{{if eq .Kind "page"}}file-alt{{else}}book{{end}} fa-lg card-img-top"></i>
-                      <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
-                  </h3>
-                  {{ range $cards }}
-                    {{ if eq .title $title }}
-                      <p>{{ .content }}</p>
-                    {{ end }}
-                  {{ end }}
-              </div>
-            </div>
-          {{ end }}
-        {{ end }}
-      </div>
-    </div>  
-  </section>
-
   <!-- Mainframe -->
-  <div data-mf="true" style="display: none;">
+  <div>
     {{ range .Pages.ByWeight }}
       {{ $title := .Title }}
       <div class="card-container">

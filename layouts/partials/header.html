@@ -7,8 +7,7 @@
     {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
       <div class="navbar navbar-nav">
         <!-- Standalone search box. -->
-        {{ partial "coveo-legacy-search.html" . }}
-        {{ partial "coveo-atomic-search.html" . }}
+        {{ partial "coveo-atomic-search.html" }}
       </div>
     {{ end }}
     {{ if ( in .Site.Params.buildtype "package" ) }}

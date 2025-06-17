@@ -28,17 +28,22 @@
           {{ end }}
         {{ end }}
       </section>
-      <h1>{{ .Title }}</h1>
+      <div class="list-header-container">
+        <img src="/images/icons/{{ .Params.logo | default "NGINX-product-icon.svg" }}">
+        <div class="list-header-title">
+          <h1>{{ .Title }}</h1>
+          {{ if .Description }}
+            <p>{{ .Description | markdownify }}</p>
+          {{ end }}
+        </div>
+      </div>
 
       {{ partial "banner" . }}
 
       {{ $hasCustomContent := .Params.hasCustomContent | default false }}
       {{ if $hasCustomContent }} 
-        {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
-        {{ .Page.Scratch.Set "custom-landing-page-context" . }}
         {{ .Content }}
       {{ else }}
-        {{ .Content }}
         {{ range .Pages.ByWeight }}
         <h2>
             <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>

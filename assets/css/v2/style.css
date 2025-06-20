@@ -352,6 +352,7 @@ ol li:last-child {
 .header {
   grid-area: header;
   display: flex;
+  padding: 0 var(--space-s);
 
   .header-container {
     display: flex;
@@ -394,7 +395,7 @@ ol li:last-child {
 .content {
   grid-area: content;
   justify-self: center;
-  padding: var(--space-s);
+  padding: 0 var(--space-l);
   max-width: var(--content-max-width);
 
   /* Allow redocly to fill the entire container */

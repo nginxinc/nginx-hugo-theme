@@ -395,6 +395,12 @@ ol li:last-child {
   justify-self: center;
   padding: var(--space-s);
   max-width: var(--content-max-width);
+
+  /* Allow redocly to fill the entire container */
+  &.content__redocly {
+    justify-self: unset;
+    max-width: unset;
+  }
 }
 
 .footer {
@@ -842,23 +848,6 @@ nav {
 /* Handles different flow-gap of list page  */
 .list-page.text-content {
   grid-template-rows: calc(70px + var(--flow-gap)) max-content;
-}
-
-.api {
-  margin: 0 0 1rem 1rem;
-  .row {
-    display: grid !important;
-  }
-
-  .nginx-docs-api-container {
-    grid-column: 1 / -1;
-    max-width: 100% !important;
-    margin-top: 2rem;
-  }
-
-  .content-layout {
-    grid-template-columns: 1fr var(--side-gutter-width);
-  }
 }
 
 /* MARK: Coveo

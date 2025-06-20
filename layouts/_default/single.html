@@ -1,2 +1,67 @@
-{{ .Render "docs" }}
+{{ define "main" }}
+<div class="grid-container">
+    <aside class="sidebar">
+        {{ partial "sidebar-v2.html" . }}
+    </aside>
 
+    <header class="header">
+        {{ block "header" . }}{{end}}
+    </header>
+
+
+    <main class="content">
+      <!-- Replace icons -->
+      {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
+      <main role="main">
+
+      <section class="main-layout">
+        <section id="maincontent" class="content-layout">
+          <div data-cms-edit="content" class="text-content">
+            <section class="breadcrumb-layout wide">
+              {{ if not .IsHome }}
+                {{ if not (in .Params.display_breadcrumb "false" ) }}
+                {{ partial "breadcrumb" .}}
+                {{ end }}
+              {{ end }}
+            </section>
+            {{ partial "banner" .}}
+            <h1>{{ .Title }}</h1>
+            {{ $content | safeHTML }}
+            {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
+            {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
+
+            <hr>
+
+            {{ if .Page.Lastmod }}
+            <div class="last-modified">
+              {{ partial "page-meta-links" . }}
+            </div>
+            {{ end }}
+
+            {{ partial "version-list" . }}
+            {{ partial "qualtrics-feedback.html" }}
+
+            {{ partial "previous-next-links-in-section-with-title.html" . }}
+           
+          </main>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+        {{ block "footer-v2" . }}
+        {{ partial "footer-v2.html" . }}
+        {{ end }}
+    </footer>
+
+    <!-- If there is a script defined in the page metadata, load it  -->
+    {{if .Params.script}}
+      {{ $script := (delimit (slice "scripts" .Params.script) "/")}}
+      {{ partial (string $script) .}}
+    {{end }}
+
+</div>
+
+
+
+{{ end }}

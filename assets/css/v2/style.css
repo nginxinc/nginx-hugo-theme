@@ -1,3 +1,95 @@
+/* MARK: Reset
+*/
+/* Modern reset: https://piccalil.li/blog/a-more-modern-css-reset/ */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Prevent font size inflation */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  overflow-y: scroll;
+}
+
+/* Remove default margin in favour of better control in authored CSS */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block-end: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}
+
+/* END RESET */
+
 /* Regular */
 @font-face {
   font-family: "JetBrainsMono";
@@ -92,7 +184,6 @@
   --sidebar-line-box-side-length: 8px;
   --sidebar-line-box-top: 6px;
   --sidebar-line-box-left: 12px;
-  --sidebar-width: 22rem;
   --sidebar-line-width: 11.5px;
   --sidebar-mobile-top-displacement: 5rem;
   --side-gutter-width: 20rem;
@@ -112,35 +203,54 @@
   --overflow-gutter-extension: 1rem;
 
   --flow-gap: 1rem;
-}
 
-/* MARK: Reset
-*/
-html,
-body,
-p,
-ol,
-ul,
-li,
-dl,
-dt,
-dd,
-blockquote,
-figure,
-fieldset,
-legend,
-textarea,
-pre,
-iframe,
-hr,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  padding: 0;
+  /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  /* ALWAYS use for fonts */
+  --font-step--3: clamp(0.576rem, 0.5796rem + -0.0047vw, 0.5787rem);
+  --font-step--2: clamp(0.6944rem, 0.6856rem + 0.0444vw, 0.72rem);
+  --font-step--1: clamp(0.8333rem, 0.8101rem + 0.1159vw, 0.9rem);
+  --font-step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+  --font-step-1: clamp(1.2rem, 1.1283rem + 0.3587vw, 1.4063rem);
+  --font-step-2: clamp(1.44rem, 1.3295rem + 0.5527vw, 1.7578rem);
+  --font-step-3: clamp(1.728rem, 1.5648rem + 0.8161vw, 2.1973rem);
+  --font-step-4: clamp(2.0736rem, 1.8395rem + 1.1704vw, 2.7466rem);
+  --font-step-5: clamp(2.4883rem, 2.1597rem + 1.6433vw, 3.4332rem);
+
+  /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  /* ALWAYS use for horizontal spacing */
+  --space-3xs: clamp(0.25rem, 0.2283rem + 0.1087vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4783rem + 0.1087vw, 0.5625rem);
+  --space-xs: clamp(0.75rem, 0.7065rem + 0.2174vw, 0.875rem);
+  --space-s: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+  --space-m: clamp(1.5rem, 1.4348rem + 0.3261vw, 1.6875rem);
+  --space-l: clamp(2rem, 1.913rem + 0.4348vw, 2.25rem);
+  --space-xl: clamp(3rem, 2.8696rem + 0.6522vw, 3.375rem);
+  --space-2xl: clamp(4rem, 3.8261rem + 0.8696vw, 4.5rem);
+  --space-3xl: clamp(6rem, 5.7391rem + 1.3043vw, 6.75rem);
+
+  /* One-up pairs */
+  --space-3xs-2xs: clamp(0.25rem, 0.1413rem + 0.5435vw, 0.5625rem);
+  --space-2xs-xs: clamp(0.5rem, 0.3696rem + 0.6522vw, 0.875rem);
+  --space-xs-s: clamp(0.75rem, 0.6196rem + 0.6522vw, 1.125rem);
+  --space-s-m: clamp(1rem, 0.7609rem + 1.1957vw, 1.6875rem);
+  --space-m-l: clamp(1.5rem, 1.2391rem + 1.3043vw, 2.25rem);
+  --space-l-xl: clamp(2rem, 1.5217rem + 2.3913vw, 3.375rem);
+  --space-xl-2xl: clamp(3rem, 2.4783rem + 2.6087vw, 4.5rem);
+  --space-2xl-3xl: clamp(4rem, 3.0435rem + 4.7826vw, 6.75rem);
+
+  /* Custom pairs */
+  --space-s-l: clamp(1rem, 0.5652rem + 2.1739vw, 2.25rem);
+
+  /* @link https://utopia.fyi/grid/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --grid-max-width: 69.75rem;
+  --grid-gutter: var(--space-s-l, clamp(1rem, 0.4975rem + 2.5126vw, 2.25rem));
+  --grid-columns: 12;
+
+  --sidebar-width: 22rem;
+  --content-max-width: 88rem;
+
+  --main-col: minmax(34rem, 50rem);
+  --side-col: minmax(18rem, 26rem);
 }
 
 @supports (font-variation-settings: normal) {
@@ -173,6 +283,9 @@ h6,
 
 html {
   scroll-behavior: smooth;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 h1,
@@ -215,8 +328,29 @@ ol li:last-child {
 
 /* MARK: Layout
 */
-header {
-  margin: 2rem 2rem 0 2rem;
+
+.grid-container {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--space-xl) 1fr auto;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar content"
+    "sidebar footer";
+  min-height: 100vh;
+
+  @media (max-width: 68rem) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "content"
+      "footer";
+  }
+}
+
+.header {
+  grid-area: header;
+  display: flex;
 
   .header-container {
     display: flex;
@@ -254,56 +388,89 @@ header {
   ul {
     list-style: none;
   }
+}
 
-  .dropdown-content {
-    position: absolute;
-    background-color: oklch(var(--color-background));
-    border: oklch(var(--color-foreground)) 1px solid;
-    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-    z-index: 1;
-    right: 0;
-    display: none;
-    width: 400px;
-    max-width: 80vw;
-    margin-right: 2rem;
-  }
+.content {
+  grid-area: content;
+  justify-self: center;
+  padding: var(--space-s);
+  max-width: var(--content-max-width);
+}
 
-  .dropdown-content ul {
-    padding: 20px 10px;
-  }
+.footer {
+  grid-area: footer;
+  padding: var(--space-l);
+  background-color: oklch(var(--color-footer));
+  margin-top: auto;
+}
 
-  .nav-item-explore {
-    margin: 0;
-  }
+/* sidebar layout */
+.sidebar {
+  grid-area: sidebar;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  /* TODO replace with correct color var */
+  border-right: 1px solid oklch(var(--color-divider));
+  overflow: hidden;
+  background: oklch(var(--color-background));
+  box-sizing: border-box;
+  transform: translateX(0);
 
-  .navbar-button {
-    padding: 0.5rem 0.5rem;
-    border: none;
-    border-radius: 0.25rem;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-  }
+  .sidebar__container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
 
-  .remove-bottom-radius {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    .sidebar__header {
+      position: sticky;
+      top: 0;
+      background: oklch(var(--color-background));
+      z-index: 1;
+
+      .sidebar__img {
+        height: 1.75rem;
+      }
+    }
+
+    .sidebar__content {
+      overflow-y: auto;
+      min-height: 0;
+      width: 100%;
+      scrollbar-gutter: stable;
+    }
   }
 }
 
-main {
-  flex: 1;
-  min-width: 20rem;
-  margin: 0 2rem 2rem 1rem;
+@media (max-width: 68rem) {
+  .sidebar {
+    grid-area: sidebar;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-width, 16rem);
+    transform: translateX(-100%);
+  }
+
+  #sidebar-toggle:checked ~ .sidebar {
+    transform: translateX(0);
+  }
+
+  .sidebar-button {
+    display: block;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+  }
 }
 
 /* MARK: Footer
 */
-footer {
-  background-color: oklch(var(--color-footer));
-  padding: 2.5rem;
-  margin-top: auto;
-}
 
 .footer-layout {
   display: grid;
@@ -498,12 +665,6 @@ nav {
   grid-column: 1 / -1;
 }
 
-/* The default main-layout */
-.main-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
 .sidebar-container {
   display: flex;
   flex-direction: column;
@@ -643,12 +804,6 @@ nav {
     grid-column: 1;
   }
 
-  .main-layout {
-    display: grid;
-    grid-template-columns: var(--sidebar-width) 1fr;
-    column-gap: var(--grid-sidebar-gutter);
-  }
-
   .content-layout {
     display: grid;
     grid-template-columns: 1fr minmax(
@@ -673,7 +828,7 @@ nav {
 }
 
 .list-page {
-  --flow-gap: .5rem;
+  --flow-gap: 0.5rem;
 
   h2 {
     font-size: 1.5rem;
@@ -693,11 +848,6 @@ nav {
   margin: 0 0 1rem 1rem;
   .row {
     display: grid !important;
-  }
-
-  .breadcrumb-layout {
-    width: auto;
-    margin-top: 2rem;
   }
 
   .nginx-docs-api-container {
@@ -877,7 +1027,7 @@ button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
   font-size: 1rem;
 }
 
-/* MARK: Sidebar
+/* MARK: Sidebar - Content
 */
 
 nav.sidebar.sidebar__mobile-open {
@@ -885,20 +1035,8 @@ nav.sidebar.sidebar__mobile-open {
 }
 
 .sidebar {
+  grid-area: sidebar;
   --color-foreground: oklch(0 0 0 / 0.75);
-
-  display: flex;
-  flex-direction: column;
-  width: 22rem;
-  max-height: 100vh;
-  position: sticky;
-  top: 0;
-  margin-top: 0rem;
-  padding-top: 1.5rem;
-  align-items: start;
-  overflow-y: auto;
-  overflow-x: hidden;
-  color: var(--color-foreground);
 
   .sidebar__container,
   .sidebar__container button,
@@ -1074,9 +1212,6 @@ p {
 .breadcrumb-layout {
   position: relative;
   background-color: white;
-  /* width: calc(100% + 4rem); */
-  margin-left: -2rem;
-  padding: 1rem 2rem;
 
   .sidebar__mobile__toggle {
     display: none;
@@ -1127,7 +1262,7 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  margin: 1rem 0 .75rem 0;
+  margin: 1rem 0 0.75rem 0;
 }
 
 h2:target,

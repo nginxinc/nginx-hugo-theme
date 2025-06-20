@@ -39,24 +39,11 @@
 
   <body id="body">
     {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
-  {{ partial "universal-tag.html" . }}
+    {{ partial "universal-tag.html" . }}
     {{ end }}
 
-    <header>
-      {{ block "header" . }}{{end}}
-    </header>
+    {{ block "main" . }}{{ end }}
 
-    <section class="base-layout" data-testid="base-layout">
-      <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
-        {{ block "main" . }}{{ end }}
-      </div>
-  </section>
-
-    <footer id="footer-v2">
-      {{ block "footer-v2" . }}
-      {{ partial "footer-v2.html" . }}
-      {{ end }}
-    </footer>
   {{ partial "scripts.html" . }}
   <div id="consent_blackbar"></div>
 </body>

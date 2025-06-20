@@ -1,54 +1,62 @@
 {{ define "main" }}
-{{/*  mf list page  */}}
-<main class="content col d-block align-top content-has-toc" role="main">
-<section class="main-layout">
-  <div class="sidebar-layout" id="sidebar-layout">
-    <button class="sidebar__mobile__toggle" aria-label="sidebar__mobile__toggle" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
-    <nav id="sidebar-v2" class="sidebar">
-      {{ partial "sidebar-v2.html" . }}
-    </nav>
-  </div>
+<div class="grid-container">
+    <aside class="sidebar">
+        {{ partial "sidebar-v2.html" . }}
+    </aside>
 
-  <section id="maincontent" class="content-layout">
-    <div data-cms-edit="content" class="text-content list-page">
-      <section class="breadcrumb-layout wide">
-        {{ if not .IsHome }}
-          {{ if not (in .Params.display_breadcrumb "false" ) }}
-          {{ partial "breadcrumb" .}}
+    <header class="header">
+        {{ block "header" . }}{{end}}
+    </header>
+
+
+    <main class="content content-has-toc" role="main">
+    <section class="main-layout">
+
+      <section id="maincontent" class="content-layout">
+        <div data-cms-edit="content" class="text-content list-page">
+          <section class="breadcrumb-layout wide">
+            {{ if not .IsHome }}
+              {{ if not (in .Params.display_breadcrumb "false" ) }}
+              {{ partial "breadcrumb" .}}
+              {{ end }}
+            {{ end }}
+          </section>
+          <h1>{{ .Title }}</h1>
+
+          {{ partial "banner" . }}
+
+          {{ $hasCustomContent := .Params.hasCustomContent | default false }}
+          {{ if $hasCustomContent }}
+            {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
+            {{ .Page.Scratch.Set "custom-landing-page-context" . }}
+            {{ .Content }}
+          {{ else }}
+            {{ .Content }}
+            {{ range .Pages.ByWeight }}
+            <h2>
+                <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
+            </h2>
+            {{ end }}
           {{ end }}
-        {{ end }}
+
+          <hr>
+          {{ if .Page.Lastmod }}
+          <div class="last-modified">
+            {{ partial "page-meta-links" . }}
+          </div>
+          {{ end }}
+
+        </div>
       </section>
-      <h1>{{ .Title }}</h1>
+    </section>
+    </main>
 
-      {{ partial "banner" . }}
+    <footer class="footer">
+    {{ block "footer-v2" . }}
+    {{ partial "footer-v2.html" . }}
+    {{ end }}
+    </footer>
 
-      {{ $hasCustomContent := .Params.hasCustomContent | default false }}
-      {{ if $hasCustomContent }} 
-        {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
-        {{ .Page.Scratch.Set "custom-landing-page-context" . }}
-        {{ .Content }}
-      {{ else }}
-        {{ .Content }}
-        {{ range .Pages.ByWeight }}
-        <h2>
-            <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
-        </h2>
-        {{ end }}
-      {{ end }}
+</div>
 
-      <hr>
-      {{ if .Page.Lastmod }}
-      <div class="last-modified">
-        {{ partial "page-meta-links" . }}
-      </div>
-      {{ end }}
-
-      </main>
-
-    </div>
-  </section>
-</section>
-</section>
-</main>
 {{ end }}
-

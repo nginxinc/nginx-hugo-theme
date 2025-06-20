@@ -22,7 +22,9 @@
 {{ $productName := index $productMap $productIdentifier }}
 
 <div class="sidebar__container">
-    <div class="sidebar__header">NGINX LOGO</div>
+    <div class="sidebar__header">
+         <img class="sidebar__img" src="{{ "/images/icons/NGINX-Docs-horiz-black-type.svg" | absURL }}" alt="NGINX Docs">
+    </div>
     <div class="sidebar__content">
         <a class="skip-link" href="#maincontent">Skip Navigation</a>
         {{ partial "sidebar-list.html" (dict

@@ -1,4 +1,4 @@
-{{- with .Params.banner -}}
+{{- with index .Params "nd-banner" -}}
   {{- if .enabled -}}
     <!-- Gather the dates and default to beginning or end of time if frontmatter is not provided -->
     {{- $currentDate :=  now | dateFormat "2006-01-02" -}}

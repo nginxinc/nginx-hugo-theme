@@ -41,8 +41,24 @@
     {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
     {{ partial "universal-tag.html" . }}
     {{ end }}
+    <div class="grid-container">
+        <aside class="sidebar">
+            {{ partial "sidebar-v2.html" . }}
+        </aside>
 
-    {{ block "main" . }}{{ end }}
+        <header class="header">
+            {{ block "header" . }}{{end}}
+        </header>
+
+        {{ block "main" . }}{{ end }}
+
+        <footer class="footer">
+            {{ block "footer-v2" . }}
+            {{ partial "footer-v2.html" . }}
+            {{ end }}
+        </footer>
+    </div>
+
 
   {{ partial "scripts.html" . }}
   <div id="consent_blackbar"></div>

@@ -1,62 +1,46 @@
 {{ define "main" }}
-<div class="grid-container">
-    <aside class="sidebar">
-        {{ partial "sidebar-v2.html" . }}
-    </aside>
 
-    <header class="header">
-        {{ block "header" . }}{{end}}
-    </header>
+<main class="content content-has-toc" role="main">
+<section class="main-layout">
 
-
-    <main class="content content-has-toc" role="main">
-    <section class="main-layout">
-
-      <section id="maincontent" class="content-layout">
-        <div data-cms-edit="content" class="text-content list-page">
-          <section class="breadcrumb-layout wide">
-            {{ if not .IsHome }}
-              {{ if not (in .Params.display_breadcrumb "false" ) }}
-              {{ partial "breadcrumb" .}}
-              {{ end }}
+    <section id="maincontent" class="content-layout">
+    <div data-cms-edit="content" class="text-content list-page">
+        <section class="breadcrumb-layout wide">
+        {{ if not .IsHome }}
+            {{ if not (in .Params.display_breadcrumb "false" ) }}
+            {{ partial "breadcrumb" .}}
             {{ end }}
-          </section>
-          <h1>{{ .Title }}</h1>
+        {{ end }}
+        </section>
+        <h1>{{ .Title }}</h1>
 
-          {{ partial "banner" . }}
+        {{ partial "banner" . }}
 
-          {{ $hasCustomContent := .Params.hasCustomContent | default false }}
-          {{ if $hasCustomContent }}
-            {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
-            {{ .Page.Scratch.Set "custom-landing-page-context" . }}
-            {{ .Content }}
-          {{ else }}
-            {{ .Content }}
-            {{ range .Pages.ByWeight }}
-            <h2>
-                <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
-            </h2>
-            {{ end }}
-          {{ end }}
+        {{ $hasCustomContent := .Params.hasCustomContent | default false }}
+        {{ if $hasCustomContent }}
+        {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
+        {{ .Page.Scratch.Set "custom-landing-page-context" . }}
+        {{ .Content }}
+        {{ else }}
+        {{ .Content }}
+        {{ range .Pages.ByWeight }}
+        <h2>
+            <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
+        </h2>
+        {{ end }}
+        {{ end }}
 
-          <hr>
-          {{ if .Page.Lastmod }}
-          <div class="last-modified">
-            {{ partial "page-meta-links" . }}
-          </div>
-          {{ end }}
-
+        <hr>
+        {{ if .Page.Lastmod }}
+        <div class="last-modified">
+        {{ partial "page-meta-links" . }}
         </div>
-      </section>
+        {{ end }}
+
+    </div>
     </section>
-    </main>
-
-    <footer class="footer">
-    {{ block "footer-v2" . }}
-    {{ partial "footer-v2.html" . }}
-    {{ end }}
-    </footer>
-
+</section>
+</main>
 </div>
 
 {{ end }}

@@ -395,7 +395,7 @@ ol li:last-child {
 .content {
   grid-area: content;
   justify-self: center;
-  padding: 0 var(--space-l);
+  padding: 0 var(--space-l) 2rem var(--space-l);
   max-width: var(--content-max-width);
 
   /* Allow redocly to fill the entire container */
@@ -542,12 +542,16 @@ nav {
 /* MARK: Homepage
 */
 
-.grid-container.homepage {
+.grid-container:has(.homepage) {
   grid-template-columns: 1fr;
   grid-template-areas:
     "header"
     "content"
     "footer";
+
+  .sidebar {
+    display: none;
+  }
 }
 
 .homepage {
@@ -652,28 +656,6 @@ nav {
   min-width: 100%;
 }
 
-.sidebar-layout {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 2;
-  min-height: 74vh;
-
-  .sidebar__mobile__toggle {
-    display: none;
-  }
-}
-
-.sidebar-layout::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 1px;
-  background-color: oklch(var(--color-divider));
-}
-
 #searchbox {
   width: 24rem;
   display: none;
@@ -682,11 +664,6 @@ nav {
 
 .breadcrumb-layout {
   grid-column: 1 / -1;
-}
-
-.sidebar-container {
-  display: flex;
-  flex-direction: column;
 }
 
 .text-content {
@@ -713,12 +690,6 @@ nav {
 }
 
 @media (max-width: 88rem) {
-  .base-layout {
-    display: grid;
-    grid-template-rows: repeat(2, auto);
-    column-gap: var(--grid-column-gutter);
-  }
-
   .content-layout .breadcrumb-layout {
     position: sticky;
     top: 0;
@@ -805,14 +776,6 @@ nav {
 }
 
 @media (min-width: 88em) {
-  .base-layout {
-    --grid-column-gutter: 4.5rem;
-    display: grid;
-    grid-template-rows: repeat(2, auto);
-    column-gap: var(--grid-column-gutter);
-    max-width: 100%;
-  }
-
   .text-content {
     grid-template-columns: var(--grid-content) var(--grid-side-callout);
     grid-template-rows: 70px max-content;

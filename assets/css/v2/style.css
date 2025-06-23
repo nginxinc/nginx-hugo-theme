@@ -542,8 +542,16 @@ nav {
 /* MARK: Homepage
 */
 
+.grid-container.homepage {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+}
+
 .homepage {
-  margin: 0 2rem;
+  --content-max-width: 120rem;
 
   .homepage-heading {
     grid-column: 1 / -1;
@@ -556,23 +564,24 @@ nav {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 500px));
     gap: 1.5rem;
-    padding: 1rem;
+
     justify-content: center;
     max-width: 98rem;
     margin: 0 auto;
+    padding-bottom: 2rem;
+
+    a {
+      color: oklch(var(--color-foreground));
+      text-decoration-color: oklch(var(--color-background));
+
+      &:hover {
+        text-decoration-color: oklch(var(--color-background));
+      }
+    }
 
     .homepage-heading {
       grid-column: 1 / -1;
       margin: 1rem 0rem;
-    }
-  }
-
-  a {
-    color: oklch(var(--color-foreground));
-    text-decoration-color: oklch(var(--color-background));
-
-    &:hover {
-      text-decoration-color: oklch(var(--color-background));
     }
   }
 
@@ -581,7 +590,7 @@ nav {
     background: oklch(var(--color-background));
     border: 1px solid oklch(var(--color-codeblock-border));
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-    height: 7rem;
+    min-height: 11rem;
     padding: 1rem 2rem 2rem 2rem;
     display: flex;
     flex-direction: column;

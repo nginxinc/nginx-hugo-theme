@@ -1,7 +1,39 @@
 {{ define "header" }}
 <div class="header-container">
     <div>Product Selector</div>
-    <div>Search</div>
-    <div>F5 Sites</div>
+    {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
+      <div>
+        <!-- Standalone search box. -->
+        {{ partial "coveo-atomic-search.html" }}
+      </div>
+    {{ end }}
+
+    <div>
+    {{ $f5Sites := slice
+      (dict "title" "DevCentral" "url" "https://community.f5.com/" "description" "Connect & learn in our hosted community")
+      (dict "title" "MyF5" "url" "https://my.f5.com/" "description" "Your key to everything F5, including support, registration keys, and subscriptions")
+      (dict "title" "NGINX" "url" "https://nginx.org/" "description" "Learn more about NGINX Open Source and read the community blog")
+    }}
+
+    <ul class="navbar navbar-nav">
+        <li class="nav-item-explore active">
+          <button id="navbar-sites-button" class="button navbar-button">
+              F5 Sites
+              <i id="navbar-sites-button-icon" class="link-chevron-icon fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-content" id="dropdown-content">
+            <ul>
+              {{ range $f5Sites }}
+                <li>
+                  <a href="{{ .url }}" target="_blank" >{{ .title }}</a>
+                  <p>{{ .description }}</p>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        </li>
+    </ul>
+
+    </div>
 </div>
 {{ end }}

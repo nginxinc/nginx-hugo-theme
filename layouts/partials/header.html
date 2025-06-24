@@ -23,12 +23,14 @@
         }}
         {{ $productMap := dict }}
         {{ range $nginxProducts }}
-            {{ $productId := index (split .url "/") 1 }}
-            {{ $productMap = merge $productMap (dict $productId .title) }}
+            {{ if not (or (eq .title "NGINX Open Source" ) (eq .title "NGINX Unit")) }}
+              {{ $productId := index (split .url "/") 1 }}
+              {{ $productMap = merge $productMap (dict $productId .title) }}
+            {{ end }}
         {{ end }}
         {{ $relPermalink := .RelPermalink }}
         {{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
-        {{ $productName := index $productMap $productIdentifier }}
+        {{ $productName := index $productMap $productIdentifier | default "Product Documentation" }}
 
         <button class="product-selector__button" id="product-selector-button">
             {{/* product name and selector */}}

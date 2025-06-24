@@ -1,9 +1,5 @@
 {{ define "main" }}
 <div class="docs-container row override-sidebar-collapse">
-  <nav id="sidebar" class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none align-top">
-    {{ partial "sidebar.html" . }}
-  </nav>
-
   <!-- Replace icons -->
   {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
 

@@ -1,14 +1,22 @@
 {{ define "header" }}
 <div class="header-container">
-    <div>Product Selector</div>
+
+    <div class="header__logo">
+        <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
+            <img class="header__img" src="{{ "/images/icons/NGINX-Docs-horiz-black-type.svg" | absURL }}" alt="NGINX Docs">
+        </a>
+    </div>
+
+    <div class="header__product-selector">Product Selector</div>
+
     {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
-      <div>
+      <div class="header__search">
         <!-- Standalone search box. -->
         {{ partial "coveo-atomic-search.html" }}
       </div>
     {{ end }}
 
-    <div>
+    <div class="header__f5sites">
     {{ $f5Sites := slice
       (dict "title" "DevCentral" "url" "https://community.f5.com/" "description" "Connect & learn in our hosted community")
       (dict "title" "MyF5" "url" "https://my.f5.com/" "description" "Your key to everything F5, including support, registration keys, and subscriptions")

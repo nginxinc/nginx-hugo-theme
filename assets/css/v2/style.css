@@ -246,6 +246,10 @@ textarea:not([rows]) {
   --grid-gutter: var(--space-s-l, clamp(1rem, 0.4975rem + 2.5126vw, 2.25rem));
   --grid-columns: 12;
 
+  /* TODO: This aligns the logo in the header perfectly with the one in the sidebar, but
+ this is not a safe way to do it, and likely to get out of sync */
+  --header-height: 93px;
+
   --sidebar-width: 22rem;
   --sidebar-item-padding: 0.25rem 0.75rem;
   --content-max-width: 88rem;
@@ -333,7 +337,7 @@ ol li:last-child {
 .grid-container {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr;
-  grid-template-rows: var(--space-3xl) 1fr auto;
+  grid-template-rows: var(--header-height) 1fr auto;
   grid-template-areas:
     "sidebar header"
     "sidebar content"
@@ -347,6 +351,10 @@ ol li:last-child {
       "content"
       "footer";
   }
+
+  .header__logo {
+    display: none;
+  }
 }
 
 /* Homepage specific layout */
@@ -358,6 +366,14 @@ ol li:last-child {
     "footer";
 
   .sidebar {
+    display: none;
+  }
+
+  .header__logo {
+    display: unset;
+  }
+
+  .header__product-selector {
     display: none;
   }
 }
@@ -373,6 +389,10 @@ ol li:last-child {
   .sidebar {
     display: none;
   }
+
+  .header__logo {
+    display: unset;
+  }
 }
 
 .header {
@@ -387,6 +407,19 @@ ol li:last-child {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+    .header__img {
+      height: 2rem;
+      padding-left: 12px;
+    }
+
+    .header__search {
+      width: 14rem;
+    }
+
+    .header__product-selector {
+      width: 10rem;
+    }
 
     > ul {
       padding: 0;

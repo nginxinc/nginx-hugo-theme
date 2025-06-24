@@ -419,6 +419,23 @@ ol li:last-child {
 
     .header__product-selector {
       width: 10rem;
+
+      .product-selector__button {
+        display: flex;
+        align-items: center;
+        background: oklch(var(--color-background));
+        border: none;
+        width: 16rem;
+        font-weight: 500;
+        cursor: pointer;
+        color: oklch(var(--color-foreground));
+        text-decoration-color: oklch(var(--color-brand) / 0.3);
+        transition: color 0.15s ease-in-out;
+
+        & :hover {
+          color: oklch(var(--color-brand));
+        }
+      }
     }
 
     > ul {
@@ -1032,16 +1049,29 @@ body:not(:has(.main-layout)) header atomic-search-interface {
 */
 
 .product-selector {
+  /* should appear above search box on smaller displays */
+  z-index: 11;
   display: none;
   position: absolute;
   top: 0;
-  min-width: 80%;
-  margin-top: 8.375rem;
-  margin-left: 44rem;
+  margin-top: 4em;
   padding: 1rem 1.5rem;
   background-color: oklch(var(--color-background));
   border: oklch(var(--color-foreground)) 1px solid;
   box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+}
+
+.product-name {
+  padding-right: var(--space-s);
+}
+
+.product-selector-button-icon {
+  color: black;
+
+  svg {
+    color: black;
+    stroke: currentColor;
+  }
 }
 
 button:has(~ .product-selector[style*="block"])

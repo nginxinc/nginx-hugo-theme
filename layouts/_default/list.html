@@ -17,11 +17,8 @@
 
         {{ $hasCustomContent := .Params.hasCustomContent | default false }}
         {{ if $hasCustomContent }}
-        {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
-        {{ .Page.Scratch.Set "custom-landing-page-context" . }}
         {{ .Content }}
         {{ else }}
-        {{ .Content }}
         {{ range .Pages.ByWeight }}
         <h2>
             <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>

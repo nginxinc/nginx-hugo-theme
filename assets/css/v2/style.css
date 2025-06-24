@@ -349,6 +349,32 @@ ol li:last-child {
   }
 }
 
+/* Homepage specific layout */
+.grid-container:has(.homepage) {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+
+  .sidebar {
+    display: none;
+  }
+}
+
+/* Search specific layout */
+.grid-container:has(.search) {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+
+  .sidebar {
+    display: none;
+  }
+}
+
 .header {
   grid-area: header;
   display: flex;
@@ -576,18 +602,6 @@ nav {
 
 /* MARK: Homepage
 */
-
-.grid-container:has(.homepage) {
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "header"
-    "content"
-    "footer";
-
-  .sidebar {
-    display: none;
-  }
-}
 
 .homepage {
   --content-max-width: 120rem;

@@ -1391,15 +1391,23 @@ h6:has(a):hover {
 }
 
 /* Landing page cards */
-
 .text-content .card-layout {
-  grid-column: 1 / -1;
+  grid-column: 1;
 
   .card-section {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
     strong {
       font-weight: 500;
+    }
+
+    /* Hide all the cards past 3 if it is a featured card section */
+    &.featured-section {
+      .card-section-content.card-grid > *:nth-child(n + 4) {
+        display: none;
+      }
     }
   }
 }
@@ -1407,15 +1415,64 @@ h6:has(a):hover {
 /* Optional grid layout */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 500px));
+  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
   gap: 1.5rem;
-  margin-top: 1rem;
 
   .card-container {
     border: 1px solid oklch(var(--color-codeblock-border));
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-    padding: 1rem 2rem 2rem 2rem;
-    margin-bottom: 1.5rem;
+    padding: 1rem;
+
+    &.featured-card {
+      /* If there is a need for a featured card, only the featured card should be full length */
+      grid-column: 1 / -1;
+
+      /* If there is a featured card AND two cards, the last one should be full length */
+      ~ .card-container:nth-child(2n):last-child {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  /* If there is no featured card, last card that is the 3rd one should be full width */
+  &:not(:has(.featured-card)) .card-container:nth-child(3n) {
+    grid-column: 1 / -1;
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+
+    .card-brand-icon {
+      height: 20px;
+      width: auto;
+    }
+
+    h2 {
+      padding: 0;
+      margin: 0;
+      font-size: 1rem;
+    }
+  }
+}
+
+.list-header-container {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: start;
+
+  img {
+    width: auto;
+    height: 3.5rem;
   }
 }
 

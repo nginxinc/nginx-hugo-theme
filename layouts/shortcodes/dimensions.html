@@ -3,15 +3,10 @@
 {{ $jsPath := replace $rawJSPath "/static" "" }}
 {{ $dimensionsRef := dict }}
 {{ with resources.Get $jsPath }}
-  {{ with .Err }}
-    {{ errorf "%s" . }}
-  {{ else }}
     {{ $dimensionsRef = . | transform.Unmarshal }}
-  {{ end }}
 {{ else }}
-  {{ errorf "Unable to get asset resource %q" $jsPath }}
+    {{ errorf "Unable to get asset resource %q" $jsPath }}
 {{ end }}
-
 
 <div class="row flex-xl-nowrap">
 

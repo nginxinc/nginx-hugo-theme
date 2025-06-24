@@ -1233,7 +1233,7 @@ h6:has(a):hover {
     padding: 1rem;
 
     &.featured-card {
-      /* If there is a featured card, only the featured card should be full length */
+      /* If there is a need for a featured card, only the featured card should be full length */
       grid-column: 1 / -1;
 
       /* If there is a featured card AND two cards, the last one should be full length */
@@ -1244,7 +1244,7 @@ h6:has(a):hover {
   }
 
   /* If there is no featured card, last card that is the 3rd one should be full width */
-  &:not(:has(.featured-card)) .card-container:nth-child(3n):last-child {
+  &:not(:has(.featured-card)) .card-container:nth-child(3n) {
     grid-column: 1 / -1;
   }
 }

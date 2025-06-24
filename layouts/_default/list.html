@@ -11,11 +11,19 @@
             {{ end }}
         {{ end }}
         </section>
-        <h1>{{ .Title }}</h1>
+        <div class="list-header-container">
+          <img src="/images/icons/{{ .Params.logo | default "NGINX-product-icon.svg" }}">
+          <div class="list-header-title">
+            <h1>{{ .Title }}</h1>
+            {{ if index .Params "nd-subtitle" }}
+              <p>{{ index .Params "nd-subtitle" | markdownify }}</p>
+            {{ end }}
+          </div>
+        </div>
 
         {{ partial "banner" . }}
 
-        {{ $hasCustomContent := .Params.hasCustomContent | default false }}
+        {{ $hasCustomContent := index .Params "nd-landing-page" | default false }}
         {{ if $hasCustomContent }}
         {{ .Content }}
         {{ else }}

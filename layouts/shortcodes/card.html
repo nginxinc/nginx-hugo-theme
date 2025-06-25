@@ -13,7 +13,7 @@
 {{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-  <div class="card-container {{ if eq $isFeatured "true" }}featured-card{{ end }}">
+  <div class="card-container {{ if eq $isFeatured "true" }}featured-card{{ end }}" data-mf="true" style="display: none;">
     {{- if $title -}}
       <div class="card-header">
         {{- if $brandIcon -}}
@@ -37,8 +37,8 @@
   <div class="col-md-5 card" data-mf="false">
     <div class="card-body">
       <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
-        {{- if $icon -}}
-          <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $icon }}.png"/>
+        {{- if $brandIcon -}}
+          <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $brandIcon }}.png"/>
         {{- end -}}
         {{- if ($title) -}}
           <a href="{{- $titleUrl -}}">{{- $title -}}</a>

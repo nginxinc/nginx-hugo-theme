@@ -11,8 +11,10 @@
                 </p>
             {{ end}}
             {{ partial "banner" .}}
-            {{ $hasCustomContent := index .Params "nd-landing-page" | default false }}
+            {{ $hasCustomContent := .Params.hasCustomContent | default false }}
             {{ if $hasCustomContent }} 
+              {{ .Page.Scratch.Set "custom-landing-page-file-name" "custom-landing-page.html" }}
+              {{ .Page.Scratch.Set "custom-landing-page-context" . }}
               {{ .Content }}
             {{ else }}
               <section data-mf="false">

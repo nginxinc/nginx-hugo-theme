@@ -1,2 +1,5 @@
 <!-- Render the main content first with modifications, then render the custom content -->
-<div class="card-layout">{{ .Inner | markdownify }}</div>
+{{ $customLandingPageFileName := .Page.Scratch.Get "custom-landing-page-file-name" }}
+{{ $customLandingPageContext := .Page.Scratch.Get "custom-landing-page-context" }}
+{{ partial $customLandingPageFileName $customLandingPageContext }}
+<div class="card-layout">{{- .Inner | markdownify -}}</div>

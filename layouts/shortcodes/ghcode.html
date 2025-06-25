@@ -13,7 +13,7 @@
       <div class="code-container chroma">
           <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button multi-line" type="button">Copy</button>
           <div class="highlight-v2" id="{{ $codeBlockId }}">
-            {{ highlight .Value $lang $params }}
+            {{ highlight .Content $lang $params }}
           </div>
       </div>
     </div>

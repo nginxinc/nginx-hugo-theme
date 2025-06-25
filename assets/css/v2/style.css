@@ -1405,7 +1405,8 @@ h6:has(a):hover {
 
     /* Hide all the cards past 3 if it is a featured card section */
     &.featured-section {
-      .card-section-content.card-grid > *:nth-child(n + 4) {
+      .card-section-content.card-grid
+        > *:nth-child(n + 4 of div.card-container) {
         display: none;
       }
     }
@@ -1435,7 +1436,7 @@ h6:has(a):hover {
   }
 
   /* If there is no featured card, last card that is the 3rd one should be full width */
-  &:not(:has(.featured-card)) .card-container:nth-child(3n) {
+  &:not(:has(.featured-card)) *:nth-child(n + 3 of div.card-container) {
     grid-column: 1 / -1;
   }
 }

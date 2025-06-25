@@ -1,4 +1,4 @@
-{{ $nginxProducts := slice 
+{{ $nginxProducts := slice
     (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
     (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
     (dict "title" "NGINX Instance Manager" "url" "/nginx-instance-manager" "type" "nginx-one")
@@ -22,6 +22,11 @@
 {{ $productName := index $productMap $productIdentifier }}
 
 <div class="sidebar__container">
+    <div class="sidebar__header">
+        <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
+            <img class="sidebar__img" src="{{ "/images/icons/NGINX-Docs-horiz-black-type.svg" | absURL }}" alt="NGINX Docs">
+        </a>
+    </div>
     <div class="sidebar__content">
         <a class="skip-link" href="#maincontent">Skip Navigation</a>
         {{ partial "sidebar-list.html" (dict

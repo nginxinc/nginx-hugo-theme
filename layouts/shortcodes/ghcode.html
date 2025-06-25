@@ -4,12 +4,12 @@
 {{ with try (resources.GetRemote $file) }}
   {{ with .Err }}
     {{ errorf "%s" . }}
-  {{ else }}
+  {{ else with .Value }}
     {{ $lang := path.Ext $file | strings.TrimPrefix "." }}
     <div id="code-block-v1" data-mf="false">
-      {{ highlight .Value $lang $params }}
+      {{ highlight .Content $lang $params }}
     </div>
-    
+
     <div class="code-block" data-mf="true" style="display: none;">
       {{- if and (ne $lang "") (ne $lang "none") -}}
           <span class="code-type chroma">{{ $lang }}</span>
@@ -17,7 +17,7 @@
       <div class="code-container chroma">
           <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button multi-line" type="button">Copy</button>
           <div class="highlight-v2" id="{{ $codeBlockId }}">
-            {{ highlight .Value $lang $params }}
+            {{ highlight .Content $lang $params }}
           </div>
       </div>
     </div>

@@ -39,6 +39,8 @@
       <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
         {{- if $brandIcon -}}
           <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $brandIcon }}.png"/>
+        {{- else -}}
+          <i class="fas fa-file-alt fa-lg card-img-top"></i>
         {{- end -}}
         {{- if ($title) -}}
           <a href="{{- $titleUrl -}}">{{- $title -}}</a>

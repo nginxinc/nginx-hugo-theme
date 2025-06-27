@@ -131,7 +131,9 @@ textarea:not([rows]) {
 :root {
   /* webfonts */
   font-family: var(--font-family);
-  font-feature-settings: "liga" on, "calt" on;
+  font-feature-settings:
+    "liga" on,
+    "calt" on;
 
   /* fallback to slightly thinner font on browsers without variable 'wght' support */
   font-weight: 350;
@@ -141,9 +143,9 @@ textarea:not([rows]) {
 
   /* MARK: Variables
   */
-  --font-family: "Inter var", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-    sans-serif;
+  --font-family:
+    "Inter var", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --color-brand: 56.6% 0.194 147.7;
   --color-brand-300: 0.84 0.0699 157.51;
   --color-brand-200: 0.91 0.0406 157.72;
@@ -261,9 +263,10 @@ textarea:not([rows]) {
 
 @supports (font-variation-settings: normal) {
   :root {
-    --font-family: InterVariable, system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
+    --font-family:
+      InterVariable, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
   }
 
   h1,
@@ -472,11 +475,6 @@ ol li:last-child {
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-  }
-
-  .remove-bottom-radius {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
   }
 
   ul {
@@ -721,19 +719,12 @@ nav {
 
 /* MARK: Main content
 */
-.docs-container * {
-  box-sizing: border-box;
-}
 
 .content-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   z-index: 1;
-}
-
-.docs-container {
-  min-width: 100%;
 }
 
 #searchbox {
@@ -877,10 +868,6 @@ nav {
         )
       ) 1fr;
     column-gap: var(--grid-column-gutter);
-  }
-
-  .content-layout .side-gutter {
-    grid-column-start: 2;
   }
 
   .navbar atomic-search-interface {
@@ -1177,7 +1164,9 @@ nav.sidebar.sidebar__mobile-open {
     border-radius: 5px 0 0 5px;
     color: oklch(0 0 0 / 0.75);
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
 
     &:hover {
       background-color: oklch(var(--color-brand) / 0.08);
@@ -1828,15 +1817,6 @@ a:has(code:not(pre code)) {
   line-height: 1;
 }
 
-.code-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.code-header.no-lang {
-  justify-content: right;
-}
-
 .code-type {
   display: inline-block;
   height: 1.5rem;
@@ -1933,11 +1913,6 @@ img,
   width: 32px;
 }
 
-.nginx-logo-footer {
-  height: 72px;
-  width: 156px;
-}
-
 /* HR Lines */
 hr {
   /* Move to gutter */
@@ -1994,32 +1969,6 @@ hr {
 .skip-link:focus {
   opacity: 1;
   pointer-events: auto;
-}
-
-/* FILTHY HACKS BEGIN */
-
-/* Override logo with black text version */
-.navbar-brand {
-  height: 3.5rem;
-  display: block;
-
-  /* non-tiling background logo */
-  background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: left center;
-  width: 200px;
-
-  img {
-    display: none;
-  }
-}
-
-/* FILTHY HACKS END */
-/* Hidden temporarily */
-
-.code-copy {
-  display: none;
 }
 
 @media print {

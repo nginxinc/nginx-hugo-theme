@@ -1,10 +1,15 @@
-{{ $changelogContent := readFile "content/nginx-one/changelog.md" }}
+{{ $productUrl := .Page.Permalink }}
+{{ $baseUrl := .Site.BaseURL }}
+{{ $linkSplit := split (replace $productUrl $baseUrl "") "/" }}
+{{ $productName := index $linkSplit 0 }}
+{{ $changelogContent := readFile (printf "content/%s/changelog.md" $productName) }}
 {{ $maxNumLogs := 3 }}
 {{ $headings := first $maxNumLogs (findRE `(?m)^##\s(.+)$` $changelogContent) }}
+
 <ul>
   {{ range $headings }}
   {{ $title := replaceRE "^##\\s" "" . }}
-  <li><a href="{{ absURL "nginx-one/changelog/" }}#{{urlize $title}}">{{ $title }}</a></li>
+  <li><a href="{{ absURL (print $productName "/changelog/#" (urlize $title)) }}">{{ $title }}</a></li>
   {{ end }}  
-  <li><a href="{{ absURL "nginx-one/changelog/" }}">Older...</a></li>
+  <li><a href="{{ absURL (print $productName "/changelog/")}}">Older...</a></li>
 </ul>

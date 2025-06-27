@@ -6,10 +6,6 @@
 
 {{ $cssHighlight := resources.Get "css/v2/highlight.css" | minify | fingerprint "sha512"}}
 <link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">
-
-{{ $cssOverrides := resources.Get "css/inline-overrides.css" | minify | fingerprint "sha512"}}
-<link href="{{ $cssOverrides.RelPermalink }}" rel="stylesheet" type="text/css" >
-
 <!-- load CSS Atomic CSS -->
 <link
   rel="stylesheet"

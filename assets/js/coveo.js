@@ -36,15 +36,13 @@ async function atomicCoveo() {
   /* Initialize the interfaces with credentials */
   const searchPageInterface = document.querySelector('#search-v2');
   const searchBarHeader = document.querySelector('#search-standalone-header');
-  const searchBarSidebar = document.querySelector('#search-standalone-sidebar');
-  const sidebar = document.querySelector('#sidebar-layout');
 
   if (searchPageInterface) {
     await searchPageInterface.initialize({
       accessToken: token,
       organizationId: org_id,
       analytics: { analyticsMode: 'legacy' },
-      preprocessRequest: (request, clientOrigin, metadata) => {
+      preprocessRequest: (request) => {
         const body = JSON.parse(request.body);
         body.q = `<@- ${body.q} -@>`;
         request.body = JSON.stringify(body);
@@ -60,7 +58,7 @@ async function atomicCoveo() {
     accessToken: token,
     organizationId: org_id,
     analytics: { analyticsMode: 'legacy' },
-    preprocessRequest: (request, clientOrigin, metadata) => {
+    preprocessRequest: (request) => {
       const body = JSON.parse(request.body);
       body.q = `<@- ${body.q} -@>`;
       request.body = JSON.stringify(body);

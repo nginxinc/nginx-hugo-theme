@@ -1,0 +1,7 @@
+{{ if and (not (eq .variant "narrow")) (not (eq .variant "wide")) }}
+    {{ errorf "Invalid variant supplied to <table> shortcode: Received %s. Wanted: 'narrow', 'wide'" .variant }}
+{{ end }}
+
+<div class="md-table-scroll-x {{ .variant }}">
+    {{ .content | markdownify}}
+</div>

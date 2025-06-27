@@ -1497,6 +1497,11 @@ table {
   }
 }
 
+.md-table-scroll-x {
+  overflow-x: auto;
+  width: 100%;
+}
+
 .narrow table {
   min-width: 100%;
   margin: var(--table-top-bottom-spacing) 0;

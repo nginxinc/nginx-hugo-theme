@@ -477,11 +477,6 @@ ol li:last-child {
     cursor: pointer;
   }
 
-  .remove-bottom-radius {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
   ul {
     list-style: none;
   }
@@ -724,19 +719,12 @@ nav {
 
 /* MARK: Main content
 */
-.docs-container * {
-  box-sizing: border-box;
-}
 
 .content-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   z-index: 1;
-}
-
-.docs-container {
-  min-width: 100%;
 }
 
 #searchbox {
@@ -880,10 +868,6 @@ nav {
         )
       ) 1fr;
     column-gap: var(--grid-column-gutter);
-  }
-
-  .content-layout .side-gutter {
-    grid-column-start: 2;
   }
 
   .navbar atomic-search-interface {
@@ -1833,15 +1817,6 @@ a:has(code:not(pre code)) {
   line-height: 1;
 }
 
-.code-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.code-header.no-lang {
-  justify-content: right;
-}
-
 .code-type {
   display: inline-block;
   height: 1.5rem;
@@ -1938,11 +1913,6 @@ img,
   width: 32px;
 }
 
-.nginx-logo-footer {
-  height: 72px;
-  width: 156px;
-}
-
 /* HR Lines */
 hr {
   /* Move to gutter */
@@ -1999,32 +1969,6 @@ hr {
 .skip-link:focus {
   opacity: 1;
   pointer-events: auto;
-}
-
-/* FILTHY HACKS BEGIN */
-
-/* Override logo with black text version */
-.navbar-brand {
-  height: 3.5rem;
-  display: block;
-
-  /* non-tiling background logo */
-  background-image: url(/images/icons/NGINX-Docs-horiz-black-type.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: left center;
-  width: 200px;
-
-  img {
-    display: none;
-  }
-}
-
-/* FILTHY HACKS END */
-/* Hidden temporarily */
-
-.code-copy {
-  display: none;
 }
 
 @media print {

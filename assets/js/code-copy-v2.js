@@ -24,6 +24,8 @@ const copyToClipBoard = ((clipboard) => async (button, codeBlockId) => {
   }
 })(navigator.clipboard);
 
+window.copyToClipBoard = copyToClipBoard;
+
 const updateButtonState = (button, message, revertDelay, disable = false) => {
   button.innerHTML = message;
 

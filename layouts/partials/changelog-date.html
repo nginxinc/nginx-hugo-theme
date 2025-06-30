@@ -1,0 +1,21 @@
+<!-- Get the product name -->
+{{ $productUrl := .Page.Permalink }}
+{{ $baseUrl := .Site.BaseURL }}
+{{ $linkSplit := split (replace $productUrl $baseUrl "") "/" }}
+{{ $productName := index $linkSplit 0 }}
+<!-- Get the content -->
+{{ $changelogContent := readFile (printf "content/%s/changelog.md" $productName) }}
+{{ $maxNumLogs := 3 }}
+{{ $headings := first $maxNumLogs (findRE `(?m)^##\s(.+)$` $changelogContent) }}
+
+<ul>
+  {{ if gt (len $headings) 0 }}
+  {{ range $headings }}
+  {{ $title := replaceRE "^##\\s" "" . }}
+  <li><a href="{{ absURL (print $productName "/changelog/#" (urlize $title)) }}">{{ $title }}</a></li>
+  {{ end }}  
+  <li><a href="{{ absURL (print $productName "/changelog/")}}">Older...</a></li>
+  {{ else }}
+  <li><p>No changelog found...</p></li>
+  {{ end }}
+</ul>

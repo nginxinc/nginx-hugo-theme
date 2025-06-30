@@ -361,7 +361,7 @@ ol li:last-child {
       margin-top: 1rem;
     }
 
-    .content-layout .breadcrumb-layout {
+    .breadcrumb-layout {
       position: sticky;
       top: 0;
       z-index: 3;
@@ -431,7 +431,7 @@ ol li:last-child {
   .header-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
 

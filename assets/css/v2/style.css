@@ -249,9 +249,7 @@ textarea:not([rows]) {
   --grid-gutter: var(--space-s-l, clamp(1rem, 0.4975rem + 2.5126vw, 2.25rem));
   --grid-columns: 12;
 
-  /* TODO: This aligns the logo in the header perfectly with the one in the sidebar, but
- this is not a safe way to do it, and likely to get out of sync */
-  --header-height: 6rem;
+  --header-height: 4rem;
 
   --sidebar-width: 22rem;
   --sidebar-item-padding-lr: 0.75rem;
@@ -362,10 +360,6 @@ ol li:last-child {
     }
 
     .breadcrumb-layout {
-      position: sticky;
-      top: 0;
-      z-index: 3;
-
       border-bottom: 1px solid oklch(var(--color-divider));
       align-items: center;
       padding: var(--space-xs) 0;
@@ -427,6 +421,13 @@ ol li:last-child {
   padding: 0 var(--space-s);
   border-bottom: 1px solid oklch(var(--color-divider));
 
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
   .header-container {
     display: flex;
     flex-direction: row;
@@ -445,11 +446,17 @@ ol li:last-child {
 
     .header__product-selector {
       width: 10rem;
+      background: rgba(0, 0, 0, 0);
+      color: oklch(var(--color-foreground));
+      text-decoration-color: oklch(var(--color-brand) / 0.3);
+      & :hover {
+        color: oklch(var(--color-brand));
+      }
 
       .product-selector__button {
         display: flex;
         align-items: center;
-        background: oklch(var(--color-background));
+        background: rgba(0, 0, 0, 0);
         border: none;
         width: 16rem;
         font-weight: 500;
@@ -567,7 +574,8 @@ ol li:last-child {
   top: 0;
   left: 0;
   width: var(--sidebar-width);
-  height: 100vh;
+  /* for sticky header, this needs to be calculated to avoid extra whitespace */
+  height: calc(110vh - var(--header-height));
   border-right: 1px solid oklch(var(--color-divider));
   overflow: hidden;
   background: oklch(var(--color-background));

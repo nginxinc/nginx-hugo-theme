@@ -1,21 +1,21 @@
 {{ define "header" }}
-<div class="header__sidebar__panel">
-    <label for="sidebar-panel">
-    {{ partial "lucide" (dict "context" . "icon" "panel-left-open") }}
-    </label>
-</div>
 <div class="header-container">
 
+    <div class="header__logo-small">
+        <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
+            <img class="header__img" src="{{ "/images/icons/NGINX-product-icon.svg" | absURL }}" alt="NGINX Docs">
+        </a>
+    </div>
     <div class="header__logo">
         <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
             <img class="header__img" src="{{ "/images/icons/NGINX-Docs-horiz-black-type.svg" | absURL }}" alt="NGINX Docs">
         </a>
     </div>
 
-    <div class="header__logo-small">
-        <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
-            <img class="header__img" src="{{ "/images/icons/NGINX-product-icon.svg" | absURL }}" alt="NGINX Docs">
-        </a>
+    <div class="header__sidebar__panel">
+        <label for="sidebar-panel">
+        {{ partial "lucide" (dict "context" . "icon" "panel-left-open") }}
+        </label>
     </div>
 
     <div class="header__product-selector">

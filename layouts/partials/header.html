@@ -7,6 +7,12 @@
         </a>
     </div>
 
+    <div class="header__logo-small">
+        <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
+            <img class="header__img" src="{{ "/images/icons/NGINX-product-icon.svg" | absURL }}" alt="NGINX Docs">
+        </a>
+    </div>
+
     <div class="header__product-selector">
         {{ $nginxProducts := slice
             (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
@@ -64,8 +70,6 @@
                 </div>
             {{ end }}
         </div>
-
-
     </div>
 
     {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}

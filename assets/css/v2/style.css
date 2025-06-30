@@ -251,10 +251,11 @@ textarea:not([rows]) {
 
   /* TODO: This aligns the logo in the header perfectly with the one in the sidebar, but
  this is not a safe way to do it, and likely to get out of sync */
-  --header-height: 93px;
+  --header-height: 6rem;
 
   --sidebar-width: 22rem;
-  --sidebar-item-padding: 0.25rem 0.75rem;
+  --sidebar-item-padding-lr: 0.75rem;
+  --sidebar-item-padding-tb: 0.25rem;
   --content-max-width: 88rem;
 
   --main-col: minmax(34rem, 50rem);
@@ -352,12 +353,33 @@ ol li:last-child {
   @media (max-width: 68rem) {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "header"
-      "content"
-      "footer";
+      "sidebar header"
+      "sidebar content"
+      "sidebar footer";
+
+    .text-content {
+      margin-top: 1rem;
+    }
+
+    .content-layout .breadcrumb-layout {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+
+      border-bottom: 1px solid oklch(var(--color-divider));
+      align-items: center;
+      padding: var(--space-xs) 0;
+    }
+  }
+  .content {
+    padding: 0 var(--space-s) 2rem;
   }
 
   .header__logo {
+    display: none;
+  }
+
+  .header__logo-small {
     display: none;
   }
 }
@@ -404,6 +426,7 @@ ol li:last-child {
   grid-area: header;
   display: flex;
   padding: 0 var(--space-s);
+  border-bottom: 1px solid oklch(var(--color-divider));
 
   .header-container {
     display: flex;
@@ -515,19 +538,21 @@ ol li:last-child {
   background: oklch(var(--color-background));
   box-sizing: border-box;
   transform: translateX(0);
-  padding: var(--space-s) 0 var(--space-s) var(--space-s);
+  padding: 0 0 var(--space-s) var(--space-s);
 
   .sidebar__container {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: var(--header-height) 1fr;
     height: 100%;
 
     .sidebar__header {
+      display: flex;
+      align-items: center;
       position: sticky;
       top: 0;
       background: oklch(var(--color-background));
       z-index: 1;
-      padding: var(--sidebar-item-padding);
+      padding: 0 0 0 var(--sidebar-item-padding-lr);
 
       .sidebar__img {
         height: 2rem;
@@ -545,6 +570,19 @@ ol li:last-child {
 }
 
 @media (max-width: 68rem) {
+  .header {
+    .header__logo-small {
+      display: unset;
+      img {
+        margin: 0;
+      }
+    }
+  }
+
+  .header__product-selector {
+    display: none;
+  }
+
   .sidebar {
     grid-area: sidebar;
     position: absolute;
@@ -760,13 +798,11 @@ nav {
   width: 100%;
 }
 
-@media (max-width: 88rem) {
-  .content-layout .breadcrumb-layout {
-    position: sticky;
-    top: 0;
-    z-index: 3;
-  }
+main {
+  margin: 0 var(--space-s) var(--space-s) var(--space-s);
+}
 
+@media (max-width: 88rem) {
   body:has(.sidebar__mobile-open) {
     /* Disable scrolling in main content + hide footer if the sidebar is visible */
     overflow-y: hidden;
@@ -840,13 +876,13 @@ nav {
       }
     }
   }
-
-  main {
-    margin: 0 2rem 2rem 2rem;
-  }
 }
 
 @media (min-width: 88em) {
+  .header__logo {
+    display: unset;
+  }
+
   .text-content {
     grid-template-columns: var(--grid-content) var(--grid-side-callout);
     grid-template-rows: 3rem max-content;
@@ -1097,7 +1133,7 @@ nav.sidebar.sidebar__mobile-open {
   }
 
   .sidebar__container button {
-    padding: var(--sidebar-item-padding);
+    padding: var(--sidebar-item-padding-tb) var(--sidebar-item-padding-lr);
     justify-content: space-between;
   }
 
@@ -1159,7 +1195,7 @@ nav.sidebar.sidebar__mobile-open {
 
   .sidebar__link {
     display: block;
-    padding: var(--sidebar-item-padding);
+    padding: var(--sidebar-item-padding-tb) var(--sidebar-item-padding-lr);
     margin: 2px 0 2px 0;
     border-radius: 5px 0 0 5px;
     color: oklch(0 0 0 / 0.75);
@@ -1904,7 +1940,6 @@ figure {
 
 img,
 .figure-bitmap {
-  margin-bottom: 0.625rem;
   display: inline-block;
   width: auto;
   max-width: 100%;

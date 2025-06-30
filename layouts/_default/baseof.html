@@ -41,6 +41,7 @@
     {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
     {{ partial "universal-tag.html" . }}
     {{ end }}
+    <input type="checkbox" id="sidebar-panel" class="sidebar-panel" hidden/>
     <div class="grid-container">
         <aside class="sidebar">
             {{ partial "sidebar-v2.html" . }}

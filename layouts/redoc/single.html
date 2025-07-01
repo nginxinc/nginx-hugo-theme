@@ -1,12 +1,8 @@
 {{ define "main" }}
 
-<!-- Remove upon cleaning up old frame code -->
-<style>
-  .nginx-docs-api-container {
-    z-index: 0 !important;
-    max-width: calc(100% + 2.4rem);
-    margin-top: 2rem;
-  }
+<main class="content content__redocly" data-testid="content">
+    <div id="api-component">{{ .Content}}</div>
+</main>
 
   @media (min-width: 768px) {
     .nginx-docs-api-container {

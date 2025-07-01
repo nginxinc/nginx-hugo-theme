@@ -4,8 +4,9 @@
     {{ partial "sidebar.html" . }}
   </nav>
 
-  <!-- Replace icons -->
-  {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
+<main class="content" data-testid="content">
+    <!-- Replace icons -->
+    {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
 
   {{if (.Params.catalog) }}
   <main class="content content-has-toc" role="main">

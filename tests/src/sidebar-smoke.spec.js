@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { runSmokeTest } from './util';
+import { test } from '@playwright/test';
+import { runSmokeTestOnPage } from './util';
 
 async function openPage(page, sidebarPage) {
   // Find all toggles
@@ -41,7 +41,7 @@ async function openPage(page, sidebarPage) {
   await content.waitFor();
 }
 
-test.describe('Smoke test', () => {
+test.describe('Smoke test for sidebar', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`/test-product/`);
   });
@@ -51,7 +51,7 @@ test.describe('Smoke test', () => {
     const sidebarPages = await page.locator('data-testid=sidebar__page').all();
     for (const sidebarPage of sidebarPages) {
       await openPage(page, sidebarPage);
-      await runSmokeTest(page);
+      await runSmokeTestOnPage(page);
     }
   });
 });

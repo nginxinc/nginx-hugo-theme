@@ -443,6 +443,9 @@ ol li:last-child {
 
     .header__search {
       width: 14rem;
+      /* This is a horrible hack to stop coveo overflowing 3500px for no reason. :sad */
+      transform: translateY(0);
+      overflow: hidden;
     }
 
     .header__product-selector {
@@ -514,6 +517,7 @@ ol li:last-child {
         height: 2rem;
         stroke: currentColor;
         color: black;
+        transition: color 0.2s ease;
       }
     }
 
@@ -1057,7 +1061,7 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   display: none;
   position: absolute;
   top: 0;
-  margin-top: 4em;
+  margin-top: calc(var(--header-height) - 1rem);
   padding: 1rem 1.5rem;
   background-color: oklch(var(--color-background));
   border: oklch(var(--color-foreground)) 1px solid;

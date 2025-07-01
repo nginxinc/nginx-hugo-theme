@@ -116,14 +116,14 @@
         </div>
     </button>
     <div class="dropdown-content" id="dropdown-content">
-    <ul>
-        {{ range $f5Sites }}
-        <li>
-            <a href="{{ .url }}" target="_blank" >{{ .title }}</a>
-            <p>{{ .description }}</p>
-        </li>
-        {{ end }}
-    </ul>
+        <ul>
+            {{ range $f5Sites }}
+            <li>
+                <a href="{{ .url }}" target="_blank" >{{ .title }}</a>
+                <p>{{ .description }}</p>
+            </li>
+            {{ end }}
+        </ul>
     </div>
 
     </div>

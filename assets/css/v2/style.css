@@ -1497,6 +1497,11 @@ table {
   }
 }
 
+.md-table-scroll-x {
+  overflow-x: auto;
+  width: 100%;
+}
+
 .narrow table {
   min-width: 100%;
   margin: var(--table-top-bottom-spacing) 0;
@@ -1974,5 +1979,22 @@ hr {
 @media print {
   .qualtrics-feedback {
     visibility: hidden;
+  }
+}
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+
+  .info-header {
+    font-size: var(--font-step-2);
+  }
+
+  .info-desc {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    font-size: var(--font-step--1);
   }
 }

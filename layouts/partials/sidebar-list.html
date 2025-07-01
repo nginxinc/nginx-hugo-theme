@@ -3,7 +3,7 @@
 {{ $firstSection := .firstSection }}
 {{ $idPrefix := .idPrefix }}
 {{ with $firstSection }}
-<ul class="sidebar__ul">
+<ul class="sidebar__ul" data-testid="sidebar__ul">
   {{ $pages := .Pages.ByWeight }}
   {{ range $index, $p := $pages }}
     {{- $onPage := eq $currentUrl $p.Permalink -}}
@@ -14,10 +14,11 @@
     {{- $nextIndex := add $index 1 -}}
     {{- $nextLink := index $pages $nextIndex -}}
     {{ if eq $p.Kind "section" }}
-      <li class="sidebar__section">
+      <li class="sidebar__section" data-testid="sidebar__section">
         <button
           id="{{ $linkID }}"
           class="sidebar__toggle {{ if $isAncestor }}sidebar__toggle--ancestor{{ end }}"
+          data-testid="sidebar__section__toggle"
           aria-expanded="{{ $shouldExpand }}"
           aria-controls="{{ $sectionID }}"
         >
@@ -33,7 +34,7 @@
         >
         {{ if and .Content (gt (len .Pages) 0) }}
             <ul>
-              <li class="sidebar__page">
+              <li class="sidebar__page" data-testid="sidebar__page">
                 <a
                   href="{{ $p.Permalink }}"
                   class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
@@ -57,7 +58,7 @@
       {{- $tocHasItems := (in $p.TableOfContents "<li>") -}}
       {{- $pageHasTOC := (and $onPage $tocHasItems $p.Params.toc) -}}
       {{- $tocID := printf "%stoc-%s" $idPrefix (urlize $p.Permalink) -}}
-      <li class="sidebar__page">
+      <li class="sidebar__page"  data-testid="sidebar__page">
         {{ if $pageHasTOC }}
           <button
             class="sidebar__toggle sidebar__link sidebar__link--current"

@@ -18,7 +18,7 @@
         </label>
     </div>
 
-    <div class="header__product-selector">
+    <div class="header__product-selector" data-testid="header__product-selector">
         {{ $nginxProducts := slice
             (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
             (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
@@ -43,7 +43,7 @@
         {{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
         {{ $productName := index $productMap $productIdentifier | default "Product Documentation" }}
 
-        <button class="product-selector__button" id="product-selector-button">
+        <button class="product-selector__button" id="product-selector-button" data-testid="product-selector__button">
             {{/* product name and selector */}}
             <span class="product-name">{{ $productName }}</span>
             <span class="product-selector-button-icon">
@@ -52,7 +52,7 @@
                 </svg>
             </span>
         </button>
-        <div class="product-selector" id="product-selector">
+        <div class="product-selector" id="product-selector" data-testid="product-selector">
             {{ $groupedProducts := dict
                 "nginx-one" (where $nginxProducts "type" "nginx-one")
                 "nginx-app-protect" (where $nginxProducts "type" "nginx-app-protect")
@@ -63,7 +63,7 @@
             {{ range $orderedKeys }}
             {{ $type := . }}
             {{ $products := index $groupedProducts $type }}
-                <div class="product-selector-content" id="product-selector-content">
+                <div class="product-selector-content" id="product-selector-content" data-testid="product-selector-content">
                     <p>{{ $type | humanize | title | upper }}</p>
                     <ul>
                     {{ range $products }}
@@ -78,20 +78,20 @@
     </div>
 
     {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
-      <div class="header__search">
+      <div class="header__search" data-testid="header__search">
         <!-- Standalone search box. -->
         {{ partial "coveo-atomic-search.html" }}
       </div>
     {{ end }}
 
-    <div class="header__f5sites">
+    <div class="header__f5sites" data-testid="header__f5sites">
     {{ $f5Sites := slice
       (dict "title" "DevCentral" "url" "https://community.f5.com/" "description" "Connect & learn in our hosted community")
       (dict "title" "MyF5" "url" "https://my.f5.com/" "description" "Your key to everything F5, including support, registration keys, and subscriptions")
       (dict "title" "NGINX" "url" "https://nginx.org/" "description" "Learn more about NGINX Open Source and read the community blog")
     }}
 
-    <button id="navbar-sites-button" class="header__f5sites__button">
+    <button id="navbar-sites-button" class="header__f5sites__button" data-testid="header__f5sites__button">
         <div class="header__f5sites__logo">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
                 <title>f5-logo-black</title>
@@ -115,7 +115,7 @@
             </svg>
         </div>
     </button>
-    <div class="dropdown-content" id="dropdown-content">
+    <div class="dropdown-content" id="dropdown-content" data-testid="header__f5sites-content">
         <ul>
             {{ range $f5Sites }}
             <li>

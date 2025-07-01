@@ -43,17 +43,17 @@
     {{ end }}
     <input type="checkbox" id="sidebar-panel" class="sidebar-panel" hidden/>
     <div class="grid-container">
-        <aside class="sidebar">
+        <aside class="sidebar" data-testid="sidebar">
             {{ partial "sidebar-v2.html" . }}
         </aside>
 
-        <header class="header">
+        <header class="header" data-testid="header">
             {{ block "header" . }}{{end}}
         </header>
 
         {{ block "main" . }}{{ end }}
 
-        <footer class="footer">
+        <footer class="footer" data-testid="footer">
             {{ block "footer-v2" . }}
             {{ partial "footer-v2.html" . }}
             {{ end }}

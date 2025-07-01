@@ -3,7 +3,7 @@ import { runSmokeTestOnPage } from './util';
 
 test.describe('Smoke test for landing page', () => {
   test('should test each product landing page renders', async ({ page }) => {
-    const products = ['test-products', 'nginx'];
+    const products = ['test-product', 'nginx'];
 
     for (const product of products) {
       await page.goto(`/${product}/`);

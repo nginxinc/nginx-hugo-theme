@@ -1,25 +1,3 @@
-{{ $nginxProducts := slice
-    (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
-    (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
-    (dict "title" "NGINX Instance Manager" "url" "/nginx-instance-manager" "type" "nginx-one")
-    (dict "title" "NGINX Ingress Controller" "url" "/nginx-ingress-controller" "type" "nginx-one")
-    (dict "title" "NGINX Gateway Fabric" "url" "/nginx-gateway-fabric" "type" "nginx-one")
-    (dict "title" "NGINX Open Source" "url" "https://nginx.org/en/docs/" "type" "nginx-one")
-    (dict "title" "Subscription Licensing & Solutions" "url" "/solutions/" "type" "nginx-one")
-    (dict "title" "NGINX Agent" "url" "/nginx-agent" "type" "nginx-one")
-    (dict "title" "NGINX App Protect WAF" "url" "/nginx-app-protect-waf" "type" "nginx-app-protect")
-    (dict "title" "NGINX App Protect DoS" "url" "/nginx-app-protect-dos" "type" "nginx-app-protect")
-    (dict "title" "NGINX as a Service for Azure" "url" "/nginxaas/azure/" "type" "nginx-as-a-service")
-    (dict "title" "NGINX Unit" "url" "https://unit.nginx.org/" "type" "nginx-other")
-}}
-{{ $productMap := dict }}
-{{ range $nginxProducts }}
-    {{ $productId := index (split .url "/") 1 }}
-    {{ $productMap = merge $productMap (dict $productId .title) }}
-{{ end }}
-{{ $relPermalink := .RelPermalink }}
-{{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
-{{ $productName := index $productMap $productIdentifier }}
 
 <div class="sidebar__container">
     <div class="sidebar__header">
@@ -33,6 +11,10 @@
             {{ partial "lucide" (dict "context" . "icon" "panel-left-close") }}
             </label>
         </div>
+    </div>
+    <div class="sidebar__search">
+      <!-- Standalone search box. -->
+      {{ partial "coveo-atomic-search.html" }}
     </div>
     <div class="sidebar__content">
         <a class="skip-link" href="#maincontent">Skip Navigation</a>

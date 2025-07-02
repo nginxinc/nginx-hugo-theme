@@ -550,6 +550,12 @@ ol li:last-child {
     display: flex;
     align-self: center;
   }
+
+  .header {
+    .header__logo-small {
+      display: unset;
+    }
+  }
 }
 
 /* sidebar layout */
@@ -614,6 +620,10 @@ ol li:last-child {
       scrollbar-gutter: stable;
     }
   }
+
+  .sidebar__search {
+    display: none;
+  }
 }
 
 /* This is our "mobile" or no sidebar breakpoint */
@@ -622,10 +632,20 @@ ol li:last-child {
     .sidebar {
       /* Above search */
       z-index: 11;
-      display: unset;
+      display: block;
       transform: translateX(0);
       border-bottom: 1px solid oklch(var(--color-divider));
       height: fit-content;
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      .sidebar__search {
+        display: flex;
+        width: calc(var(--sidebar-width) - 4rem);
+        justify-self: anchor-center;
+        margin-left: -1rem;
+      }
     }
   }
 
@@ -634,6 +654,11 @@ ol li:last-child {
       display: unset;
       img {
         margin: 0;
+      }
+    }
+    .header-container {
+      .header__search {
+        display: none;
       }
     }
   }

@@ -951,6 +951,10 @@ main {
   --atomic-border-radius-md: 0;
   --atomic-border-radius: 0;
   --atomic-font-family: var(--font-family);
+
+  atomic-search-box {
+    z-index: 0;
+  }
 }
 
 atomic-search-interface {

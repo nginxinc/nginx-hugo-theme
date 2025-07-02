@@ -150,7 +150,6 @@ textarea:not([rows]) {
   --color-brand-300: 0.84 0.0699 157.51;
   --color-brand-200: 0.91 0.0406 157.72;
   --color-brand-100: 0.98 0.0107 158.85;
-  --color-f5-brand: 0.5839 0.2253 20.56;
   --color-background: 1 0 0;
   --color-foreground: 0 0 0;
   --color-shadow: 0.86 0 0;
@@ -501,31 +500,13 @@ ol li:last-child {
     margin: 0;
   }
 
-  .header__f5sites__button {
+  .navbar-button {
+    padding: 0.5rem 0.5rem;
     border: none;
-    background-color: transparent;
-    border-radius: 0;
+    border-radius: 0.25rem;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-
-    .header__f5sites__logo {
-      pointer-events: none;
-      height: 2rem;
-
-      svg {
-        height: 2rem;
-        stroke: currentColor;
-        color: black;
-        transition: color 0.2s ease;
-      }
-    }
-
-    &:hover {
-      .header__f5sites__logo svg {
-        color: oklch(var(--color-f5-brand));
-      }
-    }
   }
 
   ul {

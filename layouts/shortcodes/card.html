@@ -24,7 +24,7 @@
           {{- end -}}
         {{- end -}}
         {{- if $titleUrl -}}
-          <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
+          <h2 class="card-title"><a href="{{- printf "%s%s" .Page.Permalink $titleUrl -}}">{{- $title -}}</a></h2>
         {{- else -}}
           <h2 class="card-title">{{- $title -}}</h2>
         {{- end -}}

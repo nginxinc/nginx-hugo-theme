@@ -2,18 +2,18 @@
 {{ $class := .class | default "" }}
 {{ $title := .title | default "" }}
 {{ $icon  := .icon  | default "" }}
-{{ $inlineParam := .inline | default "false" | lower }}
+{{ $sidelineParam := .sideline | default "false" | lower }}
 
-{{ if not (in (slice "true" "false") $inlineParam) }}
-  {{ errorf "Invalid parameter 'inline'='%s' passed to blockquote partial from '%s'. Allowed values: true, false" $inlineParam .Page.Path }}
+{{ if not (in (slice "true" "false") $sidelineParam) }}
+  {{ errorf "Invalid parameter 'sideline'='%s' passed to blockquote partial from '%s'. Allowed values: true, false" $sidelineParam .Page.Path }}
 {{ end }}
 
 {{/*  Figure out inline/side and set class accordingly  */}}
-{{ $inline := eq $inlineParam "true" }}
+{{ $sideline := eq $sidelineParam "true" }}
 {{ $sideOption := "side-callout" }}
 {{ $inlineOption := "inline-callout" }}
 
-{{ if $inline }}
+{{ if $sideline }}
   {{ $class = printf "%s %s" $class $sideOption }}
 {{ else }}
   {{ $class = printf "%s %s" $class $inlineOption }}

@@ -34,6 +34,7 @@
 
 
 {{/*  Render a different block, if "loud" callouts are used  */}}
+{{ $type := (index (split $class " ") 0) | strings.FirstUpper }}
 {{ $specialTitles := slice "Caution" "Warning" "Deprecated" "Important" }}
 {{ $specialTitleIcons := dict
   "Caution"    "alert-triangle"
@@ -41,24 +42,22 @@
   "Deprecated" "alert-octagon"
   "Important"  "arrow-right-circle"
 }}
-{{ $icon := index $specialTitleIcons $title | default "" }}
+{{ $icon := index $specialTitleIcons $type | default "" }}
 
-{{ $isSpecialTitle := in $specialTitles $title }}
+{{ $isSpecialTitle := in $specialTitles $type }}
 {{ if $isSpecialTitle }}
-  {{/*  Loud callouts  */}}
+{{/*  Loud callouts  */}}
+<blockquote class="{{ $class }}" data-mf="true" style="display: none;">
   <div>
-  <blockquote class="{{ $class }}" data-mf="true" style="display: none;">
-    <div>
-      <div class="call-out-type">
-        {{ partial "feather" (dict "context" . "icon" $icon) .}}
-       {{ $title }}
-      </div>
-      <div class="callout-content">
-        {{ .content | markdownify }}
-      </div>
+    <div class="call-out-type">
+      {{ partial "feather" (dict "context" . "icon" $icon) .}}
+      {{ $title }}
     </div>
-  </blockquote>
-</div>
+    <div class="callout-content">
+      {{ .content | markdownify }}
+    </div>
+  </div>
+</blockquote>
 
 {{ else }}
 

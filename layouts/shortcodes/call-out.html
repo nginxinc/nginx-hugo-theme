@@ -25,21 +25,10 @@ Depends on `callout.html` partial.
   {{ warnf "The '<call-out>' Shortcode parameter 'inline' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $inlineParam}}
 {{ end }}
 
-{{ $inline := eq $inlineParam "true" }}
-
-{{ $sideOption := "side-callout" }}
-{{ $inlineOption := "inline-callout" }}
-
-{{ if $inline }}
-  {{ $class = printf "%s %s" $class $inlineOption }}
-{{ else }}
-  {{ $class = printf "%s %s" $class $sideOption }}
-{{ end }}
-
 {{ partial "callout.html" (dict
-    "class" $class
+    "class" (printf "%s %s" $class "call-out")
     "title" $title
     "icon"  $icon
-    "inline" $inline
+    "inline" $inlineParam
     "content" .Inner
 ) }}

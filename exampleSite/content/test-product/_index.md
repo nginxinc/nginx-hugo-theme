@@ -3,6 +3,11 @@ description: Test pages for nginx-hugo-theme
 title: Test pages
 weight: 100
 nd-landing-page: true
+cascade:
+  nd-banner:
+    enabled: true
+    start-date: 2025-01-01
+    md: /_banners/test-product-intro.md
 ---
 {{<card-layout>}}
   {{<card-section showAsCards="true">}}

@@ -80,7 +80,7 @@
     {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
       <div class="header__search">
         <!-- Standalone search box. -->
-        {{ partial "coveo-atomic-search.html" }}
+        {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
       </div>
     {{ end }}
 

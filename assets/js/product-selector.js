@@ -4,24 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
     'product-selector-button'
   );
 
-  if (productSelectorButton === null || productSelectorContent == null) {
-    return;
-  }
+  if (!productSelectorButton || !productSelectorContent) return;
 
   productSelectorButton.addEventListener('click', () => {
-    /* Logic for hiding/showing ONLY when the button is clicked */
-    if (productSelectorContent.style.display === 'block') {
-      productSelectorContent.style.display = 'none';
-      productSelectorButton.classList.remove('remove-bottom-radius');
-    } else {
-      productSelectorContent.style.display = 'block';
-      productSelectorButton.classList.add('remove-bottom-radius');
-    }
+    const isVisible = productSelectorContent.style.display === 'block';
+    productSelectorContent.style.display = isVisible ? 'none' : 'block';
+    productSelectorButton.classList.toggle('remove-bottom-radius', !isVisible);
   });
 
   window.addEventListener('click', (event) => {
-    /* Greedy Logic to hide the product selector when something other than the button is clicked. Assumes everything has an id containing "product-selector" */
-    if (!event.target.id.includes('product-selector')) {
+    const isClickInside =
+      productSelectorButton.contains(event.target) ||
+      productSelectorContent.contains(event.target);
+    if (!isClickInside) {
       productSelectorContent.style.display = 'none';
       productSelectorButton.classList.remove('remove-bottom-radius');
     }

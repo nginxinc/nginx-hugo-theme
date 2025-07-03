@@ -1,0 +1,61 @@
+/* MARK: Accessibility
+*/
+
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: oklch(var(--color-background));
+  color: oklch(var(--color-foreground));
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  border: 2px solid oklch(var(--color-foreground));
+  z-index: 1000;
+  text-decoration: none;
+  border-radius: 0;
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.skip-link:focus {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ref https://piccalil.li/blog/visually-hidden/ */
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.feather {
+  width: 1.8ch;
+  height: 1.8ch;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: square;
+  vertical-align: sub;
+  margin: 0;
+}
+
+.lucide {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: square;
+  vertical-align: sub;
+  margin: 0;
+}

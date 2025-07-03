@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { runSmokeTestOnPage } from './util';
 
 async function openPage(page, sidebarPage) {
@@ -43,7 +43,7 @@ async function openPage(page, sidebarPage) {
 
 test.describe('Smoke test for sidebar', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(`/test-product/`);
+    await page.goto('/test-product/');
   });
 
   test('should test sidebar renders', async ({ page }) => {

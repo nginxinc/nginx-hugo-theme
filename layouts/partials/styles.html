@@ -1,11 +1,27 @@
-{{ $style := resources.Get "css/v2/style.css" | minify | fingerprint "sha512" }}
-<link href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" rel="stylesheet" type="text/css">
 
-{{ $cssInter := resources.Get "css/inter/inter.css" | minify | fingerprint "sha512" }}
-<link href="{{ $cssInter.RelPermalink }}" integrity="{{ $cssInter.Data.Integrity }}" rel="stylesheet" type="text/css">
+{{- $styles := slice
+  (resources.Get "css/global/reset.css")
+  (resources.Get "css/inter/inter.css")
+  (resources.Get "css/global/typography.css")
+  (resources.Get "css/global/tokens.css")
+  (resources.Get "css/global/layout.css")
+  (resources.Get "css/blocks.css")
+  (resources.Get "css/utilities.css")
+-}}
 
-{{ $cssHighlight := resources.Get "css/v2/highlight.css" | minify | fingerprint "sha512"}}
-<link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">
+{{- $componentStyles := resources.Match "css/components/*.css" | resources.Concat "components.css" -}}
+
+{{- /* combine all styles */ -}}
+{{- $allStyles := $styles | append $componentStyles | resources.Concat "styles.css" | minify | fingerprint "sha512" -}}
+
+
+<link href="{{ $allStyles.RelPermalink }}"
+      integrity="{{ $allStyles.Data.Integrity }}"
+      rel="stylesheet"
+      type="text/css"
+      crossorigin="anonymous"
+>
+
 <!-- load CSS Atomic CSS -->
 <link
   rel="stylesheet"

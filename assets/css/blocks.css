@@ -1,0 +1,224 @@
+/*
+Blocks should be used for larger state and layout changes.
+In this case, we handle the difference from our "normal" content layout,
+homepage, redocly pages, and list pages.
+*/
+
+/* Homepage */
+.homepage {
+  --content-max-width: 120rem;
+
+  .homepage-heading {
+    grid-column: 1 / -1;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 2rem 0rem;
+  }
+
+  .homepage-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 500px));
+    gap: 1.5rem;
+
+    justify-content: center;
+    max-width: 98rem;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+
+    a {
+      color: oklch(var(--color-foreground));
+      text-decoration-color: oklch(var(--color-background));
+
+      &:hover {
+        text-decoration-color: oklch(var(--color-background));
+      }
+    }
+
+    .homepage-heading {
+      grid-column: 1 / -1;
+      margin: 1rem 0rem;
+    }
+  }
+
+  /* Styling for items */
+  .homepage-item {
+    background: oklch(var(--color-background));
+    border: 1px solid oklch(var(--color-codeblock-border));
+    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+    min-height: 11rem;
+    padding: 1rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+      text-decoration-color: oklch(var(--color-background));
+      border: 1px solid oklch(var(--color-brand) / 0.8);
+    }
+  }
+
+  .homepage-item-heading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .homepage-item-logo {
+    margin-right: 0.5rem;
+  }
+
+  .homepage-item-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .homepage-item-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+    /* Hack to make text line-up with logos */
+    transform: translateY(-6px);
+  }
+
+  .homepage-item-content {
+    line-height: 1.5rem;
+  }
+}
+
+/* List page */
+.list-page {
+  --flow-gap: 0.5rem;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  hr {
+    margin: 1rem 0;
+  }
+}
+
+/* Handles different flow-gap of list page  */
+.list-page.text-content {
+  grid-template-rows: calc(70px + var(--flow-gap)) max-content;
+}
+
+/* OTHER TODO SORT */
+
+/* breadcrumbs */
+nav {
+  display: flex;
+  align-items: center;
+
+  .logo {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .links a {
+    margin: 0 0 0 1rem;
+  }
+}
+
+/* Breadcrumb */
+.breadcrumb-layout {
+  position: relative;
+  background-color: --color-background;
+
+  .sidebar__mobile__toggle {
+    display: none;
+  }
+}
+
+.breadcrumb {
+  color: oklch(var(--color-foreground));
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.breadcrumb .active {
+  font-weight: 600;
+}
+
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  display: block;
+
+  > * {
+    display: inline;
+    line-height: 25px;
+  }
+}
+
+.breadcrumb li:after {
+  padding: 0 0.25rem;
+  content: "\E1D7";
+}
+
+/* MARK: Catalog
+*/
+.catalog {
+  .catalog__table {
+    padding-bottom: 2rem;
+  }
+}
+
+/* MARK: Images
+*/
+figure {
+  margin: 0;
+}
+
+img,
+.figure-bitmap {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+}
+
+/* Logo */
+.f5-logo-footer {
+  height: 32px;
+  width: 32px;
+}
+
+/* HR Lines */
+hr {
+  /* Move to gutter */
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+
+  border: 1px solid oklch(var(--color-divider));
+}
+
+@media print {
+  .qualtrics-feedback {
+    visibility: hidden;
+  }
+}
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+
+  .info-header {
+    font-size: var(--font-step-2);
+  }
+
+  .info-desc {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    font-size: var(--font-step--1);
+  }
+}

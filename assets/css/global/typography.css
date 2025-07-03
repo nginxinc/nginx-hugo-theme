@@ -1,0 +1,133 @@
+/* Regular */
+@font-face {
+  font-family: "JetBrainsMono";
+  font-style: normal;
+  font-weight: 400; /* regular weight */
+  src: url("/css/fonts/jetbrainsmono/JetBrainsMono-Light.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* Italic */
+@font-face {
+  font-family: "JetBrainsMono";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/css/fonts/jetbrainsmono/JetBrainsMono-Italic.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+/* Bold */
+@font-face {
+  font-family: "JetBrainsMono";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/css/fonts/jetbrainsmono/JetBrainsMono-SemiBold.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: "JetBrainsMono";
+  font-style: italic;
+  font-weight: 700;
+  src: url("/css/fonts/jetbrainsmono/JetBrainsMono-BoldItalic.woff2")
+    format("woff2");
+  font-display: swap;
+}
+
+p {
+  font-weight: 350;
+  margin: 0;
+  line-height: 1.5rem;
+}
+
+a {
+  color: oklch(var(--color-brand));
+  text-decoration-color: oklch(var(--color-brand) / 0.3);
+  transition: text-decoration-color 0.15s ease-in-out;
+}
+
+a:hover {
+  text-decoration-color: oklch(var(--color-brand) / 0.8);
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 1rem 0 0.75rem 0;
+}
+
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  color: oklch(var(--color-brand));
+
+  .headerlink::before {
+    display: block !important;
+  }
+}
+
+h2:has(a),
+h3:has(a),
+h4:has(a),
+h5:has(a),
+h6:has(a) {
+  width: calc(100% + 1rem);
+  margin-left: -1rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+h2:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h3:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h4:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h5:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+h6:has(a):hover {
+  .headerlink::before {
+    display: block;
+  }
+}
+
+.headerlink {
+  text-decoration: none;
+
+  color: oklch(var(--color-foreground));
+}
+
+.headerlink::before {
+  position: absolute;
+  content: "#";
+  margin-left: -1.5rem;
+  opacity: 20%;
+  display: none;
+  bottom: 0;
+  color: oklch(var(--color-brand));
+}

@@ -1,0 +1,129 @@
+blockquote {
+  border: 1px solid oklch(var(--color-foreground));
+  padding: 1rem;
+  margin: 0 -1rem;
+
+  /* solid 3px drop shadow */
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+
+  &:has(.code-block) .code-block:not(:has(.single-line)) {
+    /* Removes negative margins from multi-line codeblocks */
+    margin: 0;
+  }
+
+  .callout-content {
+    margin: 0;
+  }
+}
+
+blockquote.note {
+  position: relative;
+  z-index: 0;
+}
+
+blockquote.note:before {
+  content: attr(data-title);
+  font-size: 1rem;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+
+  position: absolute;
+  margin: -1.625rem 0 0 -0.25rem;
+  padding: 0 0.25rem;
+  display: block;
+  background-color: oklch(var(--color-background));
+  z-index: 999;
+}
+
+blockquote p:first-child {
+  margin: 0 auto 1rem auto;
+}
+
+blockquote p:last-child {
+  margin: 0 auto;
+}
+
+/* Maintain the split column for as long as possible */
+@media (min-width: 67rem) {
+  blockquote.side-callout {
+    grid-column: 2 !important;
+    align-self: start;
+  }
+}
+
+blockquote > div > * {
+  margin: 0 0 var(--flow-gap) 0;
+}
+
+blockquote ol,
+blockquote ul {
+  margin: 0 0 1rem 1rem;
+}
+
+li > blockquote {
+  margin: var(--flow-gap) 0 0 0;
+}
+
+blockquote.call-out {
+  --padding: 0.75rem;
+  padding: var(--padding);
+
+  .call-out-type {
+    display: block;
+    font-weight: 500;
+    margin: calc(-1 * var(--padding)) calc(-1 * var(--padding)) var(--padding)
+      calc(-1 * var(--padding));
+
+    padding: 0.25rem var(--padding);
+  }
+
+  br {
+    display: none;
+  }
+}
+
+blockquote.caution {
+  --color-shadow: var(--color-callout-caution-shadow);
+  border: 1px solid oklch(var(--color-callout-caution));
+
+  .call-out-type {
+    background-color: oklch(var(--color-callout-caution-shadow));
+    border-bottom: 1px solid oklch(var(--color-callout-caution));
+  }
+  .call-out-type .feather {
+    color: oklch(var(--color-callout-caution));
+  }
+}
+
+blockquote.warning {
+  --color-shadow: var(--color-callout-warning-shadow);
+  border: 1px solid oklch(var(--color-callout-warning));
+
+  .call-out-type {
+    background-color: oklch(var(--color-callout-warning-shadow));
+    border-bottom: 1px solid oklch(var(--color-callout-warning));
+  }
+  .call-out-type .feather {
+    color: oklch(var(--color-callout-warning));
+  }
+}
+
+blockquote.important {
+  --color-shadow: var(--color-callout-important-shadow);
+  border: 1px solid oklch(var(--color-callout-important));
+
+  .call-out-type {
+    background-color: oklch(var(--color-callout-important-shadow));
+    border-bottom: 1px solid oklch(var(--color-callout-important));
+  }
+}
+
+li:has(> div > blockquote) {
+  blockquote {
+    margin: 0;
+  }
+
+  div:has(blockquote) {
+    margin-bottom: 0.5rem;
+  }
+}

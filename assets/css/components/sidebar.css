@@ -1,0 +1,317 @@
+/* sidebar toggling */
+#sidebar-panel:checked ~ .grid-container {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+
+  .sidebar {
+    display: none;
+  }
+
+  .header__sidebar__panel {
+    display: flex;
+    align-self: center;
+  }
+
+  .header {
+    .header__logo-small {
+      display: unset;
+    }
+  }
+}
+
+/* sidebar layout */
+
+.header__sidebar__panel,
+.sidebar__panel {
+  cursor: pointer;
+  color: var(--color-foreground);
+  label {
+    cursor: pointer;
+  }
+
+  :hover {
+    color: oklch(var(--color-brand));
+  }
+}
+
+.header__sidebar__panel {
+  display: none;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  /* for sticky header, this needs to be calculated to avoid extra whitespace */
+  height: calc(110vh - var(--header-height));
+  border-right: 1px solid oklch(var(--color-divider));
+  overflow: hidden;
+  background: oklch(var(--color-background));
+  box-sizing: border-box;
+  transform: translateX(0);
+  padding: 0 0 var(--space-s) var(--space-s);
+
+  .sidebar__container {
+    display: grid;
+    grid-template-rows: var(--header-height) 1fr;
+    height: 100%;
+
+    .sidebar__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: oklch(var(--color-background));
+      z-index: 1;
+      padding: 0 2.25rem 0 var(--sidebar-item-padding-lr);
+
+      .sidebar__img {
+        height: 2rem;
+      }
+    }
+
+    .sidebar__content {
+      overflow-y: auto;
+      min-height: 0;
+      /* allows space for scrollbar */
+      width: calc(var(--sidebar-width) - 1rem);
+      scrollbar-gutter: stable;
+    }
+  }
+
+  .sidebar__search {
+    display: none;
+  }
+}
+
+/* This is our "mobile" or no sidebar breakpoint */
+@media (max-width: 68rem) {
+  #sidebar-panel:checked ~ .grid-container {
+    .sidebar {
+      /* Above search */
+      z-index: 11;
+      display: block;
+      transform: translateX(0);
+      border-bottom: 1px solid oklch(var(--color-divider));
+
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      .sidebar__content__wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar__search {
+        display: unset;
+        width: calc(var(--sidebar-width) - 4rem);
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .header {
+    .header__logo-small {
+      display: unset;
+      img {
+        margin: 0;
+      }
+    }
+    .header-container {
+      .header__search {
+        display: none;
+      }
+    }
+  }
+
+  .header__product-selector {
+    display: none;
+  }
+
+  .header__sidebar__panel {
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-width, 16rem);
+    transform: translateX(-100%);
+  }
+
+  .sidebar-button {
+    display: block;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+nav.sidebar.sidebar__mobile-open {
+  display: block;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  --color-foreground: oklch(0 0 0 / 0.75);
+
+  .sidebar__container,
+  .sidebar__container button,
+  .sidebar__container ul,
+  .sidebar__container li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-weight: 400;
+    font-size: 0.875rem;
+  }
+
+  .sidebar__container {
+    width: var(--sidebar-width);
+  }
+
+  .sidebar__container button {
+    padding: var(--sidebar-item-padding-tb) var(--sidebar-item-padding-lr);
+    justify-content: space-between;
+  }
+
+  .sidebar__content {
+    padding: 0.5rem 0 0.4rem 0;
+    margin-right: 0.25rem;
+  }
+
+  .sidebar__ul {
+    padding-left: 0;
+  }
+
+  .sidebar__children {
+    padding-left: 1rem;
+  }
+
+  .sidebar__toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px 0 0 5px;
+    font-weight: 500;
+    color: var(--color-foreground);
+
+    &:hover {
+      background-color: oklch(var(--color-brand) / 0.06);
+      color: oklch(var(--color-brand) / 1);
+    }
+  }
+
+  .sidebar__container button.sidebar__toggle--ancestor {
+    font-weight: 600;
+  }
+
+  .sidebar__chevron {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .sidebar__chevron svg {
+    stroke-width: 1.5;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .sidebar__chevron--open {
+    transform: rotate(90deg);
+  }
+
+  .sidebar__toggle:not(:has(.sidebar__chevron)) {
+    padding-left: 2rem;
+  }
+
+  .sidebar__link {
+    display: block;
+    padding: var(--sidebar-item-padding-tb) var(--sidebar-item-padding-lr);
+    margin: 2px 0 2px 0;
+    border-radius: 5px 0 0 5px;
+    color: oklch(0 0 0 / 0.75);
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background-color: oklch(var(--color-brand) / 0.08);
+      color: oklch(var(--color-brand));
+    }
+  }
+
+  .sidebar__link--current,
+  .sidebar__toggle.sidebar__link--current {
+    color: oklch(var(--color-brand) / 1);
+    background-color: oklch(var(--color-brand) / 0.1);
+    font-weight: 600;
+    display: flex;
+    justify-self: stretch;
+    width: auto;
+    box-sizing: border-box;
+  }
+
+  .sidebar__toc {
+    #TableOfContents {
+      padding: 0 0.75rem 0 0;
+      margin: 0.5rem 0.25rem 0.5rem 0.8rem;
+      border-left: 1px solid var(--color-divider);
+      color: oklch(0 0 0 / 0.75);
+
+      &[hidden] {
+        display: none;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      &:empty {
+        display: none;
+      }
+
+      li {
+        padding: 0.25rem 0.75rem;
+      }
+
+      /* handles bug in hugo where non-rendered headers cause empty li */
+      /* https://github.com/gohugoio/hugo/issues/7128 */
+      li:empty {
+        display: none;
+      }
+
+      li:first-child {
+        padding-top: 0;
+      }
+
+      ul ul li:first-child {
+        padding-top: 0.75rem;
+      }
+
+      li:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+.product-selector {
+  /* should appear above search box on smaller displays */
+  z-index: 11;
+  display: none;
+  position: absolute;
+  top: 0;
+  margin-top: calc(var(--header-height) - 1rem);
+  padding: 1rem 1.5rem;
+  background-color: oklch(var(--color-background));
+  border: oklch(var(--color-foreground)) 1px solid;
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+}
+
+.product-name {
+  padding-right: var(--space-s);
+}
+
+.product-selector-button-icon {
+  color: black;
+
+  svg {
+    color: black;
+    stroke: currentColor;
+  }
+}
+
+button:has(~ .product-selector[style*="block"])
+  > .product-selector-button-icon {
+  transition: transform 0.1s ease-in-out;
+  transform: rotate(90deg);
+}
+
+button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
+  transition: transform 0.1s ease-in-out;
+  transform: rotate(0deg);
+}
+.product-selector p {
+  font-size: 0.75rem;
+  color: oklch(var(--color-product-title));
+  display: inline;
+}
+
+.product-selector ul {
+  padding-left: 0;
+  margin-top: 0;
+  list-style-type: none;
+}
+
+.product-selector a {
+  text-decoration: none;
+  color: oklch(var(--color-foreground));
+  font-size: 1rem;
+}

@@ -1,0 +1,73 @@
+/* MARK: Tabs
+*/
+.tabs-container {
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  .tab-labels {
+    display: flex;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    white-space: nowrap;
+    margin: 0;
+    padding-left: 2rem;
+
+    > :not(:last-child) {
+      border-right: none;
+    }
+
+    li {
+      list-style: none;
+      border: 1px solid oklch(var(--color-tabs-inactive-border));
+      border-bottom: 1px solid oklch(var(--color-foreground));
+      color: oklch(var(--color-brand));
+      padding: 10px;
+      margin: 0;
+      position: relative;
+
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .tab-content {
+    display: none;
+    margin-top: 1rem;
+    margin-left: 0;
+    width: 100%;
+
+    padding: 1rem;
+    border-bottom: 1px solid oklch(var(--color-foreground));
+
+    & > * {
+      margin: 0 0 var(--flow-gap) 0;
+    }
+  }
+
+  .tab-labels::before {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    width: 2rem;
+    border-bottom: 1px solid oklch(var(--color-foreground));
+  }
+
+  .tab-labels::after {
+    content: "";
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-bottom: 1px solid oklch(var(--color-foreground));
+  }
+}

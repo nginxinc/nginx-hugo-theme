@@ -1,0 +1,160 @@
+:root {
+  /* webfonts */
+  font-family: var(--font-family);
+  font-feature-settings:
+    "liga" on,
+    "calt" on;
+
+  /* fallback to slightly thinner font on browsers without variable 'wght' support */
+  font-weight: 350;
+
+  /* base rem = 16px by default, left as percentage for screen readers */
+  font-size: 100%;
+  --font-family:
+    "Inter var", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  /* Utilities */
+  /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  /* ALWAYS use for fonts */
+  --font-step--3: clamp(0.576rem, 0.5796rem + -0.0047vw, 0.5787rem);
+  --font-step--2: clamp(0.6944rem, 0.6856rem + 0.0444vw, 0.72rem);
+  --font-step--1: clamp(0.8333rem, 0.8101rem + 0.1159vw, 0.9rem);
+  --font-step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+  --font-step-1: clamp(1.2rem, 1.1283rem + 0.3587vw, 1.4063rem);
+  --font-step-2: clamp(1.44rem, 1.3295rem + 0.5527vw, 1.7578rem);
+  --font-step-3: clamp(1.728rem, 1.5648rem + 0.8161vw, 2.1973rem);
+  --font-step-4: clamp(2.0736rem, 1.8395rem + 1.1704vw, 2.7466rem);
+  --font-step-5: clamp(2.4883rem, 2.1597rem + 1.6433vw, 3.4332rem);
+
+  /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  /* ALWAYS use for horizontal spacing */
+  --space-3xs: clamp(0.25rem, 0.2283rem + 0.1087vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4783rem + 0.1087vw, 0.5625rem);
+  --space-xs: clamp(0.75rem, 0.7065rem + 0.2174vw, 0.875rem);
+  --space-s: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+  --space-m: clamp(1.5rem, 1.4348rem + 0.3261vw, 1.6875rem);
+  --space-l: clamp(2rem, 1.913rem + 0.4348vw, 2.25rem);
+  --space-xl: clamp(3rem, 2.8696rem + 0.6522vw, 3.375rem);
+  --space-2xl: clamp(4rem, 3.8261rem + 0.8696vw, 4.5rem);
+  --space-3xl: clamp(6rem, 5.7391rem + 1.3043vw, 6.75rem);
+
+  /* One-up pairs */
+  --space-3xs-2xs: clamp(0.25rem, 0.1413rem + 0.5435vw, 0.5625rem);
+  --space-2xs-xs: clamp(0.5rem, 0.3696rem + 0.6522vw, 0.875rem);
+  --space-xs-s: clamp(0.75rem, 0.6196rem + 0.6522vw, 1.125rem);
+  --space-s-m: clamp(1rem, 0.7609rem + 1.1957vw, 1.6875rem);
+  --space-m-l: clamp(1.5rem, 1.2391rem + 1.3043vw, 2.25rem);
+  --space-l-xl: clamp(2rem, 1.5217rem + 2.3913vw, 3.375rem);
+  --space-xl-2xl: clamp(3rem, 2.4783rem + 2.6087vw, 4.5rem);
+  --space-2xl-3xl: clamp(4rem, 3.0435rem + 4.7826vw, 6.75rem);
+
+  /* Custom pairs */
+  --space-s-l: clamp(1rem, 0.5652rem + 2.1739vw, 2.25rem);
+
+  /* @link https://utopia.fyi/grid/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --grid-max-width: 69.75rem;
+  --grid-min-width: 34rem;
+  --grid-gutter: var(--space-s-l, clamp(1rem, 0.4975rem + 2.5126vw, 2.25rem));
+  --grid-columns: 12;
+
+  /* Colors */
+  --color-brand: 56.6% 0.194 147.7;
+  --color-brand-300: 0.84 0.0699 157.51;
+  --color-brand-200: 0.91 0.0406 157.72;
+  --color-brand-100: 0.98 0.0107 158.85;
+  --color-background: 1 0 0;
+  --color-foreground: 0 0 0;
+  --color-shadow: 0.86 0 0;
+
+  /* Footer */
+  --color-footer: 0.23 0 0;
+  --color-footer-text: 0.91 0 0;
+  --color-product-title: 0.64 0 0;
+  --color-tabs-inactive-border: 0 0 0 / 20%;
+
+  --color-divider: 0.85 0 0;
+
+  /* Main grid setup */
+  --grid-content: minmax(34rem, 50rem);
+  --grid-content-mobile: minmax(20rem, 50rem);
+  --grid-side-callout: minmax(18rem, 26rem);
+  --grid-column-gutter: 3.5rem;
+
+  /* Header */
+  --header-height: 4rem;
+
+  /* Sidebar */
+  --sidebar-width: 22rem;
+  --sidebar-item-padding-lr: 0.75rem;
+  --sidebar-item-padding-tb: 0.25rem;
+
+  /* Content */
+  --content-max-width: 88rem;
+
+  /* Code block */
+  --color-inline_codeblock-border: 0.85 0 0;
+  --color-inline_codeblock-background: 0.98 0 0;
+  --codeblock-comment-diff: 2rem;
+  --codeblock-comment-space-between: 10px;
+  --codeblock-horizontal-line-length: 2rem;
+  --codeblock-horizontal-line-overflow: 0.25rem;
+  --codeblock-border-thickness: 1px;
+  --codeblock-code-section-padding-left: 1rem;
+  --codeblock-line-box-side-length: 4px;
+  --code-copy-icon-height: 1rem;
+  --code-copy-icon-width: 1rem;
+  --color-codeblock-border: 0.63 0 0;
+  --color-codeblock-shadow: 0.92 0 0;
+  --color-codeblock-background: 1 0 0;
+  --color-codeblock-highlight: 0.99 0.0479 105.97;
+
+  /* Callouts */
+  --color-callout-warning: 0.65 0.188 24;
+  --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
+  --color-callout-caution: 0.8 0.1613 71.21;
+  --color-callout-caution-shadow: 0.8 0.1613 71.21 / 20%;
+  --color-callout-important: 0.36 0 0;
+  --color-callout-important-shadow: 0.23 0 0 / 7.06%;
+
+  /* Tables */
+  --table-top-bottom-spacing: 1rem;
+  --table-row-space-between: 1.5rem;
+  --table-min-column-spacing-narrow: 1.5rem;
+  --table-min-column-spacing-wide: 0.75rem;
+  --table-header-bottom-spacing: 1rem;
+  --table-line-height: 1px;
+
+  /* Misc spacing */
+  --overflow-gutter-extension: 1rem;
+  --flow-gap: 1rem;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    --font-family:
+      InterVariable, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .breadcrumb {
+    font-variation-settings: "wght" 500;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.breadcrumb {
+  font-weight: 500;
+}

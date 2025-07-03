@@ -1202,6 +1202,7 @@ h6:has(a):hover {
 /* Landing page cards */
 .text-content .card-layout {
   grid-column: 1;
+  margin-top: 1rem;
 
   .card-section {
     display: flex;
@@ -1248,6 +1249,24 @@ h6:has(a):hover {
   &:not(:has(.featured-card)) *:nth-child(n + 3 of div.card-container) {
     grid-column: 1 / -1;
   }
+
+  &:not(:has(.featured-card))
+    *:nth-child(n + 3 of div.card-container):has(
+      ~ *:nth-child(n + 4 of div.card-container)
+    ) {
+    grid-column: auto;
+  }
+
+  &:not(:has(.featured-card)) *:nth-child(n + 4 of div.card-container) {
+    grid-column: auto;
+  }
+
+  &:not(:has(.featured-card))
+    *:nth-last-child(1 of div.card-container):nth-child(
+      odd of div.card-container
+    ) {
+    grid-column: 1 / -1;
+  }
 }
 
 .card-container {
@@ -1279,6 +1298,7 @@ h6:has(a):hover {
   gap: 1.5rem;
   align-items: center;
   justify-content: start;
+  margin-bottom: 1rem;
 
   img {
     width: auto;

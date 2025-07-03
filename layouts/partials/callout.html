@@ -2,24 +2,25 @@
 {{ $class := .class | default "" }}
 {{ $title := .title | default "" }}
 {{ $icon  := .icon  | default "" }}
-{{ $inlineParam := .inline | default "false" | lower }}
+{{ $sidelineParam := .sideline | default "false" | lower }}
 
-{{ if not (in (slice "true" "false") $inlineParam) }}
-  {{ errorf "Invalid parameter 'inline'='%s' passed to blockquote partial from '%s'. Allowed values: true, false" $inlineParam .Page.Path }}
+{{ if not (in (slice "true" "false") $sidelineParam) }}
+  {{ errorf "Invalid parameter 'sideline'='%s' passed to blockquote partial from '%s'. Allowed values: true, false" $sidelineParam .Page.Path }}
 {{ end }}
 
 {{/*  Figure out inline/side and set class accordingly  */}}
-{{ $inline := eq $inlineParam "true" }}
+{{ $sideline := eq $sidelineParam "true" }}
 {{ $sideOption := "side-callout" }}
 {{ $inlineOption := "inline-callout" }}
 
-{{ if $inline }}
+{{ if $sideline }}
   {{ $class = printf "%s %s" $class $sideOption }}
 {{ else }}
   {{ $class = printf "%s %s" $class $inlineOption }}
 {{ end }}
 
 {{/*  Render a different block, if "loud" callouts are used  */}}
+{{ $type := (index (split $class " ") 0) | strings.FirstUpper }}
 {{ $specialTitles := slice "Caution" "Warning" "Deprecated" "Important" }}
 {{ $specialTitleIcons := dict
   "Caution"    "alert-triangle"
@@ -27,24 +28,22 @@
   "Deprecated" "alert-octagon"
   "Important"  "arrow-right-circle"
 }}
-{{ $icon := index $specialTitleIcons $title | default "" }}
+{{ $icon := index $specialTitleIcons $type | default "" }}
 
-{{ $isSpecialTitle := in $specialTitles $title }}
+{{ $isSpecialTitle := in $specialTitles $type }}
 {{ if $isSpecialTitle }}
-  {{/*  Loud callouts  */}}
+{{/*  Loud callouts  */}}
+<blockquote class="{{ $class }}">
   <div>
-  <blockquote class="{{ $class }}">
-    <div>
-      <div class="call-out-type">
-        {{ partial "feather" (dict "context" . "icon" $icon) .}}
-       {{ $title }}
-      </div>
-      <div class="callout-content">
-        {{ .content | markdownify }}
-      </div>
+    <div class="call-out-type">
+      {{ partial "feather" (dict "context" . "icon" $icon) .}}
+      {{ $title }}
     </div>
-  </blockquote>
-</div>
+    <div class="callout-content">
+      {{ .content | markdownify }}
+    </div>
+  </div>
+</blockquote>
 
 {{ else }}
 

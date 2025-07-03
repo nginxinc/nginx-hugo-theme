@@ -46,6 +46,6 @@ This assumes the callout text is shorter than the text in the callout.
 If the text in the paragraph is shorter than the callout, it's likely
 the content needs to be re-written.
 
-{{<call-out "tip inline-callout" "Tip for Automated Reporting" >}}
+{{<call-out "tip" "Tip for Automated Reporting" >}}
 I am some call out text. Look at me go!
 {{</call-out>}}

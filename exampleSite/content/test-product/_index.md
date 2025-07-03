@@ -13,6 +13,11 @@ nd-content-type: landing-page
 # Intended for internal catalogue and search, case sensitive:
 # Agent, N4Azure, NIC, NIM, NGF, NAP-DOS, NAP-WAF, NGINX One, NGINX+, Solutions, Unit
 nd-product:
+cascade:
+  nd-banner:
+    enabled: true
+    start-date: 2025-01-01
+    md: /_banners/test-product-intro.md
 ---
 
 ## About

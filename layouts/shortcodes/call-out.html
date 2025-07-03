@@ -1,13 +1,13 @@
 {{/*  
 
 Usage:
-{{<call-out title="Custom title" icon="fa fa-check-circle" inline="true">}}
-This callout uses the icon check-circle. **This should be an inline callout.**
+{{<call-out title="Custom title" icon="fa fa-check-circle" sideline="true">}}
+This callout uses the icon check-circle. **This should be an sideline callout.**
 {{</call-out>}}
 
 Backwards compatibility usage:
 {{<call-out "warning" "Custom title" "fa fa-check-circle" "true">}}
-This callout uses the icon check-circle. **This should be an inline callout.**
+This callout uses the icon check-circle. **This should be an sideline callout.**
 {{</call-out>}}
 
 Depends on `callout.html` partial.
@@ -19,27 +19,16 @@ Depends on `callout.html` partial.
 {{ $icon := .Get 2 | default (.Get "icon") | default "" }}
 
 {{/*  Handle different versions of booleans  */}}
-{{ $inlineParam := (.Get 3) | default (.Get "inline") | default "false" | lower }}
+{{ $sidelineParam := (.Get 3) | default (.Get "sideline") | default "false" | lower }}
 {{- /* Validate the parameter strictly */ -}}
-{{ if not (in (slice "true" "false") $inlineParam) }}
-  {{ warnf "The '<call-out>' Shortcode parameter 'inline' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $inlineParam}}
-{{ end }}
-
-{{ $inline := eq $inlineParam "true" }}
-
-{{ $sideOption := "side-callout" }}
-{{ $inlineOption := "inline-callout" }}
-
-{{ if $inline }}
-  {{ $class = printf "%s %s" $class $inlineOption }}
-{{ else }}
-  {{ $class = printf "%s %s" $class $sideOption }}
+{{ if not (in (slice "true" "false") $sidelineParam) }}
+  {{ warnf "The '<call-out>' Shortcode parameter 'sideline' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $sidelineParam}}
 {{ end }}
 
 {{ partial "callout.html" (dict
-    "class" $class
+    "class" (printf "%s %s" $class "call-out")
     "title" $title
     "icon"  $icon
-    "inline" $inline
+    "sideline" $sidelineParam
     "content" .Inner
 ) }}

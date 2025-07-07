@@ -16,16 +16,18 @@ The structure of a card looks like the following:
 ```
 
 and will render as the following:
-{{<card-layout >}}
-  {{<card-section>}}
-    {{<card title="SOME_TITLE">}}
-      SOME CONTENT
-    {{</card >}}
-  {{</card-section>}}
-{{</card-layout >}}
+<div data-testid="cards-test__basic">
+  {{<card-layout >}}
+    {{<card-section>}}
+      {{<card title="SOME_TITLE">}}
+        SOME CONTENT
+      {{</card >}}
+    {{</card-section>}}
+  {{</card-layout >}}
+</div>
 
 ### Params 
-To support customization, there are also some params you can add to the shortcode `<card>` such as `title`, `titleUrl`, `icon`, `brandIcon`, `isFeatured`, `isFullSize`.
+To support customization, there are also some params you can add to the shortcode `<card>` such as `title`, `titleUrl`, `icon`, `brandIcon`, `isFeaturedCard`, `isFullSize`.
 
 * `title` - Title of the card.
 <br>
@@ -36,8 +38,8 @@ To support customization, there are also some params you can add to the shortcod
 * `brandIcon` - Custom icon using image from  `nginx-hugo-theme/static/images/icons`.
   * Usage: `<card brandIcon="NGINX-App-Protect-WAF-product-icon"...>`
 <br>
-* `isFeatured` - Boolean indicating whether or not the card should be the first one and full size. By default, false.
-  * Usage: `<card isFeatured="true"...>`
+* `isFeaturedCard` - Boolean indicating whether or not the card should be the first one and full size. By default, false.
+  * Usage: `<card isFeaturedCard="true"...>`
 <br>
 * `isFullSize` - Boolean indicating whether or not the card should be full size. By default, cards are half sized.
   * Usage: `<card isFullSize="true"...>`
@@ -64,30 +66,55 @@ As you can see from the above example in 'General usage', it renders as a plain 
 </card-layout >
 ```
 and will render as the following:
-{{<card-layout >}}
-  {{<card-section showAsCards="true">}}
-    {{<card title="SOME_TITLE">}}
-      SOME CONTENT
-    {{</card >}}
-  {{</card-section>}}
-{{</card-layout >}}
+<div data-testid="cards-test__showAsCards">
+  {{<card-layout >}}
+    {{<card-section showAsCards="true">}}
+      {{<card title="SOME_TITLE">}}
+        SOME CONTENT
+      {{</card >}}
+    {{</card-section>}}
+  {{</card-layout >}}
+</div>
 
-## Featured Cards
+## Featured Section
 Denoted by the param `isFeaturedSection` in the shortcode `<card-layout>`, this block of cards can contain only up to three cards.
 
-{{<card-layout >}}
-  {{<card-section showAsCards="true" isFeaturedSection="true">}}
-    {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed">}}
-      All shortcodes in one page.
-    {{</card >}}
-    {{<card title="Call Out usages" titleUrl="call-out/all-callouts/" icon="message-square">}}
-      Examples for call-out shortcode
-    {{</card >}}
-    {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
-      Examples for codeblock shortcode
-    {{</card >}}
-    {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
-      Examples for codeblock shortcode
-    {{</card >}}
-  {{</card-section>}}
-{{</card-layout >}}
+<div data-testid="cards-test__featuredSection">
+  {{<card-layout >}}
+    {{<card-section showAsCards="true" isFeaturedSection="true">}}
+      {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed">}}
+        All shortcodes in one page.
+      {{</card >}}
+      {{<card title="Call Out usages" titleUrl="call-out/all-callouts/" icon="message-square">}}
+        Examples for call-out shortcode
+      {{</card >}}
+      {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
+        Examples for codeblock shortcode
+      {{</card >}}
+      {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
+        Examples for codeblock shortcode
+      {{</card >}}
+    {{</card-section>}}
+  {{</card-layout >}}
+</div>
+
+## Featured Card
+Denoted by the param `isFeaturedCard` in the shortcode `<card>`, this will push the card up to very top of the section and make it full length.
+<div data-testid="cards-test__featuredCard">
+  {{<card-layout >}}
+    {{<card-section showAsCards="true">}}
+      {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed">}}
+        All shortcodes in one page.
+      {{</card >}}
+      {{<card title="Call Out usages" titleUrl="call-out/all-callouts/" icon="message-square">}}
+        Examples for call-out shortcode
+      {{</card >}}
+      {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code" isFeaturedCard="true">}}
+        Examples for codeblock shortcode
+      {{</card >}}
+      {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
+        Examples for codeblock shortcode
+      {{</card >}}
+    {{</card-section>}}
+  {{</card-layout >}}
+</div>

@@ -1483,6 +1483,11 @@ h6:has(a):hover {
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    order: 2;
+
+    &.featured-card {
+      order: 1;
+    }
 
     .card-header {
       display: flex;

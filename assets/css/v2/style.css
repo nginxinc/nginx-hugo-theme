@@ -880,6 +880,9 @@ nav {
     [data-grid="last-third"] {
       grid-column: 1;
     }
+    [data-grid="halve"] {
+      grid-column: 1;
+    }
 
     @media (min-width: 55rem) {
       max-width: var(--content-max-width);
@@ -904,6 +907,10 @@ nav {
 
       [data-grid="last-third"] {
         grid-column: 8 / -1;
+      }
+
+      [data-grid="halve"] {
+        grid-column: span 6;
       }
     }
   }
@@ -1451,7 +1458,7 @@ h6:has(a):hover {
 }
 
 /* Landing page cards */
-.text-content .card-layout {
+.card-layout {
   grid-column: 1;
 
   .card-section {
@@ -1463,11 +1470,34 @@ h6:has(a):hover {
       font-weight: 500;
     }
 
-    /* Hide all the cards past 3 if it is a featured card section */
     &.featured-section {
-      .card-section-content.card-grid
-        > *:nth-child(n + 4 of div.card-container) {
+      /* Hide all the cards past 3 if it is a featured card section */
+      .card-section-content > *:nth-child(n + 4 of div.card) {
         display: none;
+      }
+    }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    .card-header {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+
+      .card-brand-icon {
+        height: 20px;
+        width: auto;
+      }
+
+      h2 {
+        padding: 0;
+        margin: 0;
+        font-size: 1rem;
       }
     }
   }
@@ -1476,52 +1506,17 @@ h6:has(a):hover {
 /* Optional grid layout */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
   gap: 1.5rem;
 
-  .card-container {
+  @media (max-width: 55rem) {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
     border: 1px solid oklch(var(--color-codeblock-border));
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     padding: 1rem;
-
-    &.featured-card {
-      /* If there is a need for a featured card, only the featured card should be full length */
-      grid-column: 1 / -1;
-
-      /* If there is a featured card AND two cards, the last one should be full length */
-      ~ .card-container:nth-child(2n):last-child {
-        grid-column: 1 / -1;
-      }
-    }
-  }
-
-  /* If there is no featured card, last card that is the 3rd one should be full width */
-  &:not(:has(.featured-card)) *:nth-child(n + 3 of div.card-container) {
-    grid-column: 1 / -1;
-  }
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-
-  .card-header {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-
-    .card-brand-icon {
-      height: 20px;
-      width: auto;
-    }
-
-    h2 {
-      padding: 0;
-      margin: 0;
-      font-size: 1rem;
-    }
   }
 }
 

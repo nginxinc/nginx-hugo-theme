@@ -3,17 +3,30 @@
 {{- $icon := .Get "icon" | default "book-open" -}}
 {{- $brandIcon := .Get "brandIcon" -}}
 {{- $isFeaturedParam := .Get "isFeatured" | default "false" }}
+{{- $isFullSizeParam := .Get "isFullSize" | default "false" -}}
+
 {{- /* Validate the parameter strictly */ -}}
 {{- if not (in (slice "true" "false") $isFeaturedParam) -}}
   {{- warnf "The '<card>' Shortcode parameter 'isFeatured' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFeaturedParam -}}
 {{- end -}}
 {{- $isFeatured := cond (eq $isFeaturedParam "true") "true" "false" -}}
-{{- $current := .Page.Scratch.Get "cards" | default (slice) -}}
-{{- $newCard := dict "title" ($title) "content" (.Inner) -}}
-{{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
+
+{{- if not (in (slice "true" "false") $isFullSizeParam) -}}
+  {{- warnf "The '<card>' Shortcode parameter 'isFullSize' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFullSizeParam -}}
+{{- end -}}
+{{- $isFullSize := cond (eq $isFullSizeParam "true") "true" "false" -}}
+
+{{- /* Set up the positioning */ -}}
+{{ $dataGrid := "" }}
+{{ if or (eq $isFullSize "true") (eq $isFeatured "true") }}
+  {{ $dataGrid = "wide"}}
+{{ else }}
+  {{ $dataGrid = "halve"}}
+{{ end }}
+
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-  <div class="card-container {{ if eq $isFeatured "true" }}featured-card{{ end }}">
+  <div class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}">
     {{- if $title -}}
       <div class="card-header">
         {{- if $brandIcon -}}

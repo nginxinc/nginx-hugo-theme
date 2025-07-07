@@ -613,7 +613,7 @@ ol li:last-child {
       }
     }
 
-    .sidebar__content {
+    .sidebar__content__wrapper {
       overflow-y: auto;
       min-height: 0;
       /* allows space for scrollbar */
@@ -1157,7 +1157,6 @@ nav.sidebar.sidebar__mobile-open {
 
   .sidebar__content {
     padding: 0.5rem 0 0.4rem 0;
-    margin-right: 0.25rem;
   }
 
   .sidebar__ul {

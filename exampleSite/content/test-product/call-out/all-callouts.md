@@ -25,7 +25,7 @@ This is a plain callout with a default title for its type. It has a [link](#plai
 
 Naturally, callouts should contain less text within them than the text it lives next to. We do this for several reasons. Firstly, it looks weird to have a big empty space in the primary content area. Secondly, if you have more text in the callout, then it stops being a callout. I have asked an LLM to lengthen this passage.
 
-{{<call-out "side-callout">}}
+{{<call-out sideline="true">}}
 This is a plain side callout with no title. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<call-out>` with the `.side-callout` class.
 {{</call-out>}}
 
@@ -33,7 +33,7 @@ When designing effective web layouts, it's important to maintain proper balance 
 
 Additionally, concise callouts tend to be more effective at capturing user attention. When a callout becomes too verbose, users are less likely to read it entirely, defeating its purpose. The visual weight of callouts should align with their informational importance - brief, impactful statements create better engagement than lengthy explanations. Remember that white space itself is a powerful design element, creating visual breathing room that enhances readability and focus. Ultimately, the most successful callouts follow the principle of "less is more," delivering maximum impact through minimal interruption to the user's reading experience.
 
-{{<call-out "side-callout" "Custom title">}}
+{{<call-out sideline="true" title="Custom title">}}
 This is a plain side callout with a custom title. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<call-out>` with the `.side-callout` class, and a custom title.
 {{</call-out>}}
 

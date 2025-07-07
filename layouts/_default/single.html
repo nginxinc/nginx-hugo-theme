@@ -1,27 +1,24 @@
 {{ define "main" }}
-
 <main class="content">
     <!-- Replace icons -->
     {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
 
-
-    <section class="main-layout">
-    <section id="maincontent" class="content-layout">
-        <div data-cms-edit="content" class="text-content">
-        <section class="breadcrumb-layout wide">
-            {{ if not .IsHome }}
-            {{ if not (in .Params.display_breadcrumb "false" ) }}
-            {{ partial "breadcrumb" .}}
-            {{ end }}
-            {{ end }}
-        </section>
+    <div class="breadcrumb-layout wide">
+        {{ if not .IsHome }}
+        {{ if not (in .Params.display_breadcrumb "false" ) }}
+        {{ partial "breadcrumb" .}}
+        {{ end }}
+        {{ end }}
+    </div>
+    <article data-cms-edit="content" >
         {{ partial "banner" .}}
+
         <h1>{{ .Title }}</h1>
+
         {{ $content | safeHTML }}
+
         {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
         {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
-
-        <hr>
 
         {{ if .Page.Lastmod }}
         <div class="last-modified">
@@ -43,8 +40,6 @@
     {{ $script := (delimit (slice "scripts" .Params.script) "/")}}
     {{ partial (string $script) .}}
 {{end }}
-
-
 
 
 

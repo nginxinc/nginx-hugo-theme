@@ -921,6 +921,8 @@ nav {
     max-width: 100%;
 
     #api-component {
+      z-index: 0;
+      position: relative;
       display: block;
       max-width: 100%;
     }

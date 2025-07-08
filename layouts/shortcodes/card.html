@@ -21,7 +21,7 @@
 {{ if or (eq $isFullSize "true") (eq $isFeatured "true") }}
   {{ $dataGrid = "wide"}}
 {{ else }}
-  {{ $dataGrid = "halve"}}
+  {{ $dataGrid = "half"}}
 {{ end }}
 
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}

@@ -2,7 +2,7 @@
 
 <main class="content " role="main">
     <div data-cms-edit="content" class="text-content list-page">
-        <div class="breadcrumb-layout wide">
+        <div class="breadcrumb-layout">
         {{ if not .IsHome }}
             {{ if not (in .Params.display_breadcrumb "false" ) }}
             {{ partial "breadcrumb" .}}

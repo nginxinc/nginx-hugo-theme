@@ -880,7 +880,7 @@ nav {
     [data-grid="last-third"] {
       grid-column: 1;
     }
-    [data-grid="halve"] {
+    [data-grid="half"] {
       grid-column: 1;
     }
 
@@ -909,7 +909,7 @@ nav {
         grid-column: 8 / -1;
       }
 
-      [data-grid="halve"] {
+      [data-grid="half"] {
         grid-column: span 6;
       }
     }
@@ -1497,7 +1497,7 @@ h6:has(a):hover {
       h2 {
         padding: 0;
         margin: 0;
-        font-size: 1rem;
+        font-size: var(--font-step-1);
       }
     }
   }

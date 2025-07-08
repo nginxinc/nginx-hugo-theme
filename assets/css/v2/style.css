@@ -868,7 +868,7 @@ nav {
   & > ul,
   & > ol {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     /* These gaps determine the spacing between all content. Be careful!! */
     gap: var(--space-m) var(--space-m);
 

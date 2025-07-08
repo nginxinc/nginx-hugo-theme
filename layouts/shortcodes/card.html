@@ -4,6 +4,7 @@
 {{- $brandIcon := .Get "brandIcon" -}}
 {{- $isFeaturedParam := .Get "isFeatured" | default "false" }}
 {{- $isFullSizeParam := .Get "isFullSize" | default "false" -}}
+{{- $isLandingParam := .Get "isLanding" | default "false" }}
 
 {{- /* Validate the parameter strictly */ -}}
 {{- if not (in (slice "true" "false") $isFeaturedParam) -}}
@@ -16,10 +17,17 @@
 {{- end -}}
 {{- $isFullSize := cond (eq $isFullSizeParam "true") "true" "false" -}}
 
+{{- if not (in (slice "true" "false") $isLandingParam) -}}
+  {{- warnf "The '<card>' Shortcode parameter 'isLanding' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isLandingParam -}}
+{{- end -}}
+{{- $isLanding := cond (eq $isLandingParam "true") "true" "false" -}}
+
 {{- /* Set up the positioning */ -}}
 {{ $dataGrid := "" }}
 {{ if or (eq $isFullSize "true") (eq $isFeatured "true") }}
   {{ $dataGrid = "wide"}}
+{{ else if (eq $isLanding "true") }}
+  {{ $dataGrid = "third"}}
 {{ else }}
   {{ $dataGrid = "half"}}
 {{ end }}

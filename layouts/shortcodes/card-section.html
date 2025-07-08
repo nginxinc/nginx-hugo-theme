@@ -17,12 +17,12 @@
 {{- $class := "card-grid" -}}
 {{- /* Validate that the parent is card-layout */ -}}
 {{ if eq .Parent.Name "card-layout"}}
-  <div class="card-section {{if eq $isFeaturedSection "true"}}featured-section{{ end }}">
+  <div class="card-section{{if eq $isFeaturedSection "true"}}featured-section{{ end }}">
     {{- if $title -}}
       <strong class="card-section-title">{{- $title -}}</strong>
-      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{- .Inner -}}</div>    
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }}{{ end }}">{{- .Inner -}}</div>    
     {{ else }}
-      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{ .Inner }}</div>    
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }}{{ end }}">{{ .Inner }}</div>    
     {{ end }}
   </div>
 {{ else }}

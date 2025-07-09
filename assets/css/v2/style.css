@@ -1855,6 +1855,22 @@ a:has(code:not(pre code)) {
   table {
     width: calc(100% + var(--codeblock-horizontal-padding));
   }
+
+  .lntd:first-child pre code {
+    span {
+      margin-left: -1rem;
+      padding-left: 1rem;
+      width: calc(100% + 1rem);
+    }
+  }
+
+  pre code .line {
+    display: inline;
+  }
+
+  pre code .line.hl {
+    display: block;
+  }
 }
 
 .code-block {
@@ -1955,6 +1971,7 @@ ul .code-block {
 .highlight code .hl {
   width: fit-content;
   min-width: 100%;
+  display: block;
   background-color: oklch(var(--color-codeblock-highlight));
 }
 

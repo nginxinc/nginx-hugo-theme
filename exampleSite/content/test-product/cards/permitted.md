@@ -29,27 +29,27 @@ and will render as the following:
 ### Params 
 To support customization, there are also some params you can add to the shortcode `<card>` such as `title`, `titleUrl`, `icon`, `brandIcon`, `isFeaturedCard`, `isFullSize`.
 
-* `title` - Title of the card.
+* `title` (required) - Title of the card. 
 <br>
-* `titleUrl` - URL for the card.
+* `titleUrl` (optional) - URL for the card.
 <br>
-* `icon` - Custom icon using <a href="https://lucide.dev/icons/">lucide</a> icons.
+* `icon` (optional) - Custom icon using <a href="https://lucide.dev/icons/">lucide</a> icons.
 <br>
-* `brandIcon` - Custom icon using image from  `nginx-hugo-theme/static/images/icons`.
+* `brandIcon` (optional) - Custom icon using image from  `nginx-hugo-theme/static/images/icons`.
   * Usage: `<card brandIcon="NGINX-App-Protect-WAF-product-icon"...>`
 <br>
-* `isFeaturedCard` - Boolean indicating whether or not the card should be the first one and full size. By default, false.
+* `isFeaturedCard` (optional) - Boolean indicating whether or not the card should be the first one and full size. By default, false.
   * Usage: `<card isFeaturedCard="true"...>`
 <br>
-* `isFullSize` - Boolean indicating whether or not the card should be full size. By default, cards are half sized.
+* `isFullSize` (optional) - Boolean indicating whether or not the card should be full size. By default, cards are half sized.
   * Usage: `<card isFullSize="true"...>`
 
 For the `<card-section>`, there are some params you can add such as `title`, `isFeaturedSection`, and `showAsCards`.
 * `title` - Title of the section.
 <br>
-* `isFeaturedSection` - Boolean indicating whether or not the section is a featured one - will discuss later down the page. By default, false.
+* `isFeaturedSection` (optional) - Boolean indicating whether or not the section is a featured one - will discuss later down the page. By default, false.
 <br> 
-* `showAsCards` - Boolean indicating whether or not the cards in the section should appear with borders. By default, false.
+* `showAsCards` (optional) - Boolean indicating whether or not the cards in the section should appear with borders. By default, false.
 
 ### Additional Information
 While it may come immediate, you can't use a `<card>` shortcode on its own in your markdown or else the build will fail. This is because if you call a card, there is no way to structure it in a writer-friendly customizable way. 

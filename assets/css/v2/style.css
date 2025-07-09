@@ -1482,13 +1482,21 @@ h6:has(a):hover {
 
     &.featured-section {
       /* Hide all the cards past 3 if it is a featured card section */
-      .card-section-content > *:nth-child(n + 4 of div.card) {
+      .card-section-content > *:nth-child(n + 4 of a.card) {
         display: none;
       }
     }
   }
 
   .card {
+    color: oklch(var(--color-foreground));
+    text-decoration: none;
+    order: 2;
+
+    &.featured-card {
+      order: 1;
+    }
+
     .card-container {
       display: flex;
       flex-direction: column;
@@ -1500,6 +1508,7 @@ h6:has(a):hover {
       flex-direction: row;
       gap: 1rem;
       align-items: center;
+      color: oklch(var(--color-brand));
 
       .card-brand-icon {
         height: 20px;

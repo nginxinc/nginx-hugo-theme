@@ -2,13 +2,13 @@
 {{- $titleUrl := .Get "titleUrl" | default "." -}} 
 {{- $icon := .Get "icon" | default "book-open" -}}
 {{- $brandIcon := .Get "brandIcon" -}}
-{{- $isFeaturedParam := .Get "isFeatured" | default "false" }}
+{{- $isFeaturedParam := .Get "isFeaturedCard" | default "false" }}
 {{- $isFullSizeParam := .Get "isFullSize" | default "false" -}}
 {{- $isLandingParam := .Get "isLanding" | default "false" }}
 
 {{- /* Validate the parameter strictly */ -}}
 {{- if not (in (slice "true" "false") $isFeaturedParam) -}}
-  {{- warnf "The '<card>' Shortcode parameter 'isFeatured' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFeaturedParam -}}
+  {{- warnf "The '<card>' Shortcode parameter 'isFeaturedCard' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFeaturedParam -}}
 {{- end -}}
 {{- $isFeatured := cond (eq $isFeaturedParam "true") "true" "false" -}}
 
@@ -34,7 +34,7 @@
 
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-<a href="{{- $titleUrl -}}" alt="{{- $title -}}" class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}">
+<a href="{{- $titleUrl -}}" alt="{{- $title -}}" class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}" data-testid="{{ if eq $isFeatured "true" }}card__featured-card{{else}}card{{ end }}">
   <div class="card-container">
     {{- if $title -}}
       <div class="card-header">

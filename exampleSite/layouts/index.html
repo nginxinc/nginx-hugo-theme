@@ -1,16 +1,3 @@
 {{ define "main" }}
-
-<h1>Homepage Example</h1>
-<p>
-    <ul>
-        <li>
-            <a href="{{ relref . "nginx" }}">NGINX and NGINX Plus</a>
-        </li>
-        <li>
-            <a href="{{ relref . "test-product" }}">Test Product</a>
-        </li>
-    </ul>
-</p>
-
-
+{{ partial "homepage.html" . }}
 {{end}}

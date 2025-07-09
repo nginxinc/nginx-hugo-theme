@@ -25,7 +25,7 @@
   <div class="card-section {{if eq $isFeaturedSection "true"}}featured-section{{ end }}" data-testid="{{if eq $isFeaturedSection "true"}}card-section__featured-section{{else}}card-section{{ end }}">
     {{- if $title -}}
       <strong class="card-section-title">{{- $title -}}</strong>
-      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }}{{ end }}" data-testid="{{ if eq $showAsCards "true" }}card-section-content__card-grid{{else}}card-section-content{{ end }}">{{- .Inner -}}</div>    
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }}{{ end }}" data-testid="{{ if eq $showAsCards "true" }}card-section-content__card-grid{{else}}card-section-content{{ end }}">{{ .Inner }}</div>    
     {{ else }}
       <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }}{{ end }}" data-testid="{{ if eq $showAsCards "true" }}card-section-content__card-grid{{else}}card-section-content{{ end }}">{{ .Inner }}</div>    
     {{ end }}

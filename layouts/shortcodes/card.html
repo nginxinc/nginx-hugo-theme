@@ -1,9 +1,10 @@
 {{- $title := .Get "title" -}}
-{{- $titleUrl := .Get "titleUrl" | default "/" -}} 
+{{- $titleUrl := .Get "titleUrl" | default "." -}} 
 {{- $icon := .Get "icon" | default "book-open" -}}
 {{- $brandIcon := .Get "brandIcon" -}}
-{{- $isFeaturedParam := .Get "isFeaturedCard" | default "false" }}
+{{- $isFeaturedParam := .Get "isFeatured" | default "false" }}
 {{- $isFullSizeParam := .Get "isFullSize" | default "false" -}}
+{{- $isLandingParam := .Get "isLanding" | default "false" }}
 
 {{- /* Validate the parameter strictly */ -}}
 {{- if not (in (slice "true" "false") $isFeaturedParam) -}}
@@ -16,37 +17,40 @@
 {{- end -}}
 {{- $isFullSize := cond (eq $isFullSizeParam "true") "true" "false" -}}
 
+{{- if not (in (slice "true" "false") $isLandingParam) -}}
+  {{- warnf "The '<card>' Shortcode parameter 'isLanding' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isLandingParam -}}
+{{- end -}}
+{{- $isLanding := cond (eq $isLandingParam "true") "true" "false" -}}
+
 {{- /* Set up the positioning */ -}}
 {{ $dataGrid := "" }}
 {{ if or (eq $isFullSize "true") (eq $isFeatured "true") }}
   {{ $dataGrid = "wide"}}
+{{ else if (eq $isLanding "true") }}
+  {{ $dataGrid = "third"}}
 {{ else }}
   {{ $dataGrid = "half"}}
 {{ end }}
 
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-  <div class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}" data-testid="{{ if eq $isFeatured "true" }}card__featured-card{{else}}card{{ end }}">
+<a href="{{- $titleUrl -}}" alt="{{- $title -}}" class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}" data-testid="{{ if eq $isFeatured "true" }}card__featured-card{{else}}card{{ end }}">
+  <div class="card-container">
     {{- if $title -}}
       <div class="card-header">
         {{- if $brandIcon -}}
           <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}.svg">
-        {{- else -}}
-          {{- if $icon -}}
-            {{ partial "lucide" (dict "context" . "icon" $icon) }}
-          {{- end -}}
+        {{- else if $icon -}}
+          {{ partial "lucide" (dict "context" . "icon" $icon) }}
         {{- end -}}
-        {{- if $titleUrl -}}
-          <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
-        {{- else -}}
-          <h2 class="card-title">{{- $title -}}</h2>
-        {{- end -}}
+        <h2 class="card-title">{{- $title -}}</h2>
       </div>
     {{- else -}}
       {{ errorf "Mainframe: Missing param 'title'" }}
     {{- end -}}
-    {{ .Inner }}
+    <div class="card-content">{{ .Inner }}</div>
   </div>
+</a>
 {{- else -}}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}
 {{- end -}}

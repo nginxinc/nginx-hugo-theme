@@ -10,7 +10,7 @@
       {{- if isset . "md" -}}
           <!-- Show markdown if "md" is provided -->
           {{- $bannerPage := readFile .md -}}
-          <div class="banner {{ if .type }}banner-{{ .type }}{{ end }}">
+          <div class="banner{{ if .type }} banner-{{ .type }}{{ end }}">
             {{ $bannerPage | markdownify }}
           </div>
       {{- else -}}

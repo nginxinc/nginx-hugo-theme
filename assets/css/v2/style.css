@@ -779,6 +779,12 @@ nav {
     a {
       color: oklch(var(--color-foreground));
       text-decoration-color: oklch(var(--color-background));
+
+      &:hover {
+        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+        text-decoration-color: oklch(var(--color-background));
+        border: 1px solid oklch(var(--color-brand) / 0.8);
+      }
     }
 
     .headerlink {
@@ -791,17 +797,11 @@ nav {
     }
 
     > * {
-      grid-row: 1;
       grid-column: 1 / -1;
     }
 
-    p {
-      grid-row: 2;
-    }
-
-    .card-layout {
-      grid-row: 3;
-      grid-column: 1 / -1;
+    > p {
+      grid-column: 1;
     }
   }
 }
@@ -1489,9 +1489,11 @@ h6:has(a):hover {
   }
 
   .card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
 
     .card-header {
       display: flex;

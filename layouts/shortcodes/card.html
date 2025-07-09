@@ -1,5 +1,5 @@
 {{- $title := .Get "title" -}}
-{{- $titleUrl := .Get "titleUrl" | default "/" -}} 
+{{- $titleUrl := .Get "titleUrl" | default "." -}} 
 {{- $icon := .Get "icon" | default "book-open" -}}
 {{- $brandIcon := .Get "brandIcon" -}}
 {{- $isFeaturedParam := .Get "isFeatured" | default "false" }}
@@ -34,27 +34,23 @@
 
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-  <div class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}">
+<a href="{{- $titleUrl -}}" alt="{{- $title -}}" class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}">
+  <div class="card-container">
     {{- if $title -}}
       <div class="card-header">
         {{- if $brandIcon -}}
           <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}.svg">
-        {{- else -}}
-          {{- if $icon -}}
-            {{ partial "lucide" (dict "context" . "icon" $icon) }}
-          {{- end -}}
+        {{- else if $icon -}}
+          {{ partial "lucide" (dict "context" . "icon" $icon) }}
         {{- end -}}
-        {{- if $titleUrl -}}
-          <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
-        {{- else -}}
-          <h2 class="card-title">{{- $title -}}</h2>
-        {{- end -}}
+        <h2 class="card-title">{{- $title -}}</h2>
       </div>
     {{- else -}}
       {{ errorf "Mainframe: Missing param 'title'" }}
     {{- end -}}
-    {{ .Inner }}
+    <div class="card-content">{{ .Inner }}</div>
   </div>
+</a>
 {{- else -}}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}
 {{- end -}}

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -7,26 +7,21 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": [
-      ".vscode/",
-      "**/*.min.js",
-      "**/*.standalone.js",
-      "kube.js",
-
-      "**/css/docs-nginx-com/*.css",
-      "**/css/inter/*.css",
-      "**/fontawesome/*.css",
-      "**/static/*.css",
-      "**/bootstrap*.css",
-      "**/*.min.css",
-      "**/coveo.css",
-      "**/f5-hugo.css",
-      "**/highlight.css",
-      "**/*-overrides.css",
-
-      "exampleSite",
-      "public/*",
-      "test-results/*"
+    "includes": [
+      "**",
+      "!**/.vscode/settings.json",
+      "!**/*.min.js",
+      "!**/*.standalone.js",
+      "!**/css/inter/**/*.css",
+      "!**/css/v2/highlight.css",
+      "!**/static/**/*.css",
+      "!**/bootstrap*.css",
+      "!**/*.min.css",
+      "!**/coveo.css",
+      "!**/*-overrides.css",
+      "!**/exampleSite",
+      "!**/public/**/*",
+      "!**/test-results/**/*"
     ]
   },
   "formatter": {
@@ -41,13 +36,22 @@
         "noForEach": "off"
       },
       "style": {
-        "useTemplate": "off"
+        "useTemplate": "off",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       },
-      "nursery": {
-        "noDuplicateProperties": "error"
-      },
+      "nursery": {},
       "suspicious": {
-        "noEmptyBlock": "error"
+        "noEmptyBlock": "error",
+        "noDuplicateProperties": "error"
       },
       "correctness": {
         "noUnknownUnit": "error"

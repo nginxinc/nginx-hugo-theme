@@ -1,6 +1,7 @@
 {{ define "main" }}
 
 <main class="content content__redocly">
+    <div class="breadcrumb-layout">{{ partial "breadcrumb" . }}</div>
     <div id="api-component">{{ .Content}}</div>
 </main>
 

@@ -1,16 +1,14 @@
 {{ define "main" }}
 
 <main class="content " role="main">
-<section class="main-layout">
-    <section id="maincontent" class="content-layout">
     <div data-cms-edit="content" class="text-content list-page">
-        <section class="breadcrumb-layout wide">
+        <div class="breadcrumb-layout">
         {{ if not .IsHome }}
             {{ if not (in .Params.display_breadcrumb "false" ) }}
             {{ partial "breadcrumb" .}}
             {{ end }}
         {{ end }}
-        </section>
+        </div>
         <div class="list-header-container">
           <img src="/images/icons/{{ .Params.logo | default "NGINX-product-icon.svg" }}">
           <div class="list-header-title">
@@ -42,8 +40,7 @@
         {{ end }}
 
     </div>
-    </section>
-</section>
+
 </main>
 
 

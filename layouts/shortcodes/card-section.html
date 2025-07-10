@@ -1,6 +1,7 @@
 {{ $title := .Get "title" }}
 {{ $isFeaturedSectionParam := .Get "isFeaturedSection" | default "false" }}
 {{ $showAsCardsParam := .Get "showAsCards" | default "false"}}
+
 {{- /* Validate the parameter strictly */ -}}
 {{- if not (in (slice "true" "false") $showAsCardsParam) -}}
   {{- warnf "The '<card-section>' Shortcode parameter 'showAsCards' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $showAsCardsParam -}}
@@ -15,14 +16,18 @@
 {{- end -}}
 {{- $isFeaturedSection := cond (eq $isFeaturedSectionParam "true") "true" "false" -}}
 {{- $class := "card-grid" -}}
+
+{{- /* Get number of cards */ -}}
+{{ $cardCount := len (findRE "<div\\s+class=\"card\"[\\s\\S]*?>" .Inner) }}
+
 {{- /* Validate that the parent is card-layout */ -}}
 {{ if eq .Parent.Name "card-layout"}}
-  <div class="card-section {{if eq $isFeaturedSection "true"}}featured-section{{ end }}">
+  <div class="card-section {{if eq $isFeaturedSection "true"}}featured-section{{ end }}" data-testid="{{if eq $isFeaturedSection "true"}}card-section__featured-section{{else}}card-section{{ end }}">
     {{- if $title -}}
       <strong class="card-section-title">{{- $title -}}</strong>
-      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{- .Inner -}}</div>    
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }}{{ end }}" data-testid="{{ if eq $showAsCards "true" }}card-section-content__card-grid{{else}}card-section-content{{ end }}">{{ .Inner }}</div>    
     {{ else }}
-      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }} {{ end }}">{{ .Inner }}</div>    
+      <div class="card-section-content{{ if eq $showAsCards "true" }} {{ $class }}{{ end }}" data-testid="{{ if eq $showAsCards "true" }}card-section-content__card-grid{{else}}card-section-content{{ end }}">{{ .Inner }}</div>    
     {{ end }}
   </div>
 {{ else }}

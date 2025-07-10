@@ -156,7 +156,6 @@ textarea:not([rows]) {
   --color-inline_codeblock-border: 0.85 0 0;
   --color-inline_codeblock-background: 0.98 0 0;
   --color-codeblock-border: 0.63 0 0;
-  --color-codeblock-shadow: 0.92 0 0;
   --color-codeblock-background: 1 0 0;
   --color-codeblock-highlight: 0.99 0.0479 105.97;
   --color-footer: 0.23 0 0;
@@ -199,6 +198,7 @@ textarea:not([rows]) {
   --codeblock-comment-space-between: 10px;
   --codeblock-horizontal-line-length: 2rem;
   --codeblock-horizontal-line-overflow: 0.25rem;
+  --codeblock-horizontal-padding: 1rem;
   --codeblock-border-thickness: 1px;
   --codeblock-code-section-padding-left: 1rem;
   --codeblock-line-box-side-length: 4px;
@@ -206,17 +206,26 @@ textarea:not([rows]) {
 
   --flow-gap: 1rem;
 
-  /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  /* @link https://utopia.fyi/type/calculator?c=320,14,1.2,1240,16,1.25,5,3,&s=0.75,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   /* ALWAYS use for fonts */
-  --font-step--3: clamp(0.576rem, 0.5796rem + -0.0047vw, 0.5787rem);
-  --font-step--2: clamp(0.6944rem, 0.6856rem + 0.0444vw, 0.72rem);
-  --font-step--1: clamp(0.8333rem, 0.8101rem + 0.1159vw, 0.9rem);
-  --font-step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
-  --font-step-1: clamp(1.2rem, 1.1283rem + 0.3587vw, 1.4063rem);
-  --font-step-2: clamp(1.44rem, 1.3295rem + 0.5527vw, 1.7578rem);
-  --font-step-3: clamp(1.728rem, 1.5648rem + 0.8161vw, 2.1973rem);
-  --font-step-4: clamp(2.0736rem, 1.8395rem + 1.1704vw, 2.7466rem);
-  --font-step-5: clamp(2.4883rem, 2.1597rem + 1.6433vw, 3.4332rem);
+  /* Step -3: 8.1019px → 8.192px */
+  --font-step--3: clamp(0.5064rem, 0.5044rem + 0.0098vw, 0.512rem);
+  /* Step -2: 9.7222px → 10.24px */
+  --font-step--2: clamp(0.6076rem, 0.5964rem + 0.0563vw, 0.64rem);
+  /* Step -1: 11.6667px → 12.8px */
+  --font-step--1: clamp(0.7292rem, 0.7045rem + 0.1232vw, 0.8rem);
+  /* Step 0: 14px → 16px */
+  --font-step-0: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
+  /* Step 1: 16.8px → 20px */
+  --font-step-1: clamp(1.05rem, 0.9804rem + 0.3478vw, 1.25rem);
+  /* Step 2: 20.16px → 25px */
+  --font-step-2: clamp(1.26rem, 1.1548rem + 0.5261vw, 1.5625rem);
+  /* Step 3: 24.192px → 31.25px */
+  --font-step-3: clamp(1.512rem, 1.3586rem + 0.7672vw, 1.9531rem);
+  /* Step 4: 29.0304px → 39.0625px */
+  --font-step-4: clamp(1.8144rem, 1.5963rem + 1.0904vw, 2.4414rem);
+  /* Step 5: 34.8365px → 48.8281px */
+  --font-step-5: clamp(2.1773rem, 1.8731rem + 1.5208vw, 3.0518rem);
 
   /* @link https://utopia.fyi/space/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   /* ALWAYS use for horizontal spacing */
@@ -351,9 +360,9 @@ ol li:last-child {
   @media (max-width: 68rem) {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "sidebar header"
-      "sidebar content"
-      "sidebar footer";
+      "header"
+      "content"
+      "footer";
 
     .text-content {
       margin-top: 1rem;
@@ -512,19 +521,6 @@ ol li:last-child {
 
   ul {
     list-style: none;
-  }
-}
-
-.content {
-  grid-area: content;
-  justify-self: center;
-  padding: 0 var(--space-l) 2rem var(--space-l);
-  max-width: var(--content-max-width);
-
-  /* Allow redocly to fill the entire container */
-  &.content__redocly {
-    justify-self: unset;
-    max-width: unset;
   }
 }
 
@@ -762,12 +758,12 @@ nav {
 
 .homepage {
   --content-max-width: 120rem;
+  margin: 0 2rem;
+  line-height: 1.5rem;
 
-  .homepage-heading {
-    grid-column: 1 / -1;
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin: 2rem 0rem;
+  * {
+    margin-left: 0;
+    padding-left: 0;
   }
 
   .homepage-section {
@@ -776,83 +772,143 @@ nav {
     gap: 1.5rem;
 
     justify-content: center;
-    max-width: 98rem;
+    max-width: 100rem;
     margin: 0 auto;
-    padding-bottom: 2rem;
+    padding: 1rem;
 
     a {
       color: oklch(var(--color-foreground));
       text-decoration-color: oklch(var(--color-background));
 
       &:hover {
+        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
         text-decoration-color: oklch(var(--color-background));
+        border: 1px solid oklch(var(--color-brand) / 0.8);
       }
     }
 
-    .homepage-heading {
+    .headerlink {
+      cursor: default;
+      pointer-events: none;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    > * {
       grid-column: 1 / -1;
-      margin: 1rem 0rem;
     }
-  }
 
-  /* Styling for items */
-  .homepage-item {
-    background: oklch(var(--color-background));
-    border: 1px solid oklch(var(--color-codeblock-border));
-    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-    min-height: 11rem;
-    padding: 1rem 2rem 2rem 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-
-    &:hover {
-      box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-      text-decoration-color: oklch(var(--color-background));
-      border: 1px solid oklch(var(--color-brand) / 0.8);
+    > p {
+      grid-column: 1;
     }
-  }
-
-  .homepage-item-heading {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
-  .homepage-item-logo {
-    margin-right: 0.5rem;
-  }
-
-  .homepage-item-logo img {
-    height: 40px;
-    width: auto;
-    display: block;
-  }
-
-  .homepage-item-text {
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-    /* Hack to make text line-up with logos */
-    transform: translateY(-6px);
-  }
-
-  .homepage-item-content {
-    line-height: 1.5rem;
   }
 }
 
 /* MARK: Main content
 */
 
-.content-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  z-index: 1;
+[data-grid="wide"] {
+  grid-column: 1;
+}
+[data-grid="first-third"] {
+  grid-column: 1;
+}
+[data-grid="last-third"] {
+  grid-column: 1;
+}
+[data-grid="quarter"] {
+  grid-column: 1;
+}
+[data-grid="third"] {
+  grid-column: 1;
+}
+[data-grid="half"] {
+  grid-column: 1;
+}
+
+@media (min-width: 55rem) {
+  [data-grid="wide"] {
+    grid-column: 1 / -1;
+  }
+
+  [data-grid="first-third"] {
+    grid-column: 1 / 4;
+  }
+
+  [data-grid="first-two-thirds"] {
+    grid-column: 1 / 8;
+  }
+
+  [data-grid="last-third"] {
+    grid-column: 8 / -1;
+  }
+
+  [data-grid="quarter"] {
+    grid-column: span 3;
+  }
+
+  [data-grid="third"] {
+    grid-column: span 4;
+  }
+
+  [data-grid="half"] {
+    grid-column: span 6;
+  }
+}
+
+.content {
+  grid-area: content;
+  justify-self: center;
+  padding: 0 var(--space-l) 2rem var(--space-l);
+  max-width: var(--content-max-width);
+
+  & > *,
+  & > ul,
+  & > ol {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    /* These gaps determine the spacing between all content. Be careful!! */
+    gap: var(--space-m) var(--space-m);
+
+    /* Handles some strangeness where single-line codeblocks caused
+   horizon */
+    ol:has(.highlight-v2),
+    ul:has(.highlight-v2) {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    > *:not([data-grid]),
+    > li:not([data-grid]) {
+      grid-column: 1;
+    }
+
+    @media (min-width: 55rem) {
+      max-width: var(--content-max-width);
+      grid-template-columns: repeat(var(--grid-columns), 1fr);
+
+      > *:not([data-grid]),
+      > li:not([data-grid]) {
+        grid-column: 1 / 8;
+      }
+    }
+  }
+
+  /* Allow redocly to fill the entire container */
+  &.content__redocly {
+    justify-self: unset;
+    max-width: 100%;
+
+    #api-component {
+      z-index: 0;
+      position: relative;
+      display: block;
+      max-width: 100%;
+      margin-top: 1rem;
+    }
+  }
 }
 
 #searchbox {
@@ -862,30 +918,7 @@ nav {
 }
 
 .breadcrumb-layout {
-  grid-column: 1 / -1;
-}
-
-.text-content {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: var(--grid-content-mobile);
-  column-gap: var(--grid-column-gutter);
-  margin-top: 2rem;
-  grid-auto-rows: max-content;
-  row-gap: var(--flow-gap);
-  justify-content: center;
-}
-
-.text-content > :not(.wide) {
-  grid-column: 1 / -1;
-}
-
-.text-content .wide {
-  grid-column: 1 / -1;
-}
-
-.text-content table {
-  width: 100%;
+  padding-top: 1rem;
 }
 
 main {
@@ -895,29 +928,6 @@ main {
 @media (min-width: 88em) {
   .header__logo {
     display: unset;
-  }
-
-  .text-content {
-    grid-template-columns: var(--grid-content) var(--grid-side-callout);
-    grid-template-rows: 3rem max-content;
-    column-gap: var(--grid-column-gutter);
-  }
-
-  .text-content > :not(.wide) {
-    grid-column: 1;
-  }
-
-  .content-layout {
-    display: grid;
-    grid-template-columns: 1fr minmax(
-        auto,
-        calc(
-          var(--grid-content) +
-          var(--grid-side-callout) +
-          var(--grid-column-gutter)
-        )
-      ) 1fr;
-    column-gap: var(--grid-column-gutter);
   }
 
   .navbar atomic-search-interface {
@@ -1353,14 +1363,19 @@ a:hover {
   text-decoration-color: oklch(var(--color-brand) / 0.8);
 }
 
+/* MARK: Typography
+*/
+
 h1 {
-  font-size: 2rem;
-  margin: 0 0 1rem 0;
+  font-size: var(--font-step-3);
 }
 
 h2 {
-  font-size: 1.5rem;
-  margin: 1rem 0 0.75rem 0;
+  font-size: var(--font-step-2);
+}
+
+p {
+  font-size: var(--font-step-0);
 }
 
 h2:target,
@@ -1433,23 +1448,79 @@ h6:has(a):hover {
 }
 
 /* Landing page cards */
-.text-content .card-layout {
-  grid-column: 1;
+
+.homepage {
+  .card-grid {
+    grid-template-columns: 1fr;
+
+    @media (min-width: 70rem) {
+      grid-template-columns: repeat(12, 1fr);
+    }
+  }
+
+  .card-layout .card-grid .card {
+    padding: 1rem 2rem 2rem 2rem;
+
+    .lucide,
+    .card-brand-icon {
+      height: 40px;
+      width: auto;
+    }
+  }
+}
+
+.card-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
   .card-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
     strong {
       font-weight: 500;
+      font-size: var(--font-step-2);
+      display: block;
+      margin-bottom: 1rem;
     }
 
-    /* Hide all the cards past 3 if it is a featured card section */
     &.featured-section {
-      .card-section-content.card-grid
-        > *:nth-child(n + 4 of div.card-container) {
+      /* Hide all the cards past 3 if it is a featured card section */
+      .card-section-content > *:nth-child(n + 4 of a.card) {
         display: none;
+      }
+    }
+  }
+
+  .card {
+    color: oklch(var(--color-foreground));
+    text-decoration: none;
+    order: 2;
+
+    &.featured-card {
+      order: 1;
+    }
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      align-items: center;
+      color: oklch(var(--color-brand));
+
+      .card-brand-icon {
+        height: 20px;
+        width: auto;
+      }
+
+      h2 {
+        padding: 0;
+        margin: 0;
+        font-size: var(--font-step-1);
       }
     }
   }
@@ -1458,52 +1529,17 @@ h6:has(a):hover {
 /* Optional grid layout */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
   gap: 1.5rem;
 
-  .card-container {
+  @media (max-width: 55rem) {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
     border: 1px solid oklch(var(--color-codeblock-border));
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
     padding: 1rem;
-
-    &.featured-card {
-      /* If there is a need for a featured card, only the featured card should be full length */
-      grid-column: 1 / -1;
-
-      /* If there is a featured card AND two cards, the last one should be full length */
-      ~ .card-container:nth-child(2n):last-child {
-        grid-column: 1 / -1;
-      }
-    }
-  }
-
-  /* If there is no featured card, last card that is the 3rd one should be full width */
-  &:not(:has(.featured-card)) *:nth-child(n + 3 of div.card-container) {
-    grid-column: 1 / -1;
-  }
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-
-  .card-header {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-
-    .card-brand-icon {
-      height: 20px;
-      width: auto;
-    }
-
-    h2 {
-      padding: 0;
-      margin: 0;
-      font-size: 1rem;
-    }
   }
 }
 
@@ -1637,7 +1673,6 @@ blockquote p:last-child {
 /* Maintain the split column for as long as possible */
 @media (min-width: 67rem) {
   blockquote.side-callout {
-    grid-column: 2 !important;
     align-self: start;
   }
 }
@@ -1827,12 +1862,37 @@ a:has(code:not(pre code)) {
 
 /* Regular Codeblock */
 .highlight {
-  padding: 0 1rem 0 1rem;
+  padding: 0 var(--codeblock-horizontal-padding) 0
+    var(--codeblock-horizontal-padding);
   position: relative;
   flex: 1;
 
-  code .cl {
-    position: relative;
+  code {
+    font-size: var(--font-step--1);
+
+    .cl {
+      position: relative;
+    }
+  }
+
+  table {
+    width: calc(100% + var(--codeblock-horizontal-padding));
+  }
+
+  .lntd:first-child pre code {
+    span {
+      margin-left: -1rem;
+      padding-left: 1rem;
+      width: calc(100% + 1rem);
+    }
+  }
+
+  pre code .line {
+    display: inline;
+  }
+
+  pre code .line.hl {
+    display: block;
   }
 }
 
@@ -1863,10 +1923,6 @@ a:has(code:not(pre code)) {
   /* margin: 1.5rem 0 0.25rem 0; */
 }
 
-.highlight code {
-  font-size: 0.875rem;
-}
-
 .highlight-v2.single-line {
   display: flex;
   align-items: center;
@@ -1890,7 +1946,7 @@ a:has(code:not(pre code)) {
 }
 
 .code-container {
-  box-shadow: 2px 2px 0px oklch(var(--color-codeblock-shadow));
+  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
 }
 
 ol .code-block,
@@ -1938,6 +1994,7 @@ ul .code-block {
 .highlight code .hl {
   width: fit-content;
   min-width: 100%;
+  display: block;
   background-color: oklch(var(--color-codeblock-highlight));
 }
 
@@ -1947,6 +2004,13 @@ ul .code-block {
   .catalog__table {
     padding-bottom: 2rem;
   }
+}
+
+/* MARK: Banner 
+*/
+
+.banner {
+  margin-top: 1rem;
 }
 
 /* MARK: Images

@@ -1363,7 +1363,8 @@ a:hover {
   text-decoration-color: oklch(var(--color-brand) / 0.8);
 }
 
-/* MARK: Typography */
+/* MARK: Typography
+*/
 
 h1 {
   font-size: var(--font-step-3);
@@ -2003,6 +2004,13 @@ ul .code-block {
   .catalog__table {
     padding-bottom: 2rem;
   }
+}
+
+/* MARK: Banner 
+*/
+
+.banner {
+  margin-top: 1rem;
 }
 
 /* MARK: Images

@@ -33,11 +33,12 @@
 {{ end }}
 
 {{- /* Build the url */ -}}
-{{ if eq (substr $titleUrl 0 1) "/" }}
-  {{ $suggestedUrlFix := substr $titleUrl 1 }} 
-  {{ errorf "Please do not start the param 'titleUrl' with a forward slash. Got: '%s', use '%s' instead." $titleUrl $suggestedUrlFix }}
-{{ end }}
 {{ $url := printf "%s%s" .Page.Permalink $titleUrl }}
+{{ if eq (substr $titleUrl 0 1) "/" }}
+  {{ $url = printf "%s%s" .Site.BaseURL (substr $titleUrl 1) }}
+{{ else if (strings.Contains $titleUrl "https") }}
+  {{ $url = $titleUrl }}
+{{ end }}
 
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
@@ -46,7 +47,7 @@
     {{- if $title -}}
       <div class="card-header">
         {{- if $brandIcon -}}
-          <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}.svg">
+          <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}">
         {{- else if $icon -}}
           {{ partial "lucide" (dict "context" . "icon" $icon) }}
         {{- end -}}

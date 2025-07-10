@@ -54,7 +54,7 @@ This is a compilation of all our shortcodes to show how they look, function, res
 
 {{<card-layout >}}
   {{<card-section title="NGINX" showAsCards="true" >}}
-    {{<card title="NGINX Plus" titleUrl="/nginx/" brandIcon="NGINX-Plus-product-icon-RGB" >}}
+    {{<card title="NGINX Plus" titleUrl="nginx/" brandIcon="NGINX-Plus-product-icon-RGB" >}}
       Installing NGINX
     {{</card >}}
   {{</card-section >}}

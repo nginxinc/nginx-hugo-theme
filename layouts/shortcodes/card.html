@@ -32,9 +32,16 @@
   {{ $dataGrid = "half"}}
 {{ end }}
 
+{{- /* Build the url */ -}}
+{{ if eq (substr $titleUrl 0 1) "/" }}
+  {{ $suggestedUrlFix := substr $titleUrl 1 }} 
+  {{ errorf "Please do not start the param 'titleUrl' with a forward slash. Got: '%s', use '%s' instead." $titleUrl $suggestedUrlFix }}
+{{ end }}
+{{ $url := printf "%s%s" .Page.Permalink $titleUrl }}
+
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-<a href="{{- $titleUrl -}}" alt="{{- $title -}}" class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}" data-testid="{{ if eq $isFeatured "true" }}card__featured-card{{else}}card{{ end }}">
+<a href="{{- $url -}}" alt="{{- $title -}}" class="card{{ if eq $isFeatured "true" }} featured-card{{ end }}" data-grid="{{ $dataGrid }}" data-testid="{{ if eq $isFeatured "true" }}card__featured-card{{else}}card{{ end }}">
   <div class="card-container">
     {{- if $title -}}
       <div class="card-header">

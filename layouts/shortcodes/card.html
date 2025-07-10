@@ -35,8 +35,7 @@
 {{- /* Build the url */ -}}
 {{ $url := printf "%s%s" .Page.Permalink $titleUrl }}
 {{ if eq (substr $titleUrl 0 1) "/" }}
-  {{ $suggestedUrlFix := substr $titleUrl 1 }} 
-  {{ errorf "Please do not start the param 'titleUrl' with a forward slash. Got: '%s', use '%s' instead." $titleUrl $suggestedUrlFix }}
+  {{ $url = printf "%s%s" .Site.BaseURL (substr $titleUrl 1) }}
 {{ else if (strings.Contains $titleUrl "https") }}
   {{ $url = $titleUrl }}
 {{ end }}

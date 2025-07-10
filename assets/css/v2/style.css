@@ -776,17 +776,6 @@ nav {
     margin: 0 auto;
     padding: 1rem;
 
-    a {
-      color: oklch(var(--color-foreground));
-      text-decoration-color: oklch(var(--color-background));
-
-      &:hover {
-        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-        text-decoration-color: oklch(var(--color-background));
-        border: 1px solid oklch(var(--color-brand) / 0.8);
-      }
-    }
-
     .headerlink {
       cursor: default;
       pointer-events: none;
@@ -1448,39 +1437,15 @@ h6:has(a):hover {
 }
 
 /* Landing page cards */
-
-.homepage {
-  .card-grid {
-    grid-template-columns: 1fr;
-
-    @media (min-width: 70rem) {
-      grid-template-columns: repeat(12, 1fr);
-    }
-  }
-
-  .card-layout .card-grid .card {
-    padding: 1rem 2rem 2rem 2rem;
-
-    .lucide,
-    .card-brand-icon {
-      height: 40px;
-      width: auto;
-    }
-  }
-}
-
 .card-layout {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 
   .card-section {
-    strong {
-      font-weight: 500;
-      font-size: var(--font-step-2);
-      display: block;
-      margin-bottom: 1rem;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 
     &.featured-section {
       /* Hide all the cards past 3 if it is a featured card section */
@@ -1488,58 +1453,109 @@ h6:has(a):hover {
         display: none;
       }
     }
-  }
 
-  .card {
-    color: oklch(var(--color-foreground));
-    text-decoration: none;
-    order: 2;
-
-    &.featured-card {
-      order: 1;
+    .card-section-title {
+      font-weight: 500;
+      font-size: var(--font-step-2);
+      display: block;
     }
 
-    .card-container {
+    .card-section-content {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .card-header {
-      display: flex;
-      flex-direction: row;
       gap: 1rem;
-      align-items: center;
-      color: oklch(var(--color-brand));
 
-      .card-brand-icon {
-        height: 20px;
-        width: auto;
+      &.card-grid {
+        display: grid;
+        grid-template-columns: repeat(var(--grid-columns), 1fr);
+        gap: 1.5rem;
+
+        @media (max-width: 55rem) {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          border: 1px solid oklch(var(--color-codeblock-border));
+          box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+          padding: 1rem;
+          order: 2;
+
+          &.featured-card {
+            order: 1;
+          }
+        }
       }
 
-      h2 {
-        padding: 0;
-        margin: 0;
-        font-size: var(--font-step-1);
+      .card {
+        color: oklch(var(--color-foreground));
+        text-decoration: none;
+
+        .card-container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .card-header {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          align-items: center;
+          color: oklch(var(--color-brand));
+
+          img.card-brand-icon {
+            height: 1.5rem;
+            width: auto;
+          }
+
+          h2 {
+            padding: 0;
+            margin: 0;
+            font-size: var(--font-step-1);
+          }
+        }
       }
     }
   }
 }
 
-/* Optional grid layout */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), 1fr);
-  gap: 1.5rem;
+.homepage .card-layout {
+  margin-bottom: 3rem;
+  gap: 3rem;
 
-  @media (max-width: 55rem) {
-    grid-template-columns: 1fr;
-  }
+  .card-section {
+    .card-section-content.card-grid {
+      grid-template-columns: 1fr;
 
-  .card {
-    border: 1px solid oklch(var(--color-codeblock-border));
-    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-    padding: 1rem;
+      @media (min-width: 70rem) {
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 1fr;
+      }
+
+      .card {
+        padding: 1rem 2rem 2rem 2rem;
+
+        .card-container {
+          height: 7rem;
+          justify-content: space-around;
+
+          .card-header {
+            justify-content: flex-start;
+
+            .card-brand-icon {
+              height: 40px;
+              width: auto;
+            }
+          }
+        }
+
+        &:hover {
+          box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+          text-decoration-color: oklch(var(--color-background));
+          border: 1px solid oklch(var(--color-brand) / 0.8);
+        }
+      }
+    }
   }
 }
 

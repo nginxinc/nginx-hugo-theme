@@ -852,6 +852,7 @@ nav {
   justify-self: center;
   padding: 0 var(--space-l) 2rem var(--space-l);
   max-width: var(--content-max-width);
+  scroll-margin-top: calc(var(--header-height) + 1rem);
 
   & > *,
   & > ul,
@@ -1388,6 +1389,7 @@ h6:has(a) {
   margin-left: -1rem;
   padding-left: 1rem;
   position: relative;
+  scroll-margin-top: var(--header-height);
 }
 
 h2:has(a):hover {
@@ -1679,7 +1681,7 @@ blockquote.note:before {
 }
 
 blockquote p:first-child {
-  margin: 0 auto 1rem auto;
+  /* margin: 0 auto 1rem auto; */
 }
 
 blockquote p:last-child {
@@ -2022,7 +2024,7 @@ ul .code-block {
   }
 }
 
-/* MARK: Banner 
+/* MARK: Banner
 */
 
 .banner {

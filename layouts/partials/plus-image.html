@@ -1,0 +1,11 @@
+{{ with .Params }}
+  {{ if (index . "nd-plus") }}
+    <img class="sidebar__plus_icon"
+         src="/images/icons/NGINX-Plus-product-icon-RGB.svg"
+         alt="NGINX Plus">
+  {{ else if (index . "nd-partial-plus") }}
+    <img class="sidebar__plus_icon"
+         src="/images/icons/NGINX-Plus-product-icon-black.svg"
+         alt="NGINX Partial Plus Support">
+  {{ end }}
+{{ end }}

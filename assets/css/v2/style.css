@@ -1241,6 +1241,12 @@ nav.sidebar.sidebar__mobile-open {
     transform: rotate(90deg);
   }
 
+  .sidebar__plus_icon {
+    height: 0.875rem;
+    /* Hacking image aligning while the design is being worked out */
+    margin-bottom: -2px;
+  }
+
   .sidebar__toggle:not(:has(.sidebar__chevron)) {
     padding-inline-start: 2rem;
   }

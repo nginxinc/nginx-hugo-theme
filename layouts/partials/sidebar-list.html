@@ -65,7 +65,10 @@
             aria-controls="{{ $tocID }}"
             id="{{ $linkID }}"
           >
-            <span>{{ $p.Title }}</span>
+            <span>
+                {{ $p.Title }}
+                {{ partial "plus-image.html" $p }}
+            </span>
             <span class="sidebar__chevron sidebar__chevron--open">
               {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
             </span>
@@ -87,6 +90,7 @@
             {{ if $onPage }}aria-current="page"{{ end }}
           >
             {{ $p.Title }}
+            {{ partial "plus-image.html" $p }}
           </a>
         {{ end }}
       </li>

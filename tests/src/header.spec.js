@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('Smoke test for header', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/test-product');
   });
 
   test('should test header renders', async ({ page }) => {

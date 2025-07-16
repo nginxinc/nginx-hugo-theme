@@ -7,7 +7,7 @@
 <div class="code-block">
     <div class="code-container chroma">
         <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button" type="button">Copy</button>
-        <div class="highlight-v2 single-line" id="{{ $codeBlockId }}">
+        <div class="code-content single-line" id="{{ $codeBlockId }}">
             {{ $result.Wrapped }}
         </div>
     </div>
@@ -19,7 +19,7 @@
     {{- end -}}
     <div class="code-container chroma">
         <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button multi-line" type="button">Copy</button>
-        <div class="highlight-v2" id="{{ $codeBlockId }}">
+        <div class="code-content" id="{{ $codeBlockId }}">
             {{ $result.Wrapped }}
         </div>
     </div>

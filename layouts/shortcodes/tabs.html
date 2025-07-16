@@ -11,23 +11,23 @@
         <input type="radio" name="{{$tab_set_id}}" id="{{$id}}" aria-hidden="true">
       {{- end -}}  
 	{{- end -}}
-	<ul class="tab-labels" role="tablist" id="{{ $tab_set_id }}">
+	<ul class="tab-labels" role="tablist" id="{{ $tab_set_id }}" data-testid="labels-{{ $tab_set_id }}">
 	  {{- range $i, $e := $tabs -}}
 	  	{{- $id := printf "%s-tab%d" $tab_set_id $i -}}
 		<li>
 		  {{- if eq $i 0 -}}
-			<label class="tab-label" role="tab" id="{{$id}}" for="{{$id}}" aria-controls="{{ $id }}" aria-selected="true" tabindex="0">
+			<label class="tab-label" role="tab" id="{{$id}}" for="{{$id}}" aria-controls="{{ $id }}" aria-selected="true" tabindex="0" data-testid="tab-label">
 			  {{- trim .name " " -}}
 			</label>
 		  {{- else -}}
-			<label class="tab-label" role="tab" id="{{$id}}" for="{{$id}}" aria-controls="{{ $id }}" tabindex="0">
+			<label class="tab-label" role="tab" id="{{$id}}" for="{{$id}}" aria-controls="{{ $id }}" tabindex="0" data-testid="tab-label">
 			  {{- trim .name " " -}}
 			</label>
 		  {{- end -}}
 		</li>
 	  {{- end -}}
 	</ul>
-	<div class="tabs-content">
+	<div class="tab-contents" data-testid="contents-{{ $tab_set_id }}">
 	  {{- range $i, $e := $tabs -}}
 	    {{- $id := printf "%s-panel%d" $tab_set_id $i -}}
 		<div class="tab-content" role="tabpanel" id="{{ $tab_set_id }}-panel{{ $i }}" aria-labelledby="{{ $id }}">
@@ -57,7 +57,7 @@
       }
 	}
 
-	.tabs-container input[type="radio"]:checked:nth-of-type({{ add $i 1 }}) ~ .tabs-content div:nth-of-type({{ add $i 1 }}) {
+	.tabs-container input[type="radio"]:checked:nth-of-type({{ add $i 1 }}) ~ .tab-contents div:nth-of-type({{ add $i 1 }}) {
 	  display: block;
 	}
   {{- end -}}

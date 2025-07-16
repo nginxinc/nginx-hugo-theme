@@ -93,11 +93,11 @@
 
     <ul class="navbar navbar-nav">
         <li class="nav-item-explore active">
-          <button id="navbar-sites-button" class="button navbar-button">
+          <button id="navbar-sites-button" class="button navbar-button dropdown-button" data-testid="header__f5sites_button">
               F5 Sites
               <i id="navbar-sites-button-icon" class="link-chevron-icon fa-solid fa-chevron-down"></i>
           </button>
-          <div class="dropdown-content" id="dropdown-content">
+          <div class="dropdown-content" id="dropdown-content" data-testid="header__f5sites_content">
             <ul>
               {{ range $f5Sites }}
                 <li>

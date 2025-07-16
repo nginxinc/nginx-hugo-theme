@@ -163,8 +163,7 @@ textarea:not([rows]) {
   --color-codeblock-border: 0.63 0 0;
   --color-codeblock-background: 1 0 0;
   --color-codeblock-highlight: 0.99 0.0479 105.97;
-  --color-footer: 0.23 0 0;
-  --color-footer-text: 0.91 0 0;
+  --color-footer-text: 0 0 0 / 65%;
   --color-product-title: 0.64 0 0;
   --color-tabs-inactive-border: 0 0 0 / 20%;
   --color-callout-warning: 0.65 0.188 24;
@@ -529,11 +528,17 @@ ol li:last-child {
   }
 }
 
+.last-modified {
+  margin: 1rem 0 0 0;
+  font-size: 0.875rem;
+}
+
 .footer {
   grid-area: footer;
   padding: var(--space-l);
-  background-color: oklch(var(--color-footer));
   margin-top: auto;
+
+  border-top: 1px solid oklch(var(--color-divider));
 }
 
 /* sidebar toggling */

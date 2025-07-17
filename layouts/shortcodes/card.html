@@ -2,55 +2,74 @@
 {{- $titleUrl := .Get "titleUrl" | default "/" -}} 
 {{- $icon := .Get "icon" | default "book-open" -}}
 {{- $brandIcon := .Get "brandIcon" -}}
-{{- $isFeaturedParam := .Get "isFeatured" | default "false" }}
+{{- $isFullSizeParam := .Get "isFullSize" | default "false" -}}
+{{- $isLandingParam := .Get "isLanding" | default "false" }}
+
 {{- /* Validate the parameter strictly */ -}}
-{{- if not (in (slice "true" "false") $isFeaturedParam) -}}
-  {{- warnf "The '<card>' Shortcode parameter 'isFeatured' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFeaturedParam -}}
+{{- if not (in (slice "true" "false") $isFullSizeParam) -}}
+  {{- warnf "The '<card>' Shortcode parameter 'isFullSize' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFullSizeParam -}}
 {{- end -}}
-{{- $isFeatured := cond (eq $isFeaturedParam "true") "true" "false" -}}
-{{- $current := .Page.Scratch.Get "cards" | default (slice) -}}
-{{- $newCard := dict "title" ($title) "content" (.Inner) -}}
-{{- .Page.Scratch.Set "cards" ($current | append $newCard) -}}
+{{- $isFullSize := cond (eq $isFullSizeParam "true") "true" "false" -}}
+
+{{- if not (in (slice "true" "false") $isLandingParam) -}}
+  {{- warnf "The '<card>' Shortcode parameter 'isLanding' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isLandingParam -}}
+{{- end -}}
+{{- $isLanding := cond (eq $isLandingParam "true") "true" "false" -}}
+
+{{- /* Set up the positioning */ -}}
+{{ $dataGrid := "" }}
+{{ if eq $isFullSize "true" }}
+  {{ $dataGrid = "wide"}}
+{{ else if (eq $isLanding "true") }}
+  {{ $dataGrid = "third"}}
+{{ else }}
+  {{ $dataGrid = "half"}}
+{{ end }}
+
+{{- /* Build the url */ -}}
+{{ $url := printf "%s%s" .Page.Permalink $titleUrl }}
+{{ if eq (substr $titleUrl 0 1) "/" }}
+  {{ $url = printf "%s%s" .Site.BaseURL (substr $titleUrl 1) }}
+{{ else if (strings.Contains $titleUrl "https") }}
+  {{ $url = $titleUrl }}
+{{ end }}
+
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-  <div class="card-container {{ if eq $isFeatured "true" }}featured-card{{ end }}" data-mf="true" style="display: none;">
+<a href="{{- $url -}}" alt="{{- $title -}}" class="card" data-grid="{{ $dataGrid }}" data-testid="card"  data-mf="true" style="display: none;">
+  <div class="card-container">
     {{- if $title -}}
       <div class="card-header">
         {{- if $brandIcon -}}
-          <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}.svg">
-        {{- else -}}
-          {{- if $icon -}}
-            {{ partial "lucide" (dict "context" . "icon" $icon) }}
-          {{- end -}}
+          <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}">
+        {{- else if $icon -}}
+          {{ partial "lucide" (dict "context" . "icon" $icon) }}
         {{- end -}}
-        {{- if $titleUrl -}}
-          <h2 class="card-title"><a href="{{- $titleUrl -}}">{{- $title -}}</a></h2>
-        {{- else -}}
-          <h2 class="card-title">{{- $title -}}</h2>
-        {{- end -}}
+        <h2 class="card-title">{{- $title -}}</h2>
       </div>
     {{- else -}}
       {{ errorf "Mainframe: Missing param 'title'" }}
     {{- end -}}
+    <div class="card-content">{{ .Inner }}</div>
+  </div>
+</a>
+<div class="col-md-5 card" data-mf="false">
+  <div class="card-body">
+    <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
+      {{- if $brandIcon -}}
+        <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $brandIcon }}"/>
+      {{- else -}}
+        <i class="fas fa-file-alt fa-lg card-img-top"></i>
+      {{- end -}}
+      {{- if ($title) -}}
+        <a href="{{- $titleUrl -}}">{{- $title -}}</a>
+      {{- else -}}
+        {{ errorf "Old theme: Missing param 'title'" }}
+      {{- end -}}
+    </h3>
     <p>{{- .Inner -}}</p>
   </div>
-  <div class="col-md-5 card" data-mf="false">
-    <div class="card-body">
-      <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
-        {{- if $brandIcon -}}
-          <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $brandIcon }}.png"/>
-        {{- else -}}
-          <i class="fas fa-file-alt fa-lg card-img-top"></i>
-        {{- end -}}
-        {{- if ($title) -}}
-          <a href="{{- $titleUrl -}}">{{- $title -}}</a>
-        {{- else -}}
-          {{ errorf "Old theme: Missing param 'title'" }}
-        {{- end -}}
-      </h3>
-      <p>{{- .Inner -}}</p>
-    </div>
-  </div>
+</div>
 {{- else -}}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}
 {{- end -}}

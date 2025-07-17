@@ -11,7 +11,7 @@ cascade:
 ---
 {{<card-layout>}}
   {{<card-section showAsCards="true">}}
-    {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed">}}
+    {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed" isFullSize="true">}}
       All shortcodes in one page.
     {{</card >}}
     {{<card title="Call Out usages" titleUrl="call-out/all-callouts/" icon="message-square">}}
@@ -29,7 +29,7 @@ cascade:
 [//]: # "Provide any sort of additional supporting content you may want customers to see as well (e.g. more cards, diagrams, changelogs, etc.)"
 {{<card-layout>}}
   {{<card-section title="NGINX" showAsCards="true" >}}
-    {{<card title="NGINX Plus" titleUrl="/nginx/" brandIcon="NGINX-Plus-product-icon-RGB" >}}
+    {{<card title="NGINX Plus" titleUrl="/nginx/" brandIcon="NGINX-Plus-product-icon-RGB.png" >}}
       Installing NGINX
     {{</card >}}
   {{</card-section >}}

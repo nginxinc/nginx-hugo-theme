@@ -27,7 +27,7 @@ and will render as the following:
 </div>
 
 ### Params 
-To support customization, there are also some params you can add to the shortcode `<card>` such as `title`, `titleUrl`, `icon`, `brandIcon`, `isFeaturedCard`, `isFullSize`.
+To support customization, there are also some params you can add to the shortcode `<card>` such as `title`, `titleUrl`, `icon`, `brandIcon`, `isFullSize`.
 
 * `title` (required) - Title of the card. 
 <br>
@@ -37,9 +37,6 @@ To support customization, there are also some params you can add to the shortcod
 <br>
 * `brandIcon` (optional) - Custom icon using image from  `nginx-hugo-theme/static/images/icons`.
   * Usage: `<card brandIcon="NGINX-App-Protect-WAF-product-icon"...>`
-<br>
-* `isFeaturedCard` (optional) - Boolean indicating whether or not the card should be the first one and full size. By default, false.
-  * Usage: `<card isFeaturedCard="true"...>`
 <br>
 * `isFullSize` (optional) - Boolean indicating whether or not the card should be full size. By default, cards are half sized.
   * Usage: `<card isFullSize="true"...>`
@@ -89,27 +86,6 @@ Denoted by the param `isFeaturedSection` in the shortcode `<card-layout>`, this 
         Examples for call-out shortcode
       {{</card >}}
       {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
-        Examples for codeblock shortcode
-      {{</card >}}
-      {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
-        Examples for codeblock shortcode
-      {{</card >}}
-    {{</card-section>}}
-  {{</card-layout >}}
-</div>
-
-## Featured Card
-Denoted by the param `isFeaturedCard` in the shortcode `<card>`, this will push the card up to very top of the section and make it full length.
-<div data-testid="cards-test__featuredCard">
-  {{<card-layout >}}
-    {{<card-section showAsCards="true">}}
-      {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed">}}
-        All shortcodes in one page.
-      {{</card >}}
-      {{<card title="Call Out usages" titleUrl="call-out/all-callouts/" icon="message-square">}}
-        Examples for call-out shortcode
-      {{</card >}}
-      {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code" isFeaturedCard="true">}}
         Examples for codeblock shortcode
       {{</card >}}
       {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}

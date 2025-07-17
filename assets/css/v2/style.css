@@ -1485,10 +1485,6 @@ h6:has(a):hover {
           box-shadow: 3px 3px 0px oklch(var(--color-shadow));
           padding: 1rem;
           order: 2;
-
-          &.featured-card {
-            order: 1;
-          }
         }
       }
 

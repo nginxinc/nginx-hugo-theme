@@ -1199,77 +1199,144 @@ h6:has(a):hover {
   color: oklch(var(--color-brand));
 }
 
-/* Landing page cards */
-.text-content .card-layout {
-  grid-column: 1;
-
-  .card-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    strong {
-      font-weight: 500;
-    }
-
-    /* Hide all the cards past 3 if it is a featured card section */
-    &.featured-section {
-      .card-section-content.card-grid
-        > *:nth-child(n + 4 of div.card-container) {
-        display: none;
-      }
-    }
-  }
+/* Product landing page cards */
+.card-brand-icon {
+  margin: 0;
 }
 
-/* Optional grid layout */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
-  gap: 1.5rem;
+.card[data-grid="half"] {
+  grid-column: 1;
+}
 
-  .card-container {
-    border: 1px solid oklch(var(--color-codeblock-border));
-    box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-    padding: 1rem;
+.card[data-grid="wide"] {
+  grid-column: 1;
+}
 
-    &.featured-card {
-      /* If there is a featured card, only the featured card should be full length */
-      grid-column: 1 / -1;
-
-      /* If there is a featured card AND two cards, the last one should be full length */
-      ~ .card-container:nth-child(2n):last-child {
-        grid-column: 1 / -1;
-      }
-    }
+@media (min-width: 55rem) {
+  .card[data-grid="half"] {
+    grid-column: span 6;
   }
 
-  /* If there is no featured card, last card that is the 3rd one should be full width */
-  &:not(:has(.featured-card)) *:nth-child(n + 3 of div.card-container) {
+  .card[data-grid="wide"] {
     grid-column: 1 / -1;
   }
 }
 
-.card-container {
+.card-layout {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 1.5rem;
 
-  .card-header {
+  .card-section {
     display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 1.5rem;
 
-    .card-brand-icon {
-      height: 20px;
-      width: auto;
+    &.featured-section {
+      /* Hide all the cards past 3 if it is a featured card section */
+      .card-section-content > *:nth-child(n + 4 of a.card) {
+        display: none;
+      }
     }
 
-    h2 {
-      padding: 0;
-      margin: 0;
-      font-size: 1rem;
+    .card-section-title {
+      font-weight: 500;
+      font-size: var(--font-step-2);
+      display: block;
+    }
+
+    .card-section-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      &.card-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1.5rem;
+
+        @media (max-width: 55rem) {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          border: 1px solid oklch(var(--color-codeblock-border));
+          box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+          padding: 1rem;
+          order: 2;
+        }
+      }
+
+      .card {
+        color: oklch(var(--color-foreground));
+        text-decoration: none;
+
+        .card-container {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .card-header {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          align-items: center;
+          color: oklch(var(--color-brand));
+
+          img.card-brand-icon {
+            height: 1.5rem;
+            width: auto;
+          }
+
+          h2 {
+            padding: 0;
+            margin: 0;
+            font-size: var(--font-step-1);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Home landing page cards */
+.homepage .card-layout {
+  margin-block-end: 3rem;
+  gap: 3rem;
+
+  .card-section {
+    .card-section-content.card-grid {
+      grid-template-columns: 1fr;
+
+      @media (min-width: 70rem) {
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 1fr;
+      }
+
+      .card {
+        padding: 1rem 2rem 2rem 2rem;
+
+        .card-container {
+          height: 7rem;
+          justify-content: space-around;
+
+          .card-header {
+            justify-content: flex-start;
+
+            .card-brand-icon {
+              height: 40px;
+              width: auto;
+            }
+          }
+        }
+
+        &:hover {
+          box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+          text-decoration-color: oklch(var(--color-background));
+          border: 1px solid oklch(var(--color-brand) / 0.8);
+        }
+      }
     }
   }
 }

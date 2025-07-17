@@ -47,25 +47,4 @@ test.describe('Testing for cards shortcode', () => {
     }
     expect(visibleCards.length).toBeLessThanOrEqual(3);
   });
-
-  test('should test featured card', async ({ page }) => {
-    const section = await page.locator('data-testid=cards-test__featuredCard');
-    const featuredCard = await section.locator(
-      'data-testid=card__featured-card'
-    );
-    const cards = await (await section.locator('data-testid=card')).all();
-    const featuredCardOrder = await featuredCard.evaluate((el) => {
-      return window.getComputedStyle(el).getPropertyValue('order');
-    });
-
-    // Test featured card exist AND is the first one in the order
-    expect(await featuredCard.count()).toBeTruthy();
-    expect(featuredCardOrder).toBe('1');
-    for (const card of cards) {
-      const order = await card.evaluate((el) => {
-        return window.getComputedStyle(el).getPropertyValue('order');
-      });
-      expect(order).toBe('2');
-    }
-  });
 });

@@ -18,7 +18,7 @@ EXCLUDE="default.conf"
 Use a space or newline character to separate the items in each list:
 
 
-{{<bootstrap-table "table table-striped table-bordered">}}
+{{<table variant="narrow">}}
 
 | Parameter                | Description                                                                          |
 | ------------------------ | -------------------------------------------------------------------------------------|
@@ -26,11 +26,11 @@ Use a space or newline character to separate the items in each list:
 | `CONFPATHS`              | List of files and directories to distribute from the primary to the peers.           |
 | `EXCLUDE`                | (Optional) List of configuration files on the primary not to distribute to the peers.|
 
-{{</bootstrap-table>}}
+{{</table>}}
 
 ### Advanced Parameters
 
-{{<bootstrap-table "table table-striped table-bordered">}}
+{{<table variant="wide">}}
 
 | Parameter                | Description                                                                            | Default                 |
 | ------------------------ | ---------------------------------------------------------------------------------------|-------------------------|
@@ -42,4 +42,4 @@ Use a space or newline character to separate the items in each list:
 | `RSYNC`                  | Location of the `rsync` binary                                                         | **/usr/bin/rsync**      |
 | `SSH`                    | Location of the `ssh` binary                                                           | **/usr/bin/ssh**        |
 
-{{</bootstrap-table>}}
+{{</table>}}

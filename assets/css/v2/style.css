@@ -86,7 +86,7 @@ textarea:not([rows]) {
 
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
-  scroll-margin-block: 5ex;
+  scroll-margin-block: 5rem;
 }
 
 /* END RESET */
@@ -858,6 +858,7 @@ nav {
   justify-self: center;
   padding: 0 var(--space-l) 2rem var(--space-l);
   max-width: var(--content-max-width);
+  scroll-margin-top: calc(var(--header-height) + 1rem);
 
   & > *,
   & > ul,
@@ -1211,6 +1212,12 @@ nav.sidebar.sidebar__mobile-open {
     transform: rotate(90deg);
   }
 
+  .sidebar__plus_icon {
+    height: 0.875rem;
+    /* Hacking image aligning while the design is being worked out */
+    margin-bottom: -2px;
+  }
+
   .sidebar__toggle:not(:has(.sidebar__chevron)) {
     padding-inline-start: 2rem;
   }
@@ -1394,6 +1401,7 @@ h6:has(a) {
   margin-inline-start: -1rem;
   padding-inline-start: 1rem;
   position: relative;
+  scroll-margin-top: var(--header-height);
 }
 
 h2:has(a):hover {
@@ -1682,7 +1690,7 @@ blockquote.note:before {
 }
 
 blockquote p:first-child {
-  margin: 0 auto 1rem auto;
+  /* margin: 0 auto 1rem auto; */
 }
 
 blockquote p:last-child {
@@ -2018,7 +2026,7 @@ ul .code-block {
   }
 }
 
-/* MARK: Banner 
+/* MARK: Banner
 */
 
 .banner {

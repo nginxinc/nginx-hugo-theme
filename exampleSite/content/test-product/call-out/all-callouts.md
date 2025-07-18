@@ -13,6 +13,22 @@ These are the main callout types that may be used to bring attention to a sectio
 This is a plain callout with no title. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<call-out>`.
 {{</call-out>}}
 
+{{<call-out>}}
+This is a plain callout with no title.
+
+Checking line breaks are respected.
+
+Are they!?
+{{</call-out>}}
+
+This is a plain callout with no title.
+
+Checking line breaks are respected.
+
+Are they!?
+
+
+
 {{<call-out "" "Custom title">}}
 This is a plain callout with a title. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<call-out>` with a custom title parameter.
 {{</call-out>}}

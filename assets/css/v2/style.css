@@ -1780,7 +1780,7 @@ blockquote.caution {
     background-color: oklch(var(--color-callout-caution-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-caution));
   }
-  .call-out-type .feather {
+  .call-out-type .lucide {
     color: oklch(var(--color-callout-caution));
   }
 }
@@ -1793,7 +1793,7 @@ blockquote.warning {
     background-color: oklch(var(--color-callout-warning-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-warning));
   }
-  .call-out-type .feather {
+  .call-out-type .lucide {
     color: oklch(var(--color-callout-warning));
   }
 }
@@ -2104,21 +2104,9 @@ hr {
   border: 1px solid oklch(var(--color-divider));
 }
 
-.feather {
+.lucide {
   width: 1.8ch;
   height: 1.8ch;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: square;
-  stroke-linejoin: square;
-  vertical-align: sub;
-  margin: 0;
-}
-
-.lucide {
-  width: 1.5rem;
-  height: 1.5rem;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;

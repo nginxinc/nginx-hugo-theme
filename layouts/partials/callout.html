@@ -23,13 +23,12 @@
 {{ $type := (index (split $class " ") 0) | strings.FirstUpper }}
 {{ $specialTitles := slice "Caution" "Warning" "Deprecated" "Important" }}
 {{ $specialTitleIcons := dict
-  "Caution"    "alert-triangle"
-  "Warning"    "alert-octagon"
-  "Deprecated" "alert-octagon"
-  "Important"  "arrow-right-circle"
+  "Caution"    "triangle-alert"
+  "Warning"    "octagon-alert"
+  "Deprecated" "octagon-alert"
+  "Important"  "circle-arrow-right"
 }}
 {{ $icon := index $specialTitleIcons $type | default "" }}
-
 {{ $isSpecialTitle := in $specialTitles $type }}
 {{ if $isSpecialTitle }}
 {{/*  Loud callouts  */}}

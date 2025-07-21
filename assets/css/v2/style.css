@@ -211,6 +211,9 @@ textarea:not([rows]) {
   /* Details */
   --details-margin: 0.5rem 0rem;
 
+  /* Tab Group */
+  --magrin-tab-group: 1rem 0 0 0;
+
   --overflow-gutter-extension: 1rem;
 
   /* vars for the primary grid setup */
@@ -221,6 +224,7 @@ textarea:not([rows]) {
   --grid-side-callout: minmax(18rem, 26rem);
   --grid-column-gutter: 3.5rem;
 
+  /* Used for standard grid gap, and internal component flows */
   --flow-gap: 1rem;
 
   /* @link https://utopia.fyi/type/calculator?c=320,14,1.2,1240,16,1.25,5,3,&s=0.75,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
@@ -1722,8 +1726,8 @@ blockquote.note:before {
   z-index: 999;
 }
 
-blockquote p:first-child {
-  margin: 0 auto 1rem auto;
+blockquote p {
+  margin: 0 auto var(--flow-gap) auto;
 }
 
 blockquote p:last-child {
@@ -1819,6 +1823,7 @@ li:has(> div > blockquote) {
 .tabs-container {
   width: calc(100% + 2rem);
   margin-inline-start: -1rem;
+  margin: var(--margin-tab-group);
 
   input[type="radio"] {
     display: none;
@@ -1883,6 +1888,8 @@ li:has(> div > blockquote) {
       display: none;
       width: 100%;
       padding: 1rem;
+
+      --flow-gap: 2rem;
 
       & > * {
         margin: 0 0 var(--flow-gap) 0;

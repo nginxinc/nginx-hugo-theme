@@ -57,6 +57,13 @@ This callout especially should be used **VERY** judiciously.
 
 {{<warning>}}
 This is a Warning callout. There was previously a bug with **bold text** that we should be aware of and continue to check for. This callout was invoked with the `<warning>` shortcode. It has no custom title.
+
+This callout has another line.
+
+And another line.
+
+And a final line.
+
 {{</warning>}}
 
 

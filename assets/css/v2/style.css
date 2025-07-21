@@ -154,46 +154,31 @@ textarea:not([rows]) {
   --color-background: 1 0 0;
   --color-foreground: 0 0 0;
   --color-shadow: 0.86 0 0;
+
+  --color-footer-text: 0 0 0 / 65%;
+  --color-product-title: 0.64 0 0;
+  --color-tabs-inactive-border: 0 0 0 / 20%;
+
+  /* Typography */
+  --margin-content-h1: 2.5rem 0 0 0;
+  --margin-content-h2: 2.5rem 0 0 0;
+  --margin-content-h3: 1.5rem 0 0 0;
+  --margin-content-h4: 1rem 0 0 0;
+
+  /* Lists */
+  --margin-list: 0.5rem 0 0.5rem 1.15rem;
+  --margin-list-item: 0.5rem 0 0.5rem 0;
+  --color-list-bullet: var(--color-codeblock-border);
+  --color-list-char: var(--color-codeblock-border);
+
+  /* Codeblock */
+
+  --margin-codeblock: 1.5rem -1rem;
   --color-inline_codeblock-border: 0.85 0 0;
   --color-inline_codeblock-background: 0.98 0 0;
   --color-codeblock-border: 0.63 0 0;
   --color-codeblock-background: 1 0 0;
   --color-codeblock-highlight: 0.99 0.0479 105.97;
-  --color-footer-text: 0 0 0 / 65%;
-  --color-product-title: 0.64 0 0;
-  --color-tabs-inactive-border: 0 0 0 / 20%;
-  --color-callout-warning: 0.65 0.188 24;
-  --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
-  --color-callout-caution: 0.8 0.1613 71.21;
-  --color-callout-caution-shadow: 0.8 0.1613 71.21 / 20%;
-  --color-callout-important: 0.36 0 0;
-  --color-callout-important-shadow: 0.23 0 0 / 7.06%;
-  --color-divider: 0.85 0 0;
-
-  /* vars for the primary grid setup */
-  --grid-sidebar: 24rem;
-  --grid-sidebar-gutter: 3rem;
-  --grid-content: minmax(34rem, 50rem);
-  --grid-content-mobile: minmax(20rem, 50rem);
-  --grid-side-callout: minmax(18rem, 26rem);
-  --grid-column-gutter: 3.5rem;
-
-  --code-copy-icon-height: 1rem;
-  --code-copy-icon-width: 1rem;
-  --breadcrumb-max-height: 54px;
-  --sidebar-margin: 1.5rem;
-  --sidebar-line-box-side-length: 8px;
-  --sidebar-line-box-top: 6px;
-  --sidebar-line-box-left: 12px;
-  --sidebar-line-width: 11.5px;
-  --sidebar-mobile-top-displacement: 5rem;
-  --side-gutter-width: 20rem;
-  --table-top-bottom-spacing: 1rem;
-  --table-row-space-between: 1.5rem;
-  --table-min-column-spacing-narrow: 1.5rem;
-  --table-min-column-spacing-wide: 0.75rem;
-  --table-header-bottom-spacing: 1rem;
-  --table-line-height: 1px;
   --codeblock-comment-diff: 2rem;
   --codeblock-comment-space-between: 10px;
   --codeblock-horizontal-line-length: 2rem;
@@ -202,7 +187,39 @@ textarea:not([rows]) {
   --codeblock-border-thickness: 1px;
   --codeblock-code-section-padding-left: 1rem;
   --codeblock-line-box-side-length: 4px;
+
+  /* Callout */
+  --margin-callout: 1rem -1rem;
+  --color-callout-warning: 0.65 0.188 24;
+  --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
+  --color-callout-caution: 0.8 0.1613 71.21;
+  --color-callout-caution-shadow: 0.8 0.1613 71.21 / 20%;
+  --color-callout-important: 0.36 0 0;
+  --color-callout-important-shadow: 0.23 0 0 / 7.06%;
+
+  --color-divider: 0.85 0 0;
+
+  /* Table */
+  --margin-table: 2rem 0;
+  --table-top-bottom-spacing: 2rem;
+  --table-row-space-between: 1.5rem;
+  --table-min-column-spacing-narrow: 1.5rem;
+  --table-min-column-spacing-wide: 0.75rem;
+  --table-header-bottom-spacing: 1rem;
+  --table-line-height: 1px;
+
+  /* Details */
+  --details-margin: 0.5rem 0rem;
+
   --overflow-gutter-extension: 1rem;
+
+  /* vars for the primary grid setup */
+  --grid-sidebar: 24rem;
+  --grid-sidebar-gutter: 3rem;
+  --grid-content: minmax(34rem, 50rem);
+  --grid-content-mobile: minmax(20rem, 50rem);
+  --grid-side-callout: minmax(18rem, 26rem);
+  --grid-column-gutter: 3.5rem;
 
   --flow-gap: 1rem;
 
@@ -323,12 +340,20 @@ p {
 ul,
 ol {
   padding: 0;
-  margin: 0.5rem 0 0.5rem 1rem;
+  margin: var(--margin-list);
 }
 
 ul li,
 ol li {
-  margin: 0.5rem 0 0.5rem 0;
+  margin: var(--margin-list-item);
+}
+
+ul li::marker {
+  color: oklch(var(--color-list-bullet));
+}
+
+ol li::marker {
+  color: oklch(var(--color-list-char));
 }
 
 ul ul,
@@ -865,7 +890,7 @@ nav {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     /* These gaps determine the spacing between all content. Be careful!! */
-    gap: var(--space-m) var(--space-m);
+    gap: var(--flow-gap) var(--space-m);
 
     /* Handles some strangeness where single-line codeblocks caused
    horizon */
@@ -1289,6 +1314,7 @@ nav.sidebar.sidebar__mobile-open {
 
 /* Details/Summary */
 details summary {
+  margin: var(--details-margin);
   color: oklch(var(--color-brand));
   transition: text-decoration-color 0.15s ease-in-out;
   text-decoration: underline;
@@ -1362,11 +1388,22 @@ a:hover {
 */
 
 h1 {
+  margin: var(--margin-content-h1);
   font-size: var(--font-step-3);
 }
 
 h2 {
+  margin: var(--margin-content-h2);
   font-size: var(--font-step-2);
+}
+
+h3 {
+  margin: var(--margin-content-h3);
+  font-size: var(--font-step-1);
+}
+
+h4 {
+  margin: var(--margin-content-h4);
 }
 
 p {
@@ -1605,6 +1642,10 @@ table {
   }
 }
 
+.table {
+  margin: var(--margin-table);
+}
+
 .md-table-scroll-x {
   overflow-x: auto;
   width: 100%;
@@ -1647,7 +1688,7 @@ table hr {
 blockquote {
   border: 1px solid oklch(var(--color-foreground));
   padding: 1rem;
-  margin: 0 -1rem;
+  margin: var(--margin-callout);
 
   /* solid 3px drop shadow */
   box-shadow: 3px 3px 0px oklch(var(--color-shadow));
@@ -1924,6 +1965,7 @@ a:has(code:not(pre code)) {
 
 .code-block {
   position: relative;
+  margin: var(--margin-codeblock);
 
   tr::after {
     display: none;
@@ -2018,7 +2060,7 @@ ul .code-block {
   }
 }
 
-/* MARK: Banner 
+/* MARK: Banner
 */
 
 .banner {

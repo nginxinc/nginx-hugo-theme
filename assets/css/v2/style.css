@@ -462,7 +462,7 @@ ol li:last-child {
       background: rgba(0, 0, 0, 0);
       color: oklch(var(--color-foreground));
       text-decoration-color: oklch(var(--color-brand) / 0.3);
-      & :hover {
+      & button:hover * {
         color: oklch(var(--color-brand));
       }
 
@@ -477,10 +477,6 @@ ol li:last-child {
         color: oklch(var(--color-foreground));
         text-decoration-color: oklch(var(--color-brand) / 0.3);
         transition: color 0.15s ease-in-out;
-
-        & :hover {
-          color: oklch(var(--color-brand));
-        }
       }
     }
 

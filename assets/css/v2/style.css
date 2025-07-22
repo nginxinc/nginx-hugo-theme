@@ -1692,6 +1692,7 @@ table hr {
 blockquote {
   border: 1px solid oklch(var(--color-foreground));
   padding: 1rem;
+  height: fit-content;
   margin: var(--margin-callout);
 
   /* solid 3px drop shadow */
@@ -1704,6 +1705,16 @@ blockquote {
 
   .callout-content {
     margin: 0;
+  }
+}
+
+blockquote[data-grid="last-third"] {
+  margin-top: 0;
+}
+
+@media (max-width: 55rem) {
+  blockquote[data-grid="last-third"] {
+    margin: var(--margin-callout);
   }
 }
 

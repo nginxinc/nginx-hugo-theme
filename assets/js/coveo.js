@@ -23,9 +23,8 @@ async function getsearchObj() {
 async function atomicCoveo() {
   /* Fetch the credentials */
   await customElements.whenDefined('atomic-search-interface');
-  const token =
-    'eyJhbGciOiJIUzI1NiJ9.eyJzZWFyY2hIdWIiOiJIVUJfRVNfTmdpbnhfRG9jc19BbmRfT3JnIiwidjgiOnRydWUsInRva2VuSWQiOiJ1Ym1mejJpMzRvbmZ3c2FsaHBseHFvMmpjdSIsIm9yZ2FuaXphdGlvbiI6ImY1bmV0d29ya3Nwcm9kdWN0aW9uNXZraG4wMGgiLCJ1c2VySWRzIjpbeyJ0eXBlIjoiVXNlciIsIm5hbWUiOiJhbm9ueW1vdXMiLCJwcm92aWRlciI6IkVtYWlsIFNlY3VyaXR5IFByb3ZpZGVyIn1dLCJyb2xlcyI6WyJxdWVyeUV4ZWN1dG9yIl0sImlzcyI6IlNlYXJjaEFwaSIsImV4cCI6MTc1MzIyOTM0MCwiaWF0IjoxNzUzMTQyOTQwfQ.lsKbajGJBke_M3CzzFO8Vk6m61LpYE2gaBaFq1noqyI';
-  const org_id = 'f5networksproduction5vkhn00h';
+  const token = localStorage.getItem('coveo_jwt_v1');
+  const org_id = localStorage.getItem('coveo_org_id_v1');
   let searchObj = { token, org_id };
 
   if (token === null || org_id === null || isJwtExpired(token)) {

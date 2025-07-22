@@ -975,8 +975,15 @@ atomic-search-interface#search-v2 {
     grid-template-columns: minmax(50%, 100%) !important;
 
     @media (min-width: 1024px) {
+      &:has(atomic-search-box) {
+        grid-template-areas:
+          "atomic-section-search atomic-section-status"
+          "atomic-section-facets atomic-section-main  "
+          "atomic-section-facets .                    " !important;
+      }
+
       grid-template-areas:
-        "atomic-section-search atomic-section-status"
+        "atomic-section-facets atomic-section-status"
         "atomic-section-facets atomic-section-main  "
         "atomic-section-facets .                    " !important;
 
@@ -1024,6 +1031,10 @@ atomic-search-interface#search-v2 {
       width: 100% !important;
       max-width: 100% !important;
     }
+
+    atomic-layout-section[section="facets"] {
+      margin: var(--atomic-layout-spacing-y) 0;
+    }
   }
 }
 
@@ -1048,10 +1059,6 @@ atomic-search-interface#search-standalone-header {
       --atomic-primary: var(--atomic-neutral-dark);
     }
   }
-}
-
-#atomic-search-box-xqtsq-popup {
-  z-index: 9999;
 }
 
 body:not(:has(.main-layout)) header atomic-search-interface {

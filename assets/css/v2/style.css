@@ -452,9 +452,6 @@ ol li:last-child {
     .header__search {
       display: block;
       width: 14rem;
-      /* This is a horrible hack to stop coveo overflowing 3500px for no reason. :sad */
-      transform: translateY(0);
-      overflow: hidden;
     }
 
     .header__product-selector {

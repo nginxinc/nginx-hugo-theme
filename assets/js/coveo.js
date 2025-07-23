@@ -1,3 +1,30 @@
+const hideShadowElement = (shadowRoot, selector, timeout = 5000) => {
+  if (!shadowRoot) return;
+
+  const hideElement = () => {
+    const el = shadowRoot.querySelector(selector);
+    if (el) {
+      el.style.display = 'none';
+      return true;
+    }
+    return false;
+  };
+
+  if (hideElement()) {
+    return;
+  }
+
+  const observer = new MutationObserver((_mutations, obs) => {
+    if (hideElement()) {
+      obs.disconnect();
+    }
+  });
+
+  observer.observe(shadowRoot, { childList: true, subtree: true });
+
+  setTimeout(() => observer.disconnect(), timeout);
+};
+
 function isJwtExpired(token) {
   const parts = token.split('.');
   if (parts.length !== 3) {
@@ -90,14 +117,8 @@ async function atomicCoveo() {
     await searchBarSidebar.executeFirstSearch();
   }
 
-  /* Hide atomic-relevance-inspector */
-  const shadowElements = searchBarHeader.shadowRoot.childNodes;
-  for (let i = 0; i < shadowElements.length; i++) {
-    const val = shadowElements[i];
-    if (val.localName === 'atomic-relevance-inspector') {
-      val.style.display = 'none';
-      break;
-    }
+  if (searchBarHeader?.shadowRoot) {
+    hideShadowElement(searchBarHeader.shadowRoot, 'atomic-relevance-inspector');
   }
 }
 

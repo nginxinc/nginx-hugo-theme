@@ -1582,7 +1582,6 @@ a:hover {
         padding: 1rem 2rem 2rem 2rem;
 
         .card-container {
-          height: 7rem;
           justify-content: space-around;
 
           .card-header {

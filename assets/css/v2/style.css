@@ -404,7 +404,7 @@ ol li:last-child {
     }
   }
   .content {
-    padding: 0 var(--space-s) 2rem;
+    padding: 0 var(--space-l) 2rem;
   }
 
   .header__logo {

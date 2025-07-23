@@ -962,6 +962,7 @@ main {
 
 .list-page {
   --flow-gap: 0.5rem;
+  --margin-content-h1: 0;
 
   h2 {
     font-size: 1.5rem;
@@ -1390,80 +1391,81 @@ a:hover {
 
 /* MARK: Typography
 */
-
-h1 {
-  margin: var(--margin-content-h1);
-  font-size: var(--font-step-3);
-}
-
-h2 {
-  margin: var(--margin-content-h2);
-  font-size: var(--font-step-2);
-}
-
-h3 {
-  margin: var(--margin-content-h3);
-  font-size: var(--font-step-1);
-}
-
-h4 {
-  margin: var(--margin-content-h4);
-}
-
-p {
-  font-size: var(--font-step-0);
-}
-
-h2:target,
-h3:target,
-h4:target,
-h5:target,
-h6:target {
-  color: oklch(var(--color-brand));
-
-  .headerlink::before {
-    display: block !important;
+.content {
+  h1 {
+    margin: var(--margin-content-h1);
+    font-size: var(--font-step-3);
   }
-}
 
-h2:has(a),
-h3:has(a),
-h4:has(a),
-h5:has(a),
-h6:has(a) {
-  width: calc(100% + 1rem);
-  margin-inline-start: -1rem;
-  padding-inline-start: 1rem;
-  position: relative;
-}
-
-h2:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h2 {
+    margin: var(--margin-content-h2);
+    font-size: var(--font-step-2);
   }
-}
 
-h3:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h3 {
+    margin: var(--margin-content-h3);
+    font-size: var(--font-step-1);
   }
-}
 
-h4:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h4 {
+    margin: var(--margin-content-h4);
   }
-}
 
-h5:has(a):hover {
-  .headerlink::before {
-    display: block;
+  p {
+    font-size: var(--font-step-0);
   }
-}
 
-h6:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h2:target,
+  h3:target,
+  h4:target,
+  h5:target,
+  h6:target {
+    color: oklch(var(--color-brand));
+
+    .headerlink::before {
+      display: block !important;
+    }
+  }
+
+  h2:has(a),
+  h3:has(a),
+  h4:has(a),
+  h5:has(a),
+  h6:has(a) {
+    width: calc(100% + 1rem);
+    margin-inline-start: -1rem;
+    padding-inline-start: 1rem;
+    position: relative;
+  }
+
+  h2:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h3:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h4:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h5:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h6:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
   }
 }
 

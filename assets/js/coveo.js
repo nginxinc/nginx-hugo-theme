@@ -89,6 +89,16 @@ async function atomicCoveo() {
 
     await searchBarSidebar.executeFirstSearch();
   }
+
+  /* Hide atomic-relevance-inspector */
+  const shadowElements = searchBarHeader.shadowRoot.childNodes;
+  for (let i = 0; i < shadowElements.length; i++) {
+    const val = shadowElements[i];
+    if (val.localName === 'atomic-relevance-inspector') {
+      val.style.display = 'none';
+      break;
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

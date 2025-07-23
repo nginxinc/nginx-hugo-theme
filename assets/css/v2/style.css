@@ -154,21 +154,67 @@ textarea:not([rows]) {
   --color-background: 1 0 0;
   --color-foreground: 0 0 0;
   --color-shadow: 0.86 0 0;
+
+  --color-footer-text: 0 0 0 / 65%;
+  --color-product-title: 0.64 0 0;
+  --color-tabs-inactive-border: 0 0 0 / 20%;
+
+  /* Typography */
+  --margin-content-h1: 2.5rem 0 0 0;
+  --margin-content-h2: 2.5rem 0 0 0;
+  --margin-content-h3: 1.5rem 0 0 0;
+  --margin-content-h4: 1rem 0 0 0;
+
+  /* Lists */
+  --margin-list: 0.5rem 0 0.5rem 1.15rem;
+  --margin-list-item: 0.5rem 0 0.5rem 0;
+  --color-list-bullet: var(--color-codeblock-border);
+  --color-list-char: var(--color-codeblock-border);
+
+  /* Codeblock */
+
+  --margin-codeblock: 1.5rem -1rem;
   --color-inline_codeblock-border: 0.85 0 0;
   --color-inline_codeblock-background: 0.98 0 0;
   --color-codeblock-border: 0.63 0 0;
   --color-codeblock-background: 1 0 0;
   --color-codeblock-highlight: 0.99 0.0479 105.97;
-  --color-footer-text: 0 0 0 / 65%;
-  --color-product-title: 0.64 0 0;
-  --color-tabs-inactive-border: 0 0 0 / 20%;
+  --codeblock-comment-diff: 2rem;
+  --codeblock-comment-space-between: 10px;
+  --codeblock-horizontal-line-length: 2rem;
+  --codeblock-horizontal-line-overflow: 0.25rem;
+  --codeblock-horizontal-padding: 1rem;
+  --codeblock-border-thickness: 1px;
+  --codeblock-code-section-padding-left: 1rem;
+  --codeblock-line-box-side-length: 4px;
+
+  /* Callout */
+  --margin-callout: 1rem -1rem;
   --color-callout-warning: 0.65 0.188 24;
   --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
   --color-callout-caution: 0.8 0.1613 71.21;
   --color-callout-caution-shadow: 0.8 0.1613 71.21 / 20%;
   --color-callout-important: 0.36 0 0;
   --color-callout-important-shadow: 0.23 0 0 / 7.06%;
+
   --color-divider: 0.85 0 0;
+
+  /* Table */
+  --margin-table: 2rem 0;
+  --table-top-bottom-spacing: 2rem;
+  --table-row-space-between: 1.5rem;
+  --table-min-column-spacing-narrow: 1.5rem;
+  --table-min-column-spacing-wide: 0.75rem;
+  --table-header-bottom-spacing: 1rem;
+  --table-line-height: 1px;
+
+  /* Details */
+  --details-margin: 0.5rem 0rem;
+
+  /* Tab Group */
+  --magrin-tab-group: 1rem 0 0 0;
+
+  --overflow-gutter-extension: 1rem;
 
   /* vars for the primary grid setup */
   --grid-sidebar: 24rem;
@@ -178,32 +224,7 @@ textarea:not([rows]) {
   --grid-side-callout: minmax(18rem, 26rem);
   --grid-column-gutter: 3.5rem;
 
-  --code-copy-icon-height: 1rem;
-  --code-copy-icon-width: 1rem;
-  --breadcrumb-max-height: 54px;
-  --sidebar-margin: 1.5rem;
-  --sidebar-line-box-side-length: 8px;
-  --sidebar-line-box-top: 6px;
-  --sidebar-line-box-left: 12px;
-  --sidebar-line-width: 11.5px;
-  --sidebar-mobile-top-displacement: 5rem;
-  --side-gutter-width: 20rem;
-  --table-top-bottom-spacing: 1rem;
-  --table-row-space-between: 1.5rem;
-  --table-min-column-spacing-narrow: 1.5rem;
-  --table-min-column-spacing-wide: 0.75rem;
-  --table-header-bottom-spacing: 1rem;
-  --table-line-height: 1px;
-  --codeblock-comment-diff: 2rem;
-  --codeblock-comment-space-between: 10px;
-  --codeblock-horizontal-line-length: 2rem;
-  --codeblock-horizontal-line-overflow: 0.25rem;
-  --codeblock-horizontal-padding: 1rem;
-  --codeblock-border-thickness: 1px;
-  --codeblock-code-section-padding-left: 1rem;
-  --codeblock-line-box-side-length: 4px;
-  --overflow-gutter-extension: 1rem;
-
+  /* Used for standard grid gap, and internal component flows */
   --flow-gap: 1rem;
 
   /* @link https://utopia.fyi/type/calculator?c=320,14,1.2,1240,16,1.25,5,3,&s=0.75,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
@@ -323,12 +344,20 @@ p {
 ul,
 ol {
   padding: 0;
-  margin: 0.5rem 0 0.5rem 1rem;
+  margin: var(--margin-list);
 }
 
 ul li,
 ol li {
-  margin: 0.5rem 0 0.5rem 0;
+  margin: var(--margin-list-item);
+}
+
+ul li::marker {
+  color: oklch(var(--color-list-bullet));
+}
+
+ol li::marker {
+  color: oklch(var(--color-list-char));
 }
 
 ul ul,
@@ -375,7 +404,7 @@ ol li:last-child {
     }
   }
   .content {
-    padding: 0 var(--space-s) 2rem;
+    padding: 0 var(--space-l) 2rem;
   }
 
   .header__logo {
@@ -851,6 +880,7 @@ nav {
   justify-self: center;
   padding: 0 var(--space-l) 2rem var(--space-l);
   max-width: var(--content-max-width);
+  width: 100%;
 
   & > *,
   & > ul,
@@ -858,7 +888,7 @@ nav {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     /* These gaps determine the spacing between all content. Be careful!! */
-    gap: var(--space-m) var(--space-m);
+    gap: var(--flow-gap) var(--space-m);
 
     /* Handles some strangeness where single-line codeblocks caused
    horizon */
@@ -926,6 +956,7 @@ main {
 
 .list-page {
   --flow-gap: 0.5rem;
+  --margin-content-h1: 0;
 
   h2 {
     font-size: 1.5rem;
@@ -1288,6 +1319,7 @@ nav.sidebar.sidebar__mobile-open {
 
 /* Details/Summary */
 details summary {
+  margin: var(--details-margin);
   color: oklch(var(--color-brand));
   transition: text-decoration-color 0.15s ease-in-out;
   text-decoration: underline;
@@ -1359,69 +1391,81 @@ a:hover {
 
 /* MARK: Typography
 */
-
-h1 {
-  font-size: var(--font-step-3);
-}
-
-h2 {
-  font-size: var(--font-step-2);
-}
-
-p {
-  font-size: var(--font-step-0);
-}
-
-h2:target,
-h3:target,
-h4:target,
-h5:target,
-h6:target {
-  color: oklch(var(--color-brand));
-
-  .headerlink::before {
-    display: block !important;
+.content {
+  h1 {
+    margin: var(--margin-content-h1);
+    font-size: var(--font-step-3);
   }
-}
 
-h2:has(a),
-h3:has(a),
-h4:has(a),
-h5:has(a),
-h6:has(a) {
-  width: calc(100% + 1rem);
-  margin-inline-start: -1rem;
-  padding-inline-start: 1rem;
-  position: relative;
-}
-
-h2:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h2 {
+    margin: var(--margin-content-h2);
+    font-size: var(--font-step-2);
   }
-}
 
-h3:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h3 {
+    margin: var(--margin-content-h3);
+    font-size: var(--font-step-1);
   }
-}
 
-h4:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h4 {
+    margin: var(--margin-content-h4);
   }
-}
 
-h5:has(a):hover {
-  .headerlink::before {
-    display: block;
+  p {
+    font-size: var(--font-step-0);
   }
-}
 
-h6:has(a):hover {
-  .headerlink::before {
-    display: block;
+  h2:target,
+  h3:target,
+  h4:target,
+  h5:target,
+  h6:target {
+    color: oklch(var(--color-brand));
+
+    .headerlink::before {
+      display: block !important;
+    }
+  }
+
+  h2:has(a),
+  h3:has(a),
+  h4:has(a),
+  h5:has(a),
+  h6:has(a) {
+    width: calc(100% + 1rem);
+    margin-inline-start: -1rem;
+    padding-inline-start: 1rem;
+    position: relative;
+  }
+
+  h2:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h3:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h4:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h5:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
+  }
+
+  h6:has(a):hover {
+    .headerlink::before {
+      display: block;
+    }
   }
 }
 
@@ -1538,7 +1582,6 @@ h6:has(a):hover {
         padding: 1rem 2rem 2rem 2rem;
 
         .card-container {
-          height: 7rem;
           justify-content: space-around;
 
           .card-header {
@@ -1604,6 +1647,10 @@ table {
   }
 }
 
+.table {
+  margin: var(--margin-table);
+}
+
 .md-table-scroll-x {
   overflow-x: auto;
   width: 100%;
@@ -1646,7 +1693,8 @@ table hr {
 blockquote {
   border: 1px solid oklch(var(--color-foreground));
   padding: 1rem;
-  margin: 0 -1rem;
+  height: fit-content;
+  margin: var(--margin-callout);
 
   /* solid 3px drop shadow */
   box-shadow: 3px 3px 0px oklch(var(--color-shadow));
@@ -1658,6 +1706,16 @@ blockquote {
 
   .callout-content {
     margin: 0;
+  }
+}
+
+blockquote[data-grid="last-third"] {
+  margin-top: 0;
+}
+
+@media (max-width: 55rem) {
+  blockquote[data-grid="last-third"] {
+    margin: var(--margin-callout);
   }
 }
 
@@ -1680,8 +1738,8 @@ blockquote.note:before {
   z-index: 999;
 }
 
-blockquote p:first-child {
-  margin: 0 auto 1rem auto;
+blockquote p {
+  margin: 0 auto var(--flow-gap) auto;
 }
 
 blockquote p:last-child {
@@ -1734,7 +1792,7 @@ blockquote.caution {
     background-color: oklch(var(--color-callout-caution-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-caution));
   }
-  .call-out-type .feather {
+  .call-out-type .lucide {
     color: oklch(var(--color-callout-caution));
   }
 }
@@ -1747,7 +1805,7 @@ blockquote.warning {
     background-color: oklch(var(--color-callout-warning-shadow));
     border-bottom: 1px solid oklch(var(--color-callout-warning));
   }
-  .call-out-type .feather {
+  .call-out-type .lucide {
     color: oklch(var(--color-callout-warning));
   }
 }
@@ -1777,6 +1835,7 @@ li:has(> div > blockquote) {
 .tabs-container {
   width: calc(100% + 2rem);
   margin-inline-start: -1rem;
+  margin: var(--margin-tab-group);
 
   input[type="radio"] {
     display: none;
@@ -1841,6 +1900,8 @@ li:has(> div > blockquote) {
       display: none;
       width: 100%;
       padding: 1rem;
+
+      --flow-gap: 2rem;
 
       & > * {
         margin: 0 0 var(--flow-gap) 0;
@@ -1923,6 +1984,7 @@ a:has(code:not(pre code)) {
 
 .code-block {
   position: relative;
+  margin: var(--margin-codeblock);
 
   tr::after {
     display: none;
@@ -2017,7 +2079,7 @@ ul .code-block {
   }
 }
 
-/* MARK: Banner 
+/* MARK: Banner
 */
 
 .banner {
@@ -2054,21 +2116,9 @@ hr {
   border: 1px solid oklch(var(--color-divider));
 }
 
-.feather {
+.lucide {
   width: 1.8ch;
   height: 1.8ch;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: square;
-  stroke-linejoin: square;
-  vertical-align: sub;
-  margin: 0;
-}
-
-.lucide {
-  width: 1.5rem;
-  height: 1.5rem;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;

@@ -887,6 +887,7 @@ nav {
   justify-self: center;
   padding: 0 var(--space-l) 2rem var(--space-l);
   max-width: var(--content-max-width);
+  width: 100%;
 
   & > *,
   & > ul,

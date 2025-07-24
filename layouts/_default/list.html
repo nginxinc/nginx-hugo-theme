@@ -27,6 +27,9 @@
         {{ else }}
         {{ range .Pages.ByWeight }}
         <h2>
+           
+           {{ $rel := strings.TrimPrefix "/" .Params.url }}
+           {{ .Site.BaseURL }}
             <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
         </h2>
         {{ end }}

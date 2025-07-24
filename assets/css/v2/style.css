@@ -647,11 +647,14 @@ ol li:last-child {
     }
 
     .sidebar__content__wrapper {
+      flex-grow: 1;
       overflow-y: auto;
       min-height: 0;
       /* allows space for scrollbar */
       width: calc(var(--sidebar-width) - 1rem);
       scrollbar-gutter: stable;
+      display: flex;
+      flex-direction: column;
     }
   }
 
@@ -1169,6 +1172,10 @@ nav.sidebar.sidebar__mobile-open {
 .sidebar {
   grid-area: sidebar;
   --color-foreground: oklch(0 0 0 / 0.75);
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   .sidebar__container,
   .sidebar__container button,

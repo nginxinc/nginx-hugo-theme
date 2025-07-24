@@ -86,7 +86,7 @@ textarea:not([rows]) {
 
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
-  scroll-margin-block: 5ex;
+  scroll-margin-block: 5rem;
 }
 
 /* END RESET */
@@ -1239,6 +1239,12 @@ nav.sidebar.sidebar__mobile-open {
 
   .sidebar__chevron--open {
     transform: rotate(90deg);
+  }
+
+  .sidebar__plus_icon {
+    height: 0.875rem;
+    /* Hacking image aligning while the design is being worked out */
+    margin-bottom: -2px;
   }
 
   .sidebar__toggle:not(:has(.sidebar__chevron)) {

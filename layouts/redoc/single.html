@@ -1,15 +1,11 @@
 {{ define "main" }}
-
-<main class="content content__redocly">
+  <main class="content content__redocly">
     <div class="breadcrumb-layout">{{ partial "breadcrumb" . }}</div>
     <div id="api-component">{{ .Content}}</div>
-</main>
-
-<!-- If there is a script defined in the page metadata, load it  -->
-{{if .Params.script}}
-    {{ $script := (delimit (slice "scripts" .Params.script) "/")}}
-    {{ partial (string $script) .}}
-{{end }}
-
-</div>
+  </main>
+  <!-- If there is a script defined in the page metadata, load it  -->
+  {{ if .Params.script }}
+      {{ $script := (delimit (slice "scripts" .Params.script) "/")}}
+      {{ partial (string $script) .}}
+  {{ end }}
 {{ end }}

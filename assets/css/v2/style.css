@@ -320,10 +320,15 @@ h6,
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Breaks for redocly */
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
+}
+
+html:has(api-container) {
+  /* Fixes scroll for redocly but loses smooth scroll */
+  scroll-behavior: auto;
 }
 
 h1,
@@ -919,8 +924,8 @@ nav {
 
   /* Allow redocly to fill the entire container */
   &.content__redocly {
-    justify-self: unset;
-    max-width: 100%;
+    min-width: 100%;
+    margin: 0;
 
     #api-component {
       z-index: 0;

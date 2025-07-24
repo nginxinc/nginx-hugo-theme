@@ -916,8 +916,8 @@ nav {
 
   /* Allow redocly to fill the entire container */
   &.content__redocly {
-    justify-self: unset;
-    max-width: 100%;
+    min-width: 100%;
+    margin: 0;
 
     #api-component {
       z-index: 0;

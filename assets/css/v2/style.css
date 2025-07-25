@@ -1594,11 +1594,10 @@ a:hover {
         padding: 1rem 2rem 2rem 2rem;
 
         .card-container {
-          justify-content: space-around;
-
           .card-header {
             justify-content: flex-start;
 
+            .lucide,
             .card-brand-icon {
               height: 40px;
               width: auto;

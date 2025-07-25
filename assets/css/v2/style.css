@@ -985,6 +985,11 @@ main {
 
 .QSIUserDefinedHTML {
   z-index: 1;
+  width: 100% !important;
+
+  * {
+    width: 100% !important; /* Override Qualtrics hard-coded width */
+  }
 }
 
 /* MARK: Coveo

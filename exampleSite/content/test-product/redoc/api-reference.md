@@ -7,5 +7,11 @@ tags:
   - api
 doctypes:
   - reference
+nd-api-reference: "./api/example.json"
 ---
-{{< openapi spec="./api/example.json" >}}
+
+## Introduction
+
+Welcome to the API Reference documentation for the example book API. This documentation provides detailed information about the API endpoints, request/response formats, and other relevant details.
+
+## API Specification

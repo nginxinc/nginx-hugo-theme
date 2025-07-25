@@ -980,6 +980,18 @@ main {
   grid-template-rows: calc(70px + var(--flow-gap)) max-content;
 }
 
+/* MARK: Qualtrics
+*/
+
+.QSIUserDefinedHTML {
+  z-index: 1;
+  width: 100% !important;
+
+  * {
+    width: 100% !important; /* Override Qualtrics hard-coded width */
+  }
+}
+
 /* MARK: Coveo
 */
 

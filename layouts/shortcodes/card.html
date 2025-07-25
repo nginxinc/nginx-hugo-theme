@@ -1,5 +1,5 @@
 {{- $title := .Get "title" -}}
-{{- $titleUrl := .Get "titleUrl" | default "/" -}} 
+{{- $titleUrl := .Get "titleUrl" | default "." -}} 
 {{- $icon := .Get "icon" | default "book-open" -}}
 {{- $brandIcon := .Get "brandIcon" -}}
 {{- $isFullSizeParam := .Get "isFullSize" | default "false" -}}
@@ -36,7 +36,7 @@
 
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
-<a href="{{- $url -}}" alt="{{- $title -}}" class="card" data-grid="{{ $dataGrid }}" data-testid="card"  data-mf="true" style="display: none;">
+<a href="{{- $url -}}" alt="{{- $title -}}" class="card" data-grid="{{ $dataGrid }}" data-testid="card">
   <div class="card-container">
     {{- if $title -}}
       <div class="card-header">
@@ -53,23 +53,6 @@
     <div class="card-content">{{ .Inner }}</div>
   </div>
 </a>
-<div class="col-md-5 card" data-mf="false">
-  <div class="card-body">
-    <h3 class="card-title" style="display: flex; align-items: center; gap: 5px;">
-      {{- if $brandIcon -}}
-        <img class="card-img-top" src="{{ .Site.BaseURL }}/images/icons/{{ $brandIcon }}"/>
-      {{- else -}}
-        <i class="fas fa-file-alt fa-lg card-img-top"></i>
-      {{- end -}}
-      {{- if ($title) -}}
-        <a href="{{- $titleUrl -}}">{{- $title -}}</a>
-      {{- else -}}
-        {{ errorf "Old theme: Missing param 'title'" }}
-      {{- end -}}
-    </h3>
-    <p>{{- .Inner -}}</p>
-  </div>
-</div>
 {{- else -}}
   {{ errorf "The '<card>' must be nested directly inside the shortcode '<card-section>'. Please see the exampleSite for an example of usage." }}
 {{- end -}}

@@ -8,4 +8,11 @@ tags:
 doctypes:
   - reference
 ---
+
+## Introduction
+
+Welcome to the API Reference documentation for the example book API. This documentation provides detailed information about the API endpoints, request/response formats, and other relevant details.
+
+## API Specification
+
 {{< openapi spec="./api/example.json" >}}

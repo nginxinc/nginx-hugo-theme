@@ -1,4 +1,9 @@
-<api-container>
-  <redoc spec-url="{{ .Get "spec" | relURL }}" menu-toggle path-in-middle-panel required-props-first
-  hide-hostname="true" show-extensions="x-f5-experimental" nativeScrollbars ></redoc>
-</api-container>
+<div class="content__redocly" data-grid="wide">
+    <div id="api-component">
+        <api-container>
+            <redoc spec-url="{{ .Get "spec" | relURL }}" menu-toggle path-in-middle-panel required-props-first
+            hide-hostname="true" show-extensions="x-f5-experimental" nativeScrollbars >
+            </redoc>
+        </api-container>
+    </div>
+</div>

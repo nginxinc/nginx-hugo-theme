@@ -1512,7 +1512,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-top: 0.5rem;
+  margin-block-start: 0.5rem;
 
   .card-section {
     display: flex;
@@ -1732,7 +1732,7 @@ blockquote {
 }
 
 blockquote[data-grid="last-third"] {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 @media (max-width: 55rem) {

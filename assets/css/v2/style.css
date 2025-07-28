@@ -1292,8 +1292,6 @@ nav.sidebar.sidebar__mobile-open {
     background-color: oklch(var(--color-brand) / 0.1);
     font-weight: 600;
     display: flex;
-    justify-self: stretch;
-    width: auto;
     box-sizing: border-box;
   }
 

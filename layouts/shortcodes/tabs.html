@@ -9,7 +9,7 @@
         <input type="radio" name="{{$tab_set_id}}" id="{{$id}}" aria-hidden="true" checked="checked">
       {{- else -}}
         <input type="radio" name="{{$tab_set_id}}" id="{{$id}}" aria-hidden="true">
-      {{- end -}}  
+      {{- end -}}
 	{{- end -}}
 	<ul class="tab-labels" role="tablist" id="{{ $tab_set_id }}" data-testid="labels-{{ $tab_set_id }}">
 	  {{- range $i, $e := $tabs -}}
@@ -42,19 +42,8 @@
 <style>
   {{- range $i, $e := $tabs -}}
   	.tabs-container input[type="radio"]:checked:nth-of-type({{ add $i 1 }}) ~ .tab-labels li:nth-of-type({{ add $i 1 }}) {
-	  border: none;
-      border-top: 1px solid oklch(var(--color-foreground));
-      border-left: 1px solid oklch(var(--color-foreground));
-      border-bottom: none;
-      color: oklch(var(--color-foreground));
-
-	  + li {
-		border-left: 1px solid oklch(var(--color-foreground));
-	  }
-
-	  &:last-of-type {
-      	border-right: 1px solid oklch(var(--color-foreground));
-      }
+      border-bottom: 2px solid oklch(var(--color-brand));
+      color: oklch(var(--color-brand));
 	}
 
 	.tabs-container input[type="radio"]:checked:nth-of-type({{ add $i 1 }}) ~ .tab-contents div:nth-of-type({{ add $i 1 }}) {

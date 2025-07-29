@@ -212,7 +212,7 @@ textarea:not([rows]) {
   --details-margin: 0.5rem 0rem;
 
   /* Tab Group */
-  --magrin-tab-group: 1rem 0 0 0;
+  --margin-tab-group: 1rem -1rem 0 -1rem;
 
   --overflow-gutter-extension: 1rem;
 
@@ -1854,9 +1854,10 @@ li:has(> div > blockquote) {
 
 /* MARK: Tabs
 */
+
+/* NOTE: :checked selectors defined in layouts/shortcodes/tabs.html */
 .tabs-container {
   width: calc(100% + 2rem);
-  margin-inline-start: -1rem;
   margin: var(--margin-tab-group);
 
   input[type="radio"] {
@@ -1871,18 +1872,12 @@ li:has(> div > blockquote) {
     scrollbar-width: none;
     white-space: nowrap;
     margin: 0;
-    padding-inline-start: 2rem;
-
-    > :not(:last-child) {
-      border-right: none;
-    }
+    padding-inline-start: 1rem;
 
     li {
       list-style: none;
-      border: 1px solid oklch(var(--color-tabs-inactive-border));
-      border-bottom: 1px solid oklch(var(--color-foreground));
-      color: oklch(var(--color-brand));
-      padding: 10px;
+      border-bottom: 1px solid oklch(var(--color-tabs-inactive-border));
+      padding: 0.25rem 0.75rem;
       margin: 0;
       position: relative;
 
@@ -1898,8 +1893,8 @@ li:has(> div > blockquote) {
       display: block;
       bottom: 0;
       left: 0;
-      width: 2rem;
-      border-bottom: 1px solid oklch(var(--color-foreground));
+      width: 1rem;
+      border-bottom: 1px solid oklch(var(--color-tabs-inactive-border));
     }
 
     &::after {
@@ -1910,18 +1905,17 @@ li:has(> div > blockquote) {
       left: 0;
       right: 0;
       width: 100%;
-      border-bottom: 1px solid oklch(var(--color-foreground));
+      border-bottom: 1px solid oklch(var(--color-tabs-inactive-border));
     }
   }
 
   .tab-contents {
     padding-block: 1rem;
-    border-bottom: 1px solid oklch(var(--color-foreground));
 
     .tab-content {
       display: none;
       width: 100%;
-      padding: 1rem;
+      padding: 0.5rem 1rem;
 
       --flow-gap: 2rem;
 

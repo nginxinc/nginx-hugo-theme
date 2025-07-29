@@ -275,7 +275,7 @@ textarea:not([rows]) {
 
   /* @link https://utopia.fyi/grid/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   --grid-max-width: 69.75rem;
-  --grid-min-width: 34rem;
+  --grid-min-width: 22rem;
   --grid-gutter: var(--space-s-l, clamp(1rem, 0.4975rem + 2.5126vw, 2.25rem));
   --grid-columns: 12;
 

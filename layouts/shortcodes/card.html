@@ -17,22 +17,22 @@
 {{- $isLanding := cond (eq $isLandingParam "true") "true" "false" -}}
 
 {{- /* Set up the positioning */ -}}
-{{ $dataGrid := "" }}
-{{ if eq $isFullSize "true" }}
-  {{ $dataGrid = "wide"}}
-{{ else if (eq $isLanding "true") }}
-  {{ $dataGrid = "third"}}
-{{ else }}
-  {{ $dataGrid = "half"}}
-{{ end }}
+{{- $dataGrid := "" -}}
+{{- if eq $isFullSize "true" -}}
+  {{- $dataGrid = "wide" -}}
+{{- else if (eq $isLanding "true") -}}
+  {{- $dataGrid = "third" -}}
+{{- else -}}
+  {{- $dataGrid = "half" -}}
+{{- end -}}
 
 {{- /* Build the url */ -}}
-{{ $url := printf "%s%s" .Page.Permalink $titleUrl }}
-{{ if eq (substr $titleUrl 0 1) "/" }}
-  {{ $url = printf "%s%s" .Site.BaseURL (substr $titleUrl 1) }}
-{{ else if (strings.Contains $titleUrl "https") }}
-  {{ $url = $titleUrl }}
-{{ end }}
+{{- $url := printf "%s%s" .Page.Permalink $titleUrl -}}
+{{- if eq (substr $titleUrl 0 1) "/" -}}
+  {{- $url = printf "%s%s" .Site.BaseURL (substr $titleUrl 1) -}}
+{{- else if (strings.Contains $titleUrl "https") -}}
+  {{- $url = $titleUrl -}}
+{{- end -}}
 
 {{- /* Validate that the parent is card-section and under 3 cards */ -}}
 {{- if (eq .Parent.Name "card-section") -}}
@@ -50,7 +50,9 @@
     {{- else -}}
       {{ errorf "Mainframe: Missing param 'title'" }}
     {{- end -}}
-    <div class="card-content">{{ .Inner }}</div>
+    {{- with .Inner -}}
+    <div class="card-content">{{ . }}</div>
+    {{- end -}}
   </div>
 </a>
 {{- else -}}

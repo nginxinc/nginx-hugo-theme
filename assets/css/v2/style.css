@@ -1508,79 +1508,72 @@ a:hover {
 }
 
 /* Product landing page cards */
-.card-layout {
+.card-section {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-block-start: 0.5rem;
 
-  .card-section {
+  &.featured-section {
+    /* Hide all the cards past 3 if it is a featured card section */
+    .card-section-content > *:nth-child(n + 4 of a.card) {
+      display: none;
+    }
+  }
+
+  .card-section-title {
+    font-weight: 500;
+    font-size: var(--font-step-2);
+    display: block;
+  }
+
+  .card-section-content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 
-    &.featured-section {
-      /* Hide all the cards past 3 if it is a featured card section */
-      .card-section-content > *:nth-child(n + 4 of a.card) {
-        display: none;
-      }
-    }
+    &.card-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--grid-columns), 1fr);
+      gap: 1.5rem;
 
-    .card-section-title {
-      font-weight: 500;
-      font-size: var(--font-step-2);
-      display: block;
-    }
-
-    .card-section-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-
-      &.card-grid {
-        display: grid;
-        grid-template-columns: repeat(var(--grid-columns), 1fr);
-        gap: 1.5rem;
-
-        @media (max-width: 55rem) {
-          grid-template-columns: 1fr;
-        }
-
-        .card {
-          border: 1px solid oklch(var(--color-codeblock-border));
-          box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-          padding: 1rem;
-          order: 2;
-        }
+      @media (max-width: 55rem) {
+        grid-template-columns: 1fr;
       }
 
       .card {
-        color: oklch(var(--color-foreground));
-        text-decoration: none;
+        border: 1px solid oklch(var(--color-codeblock-border));
+        box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+        padding: 1rem;
+        order: 2;
+      }
+    }
 
-        .card-container {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
+    .card {
+      color: oklch(var(--color-foreground));
+      text-decoration: none;
+
+      .card-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .card-header {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+        color: oklch(var(--color-brand));
+
+        img.card-brand-icon {
+          height: 1.5rem;
+          width: auto;
         }
 
-        .card-header {
-          display: flex;
-          flex-direction: row;
-          gap: 1rem;
-          align-items: center;
-          color: oklch(var(--color-brand));
-
-          img.card-brand-icon {
-            height: 1.5rem;
-            width: auto;
-          }
-
-          h2 {
-            padding: 0;
-            margin: 0;
-            font-size: var(--font-step-1);
-          }
+        h2 {
+          padding: 0;
+          margin: 0;
+          font-size: var(--font-step-1);
         }
       }
     }
@@ -1588,39 +1581,34 @@ a:hover {
 }
 
 /* Home landing page cards */
-.homepage .card-layout {
-  margin-block-end: 3rem;
-  gap: 3rem;
+.homepage .card-section {
+  .card-section-content.card-grid {
+    grid-template-columns: 1fr;
 
-  .card-section {
-    .card-section-content.card-grid {
-      grid-template-columns: 1fr;
+    @media (min-width: 70rem) {
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 1fr;
+    }
 
-      @media (min-width: 70rem) {
-        grid-template-columns: repeat(12, 1fr);
-        grid-auto-rows: 1fr;
-      }
+    .card {
+      padding: 1rem 2rem 2rem 2rem;
 
-      .card {
-        padding: 1rem 2rem 2rem 2rem;
+      .card-container {
+        .card-header {
+          justify-content: flex-start;
 
-        .card-container {
-          .card-header {
-            justify-content: flex-start;
-
-            .lucide,
-            .card-brand-icon {
-              height: 40px;
-              width: auto;
-            }
+          .lucide,
+          .card-brand-icon {
+            height: 40px;
+            width: auto;
           }
         }
+      }
 
-        &:hover {
-          box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-          text-decoration-color: oklch(var(--color-background));
-          border: 1px solid oklch(var(--color-brand) / 0.8);
-        }
+      &:hover {
+        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+        text-decoration-color: oklch(var(--color-background));
+        border: 1px solid oklch(var(--color-brand) / 0.8);
       }
     }
   }

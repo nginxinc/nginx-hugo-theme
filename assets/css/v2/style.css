@@ -951,6 +951,10 @@ nav {
     position: relative;
     display: block;
     max-width: 100%;
+
+    .redoc-wrap .menu-content {
+      top: 4rem !important; /* Override redocly's inline top property */
+    }
   }
 }
 

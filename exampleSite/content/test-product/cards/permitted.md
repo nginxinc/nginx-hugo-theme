@@ -39,36 +39,13 @@ To support customization, there are also some params you can add to the shortcod
 * `isFullSize` (optional) - Boolean indicating whether or not the card should be full size. By default, cards are half sized.
   * Usage: `<card isFullSize="true"...>`
 
-For the `<card-section>`, there are some params you can add such as `title`, `isFeaturedSection`, and `showAsSingleRow`.
+For the `<card-section>`, there are some params you can add such as `title` and `isFeaturedSection`.
 * `title` - Title of the section.
 <br>
 * `isFeaturedSection` (optional) - Boolean indicating whether or not the section is a featured one - will discuss later down the page. By default, false.
-<br> 
-* `showAsSingleRow` (optional) - Boolean indicating whether or not the cards in the section should appear without borders + one card per row. By default, false.
 
 ### Additional Information
 While it may come immediate, you can't use a `<card>` shortcode on its own in your markdown or else the build will fail. This is because if you call a card, there is no way to structure it in a writer-friendly customizable way. 
-
-## Show as single row
-As you can see from the above example in 'General usage', it renders as a block with borders, aka a card. To change the appearance and render without the borders and move to one card per row, use the param `showAsSingleRow` in the shortcode `<card-section>`. The usage as seen below:
-```plaintext
-  <card-section showAsSingleRow="true">
-      <card title="SOME_TITLE">SOME CONTENT icon="SOME_LUCIDE_ICON">SOME CONTENT<\card>
-      ...
-      <card>...<\card>
-  </card-section>
-```
-and will render as the following:
-<div data-testid="cards-test__showAsSingleRow">
-  {{<card-section showAsSingleRow="true">}}
-    {{<card title="SOME_TITLE_1">}}
-      SOME CONTENT 1
-    {{</card >}}
-    {{<card title="SOME_TITLE_2">}}
-      SOME CONTENT 2
-    {{</card >}}
-  {{</card-section>}}
-</div>
 
 ## Featured Section
 Denoted by the param `isFeaturedSection` in the shortcode `<card-section>`, this block of cards can contain only up to three cards. The usage as seen below:

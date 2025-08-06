@@ -1,30 +1,20 @@
 {{ $title := .Get "title" }}
 {{ $isFeaturedSectionParam := .Get "isFeaturedSection" | default "false" }}
-{{ $showAsSingleRowParam := .Get "showAsSingleRow" | default "false"}}
 
-{{- /* Validate the parameter strictly */ -}}
-{{- if not (in (slice "true" "false") $showAsSingleRowParam) -}}
-  {{- warnf "The '<card-section>' Shortcode parameter 'showAsSingleRow' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $showAsSingleRowParam -}}
-{{- end -}}
-{{- $showAsSingleRow := cond (eq $showAsSingleRowParam "true") "true" "false" -}}
-{{- $current := .Page.Scratch.Get "showAsSingleRow" | default (dict) -}}
-{{- $newShowAsSingleRow := dict ($title | default "main") ($showAsSingleRow) -}}
-{{- .Page.Scratch.Set "showAsSingleRow" (merge $current ($newShowAsSingleRow)) -}}
 {{- /* Limit the cards if it is a featured section */ -}}
 {{- if not (in (slice "true" "false") $isFeaturedSectionParam) -}}
   {{- warnf "The '<card-section>' Shortcode parameter 'isFeaturedSection' must be 'true' or 'false', but got: '%s'. This will now default to 'false'" $isFeaturedSectionParam -}}
 {{- end -}}
 {{- $isFeaturedSection := cond (eq $isFeaturedSectionParam "true") "true" "false" -}}
-{{- $class := "card-grid" -}}
+{{- $class := "card-section-content card-grid" -}}
 
 {{- /* Get number of cards */ -}}
 {{ $cardCount := len (findRE "<div\\s+class=\"card\"[\\s\\S]*?>" .Inner) }}
-
 <div class="card-section{{if eq $isFeaturedSection "true"}} featured-section{{ end }}" data-testid="{{if eq $isFeaturedSection "true"}}card-section__featured-section{{else}}card-section{{ end }}">
   {{- if $title -}}
     <strong class="card-section-title">{{- $title -}}</strong>
-    <div class="card-section-content{{ if eq $showAsSingleRow "false" }} {{ $class }}{{ end }}" data-testid="{{ if eq $showAsSingleRow "false" }}card-section-content__card-grid{{else}}card-section-content{{ end }}">{{ .Inner }}</div>    
+    <div class="{{ $class }}" data-testid="card-section-content__card-grid">{{ .Inner }}</div>    
   {{ else }}
-    <div class="card-section-content{{ if eq $showAsSingleRow "false" }} {{ $class }}{{ end }}" data-testid="{{ if eq $showAsSingleRow "false" }}card-section-content__card-grid{{else}}card-section-content{{ end }}">{{ .Inner }}</div>    
+    <div class="{{ $class }}" data-testid="card-section-content__card-grid">{{ .Inner }}</div>    
   {{ end }}
 </div>

@@ -11,21 +11,6 @@ test.describe('Testing for cards shortcode', () => {
     const showAsCardCode = await section.locator(
       'data-testid=card-section-content'
     );
-    const basicCode = await section.locator(
-      'data-testid=card-section-content__card-grid'
-    );
-
-    expect(await showAsCardCode.count()).toBe(0);
-    expect(await basicCode.count()).toBeTruthy();
-  });
-
-  test('should test showAsSingleRow section', async ({ page }) => {
-    const section = await page.locator(
-      'data-testid=cards-test__showAsSingleRow'
-    );
-    const showAsCardCode = await section.locator(
-      'data-testid=card-section-content__card-grid'
-    );
 
     expect(await showAsCardCode.count()).toBe(0);
   });

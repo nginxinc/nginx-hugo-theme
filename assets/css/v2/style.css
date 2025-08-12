@@ -217,8 +217,6 @@ textarea:not([rows]) {
   --overflow-gutter-extension: 1rem;
 
   /* vars for the primary grid setup */
-  --grid-sidebar: 24rem;
-  --grid-sidebar-gutter: 3rem;
   --grid-content: minmax(34rem, 50rem);
   --grid-content-mobile: minmax(20rem, 50rem);
   --grid-side-callout: minmax(18rem, 26rem);
@@ -281,7 +279,7 @@ textarea:not([rows]) {
 
   --header-height: 4rem;
 
-  --sidebar-width: 22rem;
+  --sidebar-width: 24rem;
   --sidebar-item-padding-lr: 0.75rem;
   --sidebar-item-padding-tb: 0.25rem;
   --content-max-width: 88rem;
@@ -602,7 +600,7 @@ ol li:last-child {
 .header__sidebar__panel,
 .sidebar__panel {
   cursor: pointer;
-  color: var(--color-foreground);
+  color: oklch(var(--color-foreground));
   label {
     cursor: pointer;
   }
@@ -1210,7 +1208,7 @@ nav.sidebar.sidebar__mobile-open {
 
 .sidebar {
   grid-area: sidebar;
-  --color-foreground: oklch(0 0 0 / 0.75);
+  color: oklch(var(--color-foreground) / 0.75);
 
   display: flex;
   flex-direction: column;
@@ -1260,7 +1258,7 @@ nav.sidebar.sidebar__mobile-open {
     padding: 0.25rem 0.5rem;
     border-radius: 5px 0 0 5px;
     font-weight: 500;
-    color: var(--color-foreground);
+    color: oklch(var(--color-foreground));
 
     &:hover {
       background-color: oklch(var(--color-brand) / 0.06);
@@ -1320,15 +1318,16 @@ nav.sidebar.sidebar__mobile-open {
   .sidebar__toc {
     #TableOfContents {
       padding: 0 0.75rem 0 0;
-      margin: 0.5rem 0.25rem 0.5rem 0.8rem;
-      border-left: 1px solid var(--color-divider);
-      color: oklch(0 0 0 / 0.75);
+      margin: 0.5rem 0.25rem 0.5rem 0.875rem;
+      border-left: 1px solid oklch(var(--color-divider));
+      color: oklch(var(--color-foreground) / 0.75);
 
       &[hidden] {
         display: none;
       }
 
       a {
+        color: oklch(var(--color-foreground));
         text-decoration: none;
       }
 

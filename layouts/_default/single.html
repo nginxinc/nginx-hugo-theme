@@ -20,6 +20,12 @@
         {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
         {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
 
+        {{ with (index .Page.Params "nd-api-reference") }}
+        <div class="content__redocly" data-grid="breakout">
+            {{ partial "openapi.html" . }}
+        </div>
+        {{ end }}
+
         {{ if .Page.Lastmod }}
         <div class="last-modified">
             {{ partial "page-meta-links" . }}
@@ -28,10 +34,10 @@
 
         {{ partial "version-list" . }}
         {{ partial "qualtrics-feedback.html" }}
-
-    </section>
-    </section>
+    </article>
 </main>
+
+
 
 
 

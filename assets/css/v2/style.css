@@ -954,6 +954,7 @@ nav {
 
     .redoc-wrap .menu-content {
       top: 4rem !important; /* Override redocly's inline top property */
+      left: 0;
     }
   }
 }

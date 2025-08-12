@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+// import { expect, test } from '@playwright/test';
 
 // test.describe('Testing old theme', () => {
 //   test('should ensure the old theme does not visually regress', async ({

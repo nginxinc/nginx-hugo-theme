@@ -1,17 +1,9 @@
-{{/* Use this shortcode to wrap big tables that you want to have scrollbars when being shown in smaller screens */}}
-<style>
-    table, th, td {
-      border: 1px solid #CCC;
-      border-collapse: collapse;
-      list-style-position: inside;
-    }
-    th, td {
-      padding: 5px;
-    }
-    th {
-      text-align: center;
-    }
-</style>
-<div class="override-table">
-{{.Inner}}
-</div>
+<!-- Use this shortcode to allow tables to be scrollable across the x-axis -->
+<!-- Params: variant=['narrow' | 'wide'] (defaults to "narrow") -->
+
+{{ $variant := default "narrow" (.Get "variant") }}
+
+{{ partial "table.html" (dict
+    "variant" $variant
+    "content" .Inner
+)}}

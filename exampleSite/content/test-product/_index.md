@@ -35,25 +35,21 @@ This is a compilation of all our shortcodes to show how they look, function, res
 [//]: # "One card will take full width page: two will take half width each. Three will stack like an inverse pyramid."
 [//]: # "Some examples of content could be the latest release note, the most common install path, and a popular new feature."
 
-{{<card-layout >}}
-  {{<card-section showAsCards="true" isFeaturedSection="true">}}
-    {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed">}}
-      All shortcodes in one page.
-    {{</card >}}
-    {{<card title="Call Out usages" titleUrl="call-out/all-callouts/" icon="message-square">}}
-      Examples for call-out shortcode
-    {{</card >}}
-    {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
-      Examples for codeblock shortcode
-    {{</card >}}
-  {{</card-section>}}
-{{</card-layout >}}
+{{<card-section isFeaturedSection="true">}}
+  {{<card title="Everything" titleUrl="everything" icon="circle-dot-dashed">}}
+    All shortcodes in one page.
+  {{</card >}}
+  {{<card title="Call Out usages" titleUrl="call-out/all-callouts/" icon="message-square">}}
+    Examples for call-out shortcode
+  {{</card >}}
+  {{<card title="Code Block usages" titleUrl="code-blocks/code-blocks-highlighting/" icon="code">}}
+    Examples for codeblock shortcode
+  {{</card >}}
+{{</card-section>}}
 
 ## Other Content 
 [//]: # "You can add any extra content for the page here, such as additional cards, diagrams or text."
 
-{{<card-layout >}}
-  {{<card-section title="NGINX" showAsCards="true" >}}
+{{<card-section title="NGINX" >}}
     {{<card title="NGINX Plus" titleUrl="/nginx/" brandIcon="NGINX-Plus-product-icon-RGB.svg" />}}
-  {{</card-section >}}
-{{</card-layout >}}
+{{</card-section >}}

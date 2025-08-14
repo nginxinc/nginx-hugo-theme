@@ -207,6 +207,8 @@ textarea:not([rows]) {
   --table-min-column-spacing-wide: 0.75rem;
   --table-header-bottom-spacing: 1rem;
   --table-line-height: 1px;
+  --table-inner-padding: 6px 10px;
+  --table-color-divider: 0.7 0 0;
 
   /* Details */
   --details-margin: 0.5rem 0rem;
@@ -1662,36 +1664,56 @@ a:hover {
 /* MARK: Tables
 */
 table {
+  border-collapse: collapse;
   position: relative;
   z-index: 0;
+  font-size: var(--font-step-0);
 
   td {
-    padding: var(--table-row-space-between) 0;
+    vertical-align: middle;
+    padding: var(--table-inner-padding);
+    background: transparent;
+    border: var(--table-line-height) solid oklch(var(--table-color-divider));
   }
 
   th {
-    font-weight: bold;
+    font-weight: 500;
     text-align: start;
-    vertical-align: top;
-    padding-block-end: var(--table-header-bottom-spacing);
+    vertical-align: bottom;
+    padding: var(--table-inner-padding);
   }
 
   tr {
     position: relative;
   }
-
-  tr::after {
-    content: "";
-    position: absolute;
-    border-bottom: var(--table-line-height) solid oklch(var(--color-divider));
-    bottom: 0;
-    left: calc(-1 * var(--overflow-gutter-extension));
-    width: calc(100% + (2 * var(--overflow-gutter-extension)));
-  }
 }
 
 .table {
   margin: var(--margin-table);
+  &.borderless {
+    th {
+      background: none;
+      border: none;
+    }
+
+    tr:nth-child(even) td {
+      background: none;
+    }
+  }
+
+  &.bordered {
+    th {
+      border: var(--table-line-height) solid oklch(var(--table-color-divider));
+      border-top: var(--table-line-height) dashed
+        oklch(var(--table-color-divider));
+      border-bottom: var(--table-line-height) solid
+        oklch(var(--color-foreground));
+    }
+
+    tr:nth-child(even) td {
+      background: oklch(var(--table-color-divider) / 0.075);
+    }
+  }
 }
 
 .md-table-scroll-x {
@@ -1699,36 +1721,15 @@ table {
   width: 100%;
 }
 
-.narrow table {
-  min-width: 100%;
-  margin: var(--table-top-bottom-spacing) 0;
-  border-collapse: collapse;
-}
-
-.wide table {
-  margin: var(--table-top-bottom-spacing) 0;
-  border-collapse: collapse;
-}
-
-.narrow table th,
-.narrow table td {
-  padding-inline-start: var(--table-min-column-spacing-narrow);
-}
-
-.wide table th,
-.wide table td {
-  padding-inline-start: var(--table-min-column-spacing-wide);
-}
-
-table th:first-child,
-table td:first-child {
-  padding-inline-start: 0;
-}
-
 table hr {
   color: oklch(var(--color-divider));
   border: none;
-  border-bottom: var(--table-line-height) solid oklch(var(--color-divider));
+  border-bottom: var(--table-line-height) solid
+    oklch(var(--table-color-divider));
+  /*stops HR overflow outside of collapse style tables*/
+  margin-right: -10px;
+  margin-left: -10px;
+  width: auto;
 }
 
 /* MARK: Callouts

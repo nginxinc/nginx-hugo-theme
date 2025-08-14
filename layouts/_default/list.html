@@ -29,7 +29,7 @@
         {{ end }}
       </section>
       <div class="list-header-container">
-        <img src="/images/icons/{{ .Params.logo | default "NGINX-product-icon.svg" }}">
+        <img src="{{ "/images/icons/" | absURL }}{{ .Params.logo | default "NGINX-product-icon.svg" }}">
         <div class="list-header-title">
           <h1>{{ .Title }}</h1>
           {{ if index .Params "nd-subtitle" }}

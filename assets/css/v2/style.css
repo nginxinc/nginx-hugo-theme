@@ -281,7 +281,7 @@ textarea:not([rows]) {
 
   --header-height: 4rem;
 
-  --sidebar-width: 24rem;
+  --sidebar-width: min(24rem, 100%);
   --sidebar-item-padding-lr: 0.75rem;
   --sidebar-item-padding-tb: 0.25rem;
   --content-max-width: 88rem;

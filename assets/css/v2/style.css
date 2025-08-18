@@ -403,9 +403,17 @@ ol li:last-child {
     }
 
     .breadcrumb-layout {
-      border-bottom: 1px solid oklch(var(--color-divider));
       align-items: center;
       padding: var(--space-xs) 0;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: calc(100% + (-4 * var(--overflow-gutter-extension)));
+        margin-left: calc(2 * var(--overflow-gutter-extension));
+        border-bottom: 1px solid oklch(var(--color-divider));
+      }
     }
   }
   .content {

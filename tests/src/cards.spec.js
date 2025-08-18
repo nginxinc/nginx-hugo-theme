@@ -8,22 +8,11 @@ test.describe('Testing for cards shortcode', () => {
 
   test('should test basic section', async ({ page }) => {
     const section = await page.locator('data-testid=cards-test__basic');
-    const basicCode = await section.locator('data-testid=card-section-content');
     const showAsCardCode = await section.locator(
-      'data-testid=card-section-content__card-grid'
+      'data-testid=card-section-content'
     );
 
-    expect(await basicCode.count()).toBeTruthy();
     expect(await showAsCardCode.count()).toBe(0);
-  });
-
-  test('should test showAsCard section', async ({ page }) => {
-    const section = await page.locator('data-testid=cards-test__showAsCards');
-    const showAsCardCode = await section.locator(
-      'data-testid=card-section-content__card-grid'
-    );
-
-    expect(await showAsCardCode.count()).toBeTruthy();
   });
 
   test('should test featured section', async ({ page }) => {

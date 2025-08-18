@@ -1676,7 +1676,16 @@ table {
   }
 }
 
+/* Workaround for raw html tables without div wrapper*/
+table.table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+
 .table {
+  overflow-x: auto;
+  width: 100%;
   margin: var(--margin-table);
   &.borderless {
     th {
@@ -1702,11 +1711,6 @@ table {
       background: oklch(var(--table-color-divider) / 0.075);
     }
   }
-}
-
-.md-table-scroll-x {
-  overflow-x: auto;
-  width: 100%;
 }
 
 table hr {

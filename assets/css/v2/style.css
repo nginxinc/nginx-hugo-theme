@@ -1543,6 +1543,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  margin-block-end: 1.5rem;
 
   &.featured-section {
     /* Hide all the cards past 3 if it is a featured card section */

@@ -210,6 +210,9 @@ textarea:not([rows]) {
   --table-inner-padding: 6px 10px;
   --table-color-divider: 0.7 0 0;
 
+  /* Cards */
+  --card-spacing: 1.5rem;
+
   /* Details */
   --details-margin: 0.5rem 0rem;
 
@@ -1542,7 +1545,8 @@ a:hover {
 .card-section {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--card-spacing);
+  margin-block-end: calc(var(--card-spacing) - var(--flow-gap));
 
   &.featured-section {
     /* Hide all the cards past 3 if it is a featured card section */
@@ -1565,7 +1569,7 @@ a:hover {
     &.card-grid {
       display: grid;
       grid-template-columns: repeat(var(--grid-columns), 1fr);
-      gap: 1.5rem;
+      gap: var(--card-spacing);
 
       @media (max-width: 55rem) {
         grid-template-columns: 1fr;
@@ -1607,6 +1611,12 @@ a:hover {
           font-size: var(--font-step-1);
         }
       }
+
+      &:hover {
+        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+        text-decoration-color: oklch(var(--color-background));
+        border: 1px solid oklch(var(--color-brand) / 0.8);
+      }
     }
   }
 }
@@ -1634,12 +1644,6 @@ a:hover {
             width: auto;
           }
         }
-      }
-
-      &:hover {
-        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-        text-decoration-color: oklch(var(--color-background));
-        border: 1px solid oklch(var(--color-brand) / 0.8);
       }
     }
   }

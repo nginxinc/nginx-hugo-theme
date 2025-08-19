@@ -1611,6 +1611,12 @@ a:hover {
           font-size: var(--font-step-1);
         }
       }
+
+      &:hover {
+        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
+        text-decoration-color: oklch(var(--color-background));
+        border: 1px solid oklch(var(--color-brand) / 0.8);
+      }
     }
   }
 }
@@ -1638,12 +1644,6 @@ a:hover {
             width: auto;
           }
         }
-      }
-
-      &:hover {
-        box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-        text-decoration-color: oklch(var(--color-background));
-        border: 1px solid oklch(var(--color-brand) / 0.8);
       }
     }
   }

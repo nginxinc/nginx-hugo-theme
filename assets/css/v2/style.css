@@ -173,7 +173,7 @@ textarea:not([rows]) {
 
   /* Codeblock */
 
-  --margin-codeblock: 1.5rem -1rem;
+  --margin-codeblock: 1.5rem var(--overflow-gutter-extension);
   --color-inline_codeblock-border: 0.85 0 0;
   --color-inline_codeblock-background: 0.98 0 0;
   --color-codeblock-border: 0.63 0 0;
@@ -189,7 +189,7 @@ textarea:not([rows]) {
   --codeblock-line-box-side-length: 4px;
 
   /* Callout */
-  --margin-callout: 1rem -1rem;
+  --margin-callout: 1rem var(--overflow-gutter-extension);
   --color-callout-warning: 0.65 0.188 24;
   --color-callout-warning-shadow: 0.65 0.188 24 / 20%;
   --color-callout-caution: 0.8 0.1613 71.21;
@@ -216,7 +216,7 @@ textarea:not([rows]) {
   /* Tab Group */
   --margin-tab-group: 1rem -1rem 0 -1rem;
 
-  --overflow-gutter-extension: 1rem;
+  --overflow-gutter-extension: -1rem;
 
   /* vars for the primary grid setup */
   --grid-content: minmax(34rem, 50rem);
@@ -275,13 +275,13 @@ textarea:not([rows]) {
 
   /* @link https://utopia.fyi/grid/calculator?c=320,16,1.2,1240,18,1.25,5,3,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
   --grid-max-width: 69.75rem;
-  --grid-min-width: 34rem;
+  --grid-min-width: 0;
   --grid-gutter: var(--space-s-l, clamp(1rem, 0.4975rem + 2.5126vw, 2.25rem));
   --grid-columns: 12;
 
   --header-height: 4rem;
 
-  --sidebar-width: 24rem;
+  --sidebar-width: min(24rem, 100%);
   --sidebar-item-padding-lr: 0.75rem;
   --sidebar-item-padding-tb: 0.25rem;
   --content-max-width: 88rem;
@@ -403,9 +403,17 @@ ol li:last-child {
     }
 
     .breadcrumb-layout {
-      border-bottom: 1px solid oklch(var(--color-divider));
       align-items: center;
       padding: var(--space-xs) 0;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: calc(100% + (-4 * var(--overflow-gutter-extension)));
+        margin-left: calc(2 * var(--overflow-gutter-extension));
+        border-bottom: 1px solid oklch(var(--color-divider));
+      }
     }
   }
   .content {
@@ -1730,7 +1738,7 @@ blockquote {
   border: 1px solid oklch(var(--color-foreground));
   padding: 1rem;
   height: fit-content;
-  margin: var(--margin-callout);
+  margin: var(--margin-callout); /* Expand into the gutter */
 
   /* solid 3px drop shadow */
   box-shadow: 3px 3px 0px oklch(var(--color-shadow));
@@ -1742,16 +1750,6 @@ blockquote {
 
   .callout-content {
     margin: 0;
-  }
-}
-
-blockquote[data-grid="last-third"] {
-  margin-block-start: 0;
-}
-
-@media (max-width: 55rem) {
-  blockquote[data-grid="last-third"] {
-    margin: var(--margin-callout);
   }
 }
 
@@ -1786,6 +1784,13 @@ blockquote p:last-child {
 @media (min-width: 67rem) {
   blockquote.side-callout {
     align-self: start;
+  }
+}
+
+/* Maintain the gutter overflow for as long as possible */
+@media (max-width: 55rem) {
+  blockquote {
+    margin-inline: 0;
   }
 }
 
@@ -2014,7 +2019,7 @@ a:has(code:not(pre code)) {
 
 .code-block {
   position: relative;
-  margin: var(--margin-codeblock);
+  margin: var(--margin-codeblock); /* Expand into the gutter */
 
   tr::after {
     display: none;
@@ -2086,6 +2091,11 @@ a:has(code:not(pre code)) {
         line-height: 1;
       }
     }
+  }
+
+  /* Maintain the gutter overflow for as long as possible */
+  @media (max-width: 55rem) {
+    margin-inline: 0rem;
   }
 }
 

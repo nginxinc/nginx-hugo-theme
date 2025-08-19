@@ -210,6 +210,9 @@ textarea:not([rows]) {
   --table-inner-padding: 6px 10px;
   --table-color-divider: 0.7 0 0;
 
+  /* Cards */
+  --card-spacing: 1.5rem;
+
   /* Details */
   --details-margin: 0.5rem 0rem;
 
@@ -1542,8 +1545,8 @@ a:hover {
 .card-section {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-block-end: 1.5rem;
+  gap: var(--card-spacing);
+  margin-block-end: var(--card-spacing);
 
   &.featured-section {
     /* Hide all the cards past 3 if it is a featured card section */
@@ -1566,7 +1569,7 @@ a:hover {
     &.card-grid {
       display: grid;
       grid-template-columns: repeat(var(--grid-columns), 1fr);
-      gap: 1.5rem;
+      gap: var(--card-spacing);
 
       @media (max-width: 55rem) {
         grid-template-columns: 1fr;

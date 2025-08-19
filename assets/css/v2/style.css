@@ -1546,7 +1546,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: var(--card-spacing);
-  margin-block-end: var(--card-spacing);
+  margin-block-end: calc(var(--card-spacing) - var(--flow-gap));
 
   &.featured-section {
     /* Hide all the cards past 3 if it is a featured card section */

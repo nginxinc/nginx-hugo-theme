@@ -1597,7 +1597,7 @@ a:hover {
         display: flex;
         flex-direction: row;
         gap: 1rem;
-        align-items: center;
+        align-items: flex-start;
         color: oklch(var(--color-brand));
 
         img.card-brand-icon {
@@ -1637,6 +1637,7 @@ a:hover {
       .card-container {
         .card-header {
           justify-content: flex-start;
+          align-items: center;
 
           .lucide,
           .card-brand-icon {
@@ -2161,8 +2162,8 @@ hr {
 }
 
 .lucide {
-  width: 1.8ch;
-  height: 1.8ch;
+  width: 1.5rem;
+  height: 1.5rem;
   stroke: currentColor;
   fill: none;
   stroke-width: 2;

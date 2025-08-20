@@ -9,6 +9,19 @@
   box-sizing: border-box;
 }
 
+/* Coveo color overrides */
+/* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
+* {
+  --atomic-primary: oklch(var(--color-brand)); /* Adjust the primary color */
+  --atomic-ring-primary: oklch(var(--color-brand) / 0.4); /* Adjust the focus color */
+  --atomic-primary-light: oklch(var(--color-brand));
+
+  /* Remove round corners */
+  --atomic-border-radius-lg: 0;
+  --atomic-border-radius-md: 0;
+  --atomic-border-radius: 0;
+}
+
 /* Prevent font size inflation */
 html {
   -moz-text-size-adjust: none;
@@ -701,8 +714,6 @@ ol li:last-child {
       .sidebar__search {
         display: unset;
         width: calc(var(--sidebar-width));
-        --atomic-primary: oklch(var(--color-brand)); /* Adjust the primary color */
-        --atomic-ring-primary: oklch(var(--color-brand) / 0.4); /* Adjust the focus color */
         margin-block-start: 0.5rem;
         padding-inline: 0.5rem;
       }
@@ -1038,12 +1049,6 @@ atomic-search-interface#search-v2 {
   display: inline-block !important;
   width: 95vw;
   grid-column: 1 / -1;
-  --atomic-primary: oklch(var(--color-brand));
-  --atomic-primary-ring: oklch(var(--color-brand));
-  --atomic-primary-light: oklch(var(--color-brand));
-  --atomic-border-radius-lg: 0;
-  --atomic-border-radius-md: 0;
-  --atomic-border-radius: 0;
   --atomic-font-family: var(--font-family);
 
   atomic-search-box {

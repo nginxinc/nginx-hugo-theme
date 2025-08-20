@@ -47,78 +47,56 @@ async function getsearchObj() {
   return response.json();
 }
 
+async function getValidSearchCredentials() {
+  const accessToken = localStorage.getItem('coveo_jwt_v1');
+  const organizationId = localStorage.getItem('coveo_org_id_v1');
+
+  const needsFetch =
+    !accessToken || !organizationId || isJwtExpired(accessToken);
+
+  if (needsFetch) {
+    const { token, org_id } = await getsearchObj();
+    localStorage.setItem('coveo_jwt_v1', token);
+    localStorage.setItem('coveo_org_id_v1', org_id);
+    return {
+      accessToken: token,
+      organizationId: org_id,
+    };
+  }
+
+  return {
+    accessToken,
+    organizationId,
+  };
+}
+
 async function atomicCoveo() {
-  /* Fetch the credentials */
   await customElements.whenDefined('atomic-search-interface');
-  const token = localStorage.getItem('coveo_jwt_v1');
-  const org_id = localStorage.getItem('coveo_org_id_v1');
-  let searchObj = { token, org_id };
+  const credentials = await getValidSearchCredentials();
 
-  if (token === null || org_id === null || isJwtExpired(token)) {
-    searchObj = await getsearchObj();
-    localStorage.setItem('coveo_jwt_v1', searchObj.token);
-    localStorage.setItem('coveo_org_id_v1', searchObj.org_id);
-  }
+  const interfaces = [
+    document.querySelector('#search-v2'),
+    document.querySelector('#search-standalone-header'),
+    document.querySelector('#search-standalone-sidebar'),
+  ].filter(Boolean);
 
-  /* Initialize the interfaces with credentials */
-  const searchPageInterface = document.querySelector('#search-v2');
-  const searchBarHeader = document.querySelector('#search-standalone-header');
-  const searchBarSidebar = document.querySelector('#search-standalone-sidebar');
-
-  if (searchPageInterface) {
-    await searchPageInterface.initialize({
-      accessToken: token,
-      organizationId: org_id,
+  for (const el of interfaces) {
+    await el.initialize({
+      ...credentials,
       analytics: { analyticsMode: 'legacy' },
       preprocessRequest: (request) => {
         const body = JSON.parse(request.body);
         body.q = `<@- ${body.q} -@>`;
         request.body = JSON.stringify(body);
-
         return request;
       },
     });
-    await searchPageInterface.executeFirstSearch();
+    await el.executeFirstSearch();
   }
 
-  /* Initialize the header searchbar */
-  if (searchBarHeader) {
-    await searchBarHeader.initialize({
-      accessToken: token,
-      organizationId: org_id,
-      analytics: { analyticsMode: 'legacy' },
-      preprocessRequest: (request) => {
-        const body = JSON.parse(request.body);
-        body.q = `<@- ${body.q} -@>`;
-        request.body = JSON.stringify(body);
-
-        return request;
-      },
-    });
-
-    await searchBarHeader.executeFirstSearch();
-  }
-
-  /* Initialize the sidebar searchbar */
-  if (searchBarSidebar) {
-    await searchBarSidebar.initialize({
-      accessToken: token,
-      organizationId: org_id,
-      analytics: { analyticsMode: 'legacy' },
-      preprocessRequest: (request) => {
-        const body = JSON.parse(request.body);
-        body.q = `<@- ${body.q} -@>`;
-        request.body = JSON.stringify(body);
-
-        return request;
-      },
-    });
-
-    await searchBarSidebar.executeFirstSearch();
-  }
-
-  if (searchBarHeader?.shadowRoot) {
-    hideShadowElement(searchBarHeader.shadowRoot, 'atomic-relevance-inspector');
+  const headerSearchBar = document.querySelector('#search-standalone-header');
+  if (headerSearchBar?.shadowRoot) {
+    hideShadowElement(headerSearchBar.shadowRoot, 'atomic-relevance-inspector');
   }
 }
 

@@ -24,12 +24,26 @@
         {{ $hasCustomContent := index .Params "nd-landing-page" | default false }}
         {{ if $hasCustomContent }}
         {{ .Content }}
+
+        <!-- Default index page content -->
         {{ else }}
+
+    <h2> In this section </h2>
+    <div class="card-section featured-section">
+        <div class="card-section-content card-grid">
         {{ range .Pages.ByWeight }}
-          <h2>
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-          </h2>
+            <a href="{{ .Permalink }}" alt="{{ .Title }}" class="card" data-grid="first-two-thirds">
+            <div class="card-container">
+                <div class="card-header">
+                    <h2 class="card-title">{{ .Title }}</h2>
+                </div>
+                <div class="card-content">{{ .Description }}</div>
+            </div>
+            </a>
         {{ end }}
+        </div>
+    </div>
+
         {{ end }}
 
         <hr>

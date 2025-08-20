@@ -3,7 +3,7 @@ name: Build preview on documentation repo upon release publish
 on: 
   release: 
     types: 
-      - published
+      - released
 
 env:
   OWNER: nginx

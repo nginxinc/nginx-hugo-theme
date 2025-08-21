@@ -499,6 +499,8 @@ ol li:last-child {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
+    column-gap: 2rem;
     align-items: center;
     width: 100%;
 
@@ -509,7 +511,7 @@ ol li:last-child {
 
     .header__search {
       display: block;
-      width: 14rem;
+      width: auto;
     }
 
     .header__product-selector {
@@ -734,6 +736,14 @@ ol li:last-child {
     }
   }
 
+  .grid-container {
+    &:has(.homepage) {
+      .header-container .header__search {
+        display: block;
+      }
+    }
+  }
+
   .header__product-selector {
     display: none;
   }
@@ -829,7 +839,7 @@ nav {
 
   .homepage-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 500px));
+    grid-template-columns: repeat(auto-fit, minmax(0, 500px));
     gap: 1.5rem;
 
     justify-content: center;
@@ -1160,6 +1170,19 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   /* Show on pages with sidebar if it is hidden */
   body:has(.sidebar-layout) header atomic-search-interface {
     display: block;
+  }
+}
+
+@media (max-width: 568px) {
+  /* Remove the set height to push the search to new line */
+  .grid-container {
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* Change the order of the search when wrapping to new line on header */
+  .header__search {
+    order: 2;
+    padding-block: 1rem;
   }
 }
 

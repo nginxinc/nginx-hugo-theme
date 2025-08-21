@@ -1148,6 +1148,11 @@ atomic-search-interface#search-standalone-header {
       border-color: oklch(var(--color-foreground));
     }
 
+    &::part(textarea) {
+      /* Override Coveo's use of --atomic-text-lg (equal to 1rem) */
+      font-size: var(--atomic-text-base);
+    }
+
     &::part(suggestions-wrapper) {
       border-radius: 0;
       border-color: oklch(var(--color-foreground));

@@ -130,6 +130,17 @@ textarea:not([rows]) {
 }
 
 :root {
+  /* Coveo color overrides */
+  /* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
+  --atomic-primary: oklch(var(--color-brand)) !important; /* Adjust the primary color */
+  --atomic-ring-primary: oklch(var(--color-brand) / 0.4) !important; /* Adjust the focus color */
+  --atomic-primary-light: oklch(var(--color-brand)) !important;
+
+  /* Remove round corners */
+  --atomic-border-radius-lg: 0 !important;
+  --atomic-border-radius-md: 0 !important;
+  --atomic-border-radius: 0 !important;
+
   /* webfonts */
   font-family: var(--font-family);
   font-feature-settings:
@@ -463,10 +474,6 @@ ol li:last-child {
   .sidebar {
     display: none;
   }
-
-  .header__logo {
-    display: unset;
-  }
 }
 
 .header {
@@ -486,6 +493,8 @@ ol li:last-child {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-wrap: wrap;
+    column-gap: 2rem;
     align-items: center;
     width: 100%;
 
@@ -496,7 +505,7 @@ ol li:last-child {
 
     .header__search {
       display: block;
-      width: 14rem;
+      width: auto;
     }
 
     .header__product-selector {
@@ -700,8 +709,9 @@ ol li:last-child {
 
       .sidebar__search {
         display: unset;
-        width: calc(var(--sidebar-width) - 4rem);
-        margin-inline-start: 1rem;
+        width: calc(var(--sidebar-width));
+        margin-block-start: 0.5rem;
+        padding-inline: 0.5rem;
       }
     }
   }
@@ -716,6 +726,14 @@ ol li:last-child {
     .header-container {
       .header__search {
         display: none;
+      }
+    }
+  }
+
+  .grid-container {
+    &:has(.homepage) {
+      .header-container .header__search {
+        display: block;
       }
     }
   }
@@ -815,7 +833,7 @@ nav {
 
   .homepage-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 500px));
+    grid-template-columns: repeat(auto-fit, minmax(0, 500px));
     gap: 1.5rem;
 
     justify-content: center;
@@ -1035,12 +1053,6 @@ atomic-search-interface#search-v2 {
   display: inline-block !important;
   width: 95vw;
   grid-column: 1 / -1;
-  --atomic-primary: oklch(var(--color-brand));
-  --atomic-primary-ring: oklch(var(--color-brand));
-  --atomic-primary-light: oklch(var(--color-brand));
-  --atomic-border-radius-lg: 0;
-  --atomic-border-radius-md: 0;
-  --atomic-border-radius: 0;
   --atomic-font-family: var(--font-family);
 
   atomic-search-box {
@@ -1130,15 +1142,16 @@ atomic-search-interface#search-standalone-header {
       border-color: oklch(var(--color-foreground));
     }
 
+    &::part(textarea) {
+      /* Override Coveo's use of --atomic-text-lg (equal to 1rem) */
+      font-size: var(--atomic-text-base);
+    }
+
     &::part(suggestions-wrapper) {
       border-radius: 0;
       border-color: oklch(var(--color-foreground));
       width: calc(100% + 2px);
       margin-inline-start: -1px;
-    }
-
-    &::part(submit-button-wrapper) {
-      --atomic-primary: var(--atomic-neutral-dark);
     }
   }
 }
@@ -1152,6 +1165,19 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   /* Show on pages with sidebar if it is hidden */
   body:has(.sidebar-layout) header atomic-search-interface {
     display: block;
+  }
+}
+
+@media (max-width: 568px) {
+  /* Remove the set height to push the search to new line */
+  .grid-container {
+    grid-template-rows: auto 1fr auto;
+  }
+
+  /* Change the order of the search when wrapping to new line on header */
+  .header__search {
+    order: 2;
+    padding-block: 1rem;
   }
 }
 

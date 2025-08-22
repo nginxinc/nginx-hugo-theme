@@ -7,6 +7,7 @@ doctypes:
 title: Installing NGINX Open Source
 toc: true
 weight: 200
+nd-reading-time: true
 ---
 
 ![hero-graphic](/hero-graphic.webp)

@@ -1523,6 +1523,11 @@ a:hover {
       display: block;
     }
   }
+
+  .content__reading-time {
+    font-size: var(--font-step--1);
+    color: oklch(var(--color-footer-text));
+  }
 }
 
 .headerlink {

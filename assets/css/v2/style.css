@@ -9,19 +9,6 @@
   box-sizing: border-box;
 }
 
-/* Coveo color overrides */
-/* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
-* {
-  --atomic-primary: oklch(var(--color-brand)); /* Adjust the primary color */
-  --atomic-ring-primary: oklch(var(--color-brand) / 0.4); /* Adjust the focus color */
-  --atomic-primary-light: oklch(var(--color-brand));
-
-  /* Remove round corners */
-  --atomic-border-radius-lg: 0;
-  --atomic-border-radius-md: 0;
-  --atomic-border-radius: 0;
-}
-
 /* Prevent font size inflation */
 html {
   -moz-text-size-adjust: none;
@@ -143,6 +130,17 @@ textarea:not([rows]) {
 }
 
 :root {
+  /* Coveo color overrides */
+  /* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
+  --atomic-primary: oklch(var(--color-brand)) !important; /* Adjust the primary color */
+  --atomic-ring-primary: oklch(var(--color-brand) / 0.4) !important; /* Adjust the focus color */
+  --atomic-primary-light: oklch(var(--color-brand)) !important;
+
+  /* Remove round corners */
+  --atomic-border-radius-lg: 0 !important;
+  --atomic-border-radius-md: 0 !important;
+  --atomic-border-radius: 0 !important;
+
   /* webfonts */
   font-family: var(--font-family);
   font-feature-settings:
@@ -475,10 +473,6 @@ ol li:last-child {
 
   .sidebar {
     display: none;
-  }
-
-  .header__logo {
-    display: unset;
   }
 }
 
@@ -1158,10 +1152,6 @@ atomic-search-interface#search-standalone-header {
       border-color: oklch(var(--color-foreground));
       width: calc(100% + 2px);
       margin-inline-start: -1px;
-    }
-
-    &::part(submit-button-wrapper) {
-      --atomic-primary: var(--atomic-neutral-dark);
     }
   }
 }

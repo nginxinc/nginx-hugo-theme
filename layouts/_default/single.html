@@ -14,6 +14,11 @@
         {{ partial "banner" .}}
 
         <h1>{{ .Title }}</h1>
+        <div class="content__reading-time">
+        {{ if index .Params "nd-reading-time" }}
+            {{ printf "~%d min read" .ReadingTime }}
+        {{ end }}
+        </div>
 
         {{ $content | safeHTML }}
 

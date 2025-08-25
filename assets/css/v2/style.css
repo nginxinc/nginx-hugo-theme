@@ -1500,11 +1500,18 @@ a:hover {
   h3:target,
   h4:target,
   h5:target,
-  h6:target {
+  h6:target,
+  h2:has(a):hover,
+  h3:has(a):hover,
+  h4:has(a):hover,
+  h5:has(a):hover,
+  h6:has(a):hover {
     color: oklch(var(--color-brand));
 
     .headerlink::before {
-      display: block !important;
+      display: flex;
+      align-items: flex-start;
+      height: 100%
     }
   }
 
@@ -1517,36 +1524,6 @@ a:hover {
     margin-inline-start: -1rem;
     padding-inline-start: 1rem;
     position: relative;
-  }
-
-  h2:has(a):hover {
-    .headerlink::before {
-      display: block;
-    }
-  }
-
-  h3:has(a):hover {
-    .headerlink::before {
-      display: block;
-    }
-  }
-
-  h4:has(a):hover {
-    .headerlink::before {
-      display: block;
-    }
-  }
-
-  h5:has(a):hover {
-    .headerlink::before {
-      display: block;
-    }
-  }
-
-  h6:has(a):hover {
-    .headerlink::before {
-      display: block;
-    }
   }
 
   .content__reading-time {

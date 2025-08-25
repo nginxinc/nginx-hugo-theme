@@ -15,7 +15,13 @@ This is a callout with an icon.
 {{</call-out>}}
 
 {{<caution>}}
+
 This is a Caution callout. There was previously a bug with **bold text** that we should be aware of and continue to check for. This callout was invoked with the `<caution>` shortcode. It has no custom title.
+
+This is on a new line.
+
+This is on a new line
+
 {{</caution>}}
 
 {{<call-out "" "Custom title">}}

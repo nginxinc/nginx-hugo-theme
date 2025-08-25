@@ -1,0 +1,62 @@
+{{/* Group single-tag includes like:
+     {{< include "acm/how-to/policies-intro" >}}
+     {{< include "acm/how-to/policies-proxy-intro.md" >}}
+    */}}
+
+{{ $short := .Shortcode }}
+{{ $site := .Site }}
+
+<h2>Usages of <code>{{ $short }}</code></h2>
+
+{{ $patQuoted := print `(?s)\{\{\s*(?:<|%)\s*` $short `\b[^}]*?(?:"[^"]+"|'[^']+')[^}]*?(?:%|>)\}\}` }}
+
+{{/* Accumulate: key -> dict(path -> Page) */}}
+{{ $byKey := dict }}
+
+{{ range $pg := $site.RegularPages }}
+  {{ $src := readFile $pg.File.Path }}
+  {{ $matches := findRE $patQuoted $src }}
+  {{ if gt (len $matches) 0 }}
+    {{ range $m := $matches }}
+      {{/* first quoted string inside the tag */}}
+      {{ $qs := findRE `(?s)"[^"]+"|'[^']+'` $m }}
+      {{ if gt (len $qs) 0 }}
+        {{ $raw := index $qs 0 }}
+        {{ $key := replaceRE `^['"]|['"]$` "" $raw }}
+        {{ if ne $key "" }}
+          {{ $per := default (dict) (index $byKey $key) }}
+          {{ if not (isset $per $pg.File.Path) }}
+            {{ $per = merge $per (dict $pg.File.Path $pg) }}
+            {{ $byKey = merge $byKey (dict $key $per) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $scratch := newScratch }}
+{{ $scratch.Set "__groups" (slice) }}
+{{ range $k, $per := $byKey }}
+  {{ $scratch.Add "__groups" (dict "k" $k "per" $per "count" (len $per)) }}
+{{ end }}
+
+{{ $groups := default (slice) ($scratch.Get "__groups") }}
+{{ $groupsSorted := sort $groups "count" "desc" }}
+
+{{ range $g := $groupsSorted }}
+  {{ $k := index $g "k" }}
+  {{ $per := index $g "per" }}
+  {{ $count := index $g "count" }}
+
+  <h3 id="include-{{ urlize $k }}"><code>{{ $k }}</code> — used on {{ $count }} {{ if eq $count 1 }}page{{ else }}pages{{ end }}</h3>
+  <ul>
+    {{ if gt $count 0 }}
+      {{ range $path, $p := $per }}
+        <li><a href="{{ $p.Permalink }}">{{ $p.Title }}</a> — <small>{{ $p.File.Path }}</small></li>
+      {{ end }}
+    {{ else }}
+      <li><em>No pages found</em></li>
+    {{ end }}
+  </ul>
+{{ end }}

@@ -617,7 +617,7 @@ ol li:last-child {
       overflow-y: auto;
       min-height: 0;
       /* allows space for scrollbar */
-      width: calc(var(--sidebar-width) - 1rem);
+      width: calc(var(--sidebar-width));
       scrollbar-gutter: stable;
     }
   }

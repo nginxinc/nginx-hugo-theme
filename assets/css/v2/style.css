@@ -139,6 +139,8 @@ textarea:not([rows]) {
   --atomic-ring-primary: oklch(var(--color-brand) / 0.4) !important; /* Adjust the focus color */
   /* biome-ignore lint: necessary override */
   --atomic-primary-light: oklch(var(--color-brand)) !important;
+  --atomic-background: oklch(0.9911 0 0) !important;
+  --atomic-font-normal: 500 !important;
 
   /* Remove round corners */
   /* biome-ignore lint: Coveo override */
@@ -176,6 +178,7 @@ textarea:not([rows]) {
   --color-footer-text: 0 0 0 / 65%;
   --color-product-title: 0.64 0 0;
   --color-tabs-inactive-border: 0 0 0 / 20%;
+  --color-brand-bay-blue: 0.5307 0.128959 243.2508;
 
   /* Typography */
   --margin-content-h1: 2.5rem 0 0 0;
@@ -441,10 +444,6 @@ ol li:last-child {
     padding: 0 var(--space-l) 2rem;
   }
 
-  .header__logo {
-    display: none;
-  }
-
   .header__logo-small {
     display: none;
   }
@@ -488,10 +487,7 @@ ol li:last-child {
   display: flex;
   padding: 0 var(--space-s);
   border-bottom: 1px solid oklch(var(--color-divider));
-
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: oklch(var(--color-background));
   position: sticky;
   top: 0;
   z-index: 2;
@@ -499,14 +495,15 @@ ol li:last-child {
   .header-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     column-gap: 2rem;
     align-items: center;
     width: 100%;
+    height: 64px;
 
     .header__img {
-      height: 2rem;
+      height: 2.5rem;
     }
 
     .header__search {
@@ -514,26 +511,24 @@ ol li:last-child {
       width: auto;
     }
 
-    .header__product-selector {
-      width: 10rem;
-      background: rgba(0, 0, 0, 0);
-      color: oklch(var(--color-foreground));
-      text-decoration-color: oklch(var(--color-brand) / 0.3);
-      & button:hover * {
-        color: oklch(var(--color-brand));
-      }
+    .header__control {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      /* Stop the centre nginx icon position flickering with coveo  */
+      width: 336px;
 
-      .product-selector__button {
-        display: flex;
-        align-items: center;
-        background: rgba(0, 0, 0, 0);
-        border: none;
-        width: 16rem;
-        font-weight: 500;
-        cursor: pointer;
+      .header__control--sidebar {
         color: oklch(var(--color-foreground));
-        text-decoration-color: oklch(var(--color-brand) / 0.3);
-        transition: color 0.15s ease-in-out;
+
+        .header__control--sidebar--open {
+          display: none;
+        }
+
+        .header__control--sidebar--close {
+          display: unset;
+          cursor: pointer;
+        }
       }
     }
 
@@ -545,11 +540,27 @@ ol li:last-child {
       }
 
       .dropdown-button {
-        padding: 0.5rem 0.5rem;
-        border: none;
+        display: flex;
+        align-items: center;
+        border-radius: 4px;
+        border-top: 1px solid oklch(var(--color-brand-bay-blue));
+        border-right: 1px solid oklch(var(--color-brand-bay-blue));
+        border-bottom: 2px solid oklch(var(--color-brand-bay-blue));
+        border-left: 1px solid oklch(var(--color-brand-bay-blue));
+        height: 1.5rem;
         text-align: center;
         text-decoration: none;
         cursor: pointer;
+        background-color: oklch(var(--color-background));
+        font-size: var(--font-step--1);
+        color: oklch(var(--color-brand-bay-blue));
+        font-weight: 500;
+
+        .header__f5sites--icon > .lucide {
+          height: 1rem;
+          width: 1rem;
+          margin-top: 4px;
+        }
       }
 
       .dropdown-content {
@@ -618,8 +629,12 @@ ol li:last-child {
   }
 
   .header {
-    .header__logo-small {
+    .header__control--sidebar--close {
+      display: none;
+    }
+    .header__control--sidebar--open {
       display: unset;
+      cursor: pointer;
     }
   }
 }
@@ -665,7 +680,7 @@ ol li:last-child {
     .sidebar__header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       position: sticky;
       top: 0;
       background: oklch(var(--color-background));
@@ -674,6 +689,30 @@ ol li:last-child {
 
       .sidebar__img {
         height: 2rem;
+        width: 2rem;
+      }
+
+      .header__product-selector {
+        width: 10rem;
+        background: rgba(0, 0, 0, 0);
+        color: oklch(var(--color-foreground));
+        text-decoration-color: oklch(var(--color-brand) / 0.3);
+        & button:hover * {
+          color: oklch(var(--color-brand));
+        }
+
+        .product-selector__button {
+          display: flex;
+          align-items: center;
+          background: rgba(0, 0, 0, 0);
+          border: none;
+          width: 16rem;
+          font-weight: 500;
+          cursor: pointer;
+          color: oklch(var(--color-foreground));
+          text-decoration-color: oklch(var(--color-brand) / 0.3);
+          transition: color 0.15s ease-in-out;
+        }
       }
     }
 
@@ -697,6 +736,16 @@ ol li:last-child {
 /* This is our "mobile" or no sidebar breakpoint */
 @media (max-width: 68rem) {
   #sidebar-panel:checked ~ .grid-container {
+    .header {
+      .header-container {
+        justify-content: flex-end;
+
+        > :not(:first-child) {
+          display: none;
+        }
+      }
+    }
+
     .sidebar {
       /* Above search */
       z-index: 11;
@@ -723,6 +772,14 @@ ol li:last-child {
   }
 
   .header {
+    .header__product-selector {
+      display: none;
+    }
+
+    .header-container div.header__control {
+      width: fit-content;
+    }
+
     .header__logo-small {
       display: unset;
       img {
@@ -734,18 +791,6 @@ ol li:last-child {
         display: none;
       }
     }
-  }
-
-  .grid-container {
-    &:has(.homepage) {
-      .header-container .header__search {
-        display: block;
-      }
-    }
-  }
-
-  .header__product-selector {
-    display: none;
   }
 
   .header__sidebar__panel {
@@ -1011,7 +1056,7 @@ main {
 
 @media (min-width: 88em) {
   .header__logo {
-    display: unset;
+    height: 2.5rem;
   }
 
   .navbar atomic-search-interface {
@@ -1150,6 +1195,48 @@ atomic-search-interface#search-v2 {
 }
 
 /* Search bar on header */
+atomic-search-box {
+  height: 2.25rem;
+  width: 18.5rem;
+  display: flex;
+  align-items: center;
+}
+
+atomic-search-box::part(input) {
+  height: 2.25rem;
+  font-size: var(--font-step--1);
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+atomic-search-box::part(textarea-expander) {
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  resize: none;
+}
+
+atomic-search-box::part(textarea) {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+atomic-search-box::part(wrapper) {
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+atomic-search-box::part(submit-button) {
+  order: -1;
+  padding-right: 0;
+}
+
+atomic-search-box::part(submit-button-wrapper) {
+  margin: 0;
+}
+
 atomic-search-interface#search-standalone-header {
   height: fit-content;
 
@@ -1204,7 +1291,6 @@ body:not(:has(.main-layout)) header atomic-search-interface {
 .product-selector {
   /* should appear above search box on smaller displays */
   z-index: 11;
-  display: none;
   position: absolute;
   top: 0;
   margin-block-start: calc(var(--header-height) - 1rem);

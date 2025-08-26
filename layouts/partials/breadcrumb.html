@@ -6,7 +6,7 @@
             {{- define "breadcrumb" -}}
             {{- with .Parent -}}
                 {{- template "breadcrumb" . -}}
-                <li>{{- if .IsHome -}}<i class="fas fa-chevron-right"></i><a href="{{ .RelPermalink }}">{{ .Site.Title}}</a>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}{{ end }}</a><i class="fas fa-chevron-right"></i></li>
+                <li>{{- if .IsHome -}}<a href="{{ .RelPermalink }}">{{ .Site.Title}}</a>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}{{ end }}</a></li>
                 {{- end -}}
             {{- end -}}
             {{- if not .IsHome -}}

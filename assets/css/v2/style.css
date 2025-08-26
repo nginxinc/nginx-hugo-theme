@@ -464,7 +464,22 @@ ol li:last-child {
   .sidebar,
   .header__product-selector,
   .header__sidebar__panel,
+  .header__control--sidebar,
   .header__logo-small {
+    display: none;
+  }
+}
+
+/* 404 Page Handling */
+.grid-container:has(.not-found-container) {
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+
+  .sidebar,
+  .header__control--sidebar {
     display: none;
   }
 }
@@ -477,7 +492,8 @@ ol li:last-child {
     "content"
     "footer";
 
-  .sidebar {
+  .sidebar,
+  .header__control--sidebar {
     display: none;
   }
 }

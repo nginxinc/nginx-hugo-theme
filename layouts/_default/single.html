@@ -3,7 +3,7 @@
     <!-- Replace icons -->
     {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
 
-    <div class="breadcrumb-layout">
+    <div class="breadcrumb-layout" data-grid="wide">
         {{ if not .IsHome }}
         {{ if not (in .Params.display_breadcrumb "false" ) }}
         {{ partial "breadcrumb" .}}

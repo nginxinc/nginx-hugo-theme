@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   productSelectorButton.addEventListener('click', () => {
     const isVisible = productSelectorContent.style.display === 'block';
     productSelectorContent.style.display = isVisible ? 'none' : 'block';
-    productSelectorButton.classList.toggle('remove-bottom-radius', !isVisible);
   });
 
   window.addEventListener('click', (event) => {
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
       productSelectorContent.contains(event.target);
     if (!isClickInside) {
       productSelectorContent.style.display = 'none';
-      productSelectorButton.classList.remove('remove-bottom-radius');
     }
   });
 });

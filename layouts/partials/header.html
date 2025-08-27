@@ -1,88 +1,27 @@
 {{ define "header" }}
 <div class="header-container">
-    <div class="header__sidebar__panel">
-        <label for="sidebar-panel">
-        {{ partial "lucide" (dict "context" . "icon" "panel-left-open") }}
-        </label>
-    </div>
-
-    <div class="header__logo-small">
-        <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
-            <img class="header__img" src="{{ "/images/icons/NGINX-product-icon.svg" | absURL }}" alt="NGINX Docs">
-        </a>
+    <div class="header__control">
+        <div class="header__control--sidebar">
+            <label class="header__control--sidebar--close" for="sidebar-panel">
+            {{ partial "lucide" (dict "context" . "icon" "panel-left-close") }}
+            </label>
+            <label class="header__control--sidebar--open" for="sidebar-panel">
+            {{ partial "lucide" (dict "context" . "icon" "panel-left-open") }}
+            </label>
+        </div>
+        {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
+        <div class="header__search">
+            <!-- Standalone search box. -->
+            {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
+        </div>
+        {{ end }}
     </div>
 
     <div class="header__logo">
-        <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
-            <img class="header__img" src="{{ "/images/icons/NGINX-Docs-horiz-black-type.svg" | absURL }}" alt="NGINX Docs">
+        <a class="header__logo-link" href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
+            <img class="header__img" src="{{ "/images/icons/NGINX-Open-Source-product-icon.svg" | absURL }}" alt="NGINX Docs">
         </a>
     </div>
-
-    <div class="header__product-selector">
-        {{ $nginxProducts := slice
-            (dict "title" "NGINX One Console" "url" "/nginx-one" "type" "nginx-one")
-            (dict "title" "NGINX Plus" "url" "/nginx" "type" "nginx-one")
-            (dict "title" "NGINX Instance Manager" "url" "/nginx-instance-manager" "type" "nginx-one")
-            (dict "title" "NGINX Ingress Controller" "url" "/nginx-ingress-controller" "type" "nginx-one")
-            (dict "title" "NGINX Gateway Fabric" "url" "/nginx-gateway-fabric" "type" "nginx-one")
-            (dict "title" "NGINX Open Source" "url" "https://nginx.org/en/docs/" "type" "nginx-one")
-            (dict "title" "NGINX Agent" "url" "/nginx-agent" "type" "nginx-one")
-            (dict "title" "NGINX App Protect WAF" "url" "/nginx-app-protect-waf" "type" "nginx-app-protect")
-            (dict "title" "NGINX App Protect DoS" "url" "/nginx-app-protect-dos" "type" "nginx-app-protect")
-            (dict "title" "NGINX as a Service for Azure" "url" "/nginxaas/azure/" "type" "nginx-as-a-service")
-            (dict "title" "NGINX Unit" "url" "https://unit.nginx.org/" "type" "nginx-other")
-        }}
-        {{ $productMap := dict }}
-        {{ range $nginxProducts }}
-            {{ if not (or (eq .title "NGINX Open Source" ) (eq .title "NGINX Unit")) }}
-              {{ $productId := index (split .url "/") 1 }}
-              {{ $productMap = merge $productMap (dict $productId .title) }}
-            {{ end }}
-        {{ end }}
-        {{ $relPermalink := .RelPermalink }}
-        {{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
-        {{ $productName := index $productMap $productIdentifier | default "Product Documentation" }}
-
-        <button class="product-selector__button" id="product-selector-button">
-            {{/* product name and selector */}}
-            <span class="product-name">{{ $productName }}</span>
-            <span class="product-selector-button-icon">
-                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 13L7 7L0.999999 1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
-        </button>
-        <div class="product-selector" id="product-selector">
-            {{ $groupedProducts := dict
-                "nginx-one" (where $nginxProducts "type" "nginx-one")
-                "nginx-app-protect" (where $nginxProducts "type" "nginx-app-protect")
-                "nginx-as-a-service" (where $nginxProducts "type" "nginx-as-a-service")
-                "nginx-other" (where $nginxProducts "type" "nginx-other")
-            }}
-            {{ $orderedKeys := slice "nginx-one" "nginx-app-protect" "nginx-as-a-service" "nginx-other" }}
-            {{ range $orderedKeys }}
-            {{ $type := . }}
-            {{ $products := index $groupedProducts $type }}
-                <div class="product-selector-content" id="product-selector-content">
-                    <p>{{ $type | humanize | title | upper }}</p>
-                    <ul>
-                    {{ range $products }}
-                        <li>
-                            <a href="{{ .url }}">{{ .title }}</a>
-                        </li>
-                    {{ end }}
-                    </ul>
-                </div>
-            {{ end }}
-        </div>
-    </div>
-
-    {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
-      <div class="header__search">
-        <!-- Standalone search box. -->
-        {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
-      </div>
-    {{ end }}
 
     <div class="header__f5sites">
     {{ $f5Sites := slice
@@ -91,11 +30,13 @@
       (dict "title" "NGINX" "url" "https://nginx.org/" "description" "Learn more about NGINX Open Source and read the community blog")
     }}
 
-    <ul class="navbar navbar-nav">
-        <li class="nav-item-explore active">
+    <div class="navbar navbar-nav">
+        <div class="nav-item-explore active">
           <button id="navbar-sites-button" class="button navbar-button dropdown-button" data-testid="header__f5sites_button">
               F5 Sites
-              <i id="navbar-sites-button-icon" class="link-chevron-icon fa-solid fa-chevron-down"></i>
+              <span class="header__f5sites--icon">
+              {{ partial "lucide" (dict "context" . "icon" "chevron-down") }}
+              </span>
           </button>
           <div class="dropdown-content" id="dropdown-content" data-testid="header__f5sites_content">
             <ul>
@@ -107,8 +48,8 @@
               {{ end }}
             </ul>
           </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 
     </div>
 </div>

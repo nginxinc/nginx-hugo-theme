@@ -1,22 +1,73 @@
 
 <div class="sidebar__container">
     <div class="sidebar__header">
-        <div>
-            <a href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
-                <img class="sidebar__img" src="{{ "/images/icons/NGINX-Docs-horiz-black-type.svg" | absURL }}" alt="NGINX Docs">
-            </a>
-        </div>
-        <div class="sidebar__panel">
-            <label for="sidebar-panel">
-            {{ partial "lucide" (dict "context" . "icon" "panel-left-close") }}
-            </label>
-        </div>
-    </div>
-    <div class="sidebar__content__wrapper">
         <div class="sidebar__search">
           <!-- Standalone search box. -->
           {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-sidebar") }}
+          <label class="sidebar__mobile__toggle" for="sidebar-panel">
+              {{ partial "lucide" (dict "context" . "icon" "panel-left-close") }}
+          </label>
         </div>
+
+        {{ $relPermalink := .RelPermalink }}
+        {{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
+        {{ $relPermalink := strings.TrimSuffix "/" $productIdentifier  }}
+        {{ $currentProductTitle := "" }}
+
+        {{ with index .Site.Data "product-selector" }}
+          {{ range $group := . }}
+            {{ range $product := $group.products }}
+                {{ $splitProductUrl := index ((split $product.url "/")) 1 }}
+                {{ $suffixProductUrl := strings.TrimSuffix "/" $splitProductUrl | }}
+                {{ $prefixProductUrl := strings.TrimPrefix "/" $suffixProductUrl | }}
+              {{ if (eq $prefixProductUrl $productIdentifier) }}
+                {{ $currentProductTitle = $product.title }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+
+
+        <div class="product-selector">
+            <details class="product-selector__section">
+                <summary class="product-selector__toggle">
+
+                    <span class="product-selector__toggle-text">
+                        {{ if $currentProductTitle }}
+                            {{ $currentProductTitle }}
+                        {{ else }}
+                        Product Documentation
+                        {{ end }}
+                    </span>
+                    <span class="product-selector__chevron">
+                      {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
+                    </span>
+                </summary>
+                <div class="product-selector__content">
+                {{ with index .Site.Data "product-selector" }}
+                  {{ $groups := . }}
+                  {{ range $group := $groups }}
+                    <h3 class="product-selector__product-group">{{ $group.productGroup }}</h3>
+                    <ul>
+                      {{ $products := sort $group.products "productOrder" }}
+                      {{ range $product := $products }}
+                        <li class="product-selector__product"><a href="{{ $product.url }}">{{ $product.title }}</a></li>
+                      {{ end }}
+                    </ul>
+                  {{ end }}
+                {{ else }}
+
+                  <p>Could not find the data.</p>
+                {{ end }}
+                </div>
+
+            </details>
+
+        </div>
+
+    </div>
+    <div class="sidebar__content__wrapper">
+
         <div class="sidebar__content">
             <a class="skip-link" href="#maincontent">Skip Navigation</a>
             {{ partial "sidebar-list.html" (dict

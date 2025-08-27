@@ -44,7 +44,7 @@
                 {{ with index .Site.Data "product-selector" }}
                   {{ $groups := . }}
                   {{ range $group := $groups }}
-                    <h3 class="product-selector__product-group">{{ upper (replace $group.productGroup "-" " ") }}</h3>
+                    <h3 class="product-selector__product-group">{{ $group.productGroup }}</h3>
                     <ul>
                       {{ $products := sort $group.products "productOrder" }}
                       {{ range $product := $products }}

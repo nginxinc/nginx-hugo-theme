@@ -242,6 +242,9 @@ textarea:not([rows]) {
 
   --overflow-gutter-extension: -1rem;
 
+  /* Product Selector */
+  --product-selector-background: 0.9851 0 0;
+
   /* vars for the primary grid setup */
   --grid-content: minmax(34rem, 50rem);
   --grid-content-mobile: minmax(20rem, 50rem);
@@ -462,7 +465,7 @@ ol li:last-child {
   }
 
   .sidebar,
-  .header__product-selector,
+  .product-selector,
   .header__sidebar__panel,
   .header__control--sidebar,
   .header__logo-small {
@@ -697,14 +700,17 @@ ol li:last-child {
   padding: 0 0 var(--space-s) var(--space-s);
 
   .sidebar__container {
-    display: grid;
-    grid-template-rows: var(--header-height) 1fr;
+    display: flex;
+    flex-direction: column;
     height: 100%;
 
     .sidebar__header {
+      gap: 1rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      height: fit-content;
       position: sticky;
       top: 0;
       background: oklch(var(--color-background));
@@ -716,26 +722,68 @@ ol li:last-child {
         width: 2rem;
       }
 
-      .header__product-selector {
-        width: 10rem;
-        background: rgba(0, 0, 0, 0);
+      details summary::marker {
+        display: none;
+      }
+
+      .product-selector {
+        align-self: start;
+        width: auto;
+        background: oklch(var(--product-selector-background));
         color: oklch(var(--color-foreground));
         text-decoration-color: oklch(var(--color-brand) / 0.3);
         & button:hover * {
           color: oklch(var(--color-brand));
         }
 
-        .product-selector__button {
+        .product-selector__content {
+          padding-bottom: 1rem;
+        }
+
+        .product-selector__toggle {
           display: flex;
+          justify-content: space-between;
+          padding-inline-end: 4px;
           align-items: center;
-          background: rgba(0, 0, 0, 0);
-          border: none;
-          width: 16rem;
-          font-weight: 500;
-          cursor: pointer;
-          color: oklch(var(--color-foreground));
-          text-decoration-color: oklch(var(--color-brand) / 0.3);
-          transition: color 0.15s ease-in-out;
+        }
+
+        .product-selector__product-group {
+          padding-block-start: 0.5rem;
+          padding-inline-start: 1rem;
+        }
+
+        .product-selector__product {
+          padding-block-start: 0.5rem;
+          padding-inline-start: 1.5rem;
+          a {
+            font-weight: 400;
+            color: black;
+          }
+        }
+
+        .product-selector__section[open]
+          .product-selector__toggle
+          .product-selector__chevron {
+          transform: rotate(90deg);
+        }
+
+        details > summary {
+          list-style: none;
+          padding-inline-start: 1rem;
+          align-content: center;
+          font-size: var(--font-step-1);
+          color: oklch(var(--color-background));
+          background-color: oklch(var(--color-brand));
+          width: 21rem;
+          height: 2.5rem;
+
+          > li {
+            padding-inline-start: 0.5rem;
+          }
+        }
+
+        details > summary::-webkit-details-marker {
+          display: none;
         }
       }
     }
@@ -793,8 +841,6 @@ ol li:last-child {
             }
           }
         }
-
-
       }
     }
 
@@ -824,7 +870,7 @@ ol li:last-child {
   }
 
   .header {
-    .header__product-selector {
+    .product-selector {
       display: none;
     }
 
@@ -1339,19 +1385,6 @@ body:not(:has(.main-layout)) header atomic-search-interface {
 
 /* MARK: Product Selector
 */
-
-.product-selector {
-  /* should appear above search box on smaller displays */
-  z-index: 11;
-  position: absolute;
-  top: 0;
-  margin-block-start: calc(var(--header-height) - 1rem);
-  padding: 1rem 1.5rem;
-  background-color: oklch(var(--color-background));
-  border: oklch(var(--color-foreground)) 1px solid;
-  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-}
-
 .product-name {
   padding-inline-end: var(--space-s);
 }
@@ -1363,34 +1396,6 @@ body:not(:has(.main-layout)) header atomic-search-interface {
     color: black;
     stroke: currentColor;
   }
-}
-
-button:has(~ .product-selector[style*="block"])
-  > .product-selector-button-icon {
-  transition: transform 0.1s ease-in-out;
-  transform: rotate(90deg);
-}
-
-button:has(~ .product-selector[style*="none"]) > .product-selector-button-icon {
-  transition: transform 0.1s ease-in-out;
-  transform: rotate(0deg);
-}
-.product-selector p {
-  font-size: 0.75rem;
-  color: oklch(var(--color-product-title));
-  display: inline;
-}
-
-.product-selector ul {
-  padding-inline-start: 0;
-  margin-block-start: 0;
-  list-style-type: none;
-}
-
-.product-selector a {
-  text-decoration: none;
-  color: oklch(var(--color-foreground));
-  font-size: 1rem;
 }
 
 /* MARK: Sidebar - Content
@@ -1561,10 +1566,6 @@ details summary {
   transition: text-decoration-color 0.15s ease-in-out;
   text-decoration: underline;
   text-decoration-color: oklch(var(--color-brand) / 0.3);
-
-  & ~ * {
-    margin-block-start: 1rem;
-  }
 
   &:hover {
     text-decoration-color: oklch(var(--color-brand) / 0.8);

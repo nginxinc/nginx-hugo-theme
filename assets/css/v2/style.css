@@ -759,6 +759,18 @@ ol li:last-child {
 
 /* This is our "mobile" or no sidebar breakpoint */
 @media (max-width: 68rem) {
+  #sidebar-panel:not(:checked) ~ .grid-container {
+    .header {
+      .header__control--sidebar--close {
+        display: none;
+      }
+
+      .header__control--sidebar--open {
+        display: unset;
+      }
+    }
+  }
+
   #sidebar-panel:checked ~ .grid-container {
     .header {
       .header-container {
@@ -767,6 +779,22 @@ ol li:last-child {
         > :not(:first-child) {
           display: none;
         }
+
+        .header__control {
+          .header__control--sidebar {
+            color: oklch(var(--color-foreground));
+
+            .header__control--sidebar--open {
+              display: none;
+            }
+
+            .header__control--sidebar--close {
+              display: unset;
+            }
+          }
+        }
+
+
       }
     }
 

@@ -132,13 +132,20 @@ textarea:not([rows]) {
 :root {
   /* Coveo color overrides */
   /* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
+
+  /* biome-ignore lint: Coveo override */
   --atomic-primary: oklch(var(--color-brand)) !important; /* Adjust the primary color */
+  /* biome-ignore lint: necessary override */
   --atomic-ring-primary: oklch(var(--color-brand) / 0.4) !important; /* Adjust the focus color */
+  /* biome-ignore lint: necessary override */
   --atomic-primary-light: oklch(var(--color-brand)) !important;
 
   /* Remove round corners */
+  /* biome-ignore lint: Coveo override */
   --atomic-border-radius-lg: 0 !important;
+  /* biome-ignore lint: Coveo override */
   --atomic-border-radius-md: 0 !important;
+  /* biome-ignore lint: Coveo override */
   --atomic-border-radius: 0 !important;
 
   /* webfonts */
@@ -981,6 +988,7 @@ nav {
     max-width: 100%;
 
     .redoc-wrap .menu-content {
+      /* biome-ignore lint: Redoc override */
       top: 4rem !important; /* Override redocly's inline top property */
       left: 0;
     }
@@ -1035,9 +1043,11 @@ main {
 
 .QSIUserDefinedHTML {
   z-index: 1;
+  /* biome-ignore lint: Qualtrics override */
   width: 100% !important;
 
   * {
+    /* biome-ignore lint: Qualtrics override */
     width: 100% !important; /* Override Qualtrics hard-coded width */
   }
 }
@@ -1049,6 +1059,7 @@ main {
 atomic-search-interface#search-v2 {
   position: relative;
   z-index: 1;
+  /* biome-ignore lint: Coveo override */
   display: inline-block !important;
   width: 95vw;
   grid-column: 1 / -1;
@@ -1064,7 +1075,7 @@ atomic-search-interface#search-v2 {
       "atomic-section-status"
       "atomic-section-facets"
       "atomic-section-main";
-
+    /* biome-ignore lint: Coveo override */
     grid-template-columns: minmax(50%, 100%) !important;
 
     @media (min-width: 1024px) {
@@ -1072,15 +1083,19 @@ atomic-search-interface#search-v2 {
         grid-template-areas:
           "atomic-section-search atomic-section-status"
           "atomic-section-facets atomic-section-main  "
+          /* biome-ignore lint: Coveo override */
           "atomic-section-facets .                    " !important;
       }
 
       grid-template-areas:
         "atomic-section-facets atomic-section-status"
         "atomic-section-facets atomic-section-main  "
+        /* biome-ignore lint: Coveo override */
         "atomic-section-facets .                    " !important;
 
+      /* biome-ignore lint: Coveo override */
       grid-template-columns: minmax(17rem, 24rem) minmax(50%, 100%) !important;
+      /* biome-ignore lint: Coveo override */
       column-gap: calc(1.5rem + 2rem) !important;
     }
 
@@ -1105,6 +1120,7 @@ atomic-search-interface#search-v2 {
 
         atomic-query-summary {
           &::part(duration) {
+            /* biome-ignore lint: Coveo override */
             display: inline-block !important;
           }
         }
@@ -1121,7 +1137,9 @@ atomic-search-interface#search-v2 {
 
     atomic-layout-section[section="search"] {
       /* Override Coveo's width to be full */
+      /* biome-ignore lint: Coveo override */
       width: 100% !important;
+      /* biome-ignore lint: Coveo override */
       max-width: 100% !important;
     }
 
@@ -1457,6 +1475,7 @@ p {
 
 .breadcrumb li:after {
   padding: 0 0.25rem;
+  /* biome-ignore lint: Breadcrumb arrow */
   content: "\E1D7";
 }
 
@@ -1511,7 +1530,7 @@ a:hover {
     .headerlink::before {
       display: flex;
       align-items: flex-start;
-      height: 100%
+      height: 100%;
     }
   }
 

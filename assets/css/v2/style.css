@@ -780,7 +780,6 @@ ol li:last-child {
           background-color: oklch(var(--color-brand));
           height: 2.5rem;
 
-
           > li {
             padding-inline-start: 0.5rem;
           }
@@ -839,10 +838,6 @@ ol li:last-child {
             .header__control--sidebar--open {
               display: none;
             }
-
-            .header__control--sidebar--close {
-              display: unset;
-            }
           }
         }
       }
@@ -869,7 +864,9 @@ ol li:last-child {
       }
 
       .sidebar__search {
-        display: unset;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
         width: calc(var(--sidebar-width));
         padding-top: var(--space-s);
         padding-right: var(--sidebar-item-padding-lr);
@@ -877,6 +874,7 @@ ol li:last-child {
 
         #search-standalone-sidebar {
           atomic-search-box {
+            flex-grow: 1;
             width: 100%;
           }
         }

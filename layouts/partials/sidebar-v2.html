@@ -4,6 +4,9 @@
         <div class="sidebar__search">
           <!-- Standalone search box. -->
           {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-sidebar") }}
+          <label class="sidebar__mobile__toggle" for="sidebar-panel">
+              {{ partial "lucide" (dict "context" . "icon" "panel-left-close") }}
+          </label>
         </div>
 
         {{ $relPermalink := .RelPermalink }}

@@ -864,11 +864,22 @@ ol li:last-child {
         flex-direction: column;
       }
 
+      .product-selector {
+        padding-top: 0;
+      }
+
       .sidebar__search {
         display: unset;
         width: calc(var(--sidebar-width));
-        margin-block-start: 0.5rem;
-        padding-inline: 0.5rem;
+        padding-top: var(--space-s);
+        padding-right: var(--sidebar-item-padding-lr);
+        overflow: hidden;
+
+        #search-standalone-sidebar {
+          atomic-search-box {
+            width: 100%;
+          }
+        }
       }
     }
   }

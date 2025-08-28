@@ -817,7 +817,7 @@ ol li:last-child {
 /* This is our "mobile" or no sidebar breakpoint */
 @media (max-width: 68rem) {
   #search-standalone-header-panel:checked ~ .grid-container {
-    .header__search[data-mode="mobile"] {
+    .header__search {
       position: absolute;
       top: 100%;
       width: 100%;

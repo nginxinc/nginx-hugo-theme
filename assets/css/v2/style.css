@@ -772,6 +772,7 @@ ol li:last-child {
         }
 
         details > summary {
+          cursor: pointer;
           list-style: none;
           padding-inline-start: 1rem;
           align-content: center;

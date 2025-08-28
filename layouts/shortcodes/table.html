@@ -1,17 +1,27 @@
-{{/* Use this shortcode to wrap big tables that you want to have scrollbars when being shown in smaller screens */}}
-<style>
-    table, th, td {
-      border: 1px solid #CCC;
-      border-collapse: collapse;
-      list-style-position: inside;
-    }
-    th, td {
-      padding: 5px;
-    }
-    th {
-      text-align: center;
-    }
-</style>
-<div class="override-table">
-{{.Inner}}
-</div>
+<!-- Use this shortcode to allow tables to be scrollable across the x-axis -->
+<!-- Params: variant=['narrow' | 'wide'] (defaults to "wide") -->
+<!-- Params: theme=['bordered' | 'borderless'] (defaults to "bordered") -->
+
+{{ $variantRaw := .Get "variant" }}
+{{ $themeRaw := or (.Get "theme") "" }}
+
+{{ $variant := "wide" }}
+{{ $theme := "bordered" }}
+
+{{ if in (slice "narrow" "wide") $variantRaw }}
+  {{ $variant = $variantRaw }}
+{{ else if $variantRaw }}
+  {{ errorf "Invalid variant supplied to <table> shortcode: Received %s. Wanted: 'narrow', 'wide'" $variantRaw }}
+{{ end }}
+
+{{ if in (slice "bordered" "borderless") $themeRaw }}
+  {{ $theme = $themeRaw }}
+{{ else if $themeRaw }}
+  {{ errorf "Invalid theme supplied to <table> shortcode</table>: Received %s. Wanted: 'bordered', 'borderless'" $themeRaw }}
+{{ end }}
+
+{{ partial "table.html" (dict
+    "variant" $variant
+    "theme" $theme
+    "content" .Inner
+)}}

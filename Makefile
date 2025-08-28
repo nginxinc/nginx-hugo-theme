@@ -1,4 +1,4 @@
-BIOME_BASE_CMD := $(if $(shell which biome),biome,npx @biomejs/biome@1.9.4)
+BIOME_BASE_CMD := $(if $(shell which biome),biome,npx @biomejs/biome@2.2.2)
 BIOME_CONFIG_PATH := --config-path="biome.json"
 WRITE_FLAG := --write
 

@@ -51,7 +51,15 @@
                     <ul>
                       {{ $products := sort $group.products "productOrder" }}
                       {{ range $product := $products }}
-                        <li class="product-selector__product"><a href="{{ $product.url }}">{{ $product.title }}</a></li>
+                        <li class="product-selector__product">
+                          <a
+                            href="{{ $product.url }}"
+                            aria-label="{{ $product.title }} documentation"
+                            {{ if $product.extUrl }} target="_blank" {{ end }}
+                          >
+                            {{ $product.title }}
+                          </a>
+                        </li>
                       {{ end }}
                     </ul>
                   {{ end }}

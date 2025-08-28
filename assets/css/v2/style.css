@@ -987,7 +987,7 @@ nav {
 
 .homepage {
   --content-max-width: 120rem;
-  margin: 0 2rem;
+  margin: 0 0.5rem;
   line-height: 1.5rem;
 
   * {
@@ -998,12 +998,12 @@ nav {
   .homepage-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 500px));
-    gap: 1.5rem;
+    gap: 1rem;
 
     justify-content: center;
     max-width: 100rem;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 2rem 1rem;
 
     .headerlink {
       cursor: default;
@@ -1016,10 +1016,6 @@ nav {
 
     > * {
       grid-column: 1 / -1;
-    }
-
-    > p {
-      grid-column: 1;
     }
   }
 }
@@ -1513,7 +1509,7 @@ nav.sidebar.sidebar__mobile-open {
     padding: var(--sidebar-item-padding-tb) var(--sidebar-item-padding-lr);
     margin: 2px 0 2px 0;
     border-radius: 5px 0 0 5px;
-    color: oklch(0 0 0 / 0.75);
+    color: oklch(var(--color-foreground));
     text-decoration: none;
     transition:
       background-color 0.2s ease,

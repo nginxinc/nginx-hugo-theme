@@ -10,7 +10,11 @@
             </label>
         </div>
         {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
-        <div class="header__search">
+        <!-- Mobile button -->
+        <label class="header__search--mobile--search--button" id="header__search--mobile--search--button" for="search-standalone-header-panel">
+          {{ partial "lucide" (dict "context" . "icon" "search") }}
+        </label>
+        <div class="header__search" id="header__search" data-mode="mobile">
             <!-- Standalone search box. -->
             {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
         </div>

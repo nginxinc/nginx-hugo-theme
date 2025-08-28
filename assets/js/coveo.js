@@ -103,3 +103,20 @@ async function atomicCoveo() {
 document.addEventListener('DOMContentLoaded', async () => {
   atomicCoveo();
 });
+
+window.addEventListener('resize', () => {
+  const MODES = [
+    // my really bad enum
+    'desktop',
+    'mobile',
+  ];
+  const search = document.getElementById('header__search');
+
+  if (search) {
+    if (window.innerWidth < 68 * 16) {
+      search.setAttribute('data-mode', MODES[1]);
+    } else {
+      search.setAttribute('data-mode', MODES[0]);
+    }
+  }
+});

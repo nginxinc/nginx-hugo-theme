@@ -1212,6 +1212,11 @@ main {
 /* MARK: Coveo
 */
 
+.search {
+  display: flex;
+  justify-content: center;
+}
+
 /* Search results on content */
 atomic-search-interface#search-v2 {
   position: relative;

@@ -129,7 +129,31 @@ textarea:not([rows]) {
   font-display: swap;
 }
 
+/* Handle theme switching that can't be dont with the light-dark function */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* card */
+:root[data-theme="light"] {
+  --card-border: 1px solid oklch(var(--color-codeblock-border));
+  --card-shadow: 3px 3px 0px oklch(var(--color-shadow));
+  --blockquote-border: 1px solid oklch(var(--color-codeblock-border));
+  --blockquote-shadow: 3px 3px 0px oklch(var(--color-shadow));
+}
+:root[data-theme="dark"] {
+  --card-border: 1px dashed oklch(var(--color-codeblock-border));
+  --card-shadow: 0;
+  --blockquote-border: 1px dashed oklch(var(--color-codeblock-border));
+  --blockquote-shadow: 0;
+}
+
 :root {
+  color-scheme: light dark;
+
   /* Coveo color overrides */
   /* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
 
@@ -171,11 +195,12 @@ textarea:not([rows]) {
   --color-brand-300: 0.84 0.0699 157.51;
   --color-brand-200: 0.91 0.0406 157.72;
   --color-brand-100: 0.98 0.0107 158.85;
-  --color-background: 1 0 0;
-  --color-foreground: 0 0 0;
+  --color-background: light-dark(oklch(1 0 0), oklch(0.2 0 0));
+  --color-foreground: light-dark(oklch(0 0 0), oklch(1 0 0));
   --color-shadow: 0.86 0 0;
+  --code-color: oklch(0 0 0);
 
-  --color-footer-text: 0 0 0 / 65%;
+  --color-footer-text: light-dark(oklch(0 0 0 / 65%), oklch(1 0 0 / 65%));
   --color-product-title: 0.64 0 0;
   --color-tabs-inactive-border: 0 0 0 / 20%;
   --color-brand-bay-blue: 0.5307 0.128959 243.2508;
@@ -195,8 +220,11 @@ textarea:not([rows]) {
   /* Codeblock */
 
   --margin-codeblock: 1.5rem var(--overflow-gutter-extension);
-  --color-inline_codeblock-border: 0.85 0 0;
-  --color-inline_codeblock-background: 0.98 0 0;
+  --color-inline_codeblock-border: light-dark(oklch(0.85 0 0), oklch(0.85 0 0));
+  --color-inline_codeblock-background: light-dark(
+    oklch(0.98 0 0),
+    oklch(0.02 0 0)
+  );
   --color-codeblock-border: 0.63 0 0;
   --color-codeblock-background: 1 0 0;
   --color-codeblock-highlight: 0.99 0.0479 105.97;
@@ -243,7 +271,7 @@ textarea:not([rows]) {
   --overflow-gutter-extension: -1rem;
 
   /* Product Selector */
-  --product-selector-background: 0.98 0 0;
+  --product-selector-background: light-dark(oklch(0.98 0 0), oklch(0.22 0 0));
 
   /* vars for the primary grid setup */
   --grid-content: minmax(34rem, 50rem);
@@ -312,6 +340,7 @@ textarea:not([rows]) {
   --sidebar-item-padding-lr: 0.75rem;
   --sidebar-item-padding-tb: 0.25rem;
   --content-max-width: 88rem;
+  --color-sidebar-link: light-dark(oklch(0 0 0 / 75%), oklch(1 0 0 / 95%));
 
   --main-col: minmax(34rem, 50rem);
   --side-col: minmax(18rem, 26rem);
@@ -417,6 +446,7 @@ ol li:last-child {
     "sidebar footer";
   min-height: 100vh;
   min-width: var(--grid-min-width);
+  background-color: var(--color-background);
 
   @media (max-width: 68rem) {
     grid-template-columns: 1fr;
@@ -506,7 +536,7 @@ ol li:last-child {
   display: flex;
   padding: 0 var(--space-s);
   border-bottom: 1px solid oklch(var(--color-divider));
-  background: oklch(var(--color-background));
+  background: var(--color-background);
   position: sticky;
   top: 0;
   z-index: 2;
@@ -547,7 +577,10 @@ ol li:last-child {
       width: 336px;
 
       .header__control--sidebar {
-        color: oklch(var(--color-foreground));
+        display: flex;
+        gap: 1rem;
+
+        color: var(--color-foreground);
 
         .header__control--sidebar--open {
           display: none;
@@ -555,6 +588,10 @@ ol li:last-child {
 
         .header__control--sidebar--close {
           display: unset;
+          cursor: pointer;
+        }
+
+        .header__control--theme {
           cursor: pointer;
         }
       }
@@ -579,7 +616,7 @@ ol li:last-child {
         text-align: center;
         text-decoration: none;
         cursor: pointer;
-        background-color: oklch(var(--color-background));
+        background-color: var(--color-background);
         font-size: var(--font-step--1);
         color: oklch(var(--color-brand-bay-blue));
         font-weight: 500;
@@ -593,8 +630,8 @@ ol li:last-child {
 
       .dropdown-content {
         position: absolute;
-        background-color: oklch(var(--color-background));
-        border: oklch(var(--color-foreground)) 1px solid;
+        background-color: var(--color-background);
+        border: var(--color-foreground) 1px solid;
         box-shadow: 3px 3px 0px oklch(var(--color-shadow));
         z-index: 1;
         right: 0;
@@ -625,6 +662,7 @@ ol li:last-child {
 }
 
 .content {
+  background-color: var(--color-background);
   .last-modified {
     margin: 1rem 0 0 0;
     font-size: 0.875rem;
@@ -671,7 +709,7 @@ ol li:last-child {
 .header__sidebar__panel,
 .sidebar__panel {
   cursor: pointer;
-  color: oklch(var(--color-foreground));
+  color: var(--color-foreground);
   label {
     cursor: pointer;
   }
@@ -695,7 +733,7 @@ ol li:last-child {
   height: calc(110vh - var(--header-height));
   border-right: 1px solid oklch(var(--color-divider));
   overflow: hidden;
-  background: oklch(var(--color-background));
+  background: var(--color-background);
   box-sizing: border-box;
   transform: translateX(0);
   padding: 0 0 var(--space-s) var(--space-s);
@@ -714,7 +752,7 @@ ol li:last-child {
       height: fit-content;
       position: sticky;
       top: 0;
-      background: oklch(var(--color-background));
+      background: var(--color-background);
       z-index: 1;
 
       .sidebar__img {
@@ -730,7 +768,7 @@ ol li:last-child {
         width: 100%;
         padding-top: 1rem;
         padding-right: var(--sidebar-item-padding-lr);
-        color: oklch(var(--color-foreground));
+        color: var(--color-foreground);
         text-decoration-color: oklch(var(--color-brand) / 0.3);
         & button:hover * {
           color: oklch(var(--color-brand));
@@ -742,7 +780,7 @@ ol li:last-child {
         }
 
         .product-selector__section {
-          background: oklch(var(--product-selector-background));
+          background: var(--product-selector-background);
         }
 
         .product-selector__toggle {
@@ -778,7 +816,7 @@ ol li:last-child {
           padding-inline-start: 1rem;
           align-content: center;
           font-size: var(--font-step-0);
-          color: oklch(var(--color-background));
+          color: var(--color-background);
           background-color: oklch(var(--color-brand));
           height: 2.5rem;
 
@@ -835,7 +873,7 @@ ol li:last-child {
 
         .header__control {
           .header__control--sidebar {
-            color: oklch(var(--color-foreground));
+            color: var(--color-foreground);
 
             .header__control--sidebar--open {
               display: none;
@@ -941,7 +979,7 @@ ol li:last-child {
 
 .footer-f5-trademark p {
   margin: 0;
-  color: oklch(var(--color-footer-text));
+  color: var(--color-footer-text);
 }
 
 .footer-useful-links {
@@ -951,7 +989,7 @@ ol li:last-child {
 }
 
 .footer-useful-links a {
-  color: oklch(var(--color-footer-text));
+  color: var(--color-footer-text);
   text-decoration: none;
 }
 
@@ -1361,7 +1399,7 @@ atomic-search-interface#search-standalone-header {
   .header-search-box {
     &::part(wrapper) {
       border-radius: 0;
-      border-color: oklch(var(--color-foreground));
+      border-color: var(--color-foreground);
     }
 
     &::part(textarea) {
@@ -1371,7 +1409,7 @@ atomic-search-interface#search-standalone-header {
 
     &::part(suggestions-wrapper) {
       border-radius: 0;
-      border-color: oklch(var(--color-foreground));
+      border-color: var(--color-foreground);
       width: calc(100% + 2px);
       margin-inline-start: -1px;
     }
@@ -1477,7 +1515,7 @@ nav.sidebar.sidebar__mobile-open {
     padding: 0.25rem 0.5rem;
     border-radius: 5px 0 0 5px;
     font-weight: 500;
-    color: oklch(var(--color-foreground));
+    color: var(--color-foreground);
 
     &:hover {
       background-color: oklch(var(--color-brand) / 0.06);
@@ -1513,7 +1551,7 @@ nav.sidebar.sidebar__mobile-open {
     padding: var(--sidebar-item-padding-tb) var(--sidebar-item-padding-lr);
     margin: 2px 0 2px 0;
     border-radius: 5px 0 0 5px;
-    color: oklch(0 0 0 / 0.75);
+    color: var(--color-sidebar-link);
     text-decoration: none;
     transition:
       background-color 0.2s ease,
@@ -1546,7 +1584,7 @@ nav.sidebar.sidebar__mobile-open {
       }
 
       a {
-        color: oklch(var(--color-foreground));
+        color: var(--color-foreground);
         text-decoration: none;
       }
 
@@ -1591,7 +1629,7 @@ p {
 
 .breadcrumb-layout {
   position: relative;
-  background-color: white;
+  background-color: var(--color-background);
 
   .sidebar__mobile__toggle {
     display: none;
@@ -1599,7 +1637,7 @@ p {
 }
 
 .breadcrumb {
-  color: oklch(var(--color-foreground));
+  color: var(--color-foreground);
   text-decoration: none;
   font-size: 0.875rem;
   margin: 0;
@@ -1707,14 +1745,14 @@ a:hover {
 
   .content__reading-time {
     font-size: var(--font-step--1);
-    color: oklch(var(--color-footer-text));
+    color: var(--color-footer-text);
   }
 }
 
 .headerlink {
   text-decoration: none;
 
-  color: oklch(var(--color-foreground));
+  color: var(--color-foreground);
 }
 
 .headerlink::before {
@@ -1762,15 +1800,15 @@ a:hover {
       }
 
       .card {
-        border: 1px solid oklch(var(--color-codeblock-border));
-        box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+        border: var(--card-border);
+        box-shadow: var(--card-shadow);
         padding: 1rem;
         order: 2;
       }
     }
 
     .card {
-      color: oklch(var(--color-foreground));
+      color: var(--color-foreground);
       text-decoration: none;
 
       .card-container {
@@ -1800,7 +1838,7 @@ a:hover {
 
       &:hover {
         box-shadow: 3px 3px 0px oklch(var(--color-brand) / 0.4);
-        text-decoration-color: oklch(var(--color-background));
+        text-decoration-color: var(--color-background);
         border: 1px solid oklch(var(--color-brand) / 0.8);
       }
     }
@@ -1902,8 +1940,7 @@ table.table {
       border: var(--table-line-height) solid oklch(var(--table-color-divider));
       border-top: var(--table-line-height) dashed
         oklch(var(--table-color-divider));
-      border-bottom: var(--table-line-height) solid
-        oklch(var(--color-foreground));
+      border-bottom: var(--table-line-height) solid var(--color-foreground);
     }
 
     tr:nth-child(even) td {
@@ -1926,13 +1963,15 @@ table hr {
 /* MARK: Callouts
 */
 blockquote {
-  border: 1px solid oklch(var(--color-foreground));
+  /*1px solid var(--color-foreground)*/
+  border: var(--blockquote-border);
   padding: 1rem;
   height: fit-content;
   margin: var(--margin-callout); /* Expand into the gutter */
 
   /* solid 3px drop shadow */
-  box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+  /*3px 3px 0px oklch(var(--color-shadow))*/
+  box-shadow: var(--blockquote-shadow);
 
   &:has(.code-block) .code-block:not(:has(.single-line)) {
     /* Removes negative margins from multi-line codeblocks */
@@ -1959,7 +1998,7 @@ blockquote.note:before {
   margin: -1.625rem 0 0 -0.25rem;
   padding: 0 0.25rem;
   display: block;
-  background-color: oklch(var(--color-background));
+  background-color: var(--color-background);
   z-index: 999;
 }
 
@@ -2144,14 +2183,17 @@ li:has(> div > blockquote) {
 */
 code {
   font-family: "JetBrainsMono", monospace;
+  /* We want to use the same colour for codeblocks, regardless of theme*/
+  color: var(--code-color);
 }
 
 /* Inline Codeblock */
 code:not(pre code) {
-  border: solid 1px oklch(var(--color-inline_codeblock-border));
+  color: var(--color-foreground);
+  border: solid 1px var(--color-inline_codeblock-border);
   border-radius: 0.25rem;
   padding: 0 0.25rem;
-  background-color: oklch(var(--color-inline_codeblock-background));
+  background-color: var(--color-inline_codeblock-background);
   font-size: 0.875rem;
 }
 
@@ -2224,6 +2266,7 @@ a:has(code:not(pre code)) {
   .code-type {
     display: inline-block;
     height: 1.5rem;
+    color: var(--code-color);
     border-top: 1px solid oklch(var(--color-codeblock-border));
     border-left: 1px solid oklch(var(--color-codeblock-border));
     border-right: 1px solid oklch(var(--color-codeblock-border));
@@ -2244,12 +2287,12 @@ a:has(code:not(pre code)) {
     }
 
     .code-copy-button {
-      background-color: oklch(var(--color-background));
-      border: 1px solid oklch(var(--color-foreground));
+      background-color: var(--color-background);
+      border: 1px solid var(--color-foreground);
       padding: 4px 6px;
       cursor: pointer;
       font-size: 12px;
-      color: oklch(var(--color-foreground));
+      color: var(--color-foreground);
       display: none;
       position: absolute;
       margin-block-start: 8px;
@@ -2367,11 +2410,11 @@ hr {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: oklch(var(--color-background));
-  color: oklch(var(--color-foreground));
+  background-color: var(--color-background);
+  color: var(--color-foreground);
   padding: 1rem 1rem;
   font-size: 1rem;
-  border: 2px solid oklch(var(--color-foreground));
+  border: 2px solid var(--color-foreground);
   z-index: 1000;
   text-decoration: none;
   border-radius: 0;

@@ -8,6 +8,10 @@
             <label class="header__control--sidebar--open" for="sidebar-panel">
             {{ partial "lucide" (dict "context" . "icon" "panel-left-open") }}
             </label>
+            <input type="checkbox" id="theme-toggle" hidden/>
+            <label class="header__control--theme" for="theme-toggle">
+            {{ partial "lucide" (dict "context" . "icon" "sun") }}
+            </label>
         </div>
         {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
         <div class="header__search">

@@ -35,6 +35,74 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K5HG9JT');</script>
 
+  <script>
+
+    let storedTheme = null;
+    try {
+      storedTheme = localStorage.getItem("theme");
+    } catch (e) {
+      // Some environments block storage (privacy mode, etc.)
+    }
+
+    const mql = window.matchMedia
+      ? window.matchMedia("(prefers-color-scheme: dark)")
+      : null;
+    const initialTheme = storedTheme || (mql && mql.matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", initialTheme);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const toggle = document.getElementById("theme-toggle");
+      if (!toggle) return;
+
+      toggle.checked =
+        document.documentElement.getAttribute("data-theme") === "dark";
+
+      toggle.addEventListener("change", () => {
+        const theme = toggle.checked ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem("theme", theme);
+        } catch (e) {}
+      });
+
+      // Follow system preference only until the user picks a theme
+      let hasUserChoice = false;
+      try {
+        hasUserChoice = localStorage.getItem("theme") !== null;
+      } catch (e) {
+        hasUserChoice = false;
+      }
+
+      if (!hasUserChoice && mql) {
+        const onSystemChange = (e) => {
+          try {
+            if (localStorage.getItem("theme") !== null) return;
+          } catch (err) {
+            // continue following system if storage is blocked
+          }
+          const theme = e.matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+          toggle.checked = theme === "dark";
+        };
+
+        if (typeof mql.addEventListener === "function") {
+          mql.addEventListener("change", onSystemChange);
+        } else if (typeof mql.addListener === "function") {
+          mql.addListener(onSystemChange);
+        }
+      }
+    });
+
+    // Keep multiple tabs in sync so a change in one reflects in others
+    window.addEventListener("storage", (e) => {
+      if (e.key !== "theme") return;
+      const theme = e.newValue || (mql && mql.matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle) toggle.checked = theme === "dark";
+    });
+
+  </script>
   </head>
 
   <body id="body">

@@ -198,7 +198,7 @@ textarea:not([rows]) {
   --color-background: light-dark(oklch(1 0 0), oklch(0.2 0 0));
   --color-foreground: light-dark(oklch(0 0 0), oklch(1 0 0));
   --color-shadow: 0.86 0 0;
-  --code-color: oklch(0 0 0);
+  --code-color: light-dark(oklch(0 0 0), oklch(1 0 0));
 
   --color-footer-text: light-dark(oklch(0 0 0 / 65%), oklch(1 0 0 / 65%));
   --color-product-title: 0.64 0 0;

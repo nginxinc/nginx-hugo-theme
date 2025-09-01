@@ -199,7 +199,7 @@ textarea:not([rows]) {
   --color-brand-300: 0.84 0.0699 157.51;
   --color-brand-200: 0.91 0.0406 157.72;
   --color-brand-100: 0.98 0.0107 158.85;
-  --color-background: light-dark(oklch(1 0 0), oklch(0.2 0 0));
+  --color-background: light-dark(oklch(1 0 0), oklch(0.1 0.194 147.7));
   --color-foreground: light-dark(oklch(0 0 0), oklch(1 0 0 / 0.9));
   --color-shadow: 0.86 0 0;
   --code-color: light-dark(oklch(0 0 0), oklch(1 0 0));

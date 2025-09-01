@@ -143,12 +143,16 @@ textarea:not([rows]) {
   --card-shadow: 3px 3px 0px oklch(var(--color-shadow));
   --blockquote-border: 1px solid oklch(var(--color-codeblock-border));
   --blockquote-shadow: 3px 3px 0px oklch(var(--color-shadow));
+  --icon-light: block;
+  --icon-dark: none;
 }
 :root[data-theme="dark"] {
   --card-border: 1px dashed oklch(var(--color-codeblock-border));
   --card-shadow: 0;
   --blockquote-border: 1px dashed oklch(var(--color-codeblock-border));
   --blockquote-shadow: 0;
+  --icon-dark: block;
+  --icon-light: none;
 }
 
 :root {
@@ -196,7 +200,7 @@ textarea:not([rows]) {
   --color-brand-200: 0.91 0.0406 157.72;
   --color-brand-100: 0.98 0.0107 158.85;
   --color-background: light-dark(oklch(1 0 0), oklch(0.2 0 0));
-  --color-foreground: light-dark(oklch(0 0 0), oklch(1 0 0));
+  --color-foreground: light-dark(oklch(0 0 0), oklch(1 0 0 / 0.9));
   --color-shadow: 0.86 0 0;
   --code-color: light-dark(oklch(0 0 0), oklch(1 0 0));
 
@@ -592,7 +596,17 @@ ol li:last-child {
         }
 
         .header__control--theme {
+          background: none;
+          border: none;
           cursor: pointer;
+
+          .header__control--theme--light {
+            display: var(--icon-light);
+          }
+
+          .header__control--theme--dark {
+            display: var(--icon-dark);
+          }
         }
       }
     }

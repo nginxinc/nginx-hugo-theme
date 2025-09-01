@@ -36,71 +36,53 @@
     })(window,document,'script','dataLayer','GTM-K5HG9JT');</script>
 
   <script>
+  let storedTheme = null;
+  try {
+    storedTheme = localStorage.getItem('theme');
+  } catch (e) {
+    console.warn('Unable to read theme from localStorage:', e);
+  }
 
-    let storedTheme = null;
-    try {
-      storedTheme = localStorage.getItem("theme");
-    } catch (e) {
-      // Some environments block storage (privacy mode, etc.)
-    }
+  const mql = window.matchMedia?.('(prefers-color-scheme: dark)');
+  const initialTheme = storedTheme || (mql?.matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', initialTheme);
 
-    const mql = window.matchMedia
-      ? window.matchMedia("(prefers-color-scheme: dark)")
-      : null;
-    const initialTheme = storedTheme || (mql && mql.matches ? "dark" : "light");
-    document.documentElement.setAttribute("data-theme", initialTheme);
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const toggle = document.getElementById("theme-toggle");
-      if (!toggle) return;
-
-      toggle.checked =
-        document.documentElement.getAttribute("data-theme") === "dark";
-
-      toggle.addEventListener("change", () => {
-        const theme = toggle.checked ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", theme);
-        try {
-          localStorage.setItem("theme", theme);
-        } catch (e) {}
-      });
-
-      // Follow system preference only until the user picks a theme
-      let hasUserChoice = false;
+    toggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
       try {
-        hasUserChoice = localStorage.getItem("theme") !== null;
+        localStorage.setItem('theme', newTheme);
       } catch (e) {
-        hasUserChoice = false;
+        console.warn('Failed to write theme to localStorage:', e);
       }
+    });
 
-      if (!hasUserChoice && mql) {
-        const onSystemChange = (e) => {
-          try {
-            if (localStorage.getItem("theme") !== null) return;
-          } catch (err) {
-            // continue following system if storage is blocked
-          }
-          const theme = e.matches ? "dark" : "light";
-          document.documentElement.setAttribute("data-theme", theme);
-          toggle.checked = theme === "dark";
-        };
+    const hasUserChoice = storedTheme !== null;
 
-        if (typeof mql.addEventListener === "function") {
-          mql.addEventListener("change", onSystemChange);
-        } else if (typeof mql.addListener === "function") {
-          mql.addListener(onSystemChange);
+    if (!hasUserChoice && mql) {
+      const onSystemChange = (e) => {
+        try {
+          if (localStorage.getItem('theme') !== null) return;
+        } catch (err) {
+          console.warn('Unable to read theme from localStorage:', err);
         }
-      }
-    });
+        const theme = e.matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      };
+      mql.addEventListener('change', onSystemChange);
+    }
+  });
 
-    // Keep multiple tabs in sync so a change in one reflects in others
-    window.addEventListener("storage", (e) => {
-      if (e.key !== "theme") return;
-      const theme = e.newValue || (mql && mql.matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-      const toggle = document.getElementById("theme-toggle");
-      if (toggle) toggle.checked = theme === "dark";
-    });
+  window.addEventListener('storage', (e) => {
+    if (e.key !== 'theme') return;
+    const theme = e.newValue || (mql?.matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  });
 
   </script>
   </head>

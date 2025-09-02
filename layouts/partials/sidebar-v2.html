@@ -9,19 +9,17 @@
           </label>
         </div>
 
-        {{ $relPermalink := .RelPermalink }}
-        {{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
-        {{ $relPermalink := strings.TrimSuffix "/" $productIdentifier  }}
+        {{ $relPermalink := .RelPermalink | strings.TrimPrefix "/" | strings.TrimSuffix "/" }}
         {{ $currentProductTitle := "" }}
 
         {{ with index .Site.Data "product-selector" }}
           {{ range $group := . }}
             {{ range $product := $group.products }}
-                {{ $splitProductUrl := index ((split $product.url "/")) 1 }}
-                {{ $suffixProductUrl := strings.TrimSuffix "/" $splitProductUrl | }}
-                {{ $prefixProductUrl := strings.TrimPrefix "/" $suffixProductUrl | }}
-              {{ if (eq $prefixProductUrl $productIdentifier) }}
-                {{ $currentProductTitle = $product.title }}
+              {{ if not $product.extUrl }}
+                {{ $productUrl := $product.url | strings.TrimPrefix "/" | strings.TrimSuffix "/" }}
+                {{ if eq $productUrl $relPermalink }}
+                  {{ $currentProductTitle = $product.title }}
+                {{ end }}
               {{ end }}
             {{ end }}
           {{ end }}

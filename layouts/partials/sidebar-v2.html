@@ -53,7 +53,7 @@
                       {{ range $product := $products }}
                         <li class="product-selector__product">
                           <a
-                            href="{{ $product.url }}"
+                            href="{{ absURL $product.url }}"
                             aria-label="{{ $product.title }} documentation"
                             {{ if $product.extUrl }} target="_blank" {{ end }}
                           >

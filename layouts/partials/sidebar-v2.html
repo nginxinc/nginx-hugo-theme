@@ -9,15 +9,16 @@
           </label>
         </div>
 
-        {{ $relPermalink := .RelPermalink | strings.TrimPrefix "/" | strings.TrimSuffix "/" }}
+        {{ $relPermalink := .RelPermalink }}
         {{ $currentProductTitle := "" }}
 
         {{ with index .Site.Data "product-selector" }}
           {{ range $group := . }}
             {{ range $product := $group.products }}
               {{ if not $product.extUrl }}
-                {{ $productUrl := $product.url | strings.TrimPrefix "/" | strings.TrimSuffix "/" }}
-                {{ if eq $productUrl $relPermalink }}
+              {{ warnf "$relPermalink: %s" $relPermalink }}
+              {{ warnf "$product.url: %s" $product.url }}
+                {{ if strings.Contains $relPermalink $product.url }}
                   {{ $currentProductTitle = $product.title }}
                 {{ end }}
               {{ end }}

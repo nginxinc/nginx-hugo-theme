@@ -1,20 +1,8 @@
-{{ $htmlTable := .Inner | markdownify }}
-{{ $class := .Get 0 }}
-{{ $oldTable := "<table>" }}
-{{ $newTable := printf "<table class=\"%s %s\">" $class "table-v1" }}
-{{ $oldP := "<p>" }}
-{{ $newP := printf "<p class=\"%s\">" "table-v1"}}
-{{ $htmlTable := replace $htmlTable $oldTable $newTable }}
-{{ $htmlTable := replace $htmlTable $oldP $newP }}
-{{ $htmlTable | safeHTML }}
+{{ $defaultVariant := "narrow" }}
 
-<!-- Add default option for table of "narrow" if one is not provided -->
-{{ $narrowOption := "narrow" }}
-{{ $wideOption := "wide" }}
-{{ if and (not (strings.Contains $class $narrowOption)) (not (strings.Contains $class $wideOption)) }}
-  {{ $class = printf "%s %s" $class $narrowOption }}
-{{ end }}
+{{ partial "table.html" (dict
+    "variant" $defaultVariant
+    "content" .Inner
+)}}
 
-<div data-mf="true" style="display: none;" class="table-v2 {{ $class }}">
-    {{ .Inner | markdownify }}
-</div>
+{{ warnf "'<bootstrap-table></bootstrap-table>' is being deprecated. Use the '<table>' shortcode instead." }}

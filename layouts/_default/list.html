@@ -1,71 +1,61 @@
 {{ define "main" }}
-<div class="row flex-xl-nowrap" id="list-v1">
-  <nav class="sidenav overflow-auto col-md-3 d-none d-xl-block d-print-none">
-    {{ partial "sidebar.html" . }}
-  </nav>
-  <main class="content col-xl-9 d-block" role="main">
-    {{ partial "list-main" . }} 
-  </main>
-</div>
 
-{{/*  mf list page  */}}
-
-<main class="content col d-block align-top content-has-toc" role="main" data-mf="true" style="display: none">
-<section class="main-layout">
-  <div class="sidebar-layout" id="sidebar-layout">
-    <button class="sidebar__mobile__toggle" aria-expanded="false" data-mf="true">{{ partial "lucide" (dict "context" . "icon" "x")}}Close</button>
-    <nav data-mf="true" id="sidebar-v2" class="sidebar" style="display:none;">
-      {{ partial "sidebar-v2.html" . }}
-    </nav>
-  </div>
-
-  <section id="maincontent" class="content-layout" data-mf="true" style="display: none">
+<main class="content" role="main">
     <div data-cms-edit="content" class="text-content list-page">
-      <section class="breadcrumb-layout wide">
+        <div class="breadcrumb-layout">
         {{ if not .IsHome }}
-          {{ if not (in .Params.display_breadcrumb "false" ) }}
-          {{ partial "breadcrumb" .}}
-          {{ end }}
+            {{ if not (in .Params.display_breadcrumb "false" ) }}
+            {{ partial "breadcrumb" .}}
+            {{ end }}
         {{ end }}
-      </section>
-      <div class="list-header-container">
-        <img src="/images/icons/{{ .Params.logo | default "NGINX-product-icon.svg" }}">
-        <div class="list-header-title">
-          <h1>{{ .Title }}</h1>
-          {{ if index .Params "nd-subtitle" }}
-            <p>{{ index .Params "nd-subtitle" | markdownify }}</p>
-          {{ end }}
         </div>
-      </div>
+        <div class="list-header-container">
+          <img src="/images/icons/{{ .Params.logo | default "NGINX-product-icon.svg" }}">
+          <div class="list-header-title">
+            <h1>{{ .Title }}</h1>
+            {{ if index .Params "nd-subtitle" }}
+              <p>{{ index .Params "nd-subtitle" | markdownify }}</p>
+            {{ end }}
+          </div>
+        </div>
 
-      {{ partial "banner" . }}
-      {{ $hasCustomContent := index .Params "nd-landing-page" | default false }}
-      {{ if $hasCustomContent }} 
+        {{ partial "banner" . }}
+
+        {{ $hasCustomContent := index .Params "nd-landing-page" | default false }}
+        {{ if $hasCustomContent }}
         {{ .Content }}
-      {{ else }}
+
+        <!-- Default index page content -->
+        {{ else }}
+
+    <h2> In this section </h2>
+    <div class="card-section">
+        <div class="card-section-content card-grid">
         {{ range .Pages.ByWeight }}
-        <h2>
-            <a href="{{ if .Params.url}}{{ .Params.url}}{{else}}{{ .Permalink }}{{end}}">{{ .Title }}</a>
-        </h2>
+            <a href="{{ .Permalink }}" alt="{{ .Title }}" class="card" data-grid="first-two-thirds">
+            <div class="card-container">
+                <div class="card-header">
+                    <h2 class="card-title">{{ .Title }}</h2>
+                </div>
+                <div class="card-content">{{ .Description }}</div>
+            </div>
+            </a>
         {{ end }}
-      {{ end }}
+        </div>
+    </div>
 
-      <hr>
-      {{ if .Page.Lastmod }}
-      <div class="last-modified">
+        {{ end }}
+
+        <hr>
+        {{ if .Page.Lastmod }}
+        <div class="last-modified">
         {{ partial "page-meta-links" . }}
-      </div>
-      {{ end }}
-
-      </main>
+        </div>
+        {{ end }}
 
     </div>
-  </section>
-</section>
 
-
-
-</section>
 </main>
-{{ end }}
 
+
+{{ end }}

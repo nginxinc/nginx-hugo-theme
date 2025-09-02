@@ -1,0 +1,15 @@
+- productGroup: Test Product
+  products:
+    - title: "Test Product"
+      url: "test-product"
+
+- productGroup: Test External Links
+  products:
+    - title: "NGINX.org"
+      url: https://nginx.org/index.html
+      extUrl: true
+
+- productGroup: NGINX
+  products:
+    - title: "NGINX"
+      url: "nginx"

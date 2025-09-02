@@ -1,0 +1,7 @@
+{{/*
+Usage: {{< shortcode-usage "include" >}} or {{< shortcode name="include" >}}.
+*/}}
+
+{{ $name := .Get 0 | default (.Get "name") | default "include" }}
+{{ $ctx := dict "Site" .Page.Site "Shortcode" $name }}
+{{ partial "shortcode-usage.html" $ctx }}

@@ -1,82 +1,14 @@
-{{ $css1 := resources.Get "css/docs-nginx-com/nginx-site-header.css" }}
-{{ $css2 := resources.Get "css/docs-nginx-com/style.css" }}
-{{ $css3 := resources.Get "css/bootstrap-docs.css" }}
-{{ $css4 := resources.Get "css/f5-hugo.css" }}
-{{ $css5 := resources.Get "css/highlight.css" }}
-{{ $css6 := resources.Get "css/coveo.css" }}
-{{ $css7 := resources.Get "css/v2/style.css" }}
-{{ $css8 := resources.Get "css/inline-overrides.css" }}
-{{ $css9 := resources.Get "css/v2/highlight.css" }}
+{{ $style := resources.Get "css/v2/style.css" | minify | fingerprint "sha512" }}
+<link href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" rel="stylesheet" type="text/css">
 
-<!-- load v2 theme assets -->
-<link href="{{ $css7.RelPermalink }}" integrity="{{ $css7.Data.Integrity }}" rel="stylesheet" type="text/css" id="css7"
-  disabled>
+{{ $cssInter := resources.Get "css/inter/inter.css" | minify | fingerprint "sha512" }}
+<link href="{{ $cssInter.RelPermalink }}" integrity="{{ $cssInter.Data.Integrity }}" rel="stylesheet" type="text/css">
 
-{{ $cssInter := resources.Get "css/inter/inter.css" | fingerprint "sha512" }}
-<link href="{{ $cssInter.RelPermalink }}" integrity="{{ $cssInter.Data.Integrity }}" rel="stylesheet" type="text/css"
-  id="cssInter">
-
-{{ $cssHighlight := $css9 | minify | fingerprint "sha512"}}
-<link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css" id="css9">
-<!-- end v2 theme assets -->
-
-
-<!-- load FontAwesome from assets -->
-{{ $cssFA1 := resources.Get "fontawesome/css/all.min.css" | fingerprint "sha512" }}
-<link href="{{ $cssFA1.RelPermalink }}" integrity="{{ $cssFA1.Data.Integrity }}" rel="stylesheet" type="text/css"
-  id="cssFA1">
-
-{{ $cssFA2 := resources.Get "fontawesome/css/v4-font-face.min.css" | fingerprint "sha512" }}
-<link href="{{ $cssFA2.RelPermalink }}" integrity="{{ $cssFA2.Data.Integrity }}" rel="stylesheet" type="text/css"
-  id="cssFA2">
-
-{{ $cssFA3 := resources.Get "fontawesome/css/v5-font-face.min.css" | fingerprint "sha512" }}
-<link href="{{ $cssFA3.RelPermalink }}" integrity="{{ $cssFA3.Data.Integrity }}" rel="stylesheet" type="text/css"
-  id="cssFA3">
-
-<!-- load Bootstrap from local assets -->
-{{ $cssBootstrap := resources.Get "css/bootstrap.min.css" | fingerprint "sha512" }}
-<link href="{{ $cssBootstrap.RelPermalink }}" integrity="{{ $cssBootstrap.Data.Integrity }}" rel="stylesheet"
-  type="text/css" id="cssBootstrap">
-
-{{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
-<!-- load Coveo CSS -->
-<link rel="stylesheet" href="https://static.cloud.coveo.com/searchui/v2.10104/0/css/CoveoFullSearch.min.css"
-  integrity="sha512-9/A9yVCU4GS6/iIwTRJKnan4Hf8gDKj3anwItN9QCsU8SixaT5xkjjWsZ/iq0TWaizhtqOLacadXJfxHlwYCcA=="
-  crossorigin="anonymous" />{{ end }}
-
+{{ $cssHighlight := resources.Get "css/v2/highlight.css" | minify | fingerprint "sha512"}}
+<link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">
 <!-- load CSS Atomic CSS -->
 <link
   rel="stylesheet"
   href="https://static.cloud.coveo.com/atomic/v3.19.0/themes/coveo.css"
   integrity="sha512-m2BufPi8Tc6H2jcQfDj/PIl5H57C9jeqhbDFgFXKTtOhoC4S7ULXmx74FseZ8WXpfdT9uyccMHDBJDrIZlrUUQ=="
   crossorigin="anonymous"/>
-
-{{ $cssHeader := $css1 | minify | fingerprint "sha512"}}
-<link href="{{ $cssHeader.RelPermalink }}" rel="stylesheet" type="text/css" id="css1">
-
-{{ $cssNginxStyles := $css2 | minify | fingerprint "sha512"}}
-<link href="{{ $cssNginxStyles.RelPermalink }}" rel="stylesheet" type="text/css" id="css2">
-
-{{ $bootstrapDocs := $css3 | minify | fingerprint "sha512"}}
-<link href="{{ $bootstrapDocs.RelPermalink }}" rel="stylesheet" type="text/css" id="css3">
-
-{{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
-{{ $cssCoveo := $css6 | minify | fingerprint "sha512"}}
-<link href="{{ $cssCoveo.RelPermalink }}" rel="stylesheet" type="text/css" id="css6">
-{{ end }}
-
-{{ $cssF5Hugo := $css4 | minify | fingerprint "sha512"}}
-<link href="{{ $cssF5Hugo.RelPermalink }}" rel="stylesheet" type="text/css" id="css4">
-
-{{ $cssOverrides := $css8 | minify | fingerprint "sha512"}}
-<link href="{{ $cssOverrides.RelPermalink }}" rel="stylesheet" type="text/css" id="css8">
-
-{{ if fileExists "assets/css/custom.css" }}
-{{ $customCSS := resources.Get "css/custom.css" | minify | fingerprint "sha512" }}
-<link href="{{ $customCSS.RelPermalink }}" rel="stylesheet" type="text/css">
-{{ end }}
-
-<!-- load Highlight CSS -->
-{{ $cssHighlight := $css5 | minify | fingerprint "sha512"}}
-<link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css" id="css5">

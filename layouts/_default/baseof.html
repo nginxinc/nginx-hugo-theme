@@ -1,202 +1,68 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 
-<head>  
-  <style>
-    body {
-      /* Hide entire body for first paint. This suppresses flicker when theme is loading. */
-      visibility: hidden;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-  </style>
-  
-  <noscript>
-    <style>
-      /* Styles when JavaScript is disabled. Fallsback to old theme. */
-      body {
-        visibility: visible;
-      }
-    </style>
-  </noscript>
-  
-
-
-  <script>
-
-    const setTheme = (isNewTheme) => {
-      localStorage.setItem("useNewTheme", `${isNewTheme}`);
-      // swap out v1 and v2 css style
-      const v1cssIds = [
-        "cssFA1",
-        "cssFA2",
-        "cssFA3",
-        "cssBootstrap",
-        "css1",
-        "css2",
-        "css3",
-        "css4",
-        "css5",
-        "css6",
-      ];
-
-      v1cssIds.forEach((cssId) => {
-        const element = document.getElementById(cssId);
-        if (element !== null) {
-          element.disabled = isNewTheme;
-        }
-      });
-
-      const v2cssIds = ["css7", "css9"];
-      v2cssIds.forEach((cssId) => {
-        const element = document.getElementById(cssId);
-        if (element !== null) {
-          element.disabled = !isNewTheme;
-        }
-      });
-
-      // swap out v1 and v2 elements
-      const v1ElementIds = ["sidebar", "footer", "toc", "api", "search-v1", "breadcrumb-v1", "list-v1"]
-
-      v1ElementIds.forEach((elementId) => {
-        const element = document.getElementById(elementId);
-        if (element !== null) {
-          element.style.display = isNewTheme ? "none" : "";
-        }
-
-        const trustarc = document.getElementById("teconsent-v1");
-        if (trustarc) {
-          trustarc.id = isNewTheme ? "teconsent-v1" : "teconsent";
-        }
-      });
-
-      document.querySelectorAll(".table-v1").forEach((table) => {
-        table.style.display = isNewTheme ? "none" : "";
-      });
-
-      const notMfElements = ['[data-mf="false"]'];
-      notMfElements.forEach((elementId) => {
-        document.querySelectorAll(elementId).forEach((element) => {
-          element.style.display = isNewTheme ? "none" : "";
-        });
-      })
-
-      const mfElements = ['[data-mf="true"]'];
-      mfElements.forEach((elementId) => {
-        document.querySelectorAll(elementId).forEach((element) => {
-          element.style.display = isNewTheme ? "" : "none";
-
-          const trustarc = document.getElementById("teconsent-v2");
-          if (trustarc) {
-            trustarc.id = isNewTheme ? "teconsent" : "teconsent-v2";
-          }
-        });
-      });
-
-      document.getElementById("body").style.visibility = "visible";
-    };
-
-    const toggleTheme = () => {
-      setTheme(!(localStorage.getItem("useNewTheme") === "true"));
-    };
-
-    // toggle theme aliases
-    const mf = toggleTheme;
-    const useNewTheme = toggleTheme;
-
-    document.addEventListener("DOMContentLoaded", () => {
-      setTheme(localStorage.getItem("useNewTheme") === "true");
-    });
-
-    function gameCode(callback) {
-      let kkeys = [];
-      // up,up,down,down,left,right,left,right,B,A
-      const code = "38,38,40,40,37,39,37,39,66,65";
-      return (event) => {
-        kkeys.push(event.keyCode);
-        if (kkeys.toString().indexOf(code) >= 0) {
-          callback(event);
-          kkeys = [];
-        }
-      };
-    }
-    const handler = gameCode(() => {
-      mf();
-    });
-    window.addEventListener("keydown", handler);
-
-  </script>
+<head>
 
   {{ block "head" . }}
 
   {{ partial "meta.html" . }}
-  
+
   {{ partial "favicon.html" . }}
-  
+
   {{ partial "styles.html" . }}
-  
+
   {{ if in .Params.doctypes "devportal" }}
   {{ partial "devportal/style.html" . }}
   {{ end }}
-  
+
   {{ if fileExists "/layouts/partials/head_custom.html" }}
   {{ partial "head_custom.html" . }}
   {{ end }}
-  
+
   {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
-        
+
   {{ partial "trustarc.html" . }}
-  
+
   {{ partial "tealium-profile.html" . }}
-  
+
   {{ end }}
-  
+
   {{ end }}
-  
+
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K5HG9JT');</script>
-  
+
   </head>
-  
+
   <body id="body">
     {{ if or ( not hugo.IsServer ) ( not ( in .Site.Params.buildtype "package" ) ) }}
-  {{ partial "universal-tag.html" . }}
+    {{ partial "universal-tag.html" . }}
     {{ end }}
-  
-    <header>
-      {{ block "header" . }}{{end}}
-    </header>
-  
-    <section class="base-layout" data-testid="base-layout">
-      <section id="breadcrumb-v1">
-        {{ if not .IsHome }}
-          {{ if not (in .Params.display_breadcrumb "false" ) }}
-          {{ partial "breadcrumb" .}}  
-          {{ end }}
-        {{ end }}
-      </section>
-  
-      <div class="main container-fluid min-page-height" data-menu-id="{{.RelPermalink}}">
+    <input type="checkbox" id="search-standalone-header-panel" class="search-standalone-header-panel" hidden/>
+    <input type="checkbox" id="sidebar-panel" class="sidebar-panel" hidden/>
+    <div class="grid-container">
+        <aside class="sidebar">
+            {{ partial "sidebar-v2.html" . }}
+        </aside>
+
+        <header class="header">
+            {{ block "header" . }}{{end}}
+        </header>
+
         {{ block "main" . }}{{ end }}
-      </div>
-  </section>
 
-    <footer id="footer">
-      {{ block "footer" . }}
-      {{ partial "footer.html" . }}
-      {{ end }}
-    </footer>
+        <footer class="footer">
+          {{ block "footer-v2" . }}
+            {{ partial "footer-v2.html" . }}
+          {{ end }}
+        </footer>
+    </div>
 
-    <footer data-mf="true" id="footer-v2" style="display:none;">
-      {{ block "footer-v2" . }}
-      {{ partial "footer-v2.html" . }}
-      {{ end }}
-    </footer>
-  {{ partial "scripts.html" . }} 
+
+  {{ partial "scripts.html" . }}
   <div id="consent_blackbar"></div>
 </body>
 </html>

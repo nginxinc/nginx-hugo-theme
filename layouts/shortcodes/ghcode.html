@@ -5,18 +5,14 @@
   {{ with .Err }}
     {{ errorf "%s" . }}
   {{ else with .Value }}
-    {{ $lang := path.Ext $file | strings.TrimPrefix "." }}
-    <div id="code-block-v1" data-mf="false">
-      {{ highlight .Content $lang $params }}
-    </div>
-
-    <div class="code-block" data-mf="true" style="display: none;">
+    {{ $lang := path.Ext $file | strings.TrimPrefix "." }}    
+    <div class="code-block">
       {{- if and (ne $lang "") (ne $lang "none") -}}
           <span class="code-type chroma">{{ $lang }}</span>
       {{- end -}}
       <div class="code-container chroma">
           <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button multi-line" type="button">Copy</button>
-          <div class="highlight-v2" id="{{ $codeBlockId }}">
+          <div class="code-content" id="{{ $codeBlockId }}">
             {{ highlight .Content $lang $params }}
           </div>
       </div>

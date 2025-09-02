@@ -1,21 +1,14 @@
-{{ $jquery := resources.Get "/js/jquery-3-6-4.min.js" }}
-<script src="{{ $jquery.RelPermalink }}" type="text/javascript" integrity="{{ $jquery.Data.Integrity }}"></script>
-
-{{ $kubejs := resources.Get "/js/kube.js" | minify | fingerprint "sha512" }}
-<script src="{{ $kubejs.RelPermalink }}" type="text/javascript" integrity="{{ $kubejs.Data.Integrity }}"></script>
-
-<!-- load Bootstrap from local assets -->
-{{ $jsBootstrap := resources.Get "js/bootstrap.bundle.min.js" | fingerprint "sha512" }}
-<script src="{{ $jsBootstrap.RelPermalink }}" type="text/javascript"
-  integrity="{{ $jsBootstrap.Data.Integrity }}"></script>
-
-<!-- load code copy js -->
-{{ $codecopy := resources.Get "/js/code-copy.js" | fingerprint "sha512" }}
-<script src="{{ $codecopy.RelPermalink }}" type="text/javascript"></script>
-
 <!-- load code copy v2 js -->
 {{ $codecopyv2 := resources.Get "/js/code-copy-v2.js" | fingerprint "sha512" }}
 <script src="{{ $codecopyv2.RelPermalink }}" type="text/javascript"></script>
+
+<!-- load site dropdown js -->
+{{ $siteDropdown := resources.Get "/js/site-dropdown.js" | fingerprint "sha512" }}
+<script src="{{ $siteDropdown.RelPermalink }}" type="text/javascript"></script>
+
+<!-- load tabs js -->
+{{ $tabs := resources.Get "/js/tabs.js" | fingerprint "sha512" }}
+<script src="{{ $tabs.RelPermalink }}" type="text/javascript"></script>
 
 <!-- load mermaid.js -->
 {{ if .Page.Store.Get "hasMermaid" }}
@@ -63,16 +56,6 @@
 <script src="{{$redoc.RelPermalink}}" type="text/javascript"></script>{{ end }}
 
 {{ end }}
-
-
-
-<!-- Load Sidebar javascript -->
-{{ $jsSidebar := resources.Get "js/sidebar.js" | minify | fingerprint "sha512" }}
-<script src="{{ $jsSidebar.RelPermalink }}" type="text/javascript" integrity="{{ $jsSidebar.Data.Integrity }}"></script>
-  
-<!-- Load Site Dropdown javascript -->
-{{ $jsSiteDropdown := resources.Get "js/site-dropdown.js" | minify | fingerprint "sha512" }}
-<script src="{{ $jsSiteDropdown.RelPermalink }}" type="text/javascript" integrity="{{ $jsSiteDropdown.Data.Integrity }}"></script>
 
 <!-- Load Product Selector javascript -->
 {{ $jsProductSelector := resources.Get "js/product-selector.js" | minify | fingerprint "sha512" }}

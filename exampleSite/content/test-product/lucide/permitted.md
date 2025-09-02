@@ -6,11 +6,16 @@ weight: 100
 
 [Lucide Icons](https://lucide.dev/) is a free icon library with a permissive license (MIT). We use it for our minimal icon needs in place of FontAwesome in Oldframe.
 
-{{<fe "book-headphones">}}
+{{<icon "book-headphones">}}
 
-[Lucide link{{<fe "circle">}}](#)
+[Lucide link{{<icon "circle">}}](#)
 
-{{<fe "circle">}} in text.
+{{<icon "circle">}} in text.
+
+{{<icon-bug>}}
+{{<icon-feature>}}
+{{<icon-info>}}
+{{<icon-resolved>}}
 
 Here are some icons that are using font-awesome but should be backwards compatible:
 <i class="fa-solid fa-check" style="color:green"></i>
@@ -54,5 +59,5 @@ Here are some icons that are using font-awesome but should be backwards compatib
 <i class="fa fa-chevron-down"></i>
 <i class="fas fa-flask fa-lg beta-icon"></i>
 {{<warning>}}
-This is a Warning callout. There was previously a bug with **bold text** that we should be aware of and continue to check for. This callout was invoked with the `<warning>` shortcode. It has no custom title. {{<fe "octagon-alert">}}
+This is a Warning callout. There was previously a bug with **bold text** that we should be aware of and continue to check for. This callout was invoked with the `<warning>` shortcode. It has no custom title. {{<icon "octagon-alert">}}
 {{</warning>}}

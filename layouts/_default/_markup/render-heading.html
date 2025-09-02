@@ -1,13 +1,6 @@
 <h{{ .Level }} 
 id="{{ .Anchor | safeURL }}">
-<div data-mf="false">
-    {{ .Text | safeHTML }}
-    <a class="headerlink float-right" href="#{{ .Anchor | safeURL }}" title="{{ .Text | safeHTML }}">
-        <i class="fas fa-link fa-xs"></i>
-    </a>
-</div> 
-
-<div data-mf="true">
+<div>
 <a class="headerlink float-right" href="#{{ .Anchor | safeURL }}" title="{{ .Text | safeHTML }}">
     {{ .Text | safeHTML }}
 </a>

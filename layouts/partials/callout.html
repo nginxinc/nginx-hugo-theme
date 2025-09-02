@@ -13,44 +13,29 @@
 {{ $sideOption := "side-callout" }}
 {{ $inlineOption := "inline-callout" }}
 
+{{/*  Default to inline callout  */}}
+{{ $dataGrid := "first-two-thirds" }}
 {{ if $sideline }}
-  {{ $class = printf "%s %s" $class $sideOption }}
-{{ else }}
-  {{ $class = printf "%s %s" $class $inlineOption }}
+  {{ $dataGrid = "last-third" }}
 {{ end }}
-
-
-
-{{/*  Old frame callout  */}}
-<blockquote class="{{ $class }}" data-mf="false">
-  <div>
-    {{- with $icon -}}
-      <i class="{{ . }}"></i>
-    {{- end -}}
-    <strong>{{ $title }}</strong>
-    {{ .content | markdownify }}
-  </div>
-</blockquote>
-
 
 {{/*  Render a different block, if "loud" callouts are used  */}}
 {{ $type := (index (split $class " ") 0) | strings.FirstUpper }}
 {{ $specialTitles := slice "Caution" "Warning" "Deprecated" "Important" }}
 {{ $specialTitleIcons := dict
-  "Caution"    "alert-triangle"
-  "Warning"    "alert-octagon"
-  "Deprecated" "alert-octagon"
-  "Important"  "arrow-right-circle"
+  "Caution"    "triangle-alert"
+  "Warning"    "octagon-alert"
+  "Deprecated" "octagon-alert"
+  "Important"  "circle-arrow-right"
 }}
 {{ $icon := index $specialTitleIcons $type | default "" }}
-
 {{ $isSpecialTitle := in $specialTitles $type }}
 {{ if $isSpecialTitle }}
 {{/*  Loud callouts  */}}
-<blockquote class="{{ $class }}" data-mf="true" style="display: none;">
+<blockquote class="{{ $class }}" data-grid="{{ $dataGrid }}">
   <div>
     <div class="call-out-type">
-      {{ partial "feather" (dict "context" . "icon" $icon) .}}
+      {{ partial "lucide" (dict "context" . "icon" $icon) .}}
       {{ $title }}
     </div>
     <div class="callout-content">
@@ -65,7 +50,7 @@
 
 {{ $cleanTitle := strings.TrimSuffix ":" $title}}
 
-<blockquote class="{{ $class }} note" data-mf="true" style="display: none;" data-title="{{ $cleanTitle }}">
+<blockquote class="{{ $class }} note" data-title="{{ $cleanTitle }}" data-grid="{{ $dataGrid }}">
   <div class="callout-content">
     {{- with $icon -}}
       <i class="{{ . }}"></i>

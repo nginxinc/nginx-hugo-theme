@@ -1,18 +1,16 @@
-<nav aria-label="breadcrumb" class="breadcrumb navbar">
-    <div class="nav flex-md-row">
-        <ol class="breadcrumb">
-            <button class="sidebar__mobile__toggle" aria-expanded="false" data-mf="true">{{ partial "lucide" (dict "context" . "icon" "align-justify") }}</button>
-            <li><a href="/" alt="NGINX Docs Home">Home</a></li>
-            {{- define "breadcrumb" -}}
-            {{- with .Parent -}}
-                {{- template "breadcrumb" . -}}
-                <li>{{- if .IsHome -}}<i class="fas fa-chevron-right"></i><a href="{{ .RelPermalink }}">{{ .Site.Title}}</a>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}{{ end }}</a><i class="fas fa-chevron-right"></i></li>
-                {{- end -}}
+<nav aria-label="breadcrumb" class="breadcrumb" data-grid="wide">
+    <ol class="breadcrumb">
+        <button class="sidebar__mobile__toggle" aria-label="sidebar__mobile__toggle" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "align-justify") }}</button>
+        <li><a href="/" alt="NGINX Docs Home">Home</a></li>
+        {{- define "breadcrumb" -}}
+        {{- with .Parent -}}
+            {{- template "breadcrumb" . -}}
+            <li>{{- if .IsHome -}}<a href="{{ .RelPermalink }}">{{ .Site.Title}}</a>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}{{ end }}</a></li>
             {{- end -}}
-            {{- if not .IsHome -}}
-                {{- template "breadcrumb" . -}}
-                {{- .Title -}}
-        </ol>
-    </div>
+        {{- end -}}
+        {{- if not .IsHome -}}
+            {{- template "breadcrumb" . -}}
+            {{- .Title -}}
+    </ol>
 </nav>
 {{ end }}

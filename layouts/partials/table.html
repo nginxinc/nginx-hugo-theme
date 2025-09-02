@@ -1,0 +1,7 @@
+{{$variant := .variant | default "narrow"}}
+{{$theme := .theme | default "bordered"}}
+{{$dataGrid := cond (eq $variant "narrow") "first-two-thirds" (cond (eq $variant "wide") "wide" "") }}
+
+<div class="table {{ $theme }}" data-grid="{{$dataGrid}}">
+    {{ .content | markdownify }}
+</div>

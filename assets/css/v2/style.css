@@ -2011,6 +2011,14 @@ blockquote {
     margin: 0;
   }
 
+  /* Prevent codeblock x-axis overflow within callouts, retaining flow-gap for y */
+  .callout-content:has(.code-block) {
+    .code-block {
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+
   .callout-content {
     margin: 0;
   }

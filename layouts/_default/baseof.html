@@ -35,6 +35,56 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-K5HG9JT');</script>
 
+  <script>
+  let storedTheme = null;
+  try {
+    storedTheme = localStorage.getItem('theme');
+  } catch (e) {
+    console.warn('Unable to read theme from localStorage:', e);
+  }
+
+  const mql = window.matchMedia?.('(prefers-color-scheme: dark)');
+  const initialTheme = storedTheme || (mql?.matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', initialTheme);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      try {
+        localStorage.setItem('theme', newTheme);
+      } catch (e) {
+        console.warn('Failed to write theme to localStorage:', e);
+      }
+    });
+
+    const hasUserChoice = storedTheme !== null;
+
+    if (!hasUserChoice && mql) {
+      const onSystemChange = (e) => {
+        try {
+          if (localStorage.getItem('theme') !== null) return;
+        } catch (err) {
+          console.warn('Unable to read theme from localStorage:', err);
+        }
+        const theme = e.matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      };
+      mql.addEventListener('change', onSystemChange);
+    }
+  });
+
+  window.addEventListener('storage', (e) => {
+    if (e.key !== 'theme') return;
+    const theme = e.newValue || (mql?.matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  });
+
+  </script>
   </head>
 
   <body id="body">

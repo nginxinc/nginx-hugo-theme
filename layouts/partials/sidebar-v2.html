@@ -9,22 +9,23 @@
           </label>
         </div>
 
-        {{ $relPermalink := .RelPermalink }}
+        {{ $relPermalink := (urls.Parse .RelPermalink).Path }}
         {{ $currentProductTitle := "" }}
 
         {{ with index .Site.Data "product-selector" }}
           {{ range $group := . }}
             {{ range $product := $group.products }}
               {{ if not $product.extUrl }}
-              {{ warnf "$relPermalink: %s" $relPermalink }}
-              {{ warnf "$product.url: %s" $product.url }}
-                {{ if strings.Contains $relPermalink $product.url }}
+                {{ $escaped := replace $product.url "/" "\\/" }}
+                {{ $pattern := printf "/%s(/|$)" $escaped }}
+                {{ if strings.FindRE $pattern $relPermalink }}
                   {{ $currentProductTitle = $product.title }}
                 {{ end }}
               {{ end }}
             {{ end }}
           {{ end }}
         {{ end }}
+
 
 
         <div class="product-selector">

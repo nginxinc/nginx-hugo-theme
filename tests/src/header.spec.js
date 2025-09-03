@@ -46,7 +46,7 @@ test.describe('Smoke test for header', () => {
   test('F5 Sites button works', async ({ page }) => {
     const f5SitesButton = await page.getByTestId('header__f5sites__button');
     await f5SitesButton.click();
-    const f5SitesContent = await page.getByTestId('header__f5sites_content');
+    const f5SitesContent = await page.getByTestId('header__f5sites__content');
     await expect(f5SitesContent.count()).toBeTruthy();
   });
 });

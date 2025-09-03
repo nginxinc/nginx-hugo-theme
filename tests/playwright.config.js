@@ -14,7 +14,8 @@ export default defineConfig({
     screenshots: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',
-    timezoneId: 'America/Los_Angeles',
+    geolocation: { longitude: -8.486316, latitude: 51.896893 },
+    permissions: ['geolocation'],
   },
   projects: [
     {

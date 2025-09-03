@@ -16,8 +16,8 @@ list help::
 	@echo "<PRE-COMMIT>"
 	@echo "	     setup-pre-commit:		Sets up pre-commit (assuming it is installed)"
 	@echo "<PLAYWRIGHT TESTS>"
-	@echo "		 	tests: 		Runs playwright against the old theme."
-	@echo "     tests-update-screenshots:		Runs playwright against the old theme."
+	@echo "		 	tests: 		Runs playwright against the new theme."
+	@echo "     tests-update-screenshots:		Runs playwright against the new theme."
 
 .PHONY: biome-format biome-lint biome-all setup-pre-commit tests build-example-site
 FLAG :=

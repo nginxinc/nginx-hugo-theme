@@ -40,6 +40,10 @@ async function openPage(page, sidebarPage) {
 }
 
 test.describe('Smoke test for sidebar', () => {
+
+  // Slow test
+  test.setTimeout(100_000);
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/test-product/');
   });

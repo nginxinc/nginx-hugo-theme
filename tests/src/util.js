@@ -12,13 +12,14 @@ export async function runSmokeTestOnPage(page) {
 
 // THE GDPR Consent button appears when test is run from EU locations. This handles that popup.
 export async function handleConsentPopup(page) {
-  const consentContent = page.locator('#truste-consent-content');
-  const isConsentContentVisibile = await consentContent.isVisible();
-  if (isConsentContentVisibile) {
-    const consentButton = page.locator('#truste-consent-required');
-    expect(consentButton).toBeVisible();
-    await consentButton.click();
-  }
+  await page.addLocatorHandler(
+    page.locator('#truste-consent-content'), 
+    async () => {
+      const consentButton = page.locator('#truste-consent-required');
+      expect(consentButton).toBeVisible();
+      await consentButton.click();
+    }
+  );
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

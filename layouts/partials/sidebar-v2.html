@@ -9,23 +9,23 @@
           </label>
         </div>
 
-        {{ $relPermalink := .RelPermalink }}
-        {{ $productIdentifier := index ((split $relPermalink "/")) 1 }}
-        {{ $relPermalink := strings.TrimSuffix "/" $productIdentifier  }}
+        {{ $relPermalink := (urls.Parse .RelPermalink).Path }}
         {{ $currentProductTitle := "" }}
 
         {{ with index .Site.Data "product-selector" }}
           {{ range $group := . }}
             {{ range $product := $group.products }}
-                {{ $splitProductUrl := index ((split $product.url "/")) 1 }}
-                {{ $suffixProductUrl := strings.TrimSuffix "/" $splitProductUrl | }}
-                {{ $prefixProductUrl := strings.TrimPrefix "/" $suffixProductUrl | }}
-              {{ if (eq $prefixProductUrl $productIdentifier) }}
-                {{ $currentProductTitle = $product.title }}
+              {{ if not $product.extUrl }}
+                {{ $escaped := replace $product.url "/" "\\/" }}
+                {{ $pattern := printf "/%s(/|$)" $escaped }}
+                {{ if strings.FindRE $pattern $relPermalink }}
+                  {{ $currentProductTitle = $product.title }}
+                {{ end }}
               {{ end }}
             {{ end }}
           {{ end }}
         {{ end }}
+
 
 
         <div class="product-selector">
@@ -53,7 +53,7 @@
                       {{ range $product := $products }}
                         <li class="product-selector__product">
                           <a
-                            href="{{ $product.url }}"
+                            href="{{ absURL $product.url }}"
                             aria-label="{{ $product.title }} documentation"
                             {{ if $product.extUrl }} target="_blank" {{ end }}
                           >

@@ -443,7 +443,7 @@ ol li:last-child {
 .grid-container {
   display: grid;
   grid-template-columns: var(--sidebar-width) 1fr;
-  grid-template-rows: var(--header-height) 1fr auto;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "sidebar header"
     "sidebar content"
@@ -538,23 +538,71 @@ ol li:last-child {
 .header {
   grid-area: header;
   display: flex;
-  padding: 0 var(--space-s);
   border-bottom: 1px solid oklch(var(--color-divider));
   background: var(--color-background);
   position: sticky;
   top: 0;
   z-index: 2;
 
+  .header-base {
+    width: 100%;
+    position: relative;
+  }
+
+  .header-search-dropdown {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border-top: 1px solid oklch(var(--color-divider));
+    border-bottom: 1px solid oklch(var(--color-divider));
+    padding: var(--space-m) var(--space-s);
+    align-items: center;
+    display: none;
+
+    atomic-external {
+      width: 100%;
+    }
+
+    atomic-search-box {
+      width: 100%;
+
+      &::part(wrapper) {
+        border-color: oklch(var(--color-codeblock-border));
+      }
+
+      &::part(submit-button-wrapper) {
+        display: none;
+      }
+
+      &::part(textarea) {
+        font-size: var(--atomic-text-base);
+        padding: var(--space-s) var(--space-s);
+        font-weight: 400;
+      }
+
+      &::part(suggestions-wrapper) {
+        border-color: oklch(var(--color-codeblock-border));
+      }
+    }
+  }
+
+  .header-dropdown-mobile {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 8rem;
+  }
+
   .header-container {
     display: flex;
     flex-direction: row;
+    padding: 0 var(--space-s);
     justify-content: space-between;
     flex-wrap: wrap;
     column-gap: 2rem;
     align-items: center;
     width: 100%;
     height: 64px;
-    position: relative;
 
     /* This is fine unless we actually want it to break document flow at super tiny viewports */
     .header__logo {
@@ -566,6 +614,11 @@ ol li:last-child {
     .header__img {
       height: 2.5rem;
       width: 2.5rem;
+    }
+
+    .header__search--mobile--search--button {
+      cursor: pointer;
+      display: none;
     }
 
     .header__search {
@@ -647,7 +700,7 @@ ol li:last-child {
         background-color: var(--color-background);
         border: var(--color-foreground) 1px solid;
         box-shadow: 3px 3px 0px oklch(var(--color-shadow));
-        z-index: 1;
+        z-index: 20;
         right: 0;
         display: none;
         width: 400px;
@@ -789,12 +842,10 @@ ol li:last-child {
         }
 
         .product-selector__content {
-          padding-bottom: 0.5rem;
+          padding-bottom: 1rem;
           padding-top: 0.5rem;
-        }
-
-        .product-selector__section {
-          background: var(--product-selector-background);
+          border: 1px solid oklch(var(--color-brand) / 0.8);
+          border-top: none;
         }
 
         .product-selector__toggle {
@@ -803,9 +854,17 @@ ol li:last-child {
           align-items: center;
         }
 
+        .product-selector__toggle-text {
+          font-weight: 500;
+        }
+
+        .product-selector__chevron {
+          padding: 0 0.5rem;
+        }
+
         .product-selector__product-group {
           padding-block-start: 0.5rem;
-          font-size: var(--font-step--1);
+          font-size: var(--font-step--0);
           padding-inline-start: 1rem;
         }
 
@@ -814,7 +873,7 @@ ol li:last-child {
           padding-inline-start: 1.5rem;
 
           a {
-            font-size: var(--font-step--1);
+            font-size: var(--font-step--0);
           }
         }
 
@@ -864,6 +923,13 @@ ol li:last-child {
 
 /* This is our "mobile" or no sidebar breakpoint */
 @media (max-width: 68rem) {
+  #search-standalone-header-panel:checked ~ .grid-container {
+    .header {
+      .header-search-dropdown {
+        display: flex;
+      }
+    }
+  }
   #sidebar-panel:not(:checked) ~ .grid-container {
     .header {
       .header__control--sidebar--close {
@@ -936,6 +1002,14 @@ ol li:last-child {
     }
   }
 
+  .grid-container:has(.no-sidebar) {
+    .header {
+      .header__search--mobile--search--button {
+        display: block;
+      }
+    }
+  }
+
   .header {
     .product-selector {
       display: none;
@@ -953,7 +1027,9 @@ ol li:last-child {
     }
     .header-container {
       .header__search {
-        display: none;
+        #search-standalone-header {
+          display: none;
+        }
       }
     }
   }
@@ -1039,7 +1115,7 @@ nav {
 
 .homepage {
   --content-max-width: 120rem;
-  margin: 0 2rem;
+  margin: 0 0.5rem;
   line-height: 1.5rem;
 
   * {
@@ -1050,12 +1126,12 @@ nav {
   .homepage-section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 500px));
-    gap: 1.5rem;
+    gap: 1rem;
 
     justify-content: center;
     max-width: 100rem;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 2rem 1rem;
 
     .headerlink {
       cursor: default;
@@ -1068,10 +1144,6 @@ nav {
 
     > * {
       grid-column: 1 / -1;
-    }
-
-    > p {
-      grid-column: 1;
     }
   }
 }
@@ -1389,6 +1461,7 @@ atomic-search-box::part(textarea-expander) {
 atomic-search-box::part(textarea) {
   padding-left: 0;
   padding-right: 0;
+  font-weight: 400;
 }
 
 atomic-search-box::part(wrapper) {
@@ -1412,8 +1485,8 @@ atomic-search-interface#search-standalone-header {
 
   .header-search-box {
     &::part(wrapper) {
+      border-color: oklch(var(--color-codeblock-border));
       border-radius: 0;
-      border-color: var(--color-foreground);
     }
 
     &::part(textarea) {
@@ -1423,7 +1496,7 @@ atomic-search-interface#search-standalone-header {
 
     &::part(suggestions-wrapper) {
       border-radius: 0;
-      border-color: var(--color-foreground);
+      border-color: oklch(var(--color-codeblock-border));
       width: calc(100% + 2px);
       margin-inline-start: -1px;
     }
@@ -1565,7 +1638,7 @@ nav.sidebar.sidebar__mobile-open {
     padding: var(--sidebar-item-padding-tb) var(--sidebar-item-padding-lr);
     margin: 2px 0 2px 0;
     border-radius: 5px 0 0 5px;
-    color: var(--color-sidebar-link);
+    color: oklch(var(--color-foreground));
     text-decoration: none;
     transition:
       background-color 0.2s ease,

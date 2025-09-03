@@ -16,8 +16,6 @@
           {{ range $group := . }}
             {{ range $product := $group.products }}
               {{ if not $product.extUrl }}
-              {{ warnf "$relPermalink: %s" $relPermalink }}
-              {{ warnf "$product.url: %s" $product.url }}
                 {{ if strings.Contains $relPermalink $product.url }}
                   {{ $currentProductTitle = $product.title }}
                 {{ end }}

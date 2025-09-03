@@ -139,20 +139,42 @@ textarea:not([rows]) {
 
 /* card */
 :root[data-theme="light"] {
-  --card-border: 1px solid oklch(var(--color-codeblock-border));
+  --card-border: 1px solid var(--color-codeblock-border);
   --card-shadow: 3px 3px 0px oklch(var(--color-shadow));
-  --blockquote-border: 1px solid oklch(var(--color-codeblock-border));
+
+  --blockquote-border: 1px solid var(--color-codeblock-border);
   --blockquote-shadow: 3px 3px 0px oklch(var(--color-shadow));
+
   --icon-light: block;
   --icon-dark: none;
 }
 :root[data-theme="dark"] {
-  --card-border: 1px dashed oklch(var(--color-codeblock-border));
-  --card-shadow: 0;
-  --blockquote-border: 1px dashed oklch(var(--color-codeblock-border));
-  --blockquote-shadow: 0;
+  --card-border: 1px solid var(--color-codeblock-border);
+  --card-shadow: none;
+
+  --blockquote-border: 1px solid var(--color-codeblock-border);
+  --blockquote-shadow: none;
+
   --icon-dark: block;
   --icon-light: none;
+
+  blockquote.note::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: -4px;
+    bottom: -4px;
+    pointer-events: none;
+    z-index: -1;
+    outline: 1px dashed var(--color-codeblock-border);
+    outline-offset: -1px;
+  }
+
+  blockquote.note {
+    outline: 3px solid var(--color-background);
+    outline-offset: -4px;
+  }
 }
 
 :root {
@@ -229,7 +251,7 @@ textarea:not([rows]) {
     oklch(0.98 0 0),
     oklch(0.02 0 0)
   );
-  --color-codeblock-border: 0.63 0 0;
+  --color-codeblock-border: light-dark(oklch(0.63 0 0), oklch(0.9821 0 0));
   --color-codeblock-background: 1 0 0;
   --color-codeblock-highlight: 0.99 0.0479 105.97;
   --codeblock-comment-diff: 2rem;
@@ -567,7 +589,7 @@ ol li:last-child {
       width: 100%;
 
       &::part(wrapper) {
-        border-color: oklch(var(--color-codeblock-border));
+        border-color: var(--color-codeblock-border);
       }
 
       &::part(submit-button-wrapper) {
@@ -581,7 +603,7 @@ ol li:last-child {
       }
 
       &::part(suggestions-wrapper) {
-        border-color: oklch(var(--color-codeblock-border));
+        border-color: var(--color-codeblock-border);
       }
     }
   }
@@ -1485,7 +1507,7 @@ atomic-search-interface#search-standalone-header {
 
   .header-search-box {
     &::part(wrapper) {
-      border-color: oklch(var(--color-codeblock-border));
+      border-color: var(--color-codeblock-border);
       border-radius: 0;
     }
 
@@ -1496,7 +1518,7 @@ atomic-search-interface#search-standalone-header {
 
     &::part(suggestions-wrapper) {
       border-radius: 0;
-      border-color: oklch(var(--color-codeblock-border));
+      border-color: var(--color-codeblock-border);
       width: calc(100% + 2px);
       margin-inline-start: -1px;
     }
@@ -2050,14 +2072,12 @@ table hr {
 /* MARK: Callouts
 */
 blockquote {
-  /*1px solid var(--color-foreground)*/
+  background-color: var(--color-background);
   border: var(--blockquote-border);
   padding: 1rem;
   height: fit-content;
   margin: var(--margin-callout); /* Expand into the gutter */
 
-  /* solid 3px drop shadow */
-  /*3px 3px 0px oklch(var(--color-shadow))*/
   box-shadow: var(--blockquote-shadow);
 
   &:has(.code-block) .code-block:not(:has(.single-line)) {
@@ -2073,6 +2093,7 @@ blockquote {
 blockquote.note {
   position: relative;
   z-index: 0;
+  overflow: visible;
 }
 
 blockquote.note:before {
@@ -2354,9 +2375,9 @@ a:has(code:not(pre code)) {
     display: inline-block;
     height: 1.5rem;
     color: var(--code-color);
-    border-top: 1px solid oklch(var(--color-codeblock-border));
-    border-left: 1px solid oklch(var(--color-codeblock-border));
-    border-right: 1px solid oklch(var(--color-codeblock-border));
+    border-top: 1px solid var(--color-codeblock-border);
+    border-left: 1px solid var(--color-codeblock-border);
+    border-right: 1px solid var(--color-codeblock-border);
     text-transform: uppercase;
     padding: 0.15rem 0.5rem;
     font-size: 0.75rem;
@@ -2399,7 +2420,7 @@ a:has(code:not(pre code)) {
     }
 
     .code-content {
-      border: 1px solid oklch(var(--color-codeblock-border));
+      border: 1px solid var(--color-codeblock-border);
       overflow-x: scroll;
       scrollbar-width: none;
       line-height: 150%;

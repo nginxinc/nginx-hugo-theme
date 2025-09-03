@@ -9,6 +9,14 @@
               <label class="header__control--sidebar--open" for="sidebar-panel">
               {{ partial "lucide" (dict "context" . "icon" "panel-left-open") }}
               </label>
+              <button id="theme-toggle" class="header__control--theme" role="button" aria-label="Toggle theme">
+                <span class="header__control--theme--light">
+                    {{ partial "lucide" (dict "context" . "icon" "sun") }}
+                </span>
+                <span class="header__control--theme--dark">
+                    {{ partial "lucide" (dict "context" . "icon" "moon") }}
+                </span>
+            </button>
           </div>
           {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
           <!-- Mobile button -->

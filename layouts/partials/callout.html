@@ -35,11 +35,11 @@
 <blockquote class="{{ $class }}" data-grid="{{ $dataGrid }}">
   <div>
     <div class="call-out-type">
-      {{ partial "lucide" (dict "context" . "icon" $icon) .}}
+      {{ partial "lucide" (dict "context" . "icon" $icon) . }}
       {{ $title }}
     </div>
     <div class="callout-content">
-      {{ .content | markdownify }}
+      {{- .content | markdownify -}}
     </div>
   </div>
 </blockquote>

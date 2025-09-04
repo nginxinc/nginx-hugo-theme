@@ -14,6 +14,7 @@ export default defineConfig({
     screenshots: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',
+    // Set Geolocation to Cork, Ireland
     geolocation: { longitude: -8.486316, latitude: 51.896893 },
     permissions: ['geolocation'],
   },
@@ -21,6 +22,10 @@ export default defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
     },
   ],
   webServer: {

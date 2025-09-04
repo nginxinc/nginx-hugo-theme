@@ -246,8 +246,9 @@ textarea:not([rows]) {
   --product-selector-background: 0.98 0 0;
 
   /* vars for the primary grid setup */
-  --grid-content: minmax(34rem, 50rem);
-  --grid-content-mobile: minmax(20rem, 50rem);
+  --grid-max: 50rem;
+  --grid-content: minmax(34rem, var(--grid-max));
+  --grid-content-mobile: minmax(20rem, var(--grid-max));
   --grid-side-callout: minmax(18rem, 26rem);
   --grid-column-gutter: 3.5rem;
 
@@ -313,7 +314,7 @@ textarea:not([rows]) {
   --sidebar-item-padding-tb: 0.25rem;
   --content-max-width: 88rem;
 
-  --main-col: minmax(34rem, 50rem);
+  --main-col: minmax(34rem, var(--grid-max));
   --side-col: minmax(18rem, 26rem);
 }
 
@@ -1929,6 +1930,7 @@ table {
   font-size: var(--font-step-0);
 
   td {
+    max-width: var(--grid-max);
     vertical-align: middle;
     padding: var(--table-inner-padding);
     background: transparent;

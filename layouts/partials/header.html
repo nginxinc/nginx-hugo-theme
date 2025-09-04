@@ -28,35 +28,8 @@
           </a>
       </div>
 
-      <div class="header__f5sites" data-testid="header__f5sites">
-      {{ $f5Sites := slice
-        (dict "title" "DevCentral" "url" "https://community.f5.com/" "description" "Connect & learn in our hosted community")
-        (dict "title" "MyF5" "url" "https://my.f5.com/" "description" "Your key to everything F5, including support, registration keys, and subscriptions")
-        (dict "title" "NGINX" "url" "https://nginx.org/" "description" "Learn more about NGINX Open Source and read the community blog")
-      }}
+      {{ partial "f5-sites.html" . }}
 
-      <div class="navbar navbar-nav">
-          <div class="nav-item-explore active">
-            <button id="navbar-sites-button" class="button navbar-button dropdown-button" data-testid="header__f5sites__button">
-                F5 Sites
-                <span class="header__f5sites--icon">
-                {{ partial "lucide" (dict "context" . "icon" "chevron-down") }}
-                </span>
-            </button>
-            <div class="dropdown-content" id="dropdown-content" data-testid="header__f5sites__content">
-              <ul>
-                {{ range $f5Sites }}
-                  <li>
-                    <a href="{{ .url }}" target="_blank" >{{ .title }}</a>
-                    <p>{{ .description }}</p>
-                  </li>
-                {{ end }}
-              </ul>
-            </div>
-          </div>
-      </div>
-
-      </div>
   </div>
   <div class="header-search-dropdown" data-testid="header-search-dropdown-mobile">
     <atomic-external selector="#search-standalone-header">

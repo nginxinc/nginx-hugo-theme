@@ -18,13 +18,13 @@ test.describe('Smoke test for header', () => {
   });
 
   test('header control works', async ({ page }) => {
-    const sidebarButtonClose = await page.getByTestId(
+    const sidebarButtonClose = page.getByTestId(
       'header__control--sidebar--close'
     );
-    const sidebarButtonOpen = await page.getByTestId(
+    const sidebarButtonOpen = page.getByTestId(
       'header__control--sidebar--open'
     );
-    const sidebar = await page.getByTestId('sidebar');
+    const sidebar = page.getByTestId('sidebar');
 
     // Close the sidebar
     await expect(sidebarButtonClose).toBeVisible();
@@ -44,9 +44,11 @@ test.describe('Smoke test for header', () => {
   });
 
   test('F5 Sites button works', async ({ page }) => {
-    const f5SitesButton = await page.getByTestId('header__f5sites_button');
-    await f5SitesButton.click();
-    const f5SitesContent = await page.getByTestId('header__f5sites_content');
-    await expect(f5SitesContent.count()).toBeTruthy();
+    const f5SitesButton = page.getByTestId('header__f5sites_button');
+    await expect(async () => {
+      await f5SitesButton.click();
+      const f5SitesContent = page.getByTestId('header__f5sites_content');
+      await expect(f5SitesContent).toBeVisible();
+    }).toPass();
   });
 });

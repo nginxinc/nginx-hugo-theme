@@ -9,10 +9,10 @@ test.describe('Testing for tabs shortcode', () => {
   });
 
   test('tabs render', async ({ page }) => {
-    const section = await page.getByTestId('tabs-test__basic');
-    const tabsContainer = await section.getByTestId('tabs-container');
-    const tabLabels = await tabsContainer.getByTestId('tab-labels');
-    const tabContents = await tabsContainer.getByTestId('tab-contents');
+    const section = page.getByTestId('tabs-test__basic');
+    const tabsContainer = section.getByTestId('tabs-container');
+    const tabLabels = tabsContainer.getByTestId('tab-labels');
+    const tabContents = tabsContainer.getByTestId('tab-contents');
 
     expect(await tabsContainer.count()).toBeTruthy();
     expect(await tabLabels.count()).toBeTruthy();
@@ -20,10 +20,10 @@ test.describe('Testing for tabs shortcode', () => {
   });
 
   test('tabs shift content when clicked', async ({ page }) => {
-    const section = await page.getByTestId('tabs-test__basic');
-    const tabsContainer = await section.getByTestId('tabs-container');
-    const tabLabels = await tabsContainer.getByTestId('tab-labels');
-    const tabContents = await tabsContainer.getByTestId('tab-contents');
+    const section = page.getByTestId('tabs-test__basic');
+    const tabsContainer = section.getByTestId('tabs-container');
+    const tabLabels = tabsContainer.getByTestId('tab-labels');
+    const tabContents = tabsContainer.getByTestId('tab-contents');
 
     const tabsList = await tabLabels.locator('li').all();
     for (const tab of tabsList) {

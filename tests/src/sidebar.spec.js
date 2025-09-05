@@ -35,7 +35,7 @@ async function openPage(page, sidebarPage) {
 
   // Click on the page
   await sidebarPage.click();
-  const content = await page.getByTestId('content');
+  const content = page.getByTestId('content');
   await content.waitFor();
 }
 

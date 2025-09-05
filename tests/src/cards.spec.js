@@ -9,18 +9,18 @@ test.describe('Testing for cards shortcode', () => {
   });
 
   test('basic section', async ({ page }) => {
-    const section = await page.getByTestId('cards-test__basic');
-    const showAsCardCode = await section.getByTestId('card-section-content');
+    const section = page.getByTestId('cards-test__basic');
+    const showAsCardCode = section.getByTestId('card-section-content');
 
     expect(await showAsCardCode.count()).toBe(0);
   });
 
   test('featured section', async ({ page }) => {
-    const section = await page.getByTestId('cards-test__featuredSection');
-    const featuredSection = await section.getByTestId(
+    const section = page.getByTestId('cards-test__featuredSection');
+    const featuredSection = section.getByTestId(
       'card-section__featured-section'
     );
-    const cards = await (await featuredSection.getByTestId('card')).all();
+    const cards = await featuredSection.getByTestId('card').all();
 
     // Test featured section exists AND there are less than or equal to 3 cards.
     expect(await featuredSection.count()).toBeTruthy();

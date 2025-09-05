@@ -1,4 +1,4 @@
-{{$variant := .variant | default "narrow"}}
+{{$variant := .variant | default "wide"}}
 {{$theme := .theme | default "bordered"}}
 {{$dataGrid := cond (eq $variant "narrow") "first-two-thirds" (cond (eq $variant "wide") "wide" "") }}
 

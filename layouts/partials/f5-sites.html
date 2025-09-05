@@ -1,0 +1,25 @@
+<div class="header__f5sites">
+{{ with index .Site.Data "f5-sites" }}
+{{ $f5Sites := . }}
+<div class="navbar navbar-nav">
+    <div class="nav-item-explore active">
+    <button id="navbar-sites-button" class="button navbar-button dropdown-button" data-testid="header__f5sites_button">
+        F5 Sites
+        <span class="header__f5sites--icon">
+        {{ partial "lucide" (dict "context" . "icon" "chevron-down") }}
+        </span>
+    </button>
+    <div class="dropdown-content" id="dropdown-content" data-testid="header__f5sites_content">
+        <ul>
+        {{ range $f5Sites }}
+            <li>
+            <a href="{{ .url }}" target="_blank" >{{ .title }}</a>
+            <p>{{ .description }}</p>
+            </li>
+        {{ end }}
+        </ul>
+    </div>
+    </div>
+</div>
+{{ end }}
+</div>

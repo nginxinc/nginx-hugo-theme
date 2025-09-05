@@ -1,5 +1,4 @@
 BIOME_BASE_CMD := $(if $(shell which biome),biome,npx @biomejs/biome@2.2.2)
-BIOME_CONFIG_PATH := --config-path="biome.json"
 WRITE_FLAG := --write
 
 .PHONY: list help
@@ -26,11 +25,11 @@ ifeq ($(BIOME_ARGS), write)
 endif
 
 biome-format:
-	$(BIOME_BASE_CMD) format $(BIOME_CONFIG_PATH) $(FLAG)
+	$(BIOME_BASE_CMD) format $(FLAG)
 biome-lint:
-	$(BIOME_BASE_CMD) lint $(BIOME_CONFIG_PATH) $(FLAG)
+	$(BIOME_BASE_CMD) lint $(FLAG)
 biome-all:
-	$(BIOME_BASE_CMD) check $(BIOME_CONFIG_PATH) $(FLAG)
+	$(BIOME_BASE_CMD) check $(FLAG)
 
 setup-pre-commit:
 	@if ! command -v pre-commit &> /dev/null; then \

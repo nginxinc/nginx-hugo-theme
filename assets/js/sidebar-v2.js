@@ -37,6 +37,21 @@ document.addEventListener('click', (e) => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  // need to correlate path to page rather than h1, as headers can be repeated (ie. nested1c/nested2-1 is seen the same as nested1b/nested2-1)
+  const currentPage = document.querySelector("h1").textContent;
+  console.log("This is a test log "+currentPage);  
+
+  const match = Array.from(document.querySelectorAll(".sidebar__link"))
+  .find(el => el.textContent.includes(currentPage));
+
+  if (match){
+    console.log("Matching pair? "+match)
+    match.scrollIntoView({ behavior: "instant", block: "nearest" });
+  }
+
+});
+
 const debounce = (callback, wait) => {
   let timeoutId = null;
   return (...args) => {
@@ -51,7 +66,7 @@ window.addEventListener(
   'resize',
   debounce(() => {
     const sidebar = document.getElementById('sidebar-v2');
-
+    console.log("This is a test log")
     if (
       window.innerWidth > 88 * 16 &&
       sidebar.classList.contains('sidebar__mobile-open')
@@ -60,3 +75,5 @@ window.addEventListener(
     }
   }, 200)
 );
+
+

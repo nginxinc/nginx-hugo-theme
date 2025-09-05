@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<main class="content" role="main">
+<main class="content" role="main" data-testid="content">
     <div data-cms-edit="content" class="text-content list-page">
         <div class="breadcrumb-layout">
         {{ if not .IsHome }}
@@ -30,7 +30,7 @@
 
     <h2> In this section </h2>
     <div class="card-section">
-        <div class="card-section-content card-grid">
+        <div class="card-section-content card-grid" data-testid="header-search-dropdown">
         {{ range .Pages.ByWeight }}
             <a href="{{ .Permalink }}" alt="{{ .Title }}" class="card" data-grid="first-two-thirds">
             <div class="card-container">

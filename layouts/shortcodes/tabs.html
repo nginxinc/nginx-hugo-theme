@@ -2,18 +2,18 @@
 {{- $tab_set_id := .Get "name" | default (printf "tabset-%s-%d" (.Page.RelPermalink) (.Page.Scratch.Get "tabset-counter") ) | anchorize -}}
 {{- $tabs := .Scratch.Get "tabs" -}}
 {{- if .Inner -}}
-  <div class="tabs-container" id="{{ $tab_set_id }}">
+  <div class="tabs-container" id="{{ $tab_set_id }}" data-testid="tabs-container">
     {{- range $i, $e := $tabs -}}
-	  {{- $id := printf "%s-tab%d" $tab_set_id $i -}}
+	  {{- $id := printf "%s-tab-%d" $tab_set_id $i -}}
       {{- if eq $i 0 -}}
         <input type="radio" name="{{$tab_set_id}}" id="{{$id}}" aria-hidden="true" checked="checked">
       {{- else -}}
         <input type="radio" name="{{$tab_set_id}}" id="{{$id}}" aria-hidden="true">
       {{- end -}}
 	{{- end -}}
-	<ul class="tab-labels" role="tablist" id="{{ $tab_set_id }}" data-testid="labels-{{ $tab_set_id }}">
+	<ul class="tab-labels" role="tablist" id="{{ $tab_set_id }}" data-testid="tab-labels">
 	  {{- range $i, $e := $tabs -}}
-	  	{{- $id := printf "%s-tab%d" $tab_set_id $i -}}
+	  	{{- $id := printf "%s-tab-%d" $tab_set_id $i -}}
 		<li>
 		  {{- if eq $i 0 -}}
 			<label class="tab-label" role="tab" id="{{$id}}" for="{{$id}}" aria-controls="{{ $id }}" aria-selected="true" tabindex="0" data-testid="tab-label">
@@ -27,10 +27,10 @@
 		</li>
 	  {{- end -}}
 	</ul>
-	<div class="tab-contents" data-testid="contents-{{ $tab_set_id }}">
+	<div class="tab-contents" data-testid="tab-contents">
 	  {{- range $i, $e := $tabs -}}
 	    {{- $id := printf "%s-panel%d" $tab_set_id $i -}}
-		<div class="tab-content" role="tabpanel" id="{{ $tab_set_id }}-panel{{ $i }}" aria-labelledby="{{ $id }}">
+		<div class="tab-content" role="tabpanel" id="{{ $tab_set_id }}-panel-{{ $i }}" aria-labelledby="{{ $id }}" data-testid="tab-content">
 		  {{ with .content }}
 			{{ . }}
 		  {{ end }}

@@ -1,0 +1,7 @@
+{{ with .Params }}
+  {{ if (index . "nd-commercial") }}
+  - <em>Commercial</em>
+  {{ else if (index . "nd-commercial-partial") }}
+  - <em>Partial Commercial</em>
+  {{ end }}
+{{ end }}

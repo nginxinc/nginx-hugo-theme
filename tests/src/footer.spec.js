@@ -4,6 +4,7 @@ import { handleConsentPopup, waitFor } from './util';
 test.describe('Smoke test for footer', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/test-product');
+    await page.waitForLoadState('load');
     await waitFor(async () => await handleConsentPopup(page));
   });
 

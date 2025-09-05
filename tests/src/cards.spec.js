@@ -5,6 +5,7 @@ test.describe('Testing for cards shortcode', () => {
   test.beforeEach(async ({ page }) => {
     const cardsUrl = 'test-product/cards/permitted';
     await page.goto(`/${cardsUrl}`);
+    await page.waitForLoadState('load');
     await waitFor(async () => await handleConsentPopup(page));
   });
 

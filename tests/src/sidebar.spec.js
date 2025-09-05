@@ -45,6 +45,7 @@ test.describe('Smoke test for sidebar', () => {
 
   test.beforeEach(async ({ page }) => {
     await page.goto('/test-product/');
+    await page.waitForLoadState('load');
   });
 
   test('sidebar renders', async ({ page }) => {

@@ -7,6 +7,7 @@ test.describe('Smoke test for landing page', () => {
 
     for (const product of products) {
       await page.goto(`/${product}/`);
+      await page.waitForLoadState('load');
       await runSmokeTestOnPage(page);
     }
   });

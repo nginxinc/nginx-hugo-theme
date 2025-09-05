@@ -5,6 +5,7 @@ test.describe('Testing for tabs shortcode', () => {
   test.beforeEach(async ({ page }) => {
     const tabsUrl = 'test-product/tab-group/tab-group/';
     await page.goto(`/${tabsUrl}`);
+    await page.waitForLoadState('load');
     await waitFor(async () => await handleConsentPopup(page));
   });
 

@@ -38,18 +38,12 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  // need to correlate path to page rather than h1, as headers can be repeated (ie. nested1c/nested2-1 is seen the same as nested1b/nested2-1)
-  const currentPage = document.querySelector("h1").textContent;
-  console.log("This is a test log "+currentPage);  
-
+  const currentPage = window.location.href; 
   const match = Array.from(document.querySelectorAll(".sidebar__link"))
-  .find(el => el.textContent.includes(currentPage));
+                .find(el => el.href.includes(currentPage));
 
-  if (match){
-    console.log("Matching pair? "+match)
+  if (match)
     match.scrollIntoView({ behavior: "instant", block: "nearest" });
-  }
-
 });
 
 const debounce = (callback, wait) => {

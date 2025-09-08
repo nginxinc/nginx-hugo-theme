@@ -134,9 +134,14 @@ textarea:not([rows]) {
   /* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
 
   /* biome-ignore lint: Coveo override */
-  --atomic-primary: oklch(var(--color-brand)) !important; /* Adjust the primary color */
+  --atomic-primary: oklch(
+    var(--color-brand)
+  ) !important; /* Adjust the primary color */
   /* biome-ignore lint: necessary override */
-  --atomic-ring-primary: oklch(var(--color-brand) / 0.4) !important; /* Adjust the focus color */
+  --atomic-ring-primary: oklch(
+    var(--color-brand) /
+    0.4
+  ) !important; /* Adjust the focus color */
   /* biome-ignore lint: necessary override */
   --atomic-primary-light: oklch(var(--color-brand)) !important;
   --atomic-background: oklch(0.9911 0 0) !important;

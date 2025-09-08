@@ -38,12 +38,12 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const currentPage = window.location.href; 
-  const match = Array.from(document.querySelectorAll(".sidebar__link"))
-                .find(el => el.href.includes(currentPage));
+  const currentPage = window.location.href;
+  const match = Array.from(document.querySelectorAll('.sidebar__link')).find(
+    (el) => el.href.includes(currentPage)
+  );
 
-  if (match)
-    match.scrollIntoView({ behavior: "instant", block: "nearest" });
+  if (match) match.scrollIntoView({ behavior: 'instant', block: 'nearest' });
 });
 
 const debounce = (callback, wait) => {
@@ -60,7 +60,6 @@ window.addEventListener(
   'resize',
   debounce(() => {
     const sidebar = document.getElementById('sidebar-v2');
-    console.log("This is a test log")
     if (
       window.innerWidth > 88 * 16 &&
       sidebar.classList.contains('sidebar__mobile-open')
@@ -69,5 +68,3 @@ window.addEventListener(
     }
   }, 200)
 );
-
-

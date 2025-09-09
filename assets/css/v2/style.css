@@ -426,12 +426,9 @@ ol li:last-child {
       "content"
       "footer";
 
-    .text-content {
-      margin-block-start: 1rem;
-    }
-
     .breadcrumb-layout {
       align-items: center;
+      display: flex;
       padding: var(--space-xs) 0;
 
       &::after {
@@ -1264,11 +1261,6 @@ main {
   }
 }
 
-/* Handles different flow-gap of list page  */
-.list-page.text-content {
-  grid-template-rows: calc(70px + var(--flow-gap)) max-content;
-}
-
 /* MARK: Qualtrics
 */
 
@@ -1917,6 +1909,7 @@ a:hover {
 
 .list-header-container {
   display: flex;
+  margin-top: var(--space-s);
   gap: 1.5rem;
   align-items: center;
   justify-content: start;

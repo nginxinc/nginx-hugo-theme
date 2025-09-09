@@ -6,6 +6,7 @@ weight: 200
 
 ## tab-group
 
+<div data-testid="tabs-test__basic">
 {{<tabs name="common_steps_for_nginx_oss_and_plus">}}
 
 {{%tab name="Call Outs"%}}
@@ -65,6 +66,7 @@ nginx -s reload
 
 
 {{</tabs>}}
+</div>
 
 
 ## Much nested tab group

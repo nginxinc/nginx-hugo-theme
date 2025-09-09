@@ -1,28 +1,28 @@
 {{ define "header" }}
 <div class="header-base">
   <div class="header-container">
-      <div class="header__control">
+      <div class="header__control" data-testid="header__control">
           <div class="header__control--sidebar">
-              <label class="header__control--sidebar--close" for="sidebar-panel">
+              <label class="header__control--sidebar--close" for="sidebar-panel" data-testid="header__control--sidebar--close">
               {{ partial "lucide" (dict "context" . "icon" "panel-left-close") }}
               </label>
-              <label class="header__control--sidebar--open" for="sidebar-panel">
+              <label class="header__control--sidebar--open" for="sidebar-panel" data-testid="header__control--sidebar--open">
               {{ partial "lucide" (dict "context" . "icon" "panel-left-open") }}
               </label>
           </div>
           {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
           <!-- Mobile button -->
-          <label class="header__search--mobile--search--button"for="search-standalone-header-panel">
+          <label class="header__search--mobile--search--button"for="search-standalone-header-panel" data-testid="header__search--mobile--search--button">
             {{ partial "lucide" (dict "context" . "icon" "search") }}
           </label>
-          <div class="header__search">
+          <div class="header__search" data-testid="header__search">
               <!-- Standalone search box. -->
               {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
           </div>
           {{ end }}
       </div>
 
-      <div class="header__logo">
+      <div class="header__logo" data-testid="header__logo">
           <a class="header__logo-link" href="{{ .Site.BaseURL | relLangURL }}" alt="NGINX Docs Home">
               <img class="header__img" src="{{ "/images/icons/NGINX-Open-Source-product-icon.svg" | absURL }}" alt="NGINX Docs">
           </a>
@@ -31,7 +31,7 @@
       {{ partial "f5-sites.html" . }}
 
   </div>
-  <div class="header-search-dropdown">
+  <div class="header-search-dropdown" data-testid="header-search-dropdown-mobile">
     <atomic-external selector="#search-standalone-header">
       {{ $redirectUrl := default .Site.Params.coveo_search_redirect "/search.html" }}
       <atomic-search-box redirection-url={{ $redirectUrl }}></atomic-search-box>

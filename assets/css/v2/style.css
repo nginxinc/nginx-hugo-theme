@@ -1456,6 +1456,12 @@ body:not(:has(.main-layout)) header atomic-search-interface {
   display: block;
 }
 
+body:has(atomic-refine-modal[is-open=""]) {
+  /* Lock scrolling when modal is up */
+  position: fixed;
+  width: 100%;
+}
+
 @media (max-width: 88rem) {
   /* Show on pages with sidebar if it is hidden */
   body:has(.sidebar-layout) header atomic-search-interface {

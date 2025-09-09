@@ -1390,42 +1390,42 @@ atomic-search-box {
   width: 18.5rem;
   display: flex;
   align-items: center;
-}
 
-atomic-search-box::part(input) {
-  height: 2.25rem;
-  font-size: var(--font-step--1);
-  padding: 0.5rem 1rem;
-  box-sizing: border-box;
-}
+  &::part(input) {
+    height: 2.25rem;
+    font-size: var(--font-step--1);
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+  }
 
-atomic-search-box::part(textarea-expander) {
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  resize: none;
-}
+  &::part(textarea-expander) {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    resize: none;
+  }
 
-atomic-search-box::part(textarea) {
-  padding-left: 0;
-  padding-right: 0;
-  font-weight: 400;
-}
+  &::part(textarea) {
+    padding-left: 0;
+    padding-right: 0;
+    font-weight: 400;
+  }
 
-atomic-search-box::part(wrapper) {
-  height: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-}
+  &::part(wrapper) {
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+  }
 
-atomic-search-box::part(submit-button) {
-  order: -1;
-  padding-right: 0;
-}
+  &::part(submit-button) {
+    order: -1;
+    padding-right: 0;
+  }
 
-atomic-search-box::part(submit-button-wrapper) {
-  margin: 0;
+  &::part(submit-button-wrapper) {
+    margin: 0;
+  }
 }
 
 atomic-search-interface#search-standalone-header {

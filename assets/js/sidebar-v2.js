@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     (el) => el.href.includes(currentPage)
   );
 
-  if (match) match.scrollIntoView({ behavior: 'instant', block: 'nearest' });
+  if (match) match.scrollIntoView({ behavior: 'instant', block: 'start' });
 });
 
 const debounce = (callback, wait) => {

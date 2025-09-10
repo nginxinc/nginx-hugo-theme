@@ -9,7 +9,10 @@
           </label>
         </div>
 
-        {{ $relPermalink := (urls.Parse .RelPermalink).Path }}
+        <!-- Normalize our URL path to handle preview environments                 -->
+        {{ $rawPath := strings.TrimPrefix .Site.BaseURL .Permalink }}
+        {{ $normalizedPath := printf "/%s" $rawPath }}
+
         {{ $currentProductTitle := "" }}
 
         {{ with index .Site.Data "product-selector" }}
@@ -17,8 +20,8 @@
             {{ range $product := $group.products }}
               {{ if not $product.extUrl }}
                 {{ $escaped := replace $product.url "/" "\\/" }}
-                {{ $pattern := printf "/%s(/|$)" $escaped }}
-                {{ if strings.FindRE $pattern $relPermalink }}
+                {{ $pattern := printf "/%s(|$)" $escaped }}
+                {{ if strings.FindRE $pattern $normalizedPath }}
                   {{ $currentProductTitle = $product.title }}
                 {{ end }}
               {{ end }}

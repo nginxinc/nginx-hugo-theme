@@ -2,6 +2,8 @@
   products:
     - title: "Test Product"
       url: "test-product"
+    - title: "Test Nested Product"
+      url: "nested/product"
 
 - productGroup: Test External Links
   products:

@@ -38,10 +38,10 @@ document.addEventListener('click', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const currentPage = window.location.href;
-  const match = Array.from(document.querySelectorAll('.sidebar__link')).find(
-    (el) => el.href.includes(currentPage)
-  );
+  const currentPage = window.location.pathname;
+  const match = Array.from(
+    document.querySelectorAll('.sidebar__link--current')
+  ).find((el) => el?.id?.includes(currentPage));
 
   if (match) match.scrollIntoView({ behavior: 'instant', block: 'start' });
 });

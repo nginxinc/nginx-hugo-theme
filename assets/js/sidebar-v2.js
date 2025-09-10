@@ -37,6 +37,15 @@ document.addEventListener('click', (e) => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const currentPage = window.location.pathname;
+  const match = Array.from(
+    document.querySelectorAll('.sidebar__link--current')
+  ).find((el) => el?.id?.includes(currentPage));
+
+  if (match) match.scrollIntoView({ behavior: 'instant', block: 'start' });
+});
+
 const debounce = (callback, wait) => {
   let timeoutId = null;
   return (...args) => {
@@ -51,7 +60,6 @@ window.addEventListener(
   'resize',
   debounce(() => {
     const sidebar = document.getElementById('sidebar-v2');
-
     if (
       window.innerWidth > 88 * 16 &&
       sidebar.classList.contains('sidebar__mobile-open')

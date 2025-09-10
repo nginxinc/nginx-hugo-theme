@@ -34,3 +34,6 @@ exampleSite/hugo
 /coverage
 */test-results
 */playwright-report
+
+# Biome
+biome.rb

@@ -17,7 +17,7 @@
             {{ range $product := $group.products }}
               {{ if not $product.extUrl }}
                 {{ $escaped := replace $product.url "/" "\\/" }}
-                {{ $pattern := printf "/%s(/|$)" $escaped }}
+                {{ $pattern := printf "/%s(|$)" $escaped }}
                 {{ if strings.FindRE $pattern $relPermalink }}
                   {{ $currentProductTitle = $product.title }}
                 {{ end }}

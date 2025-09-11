@@ -16,6 +16,10 @@
 <script src="{{ $mermaid.RelPermalink }}" type="text/javascript" integrity="{{ $mermaid.Data.Integrity }}"></script>
 {{ end }}
 
+<!-- Coveo API -->
+{{ $searchStandalone := resources.Get "/js/coveo/standalone-search.js" | fingerprint "sha512" }}
+<script src="{{ $searchStandalone.RelPermalink }}" type="text/javascript"></script>
+
 <!-- Coveo Atomic -->
 <script
   type="module"

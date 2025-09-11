@@ -1275,6 +1275,38 @@ main {
   }
 }
 
+/* MARK: Coveo API
+*/
+
+.standalone__searchbox {
+  background-color: white;
+  border: 1px solid black;
+  width: fit-content;
+
+  .form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.25rem 0.5rem;
+
+    .submit-button {
+      background-color: inherit;
+      color: oklch(var(--color-brand));
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      margin-top: 0.2rem;
+    }
+
+    .input {
+      background-color: inherit;
+      border: none;
+      padding: 0;
+      outline: none;
+    }
+  }
+}
+
 /* MARK: Coveo
 */
 

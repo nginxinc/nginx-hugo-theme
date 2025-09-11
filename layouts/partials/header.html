@@ -17,7 +17,8 @@
           </label>
           <div class="header__search" data-testid="header__search">
               <!-- Standalone search box. -->
-              {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
+              <!-- {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }} -->
+              {{ partial "coveo-api-search" . }}
           </div>
           {{ end }}
       </div>

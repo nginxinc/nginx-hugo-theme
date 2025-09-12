@@ -19,8 +19,13 @@
           {{ range $group := . }}
             {{ range $product := $group.products }}
               {{ if not $product.extUrl }}
-                {{ $escaped := replace $product.url "/" "\\/" }}
-                {{ $pattern := printf "/%s(|$)" $escaped }}
+                <!-- Remove any leading or trailing slashes for capture group handling                -->
+                {{ $escaped := strings.TrimPrefix "/" $product.url }}
+                {{ $escaped = strings.TrimSuffix "/" $escaped }}
+
+                {{ $escaped = replace $escaped "/" "\\/" }}
+                {{ $pattern := printf "/(%s)/" $escaped }}
+
                 {{ if strings.FindRE $pattern $normalizedPath }}
                   {{ $currentProductTitle = $product.title }}
                 {{ end }}

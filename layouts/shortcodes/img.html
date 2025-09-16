@@ -1,4 +1,5 @@
-<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
+{{- $grid := .Get "grid" | default "first-two-thirds" -}}
+<figure{{ with .Get "class" }} class="{{ . }}"{{ end }} data-grid="{{$grid}}">
     {{- $src := .Get "src" -}}
     {{- $isSVG := strings.HasSuffix $src ".svg" -}}
     <img class="{{ if $isSVG }}figure-svg{{ else }}figure-bitmap{{ end }}" src="{{ .Get "src" | relURL }}"

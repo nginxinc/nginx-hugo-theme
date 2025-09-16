@@ -97,7 +97,7 @@ params:
 |---------------|------------------------|--------------------------------------------------------------------------------------------------------------|
 | `size`        | `"sm" \| "md" \| "lg"` | Size of rendered icon (defaults to "md"). Maps to "rem" enum                                                 |
 | `set`         | `string \| undefined`  | A valid string ID for an icon set (defaults to `.Site.Params.brand.iconSet`)                                 |
-| `icon`        | `string`               | A string ID for the icon-set                                                                                 |
+| `icon`        | `string \| undefined`  | A string ID for the icon                                                                                     |
 | `_iconDirect` | `string \| undefined`  | A direct path for the icon resource to render. If supplied, `set` and `icon` params are ignored in handling. |
 
 ```go-template

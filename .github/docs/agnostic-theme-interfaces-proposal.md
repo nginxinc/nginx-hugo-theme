@@ -5,7 +5,7 @@ laid out in docs-platform/629.
 
 Nothing in this document should be considered final and is subject to change.
 
-### Site Config
+## Site Config
 
 ```yaml
 params:
@@ -15,10 +15,10 @@ params:
       items: <Product[]>
           # Product Group Label
         - title: <string>
-          # The URL prefix used for the section (Ex. 'nginx' for NGINX+)
-          url: <string>
+          # The common top-level path for all documents within a domain; i.e. 'nginx' for NGINX+ 
+          pathPrefix: <string>
           # Whether this link is external to the site
-          extUrl: <bool | undefined>
+          extUrl: <bool>
   header:
     # Header Nav items
     navItems: <NavItem[]>
@@ -39,14 +39,10 @@ params:
     logo: <string | undefined>
     # Path for icon logo (Used in small width contexts), fallback to "logo" if not defined
     iconLogo: <string | undefined>
-    primary: <string | undefined>
-    secondary: <string | undefined>
-    # Replicates the interface for .Site.params.brand, minus iconSet and favicon
+    # Used for dark mode variant assets 
     dark:
       logo: <string>
       iconLogo: <string>
-      primary: <string>
-      secondary: <string>
   footer:
     # Default to &copy;{currentYear} F5, Inc. All rights reserved
     copyrightText: <string | undefined>
@@ -54,11 +50,11 @@ params:
       - title: <string>
         # Item URL
         href: <string>
-        extUrl: <boolean>
+        extUrl: <bool>
 
 ```
 
-### F5 Sites
+## F5 Sites
 
 Collection of F5Site types. Used to define items for the "F5 Sites" dropdown.
 
@@ -74,26 +70,63 @@ params:
 
 ```
 
-### Product Selector
+## Product Selector
 
-Defined in Hugo config as this applies sitewide. Optionally, keep `data/` files as source
-instead of defined in `hugo.yaml` but less explicit.
+The product selector is one of the theme's two main mechanism's for content navigation (both internal and external).
+In the context of the NGINX Docs, it's used to group products according to their broader product domains. 
 
 ```yaml
 params:
   productSelector: <ProductGroup[]>
+      # Product group label (i.e NGINX One)
     - groupLabel: <string>
+      # Individual product landing pages within that domain                
       items: <Product[]>
           # Product Label
         - title: <string>
           # The URL prefix used for the section (Ex. 'nginx' for NGINX+).
           url: <string | undefined>
           # Whether the URL is external to the site (opens a new tab if true)
-          extUrl: <bool | undefined>
+          extUrl: <bool>
 
 ```
 
-### Icon Partial
+## Styling Overrides
+
+> Implementation detail: We ideally don't want to force theme users into raw oklch values; it would be a much nicer
+surface if theme consumers could use a color keyword of their choice (rgb, hwb, hsl). However, that surface change
+would require we rewrite all our current CSS variable calls
+
+**Consumer: `assets/style.css`**
+```css
+:root {
+  --color-brand: 56.6% 0.194 147.7;
+  --color-brand-300: 0.84 0.0699 157.51;
+  --color-brand-200: 0.91 0.0406 157.72;
+  --color-brand-100: 0.98 0.0107 158.85;
+
+  --color-background: 1 0 0;
+  --color-foreground: 0 0 0;
+  --color-shadow: 0.86 0 0;
+  
+  /* Dark Mode Variables */
+  --dark_color-brand: 56.6% 0.194 147.7;
+  --dark_color-brand-300: 0.84 0.0699 157.51;
+  --dark_color-brand-200: 0.91 0.0406 157.72;
+  --dark_color-brand-100: 0.98 0.0107 158.85;
+  
+  --dark_color-background: 1 0 0;
+  --dark_color-foreground: 0 0 0;
+  --dark_color-shadow: 0.86 0 0;
+}
+```
+
+* Variables defined in any consumer CSS files should override reasonable defaults.
+* Pre-defined theming support could be offered by creating CSS files defining these variables that are then  
+  loaded based on an ID (or similar mechanism). 
+  * Ex. F5 Theme or NGINX Theme
+
+## Icon Partial
 
 | Param         | Type                   | Note                                                                                                         |
 |---------------|------------------------|--------------------------------------------------------------------------------------------------------------|
@@ -106,10 +139,8 @@ params:
 {{ partial "icon.html" set="lucide" size="md" icon="test-icon-id" _iconDirect="" . }}
 ```
 
-### Additional Notes
+## Additional Notes
 
-* Style variables defined in Hugo config may be detrimental to IDE integrations that read values for color display
-  * Optionally, require theme consumers to set variables directly in a CSS file rather than config.
 * Some of these new schemas are breaking but given the low-level of current consumers, this is the best time to make schema adjustments before wider rollout.
 
 ### Optional Collection Definition Pattern

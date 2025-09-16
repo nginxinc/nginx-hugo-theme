@@ -71,6 +71,7 @@ params:
       - title: <string>
         description: <string>
         url: <string>
+
 ```
 
 ### Product Selector
@@ -85,10 +86,11 @@ params:
       items: <Product[]>
           # Product Label
         - title: <string>
-          # The URL prefix used for the section (Ex. 'nginx' for NGINX+). Definition not required if extUrl
+          # The URL prefix used for the section (Ex. 'nginx' for NGINX+).
           url: <string | undefined>
           # Whether the URL is external to the site (opens a new tab if true)
           extUrl: <bool | undefined>
+
 ```
 
 ### Icon Partial

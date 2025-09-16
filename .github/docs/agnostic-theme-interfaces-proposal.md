@@ -1,7 +1,7 @@
 # Agnostic Theming - Proposal Interfaces (9/16/25)
 
 This document contains proposal interfaces fulfilling the requirements and criteria
-laid out in [docs-platform/629](https://github.com/nginxinc/docs-platform/issues/620).
+laid out in docs-platform/629.
 
 Nothing in this document should be considered final and is subject to change.
 
@@ -80,10 +80,10 @@ instead of defined in `hugo.yaml` but less explicit.
 
 ```yaml
 params:
-  productSelector: ProductGroup[]
-    - productGroup: <string>
-      products: Product[]
-          # Product Group Label (Product[])
+  productSelector: <ProductGroup[]>
+    - groupLabel: <string>
+      items: <Product[]>
+          # Product Label
         - title: <string>
           # The URL prefix used for the section (Ex. 'nginx' for NGINX+). Definition not required if extUrl
           url: <string | undefined>

@@ -40,7 +40,7 @@ jobs:
           with:
             node-version: 18
         - name: Installing packages
-          run: npm ci
+          run: cd performance && npm ci
         - name: Generating lighthouse reports for PR and main...
           run: | 
               node performance/lighthouse-script.js

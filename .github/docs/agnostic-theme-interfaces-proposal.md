@@ -15,10 +15,9 @@ params:
       items: <Product[]>
           # Product Group Label
         - title: <string>
-          # The common top-level path for all documents within a domain; i.e. 'nginx' for NGINX+ 
-          pathPrefix: <string>
-          # Whether this link is external to the site
-          extUrl: <bool>
+          # The common top-level path for all internal documents within a domain; i.e. 'nginx' for NGINX+. 
+          # Supply if the link is external to the site.
+          url: <string | undefined>
   header:
     # Header Nav items
     navItems: <NavItem[]>
@@ -136,7 +135,14 @@ would require we rewrite all our current CSS variable calls
 | `_iconDirect` | `string \| undefined`  | A direct path for the icon resource to render. If supplied, `set` and `icon` params are ignored in handling. |
 
 ```go-template
-{{ partial "icon.html" set="lucide" size="md" icon="test-icon-id" _iconDirect="" . }}
+{{ $iconPartialParams = (dict 
+   "size" "md"
+   "set" "lucide"
+   "icon" "lock-open"
+   "_iconDirect" ""
+)}}
+
+{{ partial "icon.html" $iconPartialParams }}
 ```
 
 ## Additional Notes

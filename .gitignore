@@ -37,3 +37,6 @@ exampleSite/hugo
 
 # Biome
 biome.rb
+
+# Local Lighthouse artifacts
+*/lighthouse-reports

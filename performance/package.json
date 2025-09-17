@@ -1,9 +1,0 @@
-{
-  "name": "nginx-docs-theme-performance",
-  "version": "1.0.0",
-  "private": "true",
-  "devDependencies": {
-    "lighthouse": "^12.2.2",
-    "puppeteer": "^24.22.0"
-  }
-}

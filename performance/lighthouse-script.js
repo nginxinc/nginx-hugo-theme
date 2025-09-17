@@ -3,38 +3,37 @@ const fs = require('fs');
 
 const PORT = 8041;
 const PR_NUMBER = process.env.GITHUB_PR_NUMBER;
-const environments = [
+const OUTPUT_DIR = './lighthouse-reports';
+const ENVIRONMENTS = [
   {
     title: 'pr',
-    url: `https://frontdoor-test-docs.nginx.com/previews/docs/${PR_NUMBER}/`,
-  },
-  {
-    title: 'main',
-    url: 'https://docs.nginx.com/',
+    url: `https://frontdoor-test-docs.nginx.com/previews/nginx-hugo-theme/${PR_NUMBER}/`,
   },
 ];
-const OUTPUT_DIR = './lighthouse-reports';
 
 const signIntoFrontDoor = async (browser, env) => {
   const page = await browser.newPage();
-  await page.authenticate({
-    username: process.env.FRONT_DOOR_USERNAME,
-    password: process.env.FRONT_DOOR_PASSWORD,
-  });
-
-  await page.goto(env['url']);
-  await page.waitForSelector('.grid-container');
-  console.log('Logged in...');
-  await page.close();
+  try {
+    await page.authenticate({
+      username: process.env.FRONT_DOOR_USERNAME,
+      password: process.env.FRONT_DOOR_PASSWORD,
+    });
+    await page.goto(env['url']);
+    await page.waitForSelector('.navbar');
+    console.log('Logged in...');
+    await page.close();
+  } catch {
+    console.log('Unable to log in...');
+  }
 };
 
-const runLighthouse = async (env) => {
+const generateLighthouseReport = async (env) => {
   const OUTPUT_FILE = `${env['title']}-report.json`;
-
   const lighthouse = (await import('lighthouse')).default;
   console.log(`Running Lighthouse for ${env['title']}...`);
   const result = await lighthouse(env['url'], { port: PORT });
   fs.writeFileSync(`${OUTPUT_DIR}/${OUTPUT_FILE}`, result.report);
+  console.log(`Generated report for ${env['title']}...`);
 };
 
 (async () => {
@@ -46,12 +45,12 @@ const runLighthouse = async (env) => {
     fs.mkdirSync(OUTPUT_DIR);
   }
 
-  for (const env of environments) {
+  for (const env of ENVIRONMENTS) {
     if (env['title'] === 'pr') {
       await signIntoFrontDoor(browser, env);
     }
-    await runLighthouse(env);
+    await generateLighthouseReport(env);
   }
 
-  await browser.close();
+  browser.close();
 })();

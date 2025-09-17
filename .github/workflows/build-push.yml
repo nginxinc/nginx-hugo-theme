@@ -43,7 +43,7 @@ jobs:
           run: npm ci
         - name: Generating lighthouse reports for PR and main...
           run: | 
-              node tests/lighthouse-script.js
+              node performance/lighthouse-script.js
         - name: Compare the artifacts for negative differences in performance
           continue-on-error: true
           run: |

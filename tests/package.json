@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": "true",
   "devDependencies": {
-    "@playwright/test": "^1.48.0"
+    "@playwright/test": "^1.48.0",
+    "lighthouse": "^12.2.2",
+    "puppeteer": "^24.22.0"
   }
 }

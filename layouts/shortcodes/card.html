@@ -1,5 +1,5 @@
 {{- $title := .Get "title" -}}
-{{- $titleUrl := .Get "titleUrl" | default "." -}} 
+{{- $titleUrl := .Get "titleUrl" | default "." -}}
 {{- $icon := .Get "icon" | default "book-open" -}}
 {{- $brandIcon := .Get "brandIcon" -}}
 {{- $isFullSizeParam := .Get "isFullSize" | default "false" -}}
@@ -41,7 +41,9 @@
     {{- if $title -}}
       <div class="card-header">
         {{- if $brandIcon -}}
-          <img class="card-brand-icon" src="/images/icons/{{ $brandIcon }}">
+          {{ with printf "images/icons/%s" $brandIcon }}
+          <img class="card-brand-icon" src="{{. | absURL}}">
+          {{ end }}
         {{- else if $icon -}}
           {{ partial "lucide" (dict "context" . "icon" $icon) }}
         {{- end -}}

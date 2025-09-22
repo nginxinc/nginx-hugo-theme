@@ -41,9 +41,19 @@ jobs:
             node-version: 18
         - name: Installing packages
           run: cd performance && npm ci
-        - name: Generating lighthouse reports for PR and main...
+        - name: Generating lighthouse reports for PR...
+          env: 
+            REPORT_NAME: "pr"
           run: | 
               node performance/lighthouse-script.js
+        - name: Download the artifact for main
+          uses: actions/download-artifact@v3
+          with:
+            name: lighthouse-reports
+            path: ./main-report
+        - name: Move the main report artifact to same directory as pr report
+          run: |
+            mv ./main-report/main-report.json ./lighthouse-reports
         - name: Compare the artifacts for negative differences in performance
           continue-on-error: true
           run: |
@@ -72,4 +82,4 @@ jobs:
           with:
               name: lighthouse-reports
               path: lighthouse-reports/
-              retention-days: 30
+              retention-days: 3

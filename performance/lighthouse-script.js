@@ -2,14 +2,9 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 const PORT = 8041;
+const REPORT_NAME = process.env.REPORT_NAME;
 const PR_NUMBER = process.env.GITHUB_PR_NUMBER;
 const OUTPUT_DIR = './lighthouse-reports';
-const ENVIRONMENTS = [
-  {
-    title: 'pr',
-    url: `https://frontdoor-test-docs.nginx.com/previews/nginx-hugo-theme/${PR_NUMBER}/`,
-  },
-];
 
 const signIntoFrontDoor = async (browser, env) => {
   const page = await browser.newPage();
@@ -36,21 +31,26 @@ const generateLighthouseReport = async (env) => {
   console.log(`Generated report for ${env['title']}...`);
 };
 
-(async () => {
-  const browser = await puppeteer.launch({
+const launchBrowser = async () => {
+  return await puppeteer.launch({
     args: [`--remote-debugging-port=${PORT}`],
     headless: true,
   });
+};
+
+(async () => {
+  const browser = await launchBrowser();
   if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR);
   }
 
-  for (const env of ENVIRONMENTS) {
-    if (env['title'] === 'pr') {
-      await signIntoFrontDoor(browser, env);
-    }
-    await generateLighthouseReport(env);
-  }
+  const environment = {
+    title: `${REPORT_NAME}`,
+    url: `https://frontdoor-test-docs.nginx.com/previews/nginx-hugo-theme/${PR_NUMBER}/`,
+  };
+
+  await signIntoFrontDoor(browser, environment);
+  await generateLighthouseReport(environment);
 
   browser.close();
 })();

@@ -9,6 +9,8 @@ on:
 env:
   OWNER: nginxinc
   REPO: nginx-hugo-theme
+  FRONT_DOOR_USERNAME: ${{ secrets.FRONT_DOOR_USERNAME }}
+  FRONT_DOOR_PASSWORD: ${{ secrets.FRONT_DOOR_PASSWORD }}
 jobs:
   generate-lighthouse-report:
     runs-on: ubuntu-22.04

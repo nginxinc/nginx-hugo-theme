@@ -14,7 +14,7 @@ const signIntoFrontDoor = async (browser, env) => {
       password: process.env.FRONT_DOOR_PASSWORD,
     });
     await page.goto(env['url']);
-    await page.waitForSelector('.navbar');
+    await page.waitForSelector('.grid-container');
     console.log('Logged in...');
     await page.close();
   } catch (error) {

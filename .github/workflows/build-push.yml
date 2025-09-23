@@ -70,9 +70,9 @@ jobs:
               }
             result-encoding: string
         - name: Download the artifact for main
-          uses: actions/download-artifact@f44cd7b40bfd40b6aa1cc1b9b5b7bf03d3c67110 # v4.1.0
+          uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
           with:
-            artifact-ids: ${{ steps.fetch_artifact.outputs.artifact_id }}
+            artifact-ids: ${{ steps.fetch-artifact-id.outputs.artifact_id }}
             path: ./main-report
         - name: Move the main report artifact to same directory as pr report
           run: |

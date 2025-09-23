@@ -38,7 +38,7 @@ jobs:
             ref: ${{ github.event.workflow_run.head_branch }}
         - uses: actions/setup-node@v5
           with:
-            node-version: 18
+            node-version: 22
         - name: Installing packages
           run: cd performance && npm ci
         - name: Generating lighthouse reports for PR...
@@ -58,14 +58,21 @@ jobs:
           continue-on-error: true
           run: |
               FIELDS=("performance" "accessibility") 
+              TOLERANCE=0.05
+              FLOOR_VALUE=90
               for FIELD in "${FIELDS[@]}"; do
                   PR_VALUE=$(cat lighthouse-reports/pr-report.json | jq -r ".categories.$FIELD.score")
                   MAIN_VALUE=$(cat lighthouse-reports/main-report.json | jq -r ".categories.$FIELD.score")
                   echo "$FIELD: PR - $PR_VALUE | Main - $MAIN_VALUE"
 
+                  if (( $(echo "$PR_VALUE < $FLOOR_VALUE" | bc -l) )); then
+                      echo "Error: $FIELD score in PR ($PR_VALUE) is less than accepted value ($FLOOR_VALUE)"
+                      exit 1
+                  fi
+
                   if [ $FIELD = "performance" ]; then  
-                    LOWER_BOUND=$(echo "$MAIN_VALUE - 0.05" | bc)
-                    UPPER_BOUND=$(echo "$MAIN_VALUE + 0.05" | bc)
+                    LOWER_BOUND=$(echo "$MAIN_VALUE - $TOLERANCE" | bc)
+                    UPPER_BOUND=$(echo "$MAIN_VALUE + $TOLERANCE" | bc)
                     if (( $(echo "$PR_VALUE < $LOWER_BOUND" | bc -l) || $(echo "$PR_VALUE > $UPPER_BOUND" | bc -l) )); then
                         echo "Error: $FIELD score in PR ($PR_VALUE) is less than in MAIN ($MAIN_VALUE)"
                         exit 1

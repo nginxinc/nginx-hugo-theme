@@ -60,25 +60,24 @@ jobs:
 
               const artifactName = process.env.MAIN_REPORT_ARTIFACT_NAME;
               const filteredArtifacts = response.data.artifacts.filter(a => a.name === artifactName);
+
               if(filteredArtifacts.length === 0) {
-                core.setFailed(`Error: Not able to find artifact with name ${artifactName}`);
+                return core.setFailed(`Error: Not able to find artifact with name ${artifactName}`);
               }
-              else {
-                const latestArtifact = filteredArtifacts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
-                console.log(`Success! Found the latest artifact with name ${artifactName}, with artifact id ${latestArtifact.id} | workflow id ${latestArtifact.workflow_run.id}`);
-                core.setOutput("artifact_id", latestArtifact.id);
-                core.setOutput("run_id", latestArtifact.workflow_run.id);
 
-                let download = await github.rest.actions.downloadArtifact({
-                  owner: owner,
-                  repo: repo,
-                  artifact_id: latestArtifact.id,
-                  archive_format: 'zip',
-                });
+              const latestArtifact = filteredArtifacts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+              console.log(`Success! Found the latest artifact with name ${artifactName}, with artifact id ${latestArtifact.id} | workflow id ${latestArtifact.workflow_run.id}`);
 
-                let fs = require('fs');
-                fs.writeFileSync('./artifact-lighthouse-report-main.zip', Buffer.from(download.data));
-              }
+              const download = await github.rest.actions.downloadArtifact({
+                owner: owner,
+                repo: repo,
+                artifact_id: latestArtifact.id,
+                archive_format: 'zip',
+              });
+
+              const fs = require('fs');
+              fs.writeFileSync('./artifact-lighthouse-report-main.zip', Buffer.from(download.data));
+              
             result-encoding: string
         - name: Unzip the artifact
           run: |

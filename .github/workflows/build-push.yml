@@ -76,7 +76,8 @@ jobs:
             path: ./main-report
         - name: Move the main report artifact to same directory as pr report
           run: |
-            mv ./main-report/main-report.json ./lighthouse-reports
+            ls -al ./main-report
+            mv ./main-report/lighthouse-reports-main ./lighthouse-reports
         - name: Compare the artifacts for negative differences in performance
           continue-on-error: true
           run: |

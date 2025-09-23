@@ -65,14 +65,16 @@ jobs:
               }
               else {
                 const latestArtifact = filteredArtifacts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
-                console.log(`Success! Found the latest artifact with name #{artifactName}`);
+                console.log(`Success! Found the latest artifact with name ${artifactName}, with artifact id ${latestArtifact.id} | workflow id ${latestArtifact.workflow_run.id}`);
                 core.setOutput("artifact_id", latestArtifact.id);
+                core.setOutput("run_id", latestArtifact.workflow_run.id);
               }
             result-encoding: string
         - name: Download the artifact for main
           uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
           with:
             artifact-ids: ${{ steps.fetch-artifact-id.outputs.artifact_id }}
+            run-id: ${{ steps.fetch-artifact-id.outputs.run_id }}
             path: ./main-report
         - name: Move the main report artifact to same directory as pr report
           run: |

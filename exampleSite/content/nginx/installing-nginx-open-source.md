@@ -10,8 +10,7 @@ weight: 200
 nd-reading-time: true
 ---
 
-![hero-graphic](/hero-graphic.webp)
-
+{{<img src="hero-graphic.webp" alt="hero graphic">}}
 ```nginx
 
 # Global Configuration

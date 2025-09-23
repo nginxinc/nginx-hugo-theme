@@ -53,13 +53,13 @@ jobs:
           with: 
             script: |
               const { owner, repo } = context.issue;
-              const response = github.rest.actions.listArtifactsForRepo({
+              const response = await github.rest.actions.listArtifactsForRepo({
                 owner,
                 repo,
               });
 
               const artifactName = process.env.MAIN_REPORT_ARTIFACT_NAME;
-              const filteredArtifacts = artifacts.data.artifacts.filter(a => a.name === artifactName);
+              const filteredArtifacts = response.data.artifacts.filter(a => a.name === artifactName);
               if(filteredArtifacts.length === 0) {
                 core.setFailed(`Error: Not able to find artifact with name ${artifactName}`);
               }

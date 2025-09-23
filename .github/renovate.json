@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "customManagers:biomeVersions",
+    "helpers:pinGitHubActionDigestsToSemver",
+    "config:semverAllWeekly",
+    ":configMigration",
+    "abandonments:recommended"
+  ],
+  "commitMessageLowerCase": "never",
+  "labels": ["dependency"]
+}

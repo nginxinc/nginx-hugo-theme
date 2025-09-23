@@ -22,12 +22,15 @@ jobs:
         - name: Installing packages
           run: cd performance && npm ci
         - name: Get PR number being merged
+          env: 
+            PAGE: 1
+            PER_PAGE: 10
           run: |
             RESPONSE=$(curl -L \
               -X GET \
               -H "Accept: application/vnd.github+json" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
-              -s "https://api.github.com/repos/${{ env.OWNER }}/${{ env.REPO }}/pulls?state=closed&direction=desc&page=1&per_page=5")
+              -s "https://api.github.com/repos/${{ env.OWNER }}/${{ env.REPO }}/pulls?state=closed&direction=desc&page=${{ env.PAGE }}&per_page=${{ env.PER_PAGE }}")
             LATEST_PR_NUMBER=$(echo "$RESPONSE" | jq -r '.[] | select(.merged_at != null) | .number' | head -1)
             echo "GITHUB_PR_NUMBER=$LATEST_PR_NUMBER" >> $GITHUB_ENV
         - name: Generating lighthouse reports for main...

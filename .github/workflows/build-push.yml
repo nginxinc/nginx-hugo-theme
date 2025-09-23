@@ -92,7 +92,7 @@ jobs:
           run: |
               FIELDS=("performance" "accessibility") 
               TOLERANCE=0.05
-              FLOOR_VALUE=90
+              FLOOR_VALUE=0.90
               for FIELD in "${FIELDS[@]}"; do
                   PR_VALUE=$(cat lighthouse-reports/pr-report.json | jq -r ".categories.$FIELD.score")
                   MAIN_VALUE=$(cat lighthouse-reports/main-report.json | jq -r ".categories.$FIELD.score")

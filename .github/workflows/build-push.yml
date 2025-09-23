@@ -68,18 +68,26 @@ jobs:
                 console.log(`Success! Found the latest artifact with name ${artifactName}, with artifact id ${latestArtifact.id} | workflow id ${latestArtifact.workflow_run.id}`);
                 core.setOutput("artifact_id", latestArtifact.id);
                 core.setOutput("run_id", latestArtifact.workflow_run.id);
+
+                let download = await github.rest.actions.downloadArtifact({
+                  owner: owner,
+                  repo: repo,
+                  artifact_id: latestArtifact.id,
+                  archive_format: 'zip',
+                });
+
+                let fs = require('fs');
+                fs.writeFileSync('./artifact-lighthouse-report-main.zip', Buffer.from(download.data));
               }
             result-encoding: string
-        - name: Download the artifact for main
-          uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
-          with:
-            artifact-ids: ${{ steps.fetch-artifact-id.outputs.artifact_id }}
-            run-id: ${{ steps.fetch-artifact-id.outputs.run_id }}
-            path: ./main-report
+        - name: Unzip the artifact
+          run: |
+            unzip ./artifact-lighthouse-report-main.zip
+            ls -al
         - name: Move the main report artifact to same directory as pr report
           run: |
-            ls -al ./main-report
-            mv ./main-report/lighthouse-reports-main ./lighthouse-reports
+            ls -al ./artifact-lighthouse-report-main
+            mv ./artifact-lighthouse-report-main/lighthouse-reports-main ./lighthouse-reports
         - name: Compare the artifacts for negative differences in performance
           continue-on-error: true
           run: |

@@ -10,7 +10,8 @@ env:
     REPO_NAME: "documentation"
     FRONT_DOOR_USERNAME: ${{ secrets.FRONT_DOOR_USERNAME }}
     FRONT_DOOR_PASSWORD: ${{ secrets.FRONT_DOOR_PASSWORD }}
-    GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}  
+    GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+    MAIN_REPORT_ARTIFACT_NAME: "lighthouse-reports-main"  
 
 jobs:
     deploy-example-site:
@@ -46,10 +47,32 @@ jobs:
             REPORT_NAME: "pr"
           run: | 
               node performance/lighthouse-script.js
+        - name: Retrieve the latest artifact ID for lighthouse report main
+          uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+          id: fetch-artifact-id
+          with: 
+            script: |
+              const { owner, repo } = context.issue;
+              const response = github.rest.actions.listArtifactsForRepo({
+                owner,
+                repo,
+              });
+
+              const artifactName = process.env.MAIN_REPORT_ARTIFACT_NAME;
+              const filteredArtifacts = artifacts.data.artifacts.filter(a => a.name === artifactName);
+              if(filteredArtifacts.length === 0) {
+                core.setFailed(`Error: Not able to find artifact with name ${artifactName}`);
+              }
+              else {
+                const latestArtifact = filteredArtifacts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+                console.log(`Success! Found the latest artifact with name #{artifactName}`);
+                core.setOutput("artifact_id", latestArtifact.id);
+              }
+            result-encoding: string
         - name: Download the artifact for main
           uses: actions/download-artifact@f44cd7b40bfd40b6aa1cc1b9b5b7bf03d3c67110 # v4.1.0
           with:
-            name: lighthouse-reports-main
+            artifact-ids: ${{ steps.fetch_artifact.outputs.artifact_id }}
             path: ./main-report
         - name: Move the main report artifact to same directory as pr report
           run: |

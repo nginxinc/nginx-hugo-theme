@@ -1,0 +1,48 @@
+name: Update lighthouse report artifact for main branch
+
+on: 
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+
+env:
+  OWNER: nginxinc
+  REPO: nginx-hugo-theme
+  FRONT_DOOR_USERNAME: ${{ secrets.FRONT_DOOR_USERNAME }}
+  FRONT_DOOR_PASSWORD: ${{ secrets.FRONT_DOOR_PASSWORD }}
+jobs:
+  generate-lighthouse-report:
+    runs-on: ubuntu-22.04
+    steps:
+        - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+          with:
+            ref: ${{ github.event.workflow_run.head_branch }}
+        - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+          with:
+            node-version: 18
+        - name: Installing packages
+          run: cd performance && npm ci
+        - name: Get PR number being merged
+          env: 
+            PAGE: 1
+            PER_PAGE: 10
+          run: |
+            RESPONSE=$(curl -L \
+              -X GET \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              -s "https://api.github.com/repos/${{ env.OWNER }}/${{ env.REPO }}/pulls?state=closed&direction=desc&page=${{ env.PAGE }}&per_page=${{ env.PER_PAGE }}")
+            LATEST_PR_NUMBER=$(echo "$RESPONSE" | jq -r '.[] | select(.merged_at != null) | .number' | head -1)
+            echo "GITHUB_PR_NUMBER=$LATEST_PR_NUMBER" >> $GITHUB_ENV
+        - name: Generating lighthouse reports for main...
+          env: 
+            REPORT_NAME: "main"
+            GITHUB_PR_NUMBER: ${{ env.GITHUB_PR_NUMBER }}
+          run: |
+            node performance/lighthouse-script.js
+        - uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+          with:
+            name: lighthouse-reports-main
+            path: lighthouse-reports/main-report.json
+            retention-days: 30

@@ -49,7 +49,7 @@ jobs:
         - name: Download the artifact for main
           uses: actions/download-artifact@v4
           with:
-            name: lighthouse-reports
+            name: lighthouse-reports-main
             path: ./main-report
         - name: Move the main report artifact to same directory as pr report
           run: |
@@ -87,6 +87,6 @@ jobs:
         - uses: actions/upload-artifact@v4
           if: ${{ !cancelled() }}
           with:
-              name: lighthouse-reports
-              path: lighthouse-reports/
+              name: lighthouse-reports-pr
+              path: lighthouse-reports/pr-report.json
               retention-days: 3

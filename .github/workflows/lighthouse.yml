@@ -38,6 +38,6 @@ jobs:
             node performance/lighthouse-script.js
         - uses: actions/upload-artifact@v4
           with:
-            name: lighthouse-reports
-            path: lighthouse-reports/
+            name: lighthouse-reports-main
+            path: lighthouse-reports/main-report.json
             retention-days: 30

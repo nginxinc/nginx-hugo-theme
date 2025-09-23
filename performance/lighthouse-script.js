@@ -18,7 +18,7 @@ const signIntoFrontDoor = async (browser, env) => {
     console.log('Logged in...');
     await page.close();
   } catch {
-    console.log('Unable to log in...');
+    console.log('Unable to log in or not needed...');
   }
 };
 
@@ -49,6 +49,7 @@ const launchBrowser = async () => {
     url: `https://frontdoor-test-docs.nginx.com/previews/nginx-hugo-theme/${PR_NUMBER}/`,
   };
 
+  console.log(`Running on ${environment.url}...`);
   await signIntoFrontDoor(browser, environment);
   await generateLighthouseReport(environment);
 

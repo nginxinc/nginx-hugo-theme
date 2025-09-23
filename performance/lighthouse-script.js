@@ -17,8 +17,8 @@ const signIntoFrontDoor = async (browser, env) => {
     await page.waitForSelector('.navbar');
     console.log('Logged in...');
     await page.close();
-  } catch {
-    console.log('Unable to log in or not needed...');
+  } catch (error) {
+    console.log('Unable to log in or not needed...', error);
   }
 };
 

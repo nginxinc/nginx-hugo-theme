@@ -8,15 +8,15 @@ type:
 ## NGINX filesystem restrictions
 NGINXaaS for Azure places restrictions on the instance's filesystem; only a specific set of directories are allowed to be read from and written to. Below is a table describing what directories the NGINX worker process can read and write to and what directories files can be written to. These files include certificate files and any files uploaded to the deployment, excluding NGINX configuration files.
 
-  {{<bootstrap-table "table table-striped table-bordered">}}
+{{<bootstrap-table "table table-striped table-bordered">}}
   | Allowed Directory | NGINX worker process can read/write to | Files can be written to |
-  |------------------ | ----------------- | ----------------- |
-  | /etc/nginx        |                   | &check;           |
-  | /opt              | &check;           | &check;           |
-  | /srv              | &check;           | &check;           |
-  | /tmp              | &check;           |                   |
-  | /var/cache/nginx  | &check;           |                   |
-  | /var/www          | &check;           | &check;           |
+  |-------------------- | -------------------- | -------------------- |
+  | /etc/nginx          |                      | {{< icon "check" >}} |
+  | /opt                | {{< icon "check" >}} | {{< icon "check" >}} |
+  | /srv                | {{< icon "check" >}} | {{< icon "check" >}} |
+  | /tmp                | {{< icon "check" >}} |                      |
+  | /var/cache/nginx    | {{< icon "check" >}} |                      |
+  | /var/www            | {{< icon "check" >}} | {{< icon "check" >}} |
 {{</bootstrap-table>}}
 
 Attempts to access other directories will be denied and result in a `5xx` error.

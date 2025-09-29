@@ -1663,10 +1663,6 @@ p {
 .breadcrumb-layout {
   position: relative;
   background-color: white;
-
-  .sidebar__mobile__toggle {
-    display: none;
-  }
 }
 
 .breadcrumb {

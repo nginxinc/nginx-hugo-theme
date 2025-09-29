@@ -1,16 +1,15 @@
 <nav aria-label="breadcrumb" class="breadcrumb" data-grid="wide">
     <ol class="breadcrumb">
-        <button class="sidebar__mobile__toggle" aria-label="sidebar__mobile__toggle" aria-expanded="false">{{ partial "lucide" (dict "context" . "icon" "align-justify") }}</button>
         <li><a href="/" alt="NGINX Docs Home">Home</a></li>
         {{- define "breadcrumb" -}}
         {{- with .Parent -}}
             {{- template "breadcrumb" . -}}
-            <li>{{- if .IsHome -}}<a href="{{ .RelPermalink }}">{{ .Site.Title}}</a>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}{{ end }}</a></li>
+            <li>{{- if .IsHome -}}<a href="{{ .RelPermalink }}">{{ .Site.Title }}</a>{{ else }}<a href="{{ .RelPermalink }}">{{ .Title }}{{ end }}</a></li>
             {{- end -}}
         {{- end -}}
         {{- if not .IsHome -}}
             {{- template "breadcrumb" . -}}
             {{- .Title -}}
+        {{ end }}
     </ol>
 </nav>
-{{ end }}

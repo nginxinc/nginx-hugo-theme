@@ -1,5 +1,6 @@
 ---
 title: Partial Commercial Feature
+linkTitle: Feature
 description: Partial Commercial Feature
 nd-commercial-partial: true
 ---

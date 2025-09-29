@@ -1,5 +1,6 @@
 ---
 title: Commercial Feature
+linkTitle: Feature
 description: Commercial Feature
 nd-commercial: true
 ---

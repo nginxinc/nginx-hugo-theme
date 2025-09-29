@@ -10,7 +10,7 @@
         {{- end -}}
         {{- if not .IsHome -}}
             {{- template "breadcrumb" . -}}
-            {{- .Title -}}
+            {{- .LinkTitle -}}
+        {{- end -}}
     </ol>
 </nav>
-{{ end }}

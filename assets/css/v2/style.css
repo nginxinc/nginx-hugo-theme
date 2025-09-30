@@ -1261,6 +1261,28 @@ main {
   }
 }
 
+.ngx-directive {
+  border-spacing: 0;
+
+  pre {
+    font-size: 0.875rem;
+  }
+
+  th {
+    width: 25px;
+    padding: 0 0.25rem 0 0;
+    text-align: left;
+    vertical-align: baseline;
+  }
+
+  td {
+    max-width: 0;
+    padding: 0;
+    border: none;
+    vertical-align: baseline;
+  }
+}
+
 /* MARK: Qualtrics
 */
 

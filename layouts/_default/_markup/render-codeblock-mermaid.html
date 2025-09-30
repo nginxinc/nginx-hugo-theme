@@ -1,4 +1,5 @@
-<pre class="mermaid">
+{{- $grid := .Attributes.grid | default "first-two-thirds" -}}
+<pre class="mermaid" data-grid="{{ $grid }}" data-testid="codeblock-mermaid">
    {{- .Inner | safeHTML }}
  </pre>
  {{ .Page.Store.Set "hasMermaid" true }}

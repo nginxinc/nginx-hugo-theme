@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { handleConsentPopup, waitFor } from './util';
+import { handleConsentPopup, waitFor } from './utils';
 
 test.describe('Testing for cards shortcode', () => {
   test.beforeEach(async ({ page }) => {

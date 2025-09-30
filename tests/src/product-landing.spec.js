@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { runSmokeTestOnPage } from './util';
+import { runSmokeTestOnPage } from './utils';
 
 test.describe('Smoke test for landing page', () => {
   test('product landing page renders', async ({ page }) => {

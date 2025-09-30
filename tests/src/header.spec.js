@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { handleConsentPopup, waitFor } from './util';
+import { handleConsentPopup, waitFor } from './utils';
 
 test.describe('Smoke test for header', () => {
   test.beforeEach(async ({ page }) => {

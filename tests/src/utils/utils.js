@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { TIMEOUT } from './constants.js';
+import { TIMEOUT } from '../constants';
 
 export async function runSmokeTestOnPage(page) {
   /* Ensure each page follows the following dom structure */

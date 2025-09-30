@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { handleConsentPopup, runSmokeTestOnPage, waitFor } from './util';
+import { handleConsentPopup, runSmokeTestOnPage, waitFor } from './utils';
 
 async function openPage(page, sidebarPage) {
   // Find all toggles

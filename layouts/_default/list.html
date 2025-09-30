@@ -10,7 +10,7 @@
         {{ end }}
         </div>
         <div class="list-header-container">
-          {{ $logo := .Params.logo | default "NGINX-product-icon.svg"}}
+          {{ $logo := .Params.logo | default "bigip.svg"}}
           {{ with printf "images/icons/%s" $logo }}
           <img src="{{. | absURL}}">
           {{ end }}

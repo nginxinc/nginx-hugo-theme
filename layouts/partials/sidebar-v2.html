@@ -40,7 +40,7 @@
             <details class="product-selector__section">
                 <summary class="product-selector__toggle">
 
-                    <span class="product-selector__toggle-text">
+                    <span class="product-selector__toggle-text" title="{{ if $currentProductTitle }}{{ $currentProductTitle }}{{else}}Product Documentation{{end}}">
                         {{ if $currentProductTitle }}
                             {{ $currentProductTitle }}
                         {{ else }}

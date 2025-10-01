@@ -802,6 +802,9 @@ ol li:last-child {
 
         .product-selector__toggle-text {
           font-weight: 500;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .product-selector__chevron {

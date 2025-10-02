@@ -2019,10 +2019,6 @@ blockquote {
     }
   }
 
-  .callout-content {
-    margin: 0;
-  }
-
   /* To help them align with text, side callouts should not have top margin*/
   &[data-grid="last-third"] {
     --margin-callout: 0 0 0 1rem;

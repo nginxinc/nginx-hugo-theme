@@ -2311,12 +2311,12 @@ a:has(code:not(pre code)) {
     text-transform: uppercase;
     padding: 0.15rem 0.5rem;
     font-size: 0.75rem;
-    z-index: 2;
-    margin: 0 0 -1px 0;
+    box-sizing: border-box;
   }
 
   .code-container {
     box-shadow: 3px 3px 0px oklch(var(--color-shadow));
+    margin-block-start: -1px;
 
     &:hover {
       .code-copy-button {
@@ -2351,6 +2351,7 @@ a:has(code:not(pre code)) {
 
     .code-content {
       border: 1px solid oklch(var(--color-codeblock-border));
+      box-sizing: border-box;
       overflow-x: scroll;
       scrollbar-width: none;
       line-height: 150%;

@@ -52,12 +52,7 @@
 
 <blockquote class="{{ $class }} note" data-title="{{ $cleanTitle }}" data-grid="{{ $dataGrid }}">
   <div class="callout-content">
-    {{- with $icon -}}
-      <i class="{{ . }}"></i>
-    {{- end -}}
-    <div class="callout-content">
-    {{ .content | markdownify }}
-    </div>
+  {{ .content | markdownify }}
   </div>
 </blockquote>
 

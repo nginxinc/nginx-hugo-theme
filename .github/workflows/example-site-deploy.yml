@@ -5,9 +5,9 @@ env:
   GH_PAGES_URL: https://nginxinc.github.io/nginx-hugo-theme
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types:
+      - published
   workflow_dispatch:
 
 permissions:

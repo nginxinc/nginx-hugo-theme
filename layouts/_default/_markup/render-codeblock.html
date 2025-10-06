@@ -15,7 +15,7 @@
 {{- else -}}
 <div class="code-block">
     {{- if and (ne .Type "") (ne .Type "none") -}}
-        <span class="code-type chroma">{{ .Type }}</span>
+        <figcaption class="code-type"><span class="title chroma">{{ .Type }}</span></figcaption>
     {{- end -}}
     <div class="code-container chroma">
         <button onclick="copyToClipBoard(this, {{ $codeBlockId }})" class="code-copy-button multi-line" type="button">Copy</button>

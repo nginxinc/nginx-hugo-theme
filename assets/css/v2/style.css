@@ -1785,7 +1785,8 @@ a:hover {
 
 .headerlink {
   text-decoration: none;
-
+  position: relative;
+  display: flex;
   color: oklch(var(--color-foreground));
 }
 

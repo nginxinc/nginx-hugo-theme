@@ -1614,6 +1614,8 @@ nav.sidebar.sidebar__mobile-open {
       margin: 0.5rem 0.25rem 0.5rem 0.875rem;
       border-left: 1px solid oklch(var(--color-divider));
       color: oklch(var(--color-foreground) / 0.75);
+      flex-direction: column;
+      align-items: start;
 
       &[hidden] {
         display: none;

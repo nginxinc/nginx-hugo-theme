@@ -1,0 +1,55 @@
+name: Deploy Example Site (GH Pages)
+env:
+  GO_VERSION: "1.23"
+  HUGO_VERSION: "0.147.8"
+  GH_PAGES_URL: https://nginxinc.github.io/nginx-hugo-theme
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Cancel any in-prog deployments if a newer push comes in.
+concurrency:
+  group: example-site-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    environment:
+      name: example-site
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 #v6.0.0
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: false
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f #v3.0.0
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+      - name: Checkout repo
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 #v5.0.0
+        with:
+          fetch-depth: 0
+      - name: Build exampleSite
+        working-directory: exampleSite
+        run: hugo --gc -e production --baseURL="$GH_PAGES_URL"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b #v4
+        with:
+          path: exampleSite/public
+      - name: Deploy artifact to GH Pages
+        id: deploy
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e #v4.0.5
+
+

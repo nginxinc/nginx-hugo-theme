@@ -38,7 +38,9 @@
         {{ end }}
 
         {{ partial "version-list" . }}
-        {{ partial "qualtrics-feedback.html" }}
+        {{ if .Site.Params.enable_qualtrics }} 
+          {{ partial "qualtrics-feedback.html" }}
+        {{ end }}
     </article>
 </main>
 

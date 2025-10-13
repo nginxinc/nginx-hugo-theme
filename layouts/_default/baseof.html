@@ -44,17 +44,17 @@
     <input type="checkbox" id="search-standalone-header-panel" class="search-standalone-header-panel" hidden/>
     <input type="checkbox" id="sidebar-panel" class="sidebar-panel" hidden/>
     <div class="grid-container">
-        <aside class="sidebar" data-testid="sidebar">
+        <aside class="sidebar" data-testid="sidebar" id="sidebar">
             {{ partial "sidebar-v2.html" . }}
         </aside>
 
-        <header class="header" data-testid="header">
+        <header class="header" data-testid="header" id="header">
             {{ block "header" . }}{{end}}
         </header>
 
         {{ block "main" . }}{{ end }}
 
-        <footer class="footer" data-testid="footer">
+        <footer class="footer" data-testid="footer" id="footer">
           {{ block "footer-v2" . }}
             {{ partial "footer-v2.html" . }}
           {{ end }}

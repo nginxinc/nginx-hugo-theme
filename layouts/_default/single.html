@@ -38,6 +38,9 @@
         {{ end }}
 
         {{ partial "version-list" . }}
+        {{ if .Site.Params.enable_qualtrics }} 
+          {{ partial "qualtrics-feedback.html" }}
+        {{ end }}
     </article>
 </main>
 

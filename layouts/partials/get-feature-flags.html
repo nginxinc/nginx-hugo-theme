@@ -1,9 +1,9 @@
 {{- $featureName := .featureName | default "" -}}
-{{- $param := index .Site.Params $featureName -}}
+{{- $param := (string (index .Site.Params $featureName)) | default "false" -}} <!-- Added default in case param does not exist, we should default to a value instead of nil -->
 {{- $result := false -}}
 
 {{- if ne $featureName "" -}}
-  {{- if not (or (eq $param true) (eq $param "true")) -}}
+  {{- if not (eq $param "true") -}}
     {{- $result = true -}}
   {{- end -}}
 {{- end -}}

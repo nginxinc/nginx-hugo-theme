@@ -12,9 +12,11 @@
           </div>
           {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
           <!-- Mobile button -->
-          <label class="header__search--mobile--search--button"for="search-standalone-header-panel" data-testid="header__search--mobile--search--button">
-            {{ partial "lucide" (dict "context" . "icon" "search") }}
-          </label>
+          {{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }} 
+            <label class="header__search--mobile--search--button"for="search-standalone-header-panel" data-testid="header__search--mobile--search--button">
+              {{ partial "lucide" (dict "context" . "icon" "search") }}
+            </label>
+          {{ end }}
           <div class="header__search" data-testid="header__search">
               <!-- Standalone search box. -->
               {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}

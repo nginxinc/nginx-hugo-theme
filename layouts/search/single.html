@@ -1,5 +1,16 @@
 {{ define "main" }}
-<section class="search no-sidebar">
-  {{ partial "coveo-atomic.html" .}}
-</section>
+  {{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }}  
+    <section class="search no-sidebar">
+      {{ partial "coveo-atomic.html" .}}
+    </section>
+  {{ else }}
+    <div class="content" data-testid="content">
+      <div class="not-found-container" data-testid="not-found-container">
+        <h1 class="info-header">
+          Search functionality is unavailable.
+        </h1>
+        <a href="{{ .Site.BaseURL | relLangURL }}" aria-label="Return home">Return to the {{ .Site.Title }} homepage.</a>
+      </div>
+    </div>
+  {{ end }}
 {{ end }}

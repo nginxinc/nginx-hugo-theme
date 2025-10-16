@@ -25,4 +25,5 @@ maxAge = -1
   github_repo = "https://github.com/nginxinc/nginx-hugo-theme"
   github_subdir = "exampleSite"
   enable_last_modified = true
+  disable_coveo = true
   coveo_search_redirect = "/search.html"

@@ -17,6 +17,7 @@
 {{ end }}
 
 <!-- Coveo Atomic -->
+{{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }}  
 <script
   type="module"
   src="https://static.cloud.coveo.com/atomic/v3.19.0/atomic.esm.js"
@@ -40,10 +41,8 @@
 {{ $secureCoveo := $.Scratch.Get "coveoSc" | minify | fingerprint "sha512" }}
 
 
-<script src="{{ $secureCoveo.RelPermalink }}" integrity="{{ $secureCoveo.Data.Integrity }}"
-  type="text/javascript"></script>
-
-
+<script src="{{ $secureCoveo.RelPermalink }}" integrity="{{ $secureCoveo.Data.Integrity }}"type="text/javascript"></script>
+{{ end }}
 
 <!-- Load the Redoc resources if we're not using Dev Portal for the API reference layout-->
 {{ if not ( eq .Site.Params.useDevPortal true ) }}

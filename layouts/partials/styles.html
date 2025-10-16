@@ -6,9 +6,12 @@
 
 {{ $cssHighlight := resources.Get "css/v2/highlight.css" | minify | fingerprint "sha512"}}
 <link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">
+
 <!-- load CSS Atomic CSS -->
+{{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }} 
 <link
   rel="stylesheet"
   href="https://static.cloud.coveo.com/atomic/v3.19.0/themes/coveo.css"
   integrity="sha512-m2BufPi8Tc6H2jcQfDj/PIl5H57C9jeqhbDFgFXKTtOhoC4S7ULXmx74FseZ8WXpfdT9uyccMHDBJDrIZlrUUQ=="
   crossorigin="anonymous"/>
+{{ end }}

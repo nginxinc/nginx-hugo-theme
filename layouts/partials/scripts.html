@@ -17,7 +17,7 @@
 {{ end }}
 
 <!-- Coveo Atomic -->
-{{ if eq .Site.Params.disable_coveo false }} 
+{{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }}  
 <script
   type="module"
   src="https://static.cloud.coveo.com/atomic/v3.19.0/atomic.esm.js"

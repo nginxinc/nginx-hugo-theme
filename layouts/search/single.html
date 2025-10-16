@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ if eq .Site.Params.disable_coveo false }} 
+  {{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }}  
     <section class="search no-sidebar">
       {{ partial "coveo-atomic.html" .}}
     </section>

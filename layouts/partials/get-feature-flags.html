@@ -1,0 +1,11 @@
+{{- $featureName := .featureName | default "" -}}
+{{- $param := index .Site.Params $featureName -}}
+{{- $result := false -}}
+
+{{- if ne $featureName "" -}}
+  {{- if not (or (eq $param true) (eq $param "true")) -}}
+    {{- $result = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return $result -}}

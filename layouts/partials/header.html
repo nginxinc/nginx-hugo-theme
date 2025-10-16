@@ -12,7 +12,8 @@
           </div>
           {{ if ( not ( in .Site.Params.buildtype "package" ) ) }}
           <!-- Mobile button -->
-          {{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }} 
+          {{ $coveoEnabled := partial "get-feature-flags.html" (dict "featureName" "disable_coveo" "Site" .Site) }}
+          {{ if $coveoEnabled }}
             <label class="header__search--mobile--search--button"for="search-standalone-header-panel" data-testid="header__search--mobile--search--button">
               {{ partial "lucide" (dict "context" . "icon" "search") }}
             </label>

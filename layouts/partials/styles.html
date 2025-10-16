@@ -8,7 +8,7 @@
 <link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">
 
 <!-- load CSS Atomic CSS -->
-{{ if .Site.Params.enable_coveo }} 
+{{ if eq .Site.Params.disable_coveo false }} 
 <link
   rel="stylesheet"
   href="https://static.cloud.coveo.com/atomic/v3.19.0/themes/coveo.css"

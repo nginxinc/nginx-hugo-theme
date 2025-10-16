@@ -38,7 +38,7 @@
 {{ end }}
 
 {{ $coveoEnabled := partial "get-feature-flags.html" (dict "featureName" "disable_coveo" "Site" .Site) }}
-{{ $qualtricsDisabled := partial "get-feature-flags.html" (dict "featureName" "disable_qualtrics") }}
+{{ $qualtricsEnabled := partial "get-feature-flags.html" (dict "featureName" "disable_qualtrics" "Site" .Site) }}
 {{/* set custom CSP to load styles and scripts with special handling for GTM scripts (requires unsafe-inline) and Dev Portal page(s) (requires 'unsafe-eval') */}}
 <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'
     https://consent.trustarc.com/ 

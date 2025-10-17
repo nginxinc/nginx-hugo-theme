@@ -8,7 +8,7 @@
 <link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">
 
 <!-- load CSS Atomic CSS -->
-{{ $coveoEnabled := partial "get-feature-flags.html" (dict "featureName" "disable_coveo" "Site" .Site) }}
+{{ $coveoEnabled := partial "get-feature-flags.html" "disable_coveo" }}
 {{ if $coveoEnabled }} 
 <link
   rel="stylesheet"

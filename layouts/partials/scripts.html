@@ -17,7 +17,7 @@
 {{ end }}
 
 <!-- Coveo Atomic -->
-{{ $coveoEnabled := partial "get-feature-flags.html" (dict "featureName" "disable_coveo" "Site" .Site) }}
+{{ $coveoEnabled := partial "get-feature-flags.html" "disable_coveo" }}
 {{ if $coveoEnabled }}
 <script
   type="module"

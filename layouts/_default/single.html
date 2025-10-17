@@ -38,7 +38,7 @@
         {{ end }}
 
         {{ partial "version-list" . }}
-        {{ $qualtricsEnabled := partial "get-feature-flags.html" (dict "featureName" "disable_qualtrics" "Site" .Site) }}
+        {{ $qualtricsEnabled := partial "get-feature-flags.html"  "disable_qualtrics" }}
         {{ if $qualtricsEnabled }} 
           {{ partial "qualtrics-feedback.html" }}
         {{ end }}

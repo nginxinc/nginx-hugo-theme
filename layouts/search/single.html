@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ $coveoEnabled := partial "get-feature-flags.html" (dict "featureName" "disable_coveo" "Site" .Site) }}
+  {{ $coveoEnabled := partial "get-feature-flags.html" "disable_coveo" }}
   {{ if $coveoEnabled }} 
     <section class="search no-sidebar">
       {{ partial "coveo-atomic.html" .}}

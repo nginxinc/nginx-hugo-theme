@@ -19,8 +19,8 @@
             </label>
           {{ end }}
           <div class="header__search" data-testid="header__search">
-              <!-- Standalone search box. -->
-              {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
+            <!-- Standalone search box. -->
+            {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header") }}
           </div>
           {{ end }}
       </div>
@@ -35,10 +35,8 @@
 
   </div>
   <div class="header-search-dropdown" data-testid="header-search-dropdown-mobile">
-    <atomic-external selector="#search-standalone-header">
-      {{ $redirectUrl := default .Site.Params.coveo_search_redirect "/search.html" }}
-      <atomic-search-box redirection-url={{ $redirectUrl }}></atomic-search-box>
-    </atomic-external>
+    <!-- Standalone search box. -->
+    {{ partial "coveo-atomic-search.html" (dict "id" "search-standalone-header-dropdown") }}
   </div>
 </div>
 {{ end }}

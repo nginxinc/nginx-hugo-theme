@@ -1,6 +1,6 @@
 {{ $redirectionUrl := .redirectionUrl | default .Site.Params.coveo_search_redirect | default "/search.html" }}
 {{ $id := .id | default "search-standalone-header"}}
 <atomic-search-interface id={{ $id }}>
-    <atomic-search-box redirection-url={{ $redirectionUrl }} class="header-search-box">
-    </atomic-search-box>
+  <atomic-search-box redirection-url={{ $redirectionUrl }} class="header-search-box">
+  </atomic-search-box>
 </atomic-search-interface>

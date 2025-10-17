@@ -8,7 +8,8 @@
 <link href="{{ $cssHighlight.RelPermalink }}" rel="stylesheet" type="text/css">
 
 <!-- load CSS Atomic CSS -->
-{{ if not (or (eq .Site.Params.disable_coveo true) (eq .Site.Params.disable_coveo "true")) }} 
+{{ $coveoEnabled := partial "get-feature-flags.html" "disable_coveo" }}
+{{ if $coveoEnabled }} 
 <link
   rel="stylesheet"
   href="https://static.cloud.coveo.com/atomic/v3.19.0/themes/coveo.css"

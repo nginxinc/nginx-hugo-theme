@@ -38,7 +38,8 @@
         {{ end }}
 
         {{ partial "version-list" . }}
-        {{ if .Site.Params.enable_qualtrics }} 
+        {{ $qualtricsEnabled := partial "get-feature-flags.html"  "disable_qualtrics" }}
+        {{ if $qualtricsEnabled }} 
           {{ partial "qualtrics-feedback.html" }}
         {{ end }}
     </article>

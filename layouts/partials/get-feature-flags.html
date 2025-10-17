@@ -1,0 +1,16 @@
+{{- /* Extract parameter with defaults and validation */ -}}
+{{- $featureName := . -}}
+{{- $featureFlags := site.Params.featureflags -}}
+{{- $featureFlagVal := (index $featureFlags $featureName) | default false -}}
+
+{{- if ne (printf "%T" $featureFlagVal) "bool" -}}
+  {{ errorf "Expected type of feature flag param %s to be boolean." $featureName }}
+{{- end -}}
+
+{{- $param := index $featureFlagVal -}}
+{{- $result := false -}}
+{{- if not (eq $param true) -}}
+  {{- $result = true -}}
+{{- end -}}
+
+{{- return $result -}}

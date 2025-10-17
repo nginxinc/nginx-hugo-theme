@@ -1423,6 +1423,7 @@ atomic-search-interface#search-v2 {
   }
 }
 
+atomic-external#search-standalone-header,
 atomic-search-interface#search-standalone-header {
   height: fit-content;
 

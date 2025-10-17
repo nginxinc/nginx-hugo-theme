@@ -85,7 +85,9 @@ async function atomicCoveo() {
         return request;
       },
     });
-    await el.executeFirstSearch();
+
+    // No standalone searchboxes should be getting executing first search.
+    if (el.id === 'search-v2') await el.executeFirstSearch();
   });
 
   const headerSearchBar = document.querySelector('#search-standalone-header');

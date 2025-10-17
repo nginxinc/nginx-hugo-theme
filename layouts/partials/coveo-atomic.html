@@ -1,11 +1,11 @@
 <atomic-search-interface id="search-v2">
     <atomic-search-layout>
       <!-- Search/Metadata Section -->
-      {{ if .Params.searchOnPage }}
         <atomic-layout-section section="search">
+          <div style="display: {{ if not .Params.searchOnFacet }}none{{ end }};">
           <atomic-search-box></atomic-search-box>
+          </div>
         </atomic-layout-section>
-      {{ end }}
       <atomic-layout-section section="status">
         <div class="atomic-full-summary-and-sort">
           <atomic-refine-toggle></atomic-refine-toggle>
@@ -43,7 +43,7 @@
 
                 <!-- URL -->
                 <atomic-result-section-title-metadata>
-                  <atomic-result-printable-uri></atomic-result-printable-uri>
+                  
                 </atomic-result-section-title-metadata>
                 
                 <!-- Excerpt -->

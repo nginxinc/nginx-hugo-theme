@@ -74,13 +74,8 @@ async function atomicCoveo() {
   await customElements.whenDefined('atomic-search-interface');
   const credentials = await getValidSearchCredentials();
 
-  const interfaces = [
-    document.querySelector('#search-v2'),
-    document.querySelector('#search-standalone-header'),
-    document.querySelector('#search-standalone-sidebar'),
-  ].filter(Boolean);
-
-  for (const el of interfaces) {
+  document.querySelectorAll('atomic-search-interface').forEach(async (el) => {
+    await customElements.whenDefined('atomic-search-interface');
     await el.initialize({
       ...credentials,
       analytics: { analyticsMode: 'legacy' },
@@ -92,7 +87,7 @@ async function atomicCoveo() {
       },
     });
     await el.executeFirstSearch();
-  }
+  });
 
   const headerSearchBar = document.querySelector('#search-standalone-header');
   if (headerSearchBar?.shadowRoot) {

@@ -1380,7 +1380,7 @@ atomic-search-interface#search-v2 {
 }
 
 /* Search bar on header */
-atomic-search-box {
+.header atomic-search-box {
   height: 2.25rem;
   width: 18.5rem;
   display: flex;

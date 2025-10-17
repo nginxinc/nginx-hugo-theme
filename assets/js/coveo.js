@@ -75,7 +75,6 @@ async function atomicCoveo() {
   const credentials = await getValidSearchCredentials();
 
   document.querySelectorAll('atomic-search-interface').forEach(async (el) => {
-    await customElements.whenDefined('atomic-search-interface');
     await el.initialize({
       ...credentials,
       analytics: { analyticsMode: 'legacy' },

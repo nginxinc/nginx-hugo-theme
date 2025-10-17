@@ -1,5 +1,5 @@
 {{- $featureName := . | default "" -}}
-{{- $param := (string (index site.Params $featureName)) | default "false" -}} <!-- Added default in case param does not exist, we should default to a value instead of nil -->
+{{- $param := (string (index site.Params.featureflags $featureName)) | default "false" -}} <!-- Added default in case param does not exist, we should default to a value instead of nil -->
 {{- $result := false -}}
 
 {{- if ne $featureName "" -}}

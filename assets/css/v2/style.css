@@ -442,7 +442,7 @@ ol li:last-child {
     }
   }
   .content {
-    padding: 0 var(--space-l) 2rem;
+    padding: 0 var(--space-2xl) 2rem;
   }
 
   .header__logo-small {
@@ -1857,6 +1857,7 @@ a:hover {
         display: flex;
         flex-direction: row;
         gap: 1rem;
+        word-break: break-word;
         align-items: flex-start;
         color: oklch(var(--color-brand));
 

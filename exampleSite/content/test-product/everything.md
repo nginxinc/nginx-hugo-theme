@@ -4,12 +4,6 @@ title: Everything
 weight: 200
 ---
 
-## before-you-begin
-
-{{< before-you-begin >}}
-Before you can set users' passwords, ensure you have [created users](#create-users) in NGINX Instance Manager. Once you've created the users, you can use one of the following options to set their passwords.
-{{< /before-you-begin >}}
-
 ## bootstrap-table
 
 {{<bootstrap-table "table">}}
@@ -60,10 +54,6 @@ This won't render anything.
 
 {{< include "nginx-openid-repo-note.txt" >}}
 
-## see-also
-
-{{< see-also >}}See also!{{< /see-also >}}
-
 
 ## details
 <details>
@@ -75,11 +65,11 @@ And this is the content on how to do so.
 <details open>
     <summary>example dynamic-agent.conf</summary>
 
-{{<note>}}
+{{<call-out "note">}}
 Default location in Linux environments: `/var/lib/nginx-agent/agent-dynamic.conf`
 
 Default location in FreeBSD environments: `/var/db/nginx-agent/agent-dynamic.conf`
-{{</note>}}
+{{</call-out>}}
 
 ```yaml
 # Dynamic configuration file for NGINX Agent.

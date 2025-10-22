@@ -749,7 +749,7 @@ ol li:last-child {
   background: oklch(var(--color-background));
   box-sizing: border-box;
   transform: translateX(0);
-  padding: 0 0 var(--space-s) var(--space-s);
+  padding-inline-start: var(--space-s);
 
   .sidebar__container {
     display: flex;

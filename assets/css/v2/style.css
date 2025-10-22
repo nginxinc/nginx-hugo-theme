@@ -1236,10 +1236,6 @@ nav {
   padding-block-start: 1rem;
 }
 
-main {
-  margin: 0 var(--space-s) var(--space-s) var(--space-s);
-}
-
 @media (min-width: 88em) {
   .header__logo {
     height: 2.5rem;

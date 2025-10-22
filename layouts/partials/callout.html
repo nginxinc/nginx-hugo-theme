@@ -36,7 +36,7 @@
   <div>
     <div class="call-out-type">
       {{ partial "lucide" (dict "context" . "icon" $icon) . }}
-      {{ $title }}
+      {{ if $title }}{{ $title }}{{ else }}{{ $type }}{{end}}
     </div>
     <div class="callout-content">
       {{- .content | markdownify -}}

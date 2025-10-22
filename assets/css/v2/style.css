@@ -309,7 +309,7 @@ textarea:not([rows]) {
 
   --header-height: 4rem;
 
-  --sidebar-width: min(24rem, 100%);
+  --sidebar-width: min(22rem, 100%);
   --sidebar-item-padding-lr: 0.75rem;
   --sidebar-item-padding-tb: 0.25rem;
   --content-max-width: 88rem;
@@ -442,7 +442,7 @@ ol li:last-child {
     }
   }
   .content {
-    padding: 0 var(--space-2xl) 2rem;
+    padding: 0 var(--space-xl) 2rem;
   }
 
   .header__logo-small {

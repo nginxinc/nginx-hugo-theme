@@ -1593,6 +1593,7 @@ nav.sidebar.sidebar__mobile-open {
     transition:
       background-color 0.2s ease,
       color 0.2s ease;
+    text-wrap: wrap;
 
     &:hover {
       background-color: oklch(var(--color-brand) / 0.08);

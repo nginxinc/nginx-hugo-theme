@@ -90,7 +90,7 @@ You can reuse the content of any file in the includes directory using the follow
 
 ### Hugo Config
 
-We have several custom options to add to your config `toml` or `yaml`.
+We have several **optional** custom options to add to your config `toml` or `yaml`.
 
 ### `searchOnPage`
 Option to add a coveo searchbar on top of the coveo filters on a search results page.

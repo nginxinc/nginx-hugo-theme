@@ -1786,6 +1786,8 @@ a:hover {
   position: relative;
   display: flex;
   color: oklch(var(--color-foreground));
+  gap: var(--space-3xs);
+  align-items: center;
 }
 
 .headerlink::before {

@@ -92,7 +92,7 @@ You can reuse the content of any file in the includes directory using the follow
 
 We have several custom options to add to your config `toml` or `yaml`.
 
-## `searchOnPage`
+### `searchOnPage`
 Option to add a coveo searchbar on top of the coveo filters on a search results page.
 
 Example:
@@ -100,7 +100,7 @@ Example:
 [params]
   searchOnPage = true
 ```
-## `featureFlags`
+### `featureFlags`
 Options to add feature flags. Syntax denoted by prefix `disable_`.
 
 Example:
@@ -112,7 +112,7 @@ Example:
       disable_qualtrics = true
 ```
 
-## `typographer`
+### `typographer`
 Options to translate plain ASCII punctuation characters into typographic-punctuation HTML entities. More info [here](https://gohugo.io/configuration/markup/#typographer).
 
 Example:

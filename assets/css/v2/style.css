@@ -1786,6 +1786,8 @@ a:hover {
   position: relative;
   display: flex;
   color: oklch(var(--color-foreground));
+  gap: var(--space-3xs);
+  align-items: center;
 }
 
 .headerlink::before {
@@ -2242,6 +2244,7 @@ code:not(pre code) {
 a code:not(pre code) {
   border: solid 1px oklch(var(--color-brand) / 0.3);
   border-bottom: solid 2px oklch(var(--color-brand) / 0.3);
+  font-size: inherit;
 
   /* transition: border 0.15s ease-in-out; */
 }

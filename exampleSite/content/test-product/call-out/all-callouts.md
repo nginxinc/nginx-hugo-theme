@@ -17,10 +17,6 @@ This is a plain callout with no title. It has a [link](#plain-callouts) to a hea
 This is a plain callout with a title. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<call-out>` with a custom title parameter.
 {{</call-out>}}
 
-{{<before-you-begin>}}
-This is a plain callout with a default title for its type. It has a [link](#plain-callouts) to a heading on this page. Its shortcode is `<before-you-begin>`.
-{{</before-you-begin>}}
-
 ## Side Callouts
 
 Naturally, callouts should contain less text within them than the text it lives next to. We do this for several reasons. Firstly, it looks weird to have a big empty space in the primary content area. Secondly, if you have more text in the callout, then it stops being a callout. I have asked an LLM to lengthen this passage.
@@ -71,24 +67,3 @@ And a final line.
 This is a Warning callout with a custom title. There was previously a bug with **bold text** that we should be aware of and continue to check for. This callout was invoked with the `<call-out>` shortcode with the `.warning` class, and a custom title.
 {{</call-out>}}
 
-
-
-
-## Old "plain" callouts
-The following will not have special styling, but are pre-existing shortcodes.
-
-{{<note>}}
-This is `<note>`. In oldframe it should have `note:` in bold, at the start.
-{{</note>}}
-
-{{<tip>}}
-This is `<tip>`. In oldframe it should have `tip:` in bold, at the start.
-{{</tip>}}
-
-{{<before-you-begin>}}
-This is `<before-you-begin>`.
-{{</before-you-begin>}}
-
-{{<see-also>}}
-This is `<see-also>`.
-{{</see-also>}}

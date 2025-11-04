@@ -8,7 +8,7 @@ export default defineConfig({
   workers: 1,
   outputDir: './test-results',
   snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}{ext}',
-  reporter: [['html', { outputFolder: './playwright-report' }]],
+  reporter: [['html', { open: 'never', outputFolder: './playwright-report' }]],
   use: {
     baseURL: `${BASE_URL}:${PORT}`,
     screenshots: 'only-on-failure',
@@ -32,6 +32,7 @@ export default defineConfig({
     command: `cd ../exampleSite && hugo mod get && hugo --gc --config hugo.toml,hugo.test.toml && hugo serve --port ${PORT} --config hugo.toml,hugo.test.toml`,
     url: `${BASE_URL}:${PORT}`,
     stdout: 'ignore',
+    reuseExistingServer: !process.env.CI,
   },
   expect: {
     toHaveScreenshot: {

@@ -2,6 +2,9 @@
 {{ $codecopyv2 := resources.Get "/js/code-copy-v2.js" | fingerprint "sha512" }}
 <script src="{{ $codecopyv2.RelPermalink }}" type="text/javascript"></script>
 
+{{ $browserIncompatibility := resources.Get "/js/browser-incompatibility.js" | fingerprint "sha512" }}
+<script src="{{ $browserIncompatibility.RelPermalink }}" type="text/javascript"></script>
+
 <!-- load site dropdown js -->
 {{ $siteDropdown := resources.Get "/js/site-dropdown.js" | fingerprint "sha512" }}
 <script src="{{ $siteDropdown.RelPermalink }}" type="text/javascript"></script>

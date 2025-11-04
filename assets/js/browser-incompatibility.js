@@ -22,7 +22,7 @@ const currentBrowser = navigator.browserVersion.split(' ').at(0);
 const currentVersion = navigator.browserVersion.split(' ').at(1);
 
 // Minimum version for FULL support. Source - https://caniuse.com/css-nesting
-const supportedNestedCSS = {
+const supportedNestedCSSVersion = {
   Safari: 17.2,
   Chrome: 112,
   Firefox: 117,
@@ -31,9 +31,9 @@ const supportedNestedCSS = {
 
 // Set the alert if first time visiting
 if (!localStorage.getItem('isBrowserVersionChecked')) {
-  if (currentVersion < supportedNestedCSS[currentBrowser]) {
+  if (currentVersion < supportedNestedCSSVersion[currentBrowser]) {
     alert(
-      `Incompatible browser\n\nPlease update your browser from ${currentBrowser} ${currentVersion} to ${currentBrowser} ${supportedNestedCSS[currentBrowser]} for full support.`
+      `Incompatible browser\n\nPlease update your browser from ${currentBrowser} ${currentVersion} to ${currentBrowser} ${supportedNestedCSSVersion[currentBrowser]} for full support.`
     );
   }
   localStorage.setItem('isBrowserVersionChecked', true);

@@ -4,10 +4,7 @@ import { handleConsentPopup, runSmokeTestCoveo, waitFor } from './utils';
 const mockData = {
   validQuery: 'proxy',
   invalidQuery: 'abcdefghijkl',
-  filters: [
-    'f-f5_product=NGINX Open Source',
-    'f-f5_product_grouping=NGINX One',
-  ],
+  filters: ['numberOfResults=100', 'sortCriteria=date descending'],
 };
 
 async function submitSearchQuery(page, query) {
@@ -16,7 +13,7 @@ async function submitSearchQuery(page, query) {
   await searchBar.fill(query);
   await page.keyboard.press('Enter');
   await page.waitForURL(`**/search.html#q=${query}`);
-  await page.waitForLoadState('load');
+  await page.waitForSelector('#search-v2');
 }
 
 function buildFilter() {
@@ -52,7 +49,9 @@ test.describe('Coveo test', () => {
     await expect(noResultsMessage).toBeVisible();
   });
 
-  test('inbound link', async ({ page }) => {
+  test('inbound link do not reset URL', async ({ page }) => {
+    // Use ONLY generic filters. Do not add any product specific filters, particularly from the facet.
+    // If these basic filters work, then its safe to assume, adding facet filters will not reset the URL.
     const endpoint = `/search.html#q=${mockData.validQuery}${buildFilter()}`;
     await page.goto(endpoint);
     await page.waitForSelector('#search-v2');

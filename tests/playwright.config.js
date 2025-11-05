@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 const BASE_URL = 'http://127.0.0.1';
 const PORT = 1313;
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 export default defineConfig({
   testDir: './src',

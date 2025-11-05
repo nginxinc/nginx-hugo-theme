@@ -1,1 +1,1 @@
-export * from './coveo.mockdata';
+export * from './coveo.mock';

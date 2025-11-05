@@ -22,11 +22,7 @@ test.describe('Coveo test', () => {
     await page.goto('/');
     await page.waitForLoadState('load');
     await waitFor(async () => await handleConsentPopup(page));
-
-    const excludedTests = ['missing coveo credentials'];
-    if (!excludedTests.includes(test.info().title)) {
-      await mockCoveoCredentials(page, request);
-    }
+    await mockCoveoCredentials(page, request);
   });
 
   test.afterEach(async ({ page }) => {
@@ -66,13 +62,15 @@ test.describe('Coveo test', () => {
 
   test('missing coveo credentials', async ({ page }) => {
     const searchEndpoint = 'search.html';
-    await page.goto(`/${searchEndpoint}`);
+    await page.unroute(`**/${COVEO_CREDENTIALS_ENDPOINT}`);
+    await page.evaluate(() => window.localStorage.clear());
     await page.route(`**/${COVEO_CREDENTIALS_ENDPOINT}`, async (route) => {
       await route.fulfill({
         status: 404,
         contentType: 'text/html; charset=utf-8',
       });
     });
+    await page.goto(`/${searchEndpoint}`);
 
     const coveoErrorContent = page.getByTestId('coveo-error-content');
     await expect(coveoErrorContent).toBeVisible();

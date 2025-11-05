@@ -4,6 +4,7 @@
 *.key
 *~
 \#*
+.env
 
 # OS Specific #
 ###############
@@ -34,6 +35,7 @@ exampleSite/hugo
 /coverage
 */test-results
 */playwright-report
+*.bkp
 
 # Biome
 biome.rb

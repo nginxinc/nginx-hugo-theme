@@ -2,7 +2,11 @@
   "name": "nginx-docs-theme-test",
   "version": "1.0.0",
   "private": "true",
+  "scripts": {
+    "test": "playwright test --workers 6"
+  },
   "devDependencies": {
-    "@playwright/test": "1.48.0"
+    "@playwright/test": "1.48.0",
+    "dotenv": "^17.2.3"
   }
 }

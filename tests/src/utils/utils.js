@@ -1,6 +1,18 @@
 import { expect } from '@playwright/test';
 import { TIMEOUT } from '../constants';
 
+export async function runSmokeTestCoveo(page) {
+  // Separate into variables in case we need to decouple from Coveo Atomic, but we still keep the basic structure of a search page.
+  const resultsPage = page.getByTestId('search-results-page');
+  const status = resultsPage.locator('atomic-layout-section[section="status"]');
+  const facet = resultsPage.locator('atomic-layout-section[section="facets"]');
+  const main = resultsPage.locator('atomic-layout-section[section="main"]');
+
+  await expect(status).toBeVisible();
+  await expect(facet).toBeVisible();
+  await expect(main).toBeVisible();
+}
+
 export async function runSmokeTestOnPage(page) {
   /* Ensure each page follows the following dom structure */
   await expect(await page.getByTestId('content').count()).toBeTruthy();
@@ -27,3 +39,10 @@ export const waitFor = async function waitFor(f, ftimeout = TIMEOUT) {
   while (!f()) await sleep(ftimeout);
   return f();
 };
+
+export function buildURLFragment(fragments) {
+  return fragments
+    .map((fragment) => `&${fragment}`)
+    .join('')
+    .replaceAll(' ', '%20');
+}

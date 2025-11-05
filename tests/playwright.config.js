@@ -1,14 +1,18 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
 const BASE_URL = 'http://127.0.0.1';
 const PORT = 1313;
+
+dotenv.config({ quiet: true });
+
 export default defineConfig({
   testDir: './src',
   fullyParallel: true,
   workers: 1,
   outputDir: './test-results',
   snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}{ext}',
-  reporter: [['html', { outputFolder: './playwright-report' }]],
+  reporter: [['html', { open: 'never', outputFolder: './playwright-report' }]],
   use: {
     baseURL: `${BASE_URL}:${PORT}`,
     screenshots: 'only-on-failure',
@@ -29,9 +33,10 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `cd ../exampleSite && hugo mod get && hugo --gc --config hugo.toml,hugo.test.toml && hugo serve --port ${PORT} --config hugo.toml,hugo.test.toml`,
+    command: `cd ../exampleSite && sed -i.bkp 's/disable_coveo = .*/disable_coveo = false/' hugo.toml && hugo mod get && hugo --gc --config hugo.toml,hugo.test.toml && hugo serve --port ${PORT} --config hugo.toml,hugo.test.toml`,
     url: `${BASE_URL}:${PORT}`,
     stdout: 'ignore',
+    reuseExistingServer: !process.env.CI,
   },
   expect: {
     toHaveScreenshot: {

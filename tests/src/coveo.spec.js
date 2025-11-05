@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { COVEO_CREDENTIALS_ENDPOINT } from './constants';
 import { mockCoveoCredentials, mockCoveoData } from './mock';
 import {
   buildURLFragment,
@@ -21,12 +22,17 @@ test.describe('Coveo test', () => {
     await page.goto('/');
     await page.waitForLoadState('load');
     await waitFor(async () => await handleConsentPopup(page));
-    await mockCoveoCredentials(page, request);
+
+    const excludedTests = ['missing coveo credentials'];
+    if (!excludedTests.includes(test.info().title)) {
+      await mockCoveoCredentials(page, request);
+    }
   });
 
   test.afterEach(async ({ page }) => {
     // Run basic smoke tests on all valid queries
-    if (!test.info().title.includes('invalid search query')) {
+    const excludedTests = ['invalid search query', 'missing coveo credentials'];
+    if (!excludedTests.includes(test.info().title)) {
       await runSmokeTestCoveo(page);
     }
   });
@@ -56,5 +62,19 @@ test.describe('Coveo test', () => {
     // reloading should retain the same link instead of resetting
     await page.reload();
     expect(page.url()).toContain(endpoint);
+  });
+
+  test('missing coveo credentials', async ({ page }) => {
+    const searchEndpoint = 'search.html';
+    await page.goto(`/${searchEndpoint}`);
+    await page.route(`**/${COVEO_CREDENTIALS_ENDPOINT}`, async (route) => {
+      await route.fulfill({
+        status: 404,
+        contentType: 'text/html; charset=utf-8',
+      });
+    });
+
+    const coveoErrorContent = page.getByTestId('coveo-error-content');
+    await expect(coveoErrorContent).toBeVisible();
   });
 });

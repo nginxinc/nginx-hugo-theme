@@ -101,9 +101,7 @@ async function atomicCoveo() {
   } catch (error) {
     // Handle coveo error from only a LACK of credentials.
     // INCORRECT credentials will cause the page to load but spin waiting.
-    const coveoErrorContainer = document.getElementById(
-      'coveo-error-container'
-    );
+    const coveoErrorContainer = document.getElementById('coveo-error-content');
     coveoErrorContainer.style.display = 'block';
   }
 }

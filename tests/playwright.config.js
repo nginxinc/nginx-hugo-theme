@@ -1,7 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
 const BASE_URL = 'http://127.0.0.1';
 const PORT = 1313;
+
+dotenv.config();
+
 export default defineConfig({
   testDir: './src',
   fullyParallel: true,

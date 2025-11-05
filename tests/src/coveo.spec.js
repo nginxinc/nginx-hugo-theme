@@ -23,11 +23,41 @@ function buildFilter() {
     .replaceAll(' ', '%20');
 }
 
+async function mockCoveo(page, request) {
+  // Get credentials
+  const tokenBaseURL = 'https://docs-dev.nginx.com';
+  const tokenEndpoint = '/api/v1/auth/search_token';
+  const username = process.env.FRONT_DOOR_USERNAME;
+  const password = process.env.FRONT_DOOR_PASSWORD;
+  const response = await request.get(tokenBaseURL + tokenEndpoint, {
+    headers: {
+      Authorization:
+        'Basic ' + Buffer.from(`${username}:${password}`).toString('base64'),
+    },
+  });
+
+  expect(response.ok()).toBeTruthy();
+  expect(response.status()).toBe(200);
+
+  const credentials = await response.json();
+
+  // Mock the local request to be successful, then reload the page.
+  await page.route(`**${tokenEndpoint}`, async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(credentials),
+    });
+  });
+  await page.reload();
+}
+
 test.describe('Coveo test', () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, request }) => {
     await page.goto('/');
     await page.waitForLoadState('load');
     await waitFor(async () => await handleConsentPopup(page));
+    await mockCoveo(page, request);
   });
 
   test.afterEach(async ({ page }) => {
@@ -57,6 +87,10 @@ test.describe('Coveo test', () => {
     await page.waitForSelector('#search-v2');
 
     // should retain the same link instead of resetting
+    expect(page.url()).toContain(endpoint);
+
+    // reloading should retain the same link instead of resetting
+    await page.reload();
     expect(page.url()).toContain(endpoint);
   });
 });

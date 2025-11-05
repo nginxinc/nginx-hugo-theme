@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { mockCoveoCredentials, mockCoveoData } from './mock';
 import {
   buildURLFragment,
   handleConsentPopup,
@@ -15,47 +16,12 @@ async function submitSearchQuery(page, query) {
   await page.waitForSelector('#search-v2');
 }
 
-async function mockCoveo(page, request) {
-  // Get credentials
-  const tokenBaseURL = 'https://docs-dev.nginx.com';
-  const tokenEndpoint = '/api/v1/auth/search_token';
-  const username = process.env.FRONT_DOOR_USERNAME;
-  const password = process.env.FRONT_DOOR_PASSWORD;
-  const response = await request.get(tokenBaseURL + tokenEndpoint, {
-    headers: {
-      Authorization:
-        'Basic ' + Buffer.from(`${username}:${password}`).toString('base64'),
-    },
-  });
-
-  expect(response.ok()).toBeTruthy();
-  expect(response.status()).toBe(200);
-
-  const credentials = await response.json();
-
-  // Mock the local request to be successful, then reload the page.
-  await page.route(`**${tokenEndpoint}`, async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify(credentials),
-    });
-  });
-  await page.reload();
-}
-
-const mockData = {
-  validQuery: 'proxy',
-  invalidQuery: 'abcdefghijkl',
-  filters: ['numberOfResults=100', 'sortCriteria=date descending'],
-};
-
 test.describe('Coveo test', () => {
   test.beforeEach(async ({ page, request }) => {
     await page.goto('/');
     await page.waitForLoadState('load');
     await waitFor(async () => await handleConsentPopup(page));
-    await mockCoveo(page, request);
+    await mockCoveoCredentials(page, request);
   });
 
   test.afterEach(async ({ page }) => {
@@ -66,11 +32,11 @@ test.describe('Coveo test', () => {
   });
 
   test('valid search query', async ({ page }) => {
-    await submitSearchQuery(page, mockData.validQuery);
+    await submitSearchQuery(page, mockCoveoData.validQuery);
   });
 
   test('invalid search query', async ({ page }) => {
-    await submitSearchQuery(page, mockData.invalidQuery);
+    await submitSearchQuery(page, mockCoveoData.invalidQuery);
     const resultsPage = page.getByTestId('search-results-page');
     const main = resultsPage.locator('atomic-layout-section[section="main"]');
     const noResultsMessage = main.locator('[part="no-results"]');
@@ -80,7 +46,7 @@ test.describe('Coveo test', () => {
   test('inbound link do not reset URL', async ({ page }) => {
     // Use ONLY generic filters. Do not add any product specific filters, particularly from the facet.
     // If these basic filters work, then its safe to assume, adding facet filters will not reset the URL.
-    const endpoint = `/search.html#q=${mockData.validQuery}${buildURLFragment(mockData.filters)}`;
+    const endpoint = `/search.html#q=${mockCoveoData.validQuery}${buildURLFragment(mockCoveoData.filters)}`;
     await page.goto(endpoint);
     await page.waitForSelector('#search-v2');
 

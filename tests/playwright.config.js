@@ -29,7 +29,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `cd ../exampleSite && hugo mod get && hugo --gc --config hugo.toml,hugo.test.toml && hugo serve --port ${PORT} --config hugo.toml,hugo.test.toml`,
+    command: `cd ../exampleSite && sed -i.bkp 's/disable_coveo = .*/disable_coveo = false/' hugo.toml && hugo mod get && hugo --gc --config hugo.toml,hugo.test.toml && hugo serve --port ${PORT} --config hugo.toml,hugo.test.toml`,
     url: `${BASE_URL}:${PORT}`,
     stdout: 'ignore',
     reuseExistingServer: !process.env.CI,

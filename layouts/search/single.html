@@ -4,8 +4,8 @@
     <section class="search no-sidebar">
       {{ partial "coveo-atomic.html" . }}
     </section>
-    {{ partial "search-error.html" true }}
+    {{ partial "search-error.html" }}
   {{ else }}
-   {{ partial "search-error.html" false }}
+   {{ partial "search-error.html" }}
   {{ end }}
 {{ end }}

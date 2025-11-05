@@ -1,0 +1,10 @@
+{{- $isCoveoDefined := . -}}
+
+<div class="content" data-testid="content" id="coveo-error-container" style="{{- if $isCoveoDefined -}}display: none;{{- else -}}{{- end -}}">
+  <div class="not-found-container" data-testid="not-found-container">
+    <h1 class="info-header">
+      Search functionality is unavailable.
+    </h1>
+    <a href="{{ site.BaseURL | relLangURL }}" aria-label="Return home">Return to the {{ site.Title }} homepage.</a>
+  </div>
+</div>

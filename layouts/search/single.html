@@ -2,24 +2,10 @@
   {{ $coveoEnabled := partial "get-feature-flags.html" "disable_coveo" }}
   {{ if $coveoEnabled }} 
     <section class="search no-sidebar">
-      {{ partial "coveo-atomic.html" .}}
+      {{ partial "coveo-atomic.html" . }}
     </section>
-    <div class="content" data-testid="content" id="coveo-error-container" style="display: none;">
-      <div class="not-found-container" data-testid="not-found-container">
-        <h1 class="info-header">
-          Search functionality is unavailable.
-        </h1>
-        <a href="{{ .Site.BaseURL | relLangURL }}" aria-label="Return home">Return to the {{ .Site.Title }} homepage.</a>
-      </div>
-    </div>
+    {{ partial "search-error.html" true }}
   {{ else }}
-    <div class="content" data-testid="content">
-      <div class="not-found-container" data-testid="not-found-container">
-        <h1 class="info-header">
-          Search functionality is unavailable.
-        </h1>
-        <a href="{{ .Site.BaseURL | relLangURL }}" aria-label="Return home">Return to the {{ .Site.Title }} homepage.</a>
-      </div>
-    </div>
+   {{ partial "search-error.html" false }}
   {{ end }}
 {{ end }}

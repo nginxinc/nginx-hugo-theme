@@ -33,7 +33,7 @@ const supportedNestedCSSVersion = {
 if (!localStorage.getItem('isBrowserVersionChecked')) {
   if (currentVersion < supportedNestedCSSVersion[currentBrowser]) {
     alert(
-      `Incompatible browser\n\nPlease update your browser from ${currentBrowser} ${currentVersion} to ${currentBrowser} ${supportedNestedCSSVersion[currentBrowser]} for full support.`
+      `Unsupported browser\n\n${currentBrowser} ${currentVersion} may not display this site correctly.\nUpdate to at least ${currentBrowser} ${supportedNestedCSSVersion[currentBrowser]} for the best experience.`
     );
   }
   localStorage.setItem('isBrowserVersionChecked', true);

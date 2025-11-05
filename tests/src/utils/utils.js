@@ -39,3 +39,10 @@ export const waitFor = async function waitFor(f, ftimeout = TIMEOUT) {
   while (!f()) await sleep(ftimeout);
   return f();
 };
+
+export function buildURLFragment(fragments) {
+  return fragments
+    .map((filter) => `&${filter}`)
+    .join('')
+    .replaceAll(' ', '%20');
+}

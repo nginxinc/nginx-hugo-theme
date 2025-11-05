@@ -1,11 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { handleConsentPopup, runSmokeTestCoveo, waitFor } from './utils';
-
-const mockData = {
-  validQuery: 'proxy',
-  invalidQuery: 'abcdefghijkl',
-  filters: ['numberOfResults=100', 'sortCriteria=date descending'],
-};
+import {
+  buildURLFragment,
+  handleConsentPopup,
+  runSmokeTestCoveo,
+  waitFor,
+} from './utils';
 
 async function submitSearchQuery(page, query) {
   const headerSearchBarContainer = page.getByTestId('header__search');
@@ -14,13 +13,6 @@ async function submitSearchQuery(page, query) {
   await page.keyboard.press('Enter');
   await page.waitForURL(`**/search.html#q=${query}`);
   await page.waitForSelector('#search-v2');
-}
-
-function buildFilter() {
-  return mockData.filters
-    .map((filter) => `&${filter}`)
-    .join('')
-    .replaceAll(' ', '%20');
 }
 
 async function mockCoveo(page, request) {
@@ -52,6 +44,12 @@ async function mockCoveo(page, request) {
   await page.reload();
 }
 
+const mockData = {
+  validQuery: 'proxy',
+  invalidQuery: 'abcdefghijkl',
+  filters: ['numberOfResults=100', 'sortCriteria=date descending'],
+};
+
 test.describe('Coveo test', () => {
   test.beforeEach(async ({ page, request }) => {
     await page.goto('/');
@@ -82,7 +80,7 @@ test.describe('Coveo test', () => {
   test('inbound link do not reset URL', async ({ page }) => {
     // Use ONLY generic filters. Do not add any product specific filters, particularly from the facet.
     // If these basic filters work, then its safe to assume, adding facet filters will not reset the URL.
-    const endpoint = `/search.html#q=${mockData.validQuery}${buildFilter()}`;
+    const endpoint = `/search.html#q=${mockData.validQuery}${buildURLFragment(mockData.filters)}`;
     await page.goto(endpoint);
     await page.waitForSelector('#search-v2');
 

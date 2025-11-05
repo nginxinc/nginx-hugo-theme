@@ -42,7 +42,7 @@ export const waitFor = async function waitFor(f, ftimeout = TIMEOUT) {
 
 export function buildURLFragment(fragments) {
   return fragments
-    .map((filter) => `&${filter}`)
+    .map((fragment) => `&${fragment}`)
     .join('')
     .replaceAll(' ', '%20');
 }

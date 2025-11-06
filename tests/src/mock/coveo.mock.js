@@ -1,8 +1,5 @@
 import { expect } from '@playwright/test';
-import {
-  COVEO_CREDENTIALS_BASE_URL,
-  COVEO_CREDENTIALS_ENDPOINT,
-} from '../constants';
+import { COVEO_CREDENTIALS_ENDPOINT } from '../constants';
 
 export const mockCoveoData = {
   validQuery: 'proxy',
@@ -14,8 +11,9 @@ export async function mockCoveoCredentials(page, request) {
   // Get credentials
   const username = process.env.FRONT_DOOR_USERNAME;
   const password = process.env.FRONT_DOOR_PASSWORD;
+  const baseURL = process.env.COVEO_CREDENTIALS_BASE_URL;
   const response = await request.get(
-    `${COVEO_CREDENTIALS_BASE_URL}/${COVEO_CREDENTIALS_ENDPOINT}`,
+    `${baseURL}/${COVEO_CREDENTIALS_ENDPOINT}`,
     {
       headers: {
         Authorization:

@@ -20,6 +20,12 @@
         {{ end }}
         </div>
 
+
+        {{ if .Site.Params.applicability }}
+            {{ partial "applicability.html" . }}
+        {{ end }}
+
+
         {{ $content | safeHTML }}
 
         {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}

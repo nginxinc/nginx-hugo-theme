@@ -8,6 +8,7 @@
     ":configMigration",
     "abandonments:recommended"
   ],
+  "commitMessagePrefix": "Chore:",
   "commitMessageLowerCase": "never",
   "labels": ["dependency"]
 }

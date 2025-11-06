@@ -1,0 +1,48 @@
+{{/*  
+
+Usage:
+
+{{ partial "applicability.html" . }}
+
+
+applicability.html parses a json file `versionMeta.json` of the following structure:
+[
+  {
+      "name": "page-name",
+      "url": "/path/to/page.html",
+      "applicability": [
+          {
+              "module": "Module Name",
+              "versions": ["15.1.8", "15.1.7", "15.1.6", "15.1.5", "15.1.4", "15.1.3"]
+          }
+      ]
+  }
+]
+
+Where `url` (with .html removed) matches the path of a current page,
+a details-summary will be generated should applicable versions
+*/}}
+
+
+{{- $rel := .RelPermalink | strings.TrimSuffix "/" -}}
+{{- $relUp1 := path.Dir $rel -}}
+
+{{- range $release := site.Data.versionMeta -}}
+  {{- with $release.documents -}}
+    {{- range $doc := . -}}
+      {{- $urlBase := path.Base $doc.url | replaceRE "\\.html$" "" -}}
+      {{- if or (strings.Contains $doc.url $rel) (strings.Contains $doc.url $relUp1) -}}
+        <details>
+          <summary>Applies To</summary>
+        {{- range $app := $doc.applicability -}}
+            <div><strong>{{ $app.module }}:</strong>
+              <p>
+                <code>{{ delimit $app.versions ", " }}</code>
+              </p> 
+            </div>
+        {{- end -}}  
+        </details>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

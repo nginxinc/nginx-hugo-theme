@@ -1,0 +1,46 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "customManagers:biomeVersions",
+    "helpers:pinGitHubActionDigestsToSemver",
+    ":configMigration",
+    // Scheduled for mondays before 4AM
+    "schedule:earlyMondays",
+    "abandonments:recommended"
+  ],
+  "prHourlyLimit": 4,
+  "packageRules": [
+    // Disable npm major updates PR unless dispatched from Dashboard
+    {
+      "matchManagers": "npm",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    // Group all GitHub actions updates 
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "GH Action Deps"
+    },
+    // Disable go package handling
+    {
+      "matchManagers": ["gomod"],
+      "enabled": false
+    },
+    // Upgrade to version 22 for non-latest
+    {
+      "matchPackageNames": ["ubuntu"],
+      "allowedVersions": "22"
+    },
+    // Group tests and performance updates
+    {
+      "matchFileNames": ["tests/package.json", "performance/package.json"],
+      "groupName": "tests & performance npm deps",
+      "description": "Non-Major version bumps to testing/performance deps"
+    }
+  ],
+  "rangeStrategy": "pin",
+  "commitMessagePrefix": "Deps:",
+  "commitMessageLowerCase": "never",
+  "labels": ["dependency"]
+}

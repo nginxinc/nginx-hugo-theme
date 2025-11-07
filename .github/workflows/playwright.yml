@@ -45,7 +45,7 @@ jobs:
                 ${{ runner.os }}-playwright-
           - name: Install playwright with dependencies
             if: steps.restore-cache.outputs.cache-hit != 'true'
-            run: cd tests && npx playwright install --with-deps ${{ env.BROWSERS }}
+            run: cd tests && npx playwright install --with-deps ${{ env.BROWSERS }} --only-shell
           - name: Install playwright dependencies
             if: steps.restore-cache.outputs.cache-hit == 'true'
             run: cd tests && npx playwright install-deps ${{ env.BROWSERS }}

@@ -24,8 +24,28 @@ jobs:
             with:
                 hugo-version: '0.147.8'
                 extended: true
-          - name: Install dependencies and playwright browsers
-            run: cd tests && npm ci && npx playwright install --with-deps
+          - name: Install dependencies
+            run: cd tests && npm ci
+          - name: Check playwright version
+            id: check-playwright-version
+            run: |
+              cd tests
+              version=$(npm list @playwright/test --json | jq -r '.dependencies["@playwright/test"].version')
+              echo "version=$version" >> $GITHUB_OUTPUT
+              echo "Version:" $version
+          - name: Attempt to restore cache
+            uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+            id: restore-cache
+            with:
+              # By default this path is hardcoded by OS - https://playwright.dev/python/docs/browsers#managing-browser-binaries
+              path: '~/.cache/ms-playwright'
+              key: '${{ runner.os }}-playwright-${{ steps.check-playwright-version.outputs.version }}'
+              # Fallback, if version changed, use the most recent cached version.
+              restore-keys: |
+                ${{ runner.os }}-playwright-
+          - name: Install playwright dependencies
+            if: steps.restore-cache.outputs.cache-hit != 'true'
+            run: cd tests && npx playwright install --with-deps
           - name: Run Playwright tests
             id: test-ui
             run: |

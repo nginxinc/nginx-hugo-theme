@@ -71,28 +71,38 @@ async function getValidSearchCredentials() {
 }
 
 async function atomicCoveo() {
-  await customElements.whenDefined('atomic-search-interface');
-  const credentials = await getValidSearchCredentials();
+  try {
+    await customElements.whenDefined('atomic-search-interface');
+    const credentials = await getValidSearchCredentials();
 
-  document.querySelectorAll('atomic-search-interface').forEach(async (el) => {
-    await el.initialize({
-      ...credentials,
-      analytics: { analyticsMode: 'legacy' },
-      preprocessRequest: (request) => {
-        const body = JSON.parse(request.body);
-        body.q = `<@- ${body.q} -@>`;
-        request.body = JSON.stringify(body);
-        return request;
-      },
+    document.querySelectorAll('atomic-search-interface').forEach(async (el) => {
+      await el.initialize({
+        ...credentials,
+        analytics: { analyticsMode: 'legacy' },
+        preprocessRequest: (request) => {
+          const body = JSON.parse(request.body);
+          body.q = `<@- ${body.q} -@>`;
+          request.body = JSON.stringify(body);
+          return request;
+        },
+      });
+
+      // No standalone searchboxes should be getting executing first search.
+      if (el.id === 'search-v2') await el.executeFirstSearch();
     });
 
-    // No standalone searchboxes should be getting executing first search.
-    if (el.id === 'search-v2') await el.executeFirstSearch();
-  });
-
-  const headerSearchBar = document.querySelector('#search-standalone-header');
-  if (headerSearchBar?.shadowRoot) {
-    hideShadowElement(headerSearchBar.shadowRoot, 'atomic-relevance-inspector');
+    const headerSearchBar = document.querySelector('#search-standalone-header');
+    if (headerSearchBar?.shadowRoot) {
+      hideShadowElement(
+        headerSearchBar.shadowRoot,
+        'atomic-relevance-inspector'
+      );
+    }
+  } catch (error) {
+    // Handle coveo error from only a LACK of credentials.
+    // INCORRECT credentials will cause the page to load but spin waiting.
+    const coveoErrorContainer = document.getElementById('coveo-error-content');
+    coveoErrorContainer.style.display = 'block';
   }
 }
 

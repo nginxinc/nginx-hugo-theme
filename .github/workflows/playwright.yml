@@ -11,6 +11,7 @@ env:
     FRONT_DOOR_USERNAME: ${{ secrets.FRONT_DOOR_USERNAME }}
     FRONT_DOOR_PASSWORD:  ${{ secrets.FRONT_DOOR_PASSWORD }}
     COVEO_CREDENTIALS_BASE_URL: ${{ secrets.COVEO_CREDENTIALS_BASE_URL }}
+    BROWSERS: "webkit firefox"
 jobs:
     playwright:
         name: Run Playwright
@@ -32,7 +33,6 @@ jobs:
               cd tests
               version=$(npm list @playwright/test --json | jq -r '.dependencies["@playwright/test"].version')
               echo "version=$version" >> $GITHUB_OUTPUT
-              echo "Version:" $version
           - name: Attempt to restore cache
             uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
             id: restore-cache
@@ -43,9 +43,12 @@ jobs:
               # Fallback, if version changed, use the most recent cached version.
               restore-keys: |
                 ${{ runner.os }}-playwright-
-          - name: Install playwright dependencies
+          - name: Install playwright with dependencies
             if: steps.restore-cache.outputs.cache-hit != 'true'
-            run: cd tests && npx playwright install --with-deps
+            run: cd tests && npx playwright install --with-deps ${{ env.BROWSERS }}
+          - name: Install playwright dependencies
+            if: steps.restore-cache.outputs.cache-hit == 'true'
+            run: cd tests && npx playwright install-deps ${{ env.BROWSERS }}
           - name: Run Playwright tests
             id: test-ui
             run: |

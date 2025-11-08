@@ -9,15 +9,31 @@ on:
 
 env:
     FRONT_DOOR_USERNAME: ${{ secrets.FRONT_DOOR_USERNAME }}
-    FRONT_DOOR_PASSWORD:  ${{ secrets.FRONT_DOOR_PASSWORD }}
+    FRONT_DOOR_PASSWORD: ${{ secrets.FRONT_DOOR_PASSWORD }}
     COVEO_CREDENTIALS_BASE_URL: ${{ secrets.COVEO_CREDENTIALS_BASE_URL }}
-    BROWSERS: "webkit firefox"
 jobs:
-    playwright:
+    get-playwright-version:
+        name: Get Playwright Version
+        runs-on: ubuntu-latest
+        outputs:
+          version: ${{ steps.get-playwright-version.outputs.version }}
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+          - name: Get version from package.json
+            id: get-playwright-version
+            run: |
+              cd tests
+              version=$(jq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"]' package.json)
+              test -n "$version" || { echo "No @playwright/test version found in package.json"; exit 1; }
+              echo "version=$version" >> $GITHUB_OUTPUT
+              echo "Version: " $version
+    run-playwright:
         name: Run Playwright
+        needs: get-playwright-version
         runs-on: ubuntu-latest
         container:
-          image: mcr.microsoft.com/playwright:v1.55.1-jammy
+          image: mcr.microsoft.com/playwright:v${{needs.get-playwright-version.outputs.version}}-jammy
         steps: 
           # Checkout the repository so the workflow has access to the code
           - name: Checkout code

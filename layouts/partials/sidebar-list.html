@@ -23,7 +23,7 @@
           aria-controls="{{ $sectionID }}"
         >
           <span class="sidebar__toggle-text">{{ $p.LinkTitle }}</span>
-          <span class="sidebar__chevron {{ if $shouldExpand }}sidebar__chevron--open{{ end }}">
+          <span class="sidebar__chevron {{ if $shouldExpand }}sidebar__chevron--open{{ end }}" data-testid="sidebar__chevron">
             {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
           </span>
         </button>
@@ -38,6 +38,7 @@
                 <a
                   href="{{ $p.Permalink }}"
                   class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
+                  data-testid="sidebar__link"
                   {{ if $onPage }}aria-current="page"{{ end }}
                 >
                   Overview
@@ -62,12 +63,13 @@
         {{ if $pageHasTOC }}
           <button
             class="sidebar__toggle sidebar__link sidebar__link--current"
+            data-testid="sidebar__section__toggle"
             aria-expanded="true"
             aria-controls="{{ $tocID }}"
             id="{{ $linkID }}"
           >
             <span>{{ $p.LinkTitle }} {{ partial "commercial-feature.html" $p }}</span>
-            <span class="sidebar__chevron sidebar__chevron--open">
+            <span class="sidebar__chevron sidebar__chevron--open" data-testid="sidebar__chevron">
               {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
             </span>
           </button>
@@ -86,6 +88,7 @@
             id="{{ $linkID }}"
             class="sidebar__link {{ if $onPage }}sidebar__link--current{{ end }}"
             {{ if $onPage }}aria-current="page"{{ end }}
+            data-testid="sidebar__link"
           >
               <span>{{ $p.LinkTitle }} {{ partial "commercial-feature.html" $p }}</span>
           </a>

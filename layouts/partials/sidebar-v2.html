@@ -51,7 +51,7 @@
                       {{ partial "lucide" (dict "context" . "icon" "chevron-right") }}
                     </span>
                 </summary>
-                <div class="product-selector__content">
+                <div class="product-selector__content" data-testid="product-selector__content">
                 {{ with index .Site.Data "product-selector" }}
                   {{ $groups := . }}
                   {{ range $group := $groups }}
@@ -59,7 +59,7 @@
                     <ul>
                       {{ $products := sort $group.products "productOrder" }}
                       {{ range $product := $products }}
-                        <li class="product-selector__product">
+                        <li class="product-selector__product" data-testid="product-selector__product">
                           <a
                             href="{{ absURL $product.url }}"
                             aria-label="{{ $product.title }} documentation"

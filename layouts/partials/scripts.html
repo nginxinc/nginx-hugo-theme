@@ -60,10 +60,6 @@
 
 {{ end }}
 
-<!-- Load Product Selector javascript -->
-{{ $jsProductSelector := resources.Get "js/product-selector.js" | minify | fingerprint "sha512" }}
-<script src="{{ $jsProductSelector.RelPermalink }}" type="text/javascript" integrity="{{ $jsProductSelector.Data.Integrity }}"></script>
-
 <!-- Load Sidebar v2 javascript -->
 {{ $jsSidebarV2 := resources.Get "js/sidebar-v2.js" | minify | fingerprint "sha512" }}
 <script src="{{ $jsSidebarV2.RelPermalink }}" type="text/javascript" integrity="{{ $jsSidebarV2.Data.Integrity }}"></script>

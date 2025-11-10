@@ -50,6 +50,7 @@ jobs:
             run: cd tests && npm ci
           - name: Run Playwright tests
             id: test-ui
+            # Check done to set the home variable. Workaround as browser is unable to launch if the $HOME folder isn't owned by the current user.
             if:  ${{ runner.os == 'Linux' }}
             env:
               HOME: /root

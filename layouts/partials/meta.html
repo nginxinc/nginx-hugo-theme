@@ -71,3 +71,9 @@
 <meta name="product" content="{{ .Site.Title }}">
 <meta name="version" content="{{ .Site.Params.currentVersion }}">
 <meta name="doc_type" content="Manual">
+
+{{ if .Site.Params.applicability }}
+    {{ partial "applicability-meta.html" . }}
+{{ end }}
+
+

@@ -1,0 +1,18 @@
+{{- $rel := .RelPermalink | strings.TrimSuffix "/" -}}
+{{- $relUp1 := path.Dir $rel -}}
+
+{{- range $release := site.Data.versionMeta -}}
+  {{- with $release.documents -}}
+    {{- range $doc := . -}}
+      {{- $urlBase := path.Base $doc.url | replaceRE "\\.html$" "" -}}
+      {{- if or (strings.Contains $doc.url $rel) (strings.Contains $doc.url $relUp1) -}} 
+        {{- range $app := $doc.applicability -}}
+            <meta name="product" content="{{ $app.module }}"/>
+            {{- range $version := $app.versions -}}
+            <meta content="{{ $version }}" name="{{ $app.module }}"/>
+            {{- end -}} 
+        {{- end -}}  
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

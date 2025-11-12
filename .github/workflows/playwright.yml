@@ -19,7 +19,7 @@ jobs:
           version: ${{ steps.get-playwright-version.outputs.version }}
         steps:
           - name: Checkout code
-            uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+            uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
           - name: Get version from package.json
             id: get-playwright-version
             run: |
@@ -37,7 +37,7 @@ jobs:
         steps: 
           # Checkout the repository so the workflow has access to the code
           - name: Checkout code
-            uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+            uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
           - name: Setup Hugo
             uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
             with:
@@ -45,7 +45,7 @@ jobs:
                 extended: true
           - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 #v6.0.0
             with: 
-              go-version: '1.24.6'
+              go-version: '1.25.4'
           - name: Install dependencies
             run: cd tests && npm ci
           - name: Run Playwright tests
@@ -61,7 +61,7 @@ jobs:
                 echo "Playwright tests failed. Please view the Playwright report to see full error."
                 exit 1
               fi
-          - uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+          - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
             id: artifact-upload
             if: ${{ !cancelled() && failure() && steps.test-ui.conclusion == 'failure' }}
             with:
@@ -69,7 +69,7 @@ jobs:
               path: tests/playwright-report/
               retention-days: 3
           - name: Comment on PR with Playwright report
-            uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+            uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
             if: ${{ failure() }}
             with:
               script: |

@@ -9,12 +9,31 @@ on:
 
 env:
     FRONT_DOOR_USERNAME: ${{ secrets.FRONT_DOOR_USERNAME }}
-    FRONT_DOOR_PASSWORD:  ${{ secrets.FRONT_DOOR_PASSWORD }}
+    FRONT_DOOR_PASSWORD: ${{ secrets.FRONT_DOOR_PASSWORD }}
     COVEO_CREDENTIALS_BASE_URL: ${{ secrets.COVEO_CREDENTIALS_BASE_URL }}
 jobs:
-    playwright:
-        name: Run Playwright
+    get-playwright-version:
+        name: Get Playwright Version
         runs-on: ubuntu-latest
+        outputs:
+          version: ${{ steps.get-playwright-version.outputs.version }}
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+          - name: Get version from package.json
+            id: get-playwright-version
+            run: |
+              cd tests
+              version=$(jq -r '.devDependencies["@playwright/test"] // .dependencies["@playwright/test"]' package.json)
+              test -n "$version" || { echo "No @playwright/test version found in package.json"; exit 1; }
+              echo "version=$version" >> $GITHUB_OUTPUT
+              echo "Version: " $version
+    run-playwright:
+        name: Run Playwright
+        needs: get-playwright-version
+        runs-on: ubuntu-latest
+        container:
+          image: mcr.microsoft.com/playwright:v${{needs.get-playwright-version.outputs.version}}-jammy
         steps: 
           # Checkout the repository so the workflow has access to the code
           - name: Checkout code
@@ -24,12 +43,20 @@ jobs:
             with:
                 hugo-version: '0.147.8'
                 extended: true
-          - name: Install dependencies and playwright browsers
-            run: cd tests && npm ci && npx playwright install --with-deps
+          - uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 #v6.0.0
+            with: 
+              go-version: '1.24.6'
+          - name: Install dependencies
+            run: cd tests && npm ci
           - name: Run Playwright tests
             id: test-ui
+            # Check done to set the home variable. Workaround as browser is unable to launch if the $HOME folder isn't owned by the current user.
+            if:  ${{ runner.os == 'Linux' }}
+            env:
+              HOME: /root
             run: |
-              make tests | tee output.log
+              git config --global --add safe.directory /__w/nginx-hugo-theme/nginx-hugo-theme
+              cd tests && npx playwright test | tee output.log
               if grep -q "failed" output.log; then
                 echo "Playwright tests failed. Please view the Playwright report to see full error."
                 exit 1

@@ -68,3 +68,67 @@ window.addEventListener(
     }
   }, 200)
 );
+
+// TOC header highlight
+(() => {
+  const toc = document.getElementById('TableOfContents');
+  if (!toc) return;
+
+  const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+  if (!links.length) return;
+
+  // Map section id -> TOC link
+  const linkById = new Map();
+  for (const a of links) {
+    const id = decodeURIComponent(a.getAttribute('href').slice(1));
+    linkById.set(id, a);
+  }
+
+  // Find headings that actually exist on the page
+  const headings = Array.from(linkById.keys())
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+
+  if (!headings.length) return;
+
+  const setActive = (id) => {
+    toc.querySelectorAll('a.is-active').forEach((a) => {
+      a.classList.remove('is-active');
+    });
+    const a = linkById.get(id);
+    if (a) a.classList.add('is-active');
+  };
+
+  // Use IntersectionObserver to track which section is "current"
+  let lastActiveId = null;
+  const io = new IntersectionObserver(
+    (entries) => {
+      // Consider headings that are above the top portion of the viewport as active candidates.
+      // Pick the one closest to the top.
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+      if (!visible.length) return;
+
+      const id = visible[0].target.id;
+      if (id && id !== lastActiveId) {
+        lastActiveId = id;
+        setActive(id);
+      }
+    },
+    {
+      root: null,
+      // Shrink the "active" zone so a section becomes active a bit after it enters
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0,
+    }
+  );
+
+  headings.forEach((h) => {
+    io.observe(h);
+  });
+
+  // If you load with a hash, sync immediately
+  if (location.hash) setActive(decodeURIComponent(location.hash.slice(1)));
+})();

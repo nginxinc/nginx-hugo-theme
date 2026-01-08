@@ -22,10 +22,17 @@ maxAge = -1
       noClasses = false
 
 [params]
+  description = "Component example site and usage documentation for NGINX Hugo Theme"
   github_repo = "https://github.com/nginxinc/nginx-hugo-theme"
   github_subdir = "exampleSite"
   enable_last_modified = true
   coveo_search_redirect = "/search.html"
+  [params.rich_meta]
+    thumbnail = "/images/nginx-documentation-500x300.png"
+    thumbnail_res = "500x300"
+    twitter_username = "@f5"
+    fb_publisher = "https://www.facebook.com/f5incorporated/"
   [params.featureFlags]
     disable_coveo = true
     disable_qualtrics = true
+    disable_rich_meta = false

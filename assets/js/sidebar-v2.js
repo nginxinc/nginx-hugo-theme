@@ -69,6 +69,29 @@ window.addEventListener(
   }, 200)
 );
 
+/**
+ * Get the associated heading for a given content element.
+ *
+ * @param {*} content
+ * @param {*} headings
+ * @returns
+ */
+const getHeadingForContent = (content, headings) => {
+  let closestHeading = null;
+  for (const heading of headings) {
+    if (
+      heading.compareDocumentPosition(content) &
+      Node.DOCUMENT_POSITION_FOLLOWING
+    ) {
+      closestHeading = heading;
+    } else {
+      break;
+    }
+  }
+
+  return closestHeading;
+};
+
 // TOC header highlight
 (() => {
   const toc = document.getElementById('TableOfContents');
@@ -110,8 +133,13 @@ window.addEventListener(
         .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
       if (!visible.length) return;
+      const target = visible[0].target;
+      const heading = headings.includes(target)
+        ? target
+        : getHeadingForContent(visible[0].target, headings);
+      if (!heading) return;
 
-      const id = visible[0].target.id;
+      const id = heading.id;
       if (id && id !== lastActiveId) {
         lastActiveId = id;
         setActive(id);
@@ -120,13 +148,26 @@ window.addEventListener(
     {
       root: null,
       // Shrink the "active" zone so a section becomes active a bit after it enters
-      rootMargin: '-20% 0px -70% 0px',
+      rootMargin: '-68px 0px -90% 0px',
       threshold: 0,
     }
   );
 
   headings.forEach((h) => {
     io.observe(h);
+
+    let c = h.nextElementSibling;
+
+    // Observe the very last element of the content of the heading.
+    // This is done because the way Intersections work, big chunks of a singular element forces it so the top of it has to visible for it to intersect.
+    while (c && c.tagName !== h.tagName) {
+      let current = c;
+      while (current?.lastElementChild) {
+        current = current.lastElementChild;
+      }
+      io.observe(current);
+      c = c.nextElementSibling; // Check next sibling
+    }
   });
 
   // If you load with a hash, sync immediately

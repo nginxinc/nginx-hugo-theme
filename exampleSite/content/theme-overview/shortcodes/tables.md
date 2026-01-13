@@ -7,6 +7,7 @@ toc: true
 The theme used the [table render hooks](https://gohugo.io/render-hooks/tables/) to customize table rendering.
 
 ### Plain markdown
+
 A pure markdown table, will have the default attributes of `narrow` and `borderless`.
 
 | Parameter                | Description                                                                          |

@@ -25,6 +25,7 @@ Mermaid supports multiple grid sizes, similar to the [img](./images.md) shortcod
 This attribute is provided as part of the codeblock options for `mermaid`.
 
 ### Default
+
 By default, it will use the `first-two-thirds` grid, if nothing is provided. 
 
 This allows the use of a side callout.
@@ -59,6 +60,7 @@ Here is an example of a callout to the side of a mermaid chart.
 
 
 ### Wide
+
 To use the full, wide grid:
 ```
 ```mermaid {grid="wide"}
@@ -160,6 +162,7 @@ graph LR
 ```
 
 ### Last third
+
 Or an 'aside' style `last-third`:
 ```
 ```mermaid {grid="last-third"}

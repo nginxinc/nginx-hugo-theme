@@ -31,6 +31,7 @@ helloWorld();
 All line highlighting is handled by passing options to the codeblocks
 
 ### Example with highlighting one line
+
 Here, we also have `lineos` set to false, so line numbers are not shown.
 
 `hcl {linenos=false,hl_lines=[2]}`

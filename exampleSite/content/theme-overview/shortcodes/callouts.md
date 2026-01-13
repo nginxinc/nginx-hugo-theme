@@ -11,6 +11,7 @@ Callouts are Hugo shortcodes used to visually highlight supplementary, important
 These are the main callout types that may be used to bring attention to a section of text. The callouts can be rendered in the center of the body or [on the side](#side).
 
 ### Basic
+
 The most basic callout wraps a "box" around text.
 
 ``` go-html-template
@@ -24,6 +25,7 @@ This is a plain callout with no title. It has a [link](#plain-callouts) to a hea
 {{</call-out>}}
 
 ### Custom title
+
 A title can be added with the `title` parameter
 
 ``` go-html-template
@@ -39,6 +41,7 @@ This is a plain callout with title.
 
 
 ## Side
+
 All callout types can also be rendered to the _side_ using the `sideline="true"` parameter.
 
 ``` go-html-template
@@ -54,6 +57,7 @@ This is a plain side callout with no title.
 {{</call-out>}}
 
 ## Important, but not urgent
+
 This is a weird exception callout that adds just a little extra contrast to the callout.
 
 ``` go-html-template

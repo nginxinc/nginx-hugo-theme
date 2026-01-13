@@ -4,6 +4,7 @@ description:
 ---
 
 ## NGINX Hugo Theme Documentation
+
 Documentation for hugo theme
 {{<card-section>}}
   {{<card title="Theme Overview" titleUrl="/theme-overview/" icon="library-big"  isLanding="true">}}

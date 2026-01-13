@@ -68,8 +68,7 @@ You need to "nest" shortcodes to use tab groups. A very basic example below has 
     ``` javascript
     console.log("This is an example code block in a tab group");
     ```
-    
-    thng
+
   {{%/tab %}}
 
   {{% tab name="callout" %}}

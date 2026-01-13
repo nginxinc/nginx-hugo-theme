@@ -26,7 +26,8 @@ and will render as the following:
 
 Essentially, you have some `card` shortcodes that can only be put inside a `card-section` shortcode to group content together better.
 
-### Params 
+### Params
+
 To support customization, there are also some params you can add to the shortcode `<card>` such as `title`, `titleUrl`, `icon`, `brandIcon`, `isFullSize`.
 
 * `title` (required) - Title of the card. 

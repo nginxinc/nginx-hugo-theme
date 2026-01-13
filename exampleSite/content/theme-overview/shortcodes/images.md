@@ -19,6 +19,7 @@ The following values are supported:
 
 
 ## Default
+
 By default, and image will take up the `first-two-thirds` of the grid, allowing for call out content to its right.
 
 ``` go-template
@@ -37,6 +38,7 @@ Here is an example of a callout to the side of an image.
 
 
 ## wide
+
 Providing the "wide" option, will make the image take up the full grid.
 
 ``` go-template
@@ -47,6 +49,7 @@ Providing the "wide" option, will make the image take up the full grid.
 
 
 ## last-third
+
 Providing the "last-third" option, will make the image take up the last third of the grid, similar to a side call out.
 This makes it possible to place an image to the right of text.
 

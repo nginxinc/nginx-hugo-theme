@@ -36,7 +36,7 @@ Here is an example of a callout to the side of an image.
 {{</call-out>}}
 
 
-## `wide`
+## wide
 Providing the "wide" option, will make the image take up the full grid.
 
 ``` go-template
@@ -46,7 +46,7 @@ Providing the "wide" option, will make the image take up the full grid.
 {{< img src="hero-graphic.webp" grid="wide">}}
 
 
-## `last-third`
+## last-third
 Providing the "last-third" option, will make the image take up the last third of the grid, similar to a side call out.
 This makes it possible to place an image to the right of text.
 

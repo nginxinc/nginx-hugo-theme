@@ -6,13 +6,18 @@ description:
 ## NGINX Hugo Theme Documentation
 Documentation for hugo theme
 {{<card-section>}}
-  {{<card title="Test Product" titleUrl="/test-product/" icon="test-tubes"  isLanding="true">}}
+  {{<card title="Theme Overview" titleUrl="/theme-overview/" icon="library-big"  isLanding="true">}}
     See explanations and usages of shortcodes
   {{</card >}}
-  {{<card title="Test Nested Product" titleUrl="/nested/product" icon="test-tubes"  isLanding="true">}}
-    Test nested product path
+
+  {{<card title="Nested product path" titleUrl="/nested/product" icon="egg"  isLanding="true">}}
+    Test product used for designing nested product paths like "/nested/product".
   {{</card >}}
-  {{<card title="NGINX Plus" titleUrl="/nginx/" brandIcon="NGINX-Plus-product-icon.svg"  isLanding="true">}}
-    See a live example of theme components
+
+  {{<card title="Test Product (OLD)" titleUrl="/test-product/" icon="test-tubes"  isLanding="true">}}
+    See explanations and usages of shortcodes (OLD)
   {{</card >}}
+
 {{</card-section>}}
+
+

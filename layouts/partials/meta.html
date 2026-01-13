@@ -35,9 +35,9 @@
 <meta name="robots" content="noindex,nofollow" />
 {{ end }}
 
-{{ $richMetaDisabled := partial "get-feature-flags.html" "disable_rich_meta" }}
+{{ $richMetaEnabled := partial "get-feature-flags.html" "disable_rich_meta" }}
 
-{{ if $richMetaDisabled }}
+{{ if $richMetaEnabled }}
     {{ $metaImage := .Site.Params.rich_meta.thumbnail }}
 
     <!-- Normalzize path for preview URLs    -->
@@ -58,6 +58,12 @@
         <meta property="og:type" content="website" />
     {{ else }}
         <meta property="og:type" content="article" />
+        {{ with .Page.Lastmod }}
+            <meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z0700" }}">
+        {{ end }}
+        {{ with .Parent.Title }}
+            <meta property="article:section" content="{{ . }}" />
+        {{ end }}
     {{ end }}
 
     <meta property="og:url" content="{{ .Permalink }}" />

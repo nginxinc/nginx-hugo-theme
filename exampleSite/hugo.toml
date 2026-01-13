@@ -35,4 +35,3 @@ maxAge = -1
   [params.featureFlags]
     disable_coveo = true
     disable_qualtrics = true
-    disable_rich_meta = false

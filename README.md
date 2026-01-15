@@ -110,7 +110,44 @@ Example:
   [params.featureFlags]
       disable_coveo = true
       disable_qualtrics = true
+      disable_rich_meta = false
 ```
+
+### Rich Meta - Open Graph / Social Media Integrations
+
+This theme allows for the configuration of OpenGraph embeds and other social media integrations through
+the following config parameters. Title and description properties are set implicitly based on page desc/title
+and do not need to be supplied.
+
+**Disable OpenGraph/Rich Meta Handling**
+
+```toml
+[params.featureFlags]
+    disable_rich_meta = true
+```
+
+**Thumbnail**
+
+Set the following parameter to control the image used by OpenGraph and social integrations. Must be an asset
+present within the `static` directory 
+
+```toml
+[params.rich_meta]
+    thumbnail = "/images/nginx-documentation-500x300.png"
+    thumbnail_res = "500x300" # Width x Height
+```
+
+**Additional Meta for Social Media Providers**
+
+To provide additional meta for certain social media providers, set the following parameters. If params
+are not set handling will be skipped. 
+
+```toml
+[params.rich_meta]
+    twitter_username = "@f5"
+    fb_publisher = "https://www.facebook.com/f5incorporated/"
+```
+
 
 ### `typographer`
 Options to translate plain ASCII punctuation characters into typographic-punctuation HTML entities. More info [here](https://gohugo.io/configuration/markup/#typographer).

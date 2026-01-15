@@ -45,36 +45,31 @@ You need to "nest" shortcodes to use tab groups. A very basic example below has 
 
 ### Complicated components
 
-``` go-html-template
-{{</* tabs name="complex tab groups" */>}}
+When populated tab groups with short codes, whitespace is very important.
 
-  {{</* tab name="Syntax" */>}}
-    Tab group 1
-  {{</* /tab */>}}
+Shortcode syntax _must_ be in line with the tab shortcode itself to render properly.
 
-  {{</* tab name="Tab group 2" */>}}
-    Tab group 2
-  {{</* /tab */>}}
 
-{{</* /tabs */>}}
-```
+{{<tabs name="complex tab groups" >}}
 
-{{< tabs name="complex tab groups" >}}
+  {{%tab name="Syntax highlighting"%}}
+  Here is a code block inside a tab group.
 
-  {{% tab name="syntax highlighting" %}}
-
-   Here is a code block inside a tab group.
-
-    ``` javascript
-    console.log("This is an example code block in a tab group");
-    ```
-
+  ``` javascript
+  console.log("This is an example code block in a tab group");
+  ```
   {{%/tab %}}
 
-  {{% tab name="callout" %}}
-    {{<call-out>}}
-    This is an example of a callout in a tab group.
-    {{</call-out>}}
+  {{%tab name="Callout"%}}
+  {{<call-out>}}
+  This is an example of a callout in a tab group.
+  {{</call-out>}}
   {{%/tab %}}
 
 {{< /tabs >}}
+
+{{<call-out class="info">}}
+It seems to be impossible to render `%` style shortcodes in a codeblock. (A rendering hugo in a hugo code fence problem 😐).
+
+Please click on "View Source" at the bottom of this page to see the above examples source code.
+{{</call-out>}}

@@ -8,6 +8,12 @@ weight: 200
 There is an option to use the `highlight` shortcode from Hugo but we have disabled that feature as it is redundant to using ticks. All usage will throw an error in the Hugo build.
 {{</warning>}}
 
+```
+!= testing ligatures
+===
+:=
+```
+
 ## Example with highlighting one line
 ```hcl {linenos=false,hl_lines=[16]}
 resource "azurerm_nginx_certificate" "cert1" {

@@ -2233,6 +2233,9 @@ li:has(> div > blockquote) {
 */
 code {
   font-family: "JetBrainsMono", monospace;
+  font-feature-settings:
+    "ss19" on,
+    "calt" off;
 }
 
 /* Inline Codeblock */

@@ -1,17 +1,14 @@
-- productGroup: Test Product
+- productGroup: "Docs on docs"
   products:
-    - title: "Test Product"
-      url: "test-product"
-    - title: "Test Nested Product"
-      url: "nested/product"
+    - title: "Theme Overview"
+      url: "theme-overview/"
+    - title: "Nested product path"
+      url: "/nested/product"
+    - title: "Test product (OLD)"
+      url: "/test-product/"
 
 - productGroup: Test External Links
   products:
     - title: "NGINX.org"
       url: https://nginx.org/index.html
       extUrl: true
-
-- productGroup: NGINX
-  products:
-    - title: "NGINX"
-      url: "nginx"

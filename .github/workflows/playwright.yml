@@ -19,7 +19,7 @@ jobs:
           version: ${{ steps.get-playwright-version.outputs.version }}
         steps:
           - name: Checkout code
-            uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+            uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
           - name: Get version from package.json
             id: get-playwright-version
             run: |
@@ -37,7 +37,7 @@ jobs:
         steps: 
           # Checkout the repository so the workflow has access to the code
           - name: Checkout code
-            uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+            uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
           - name: Setup Hugo
             uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
             with:
@@ -61,7 +61,7 @@ jobs:
                 echo "Playwright tests failed. Please view the Playwright report to see full error."
                 exit 1
               fi
-          - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+          - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
             id: artifact-upload
             if: ${{ !cancelled() && failure() && steps.test-ui.conclusion == 'failure' }}
             with:
@@ -69,7 +69,7 @@ jobs:
               path: tests/playwright-report/
               retention-days: 3
           - name: Comment on PR with Playwright report
-            uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+            uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
             if: ${{ failure() }}
             with:
               script: |

@@ -34,12 +34,12 @@ jobs:
       needs: deploy-example-site
       runs-on: ubuntu-22.04
       steps:
-        - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
           with:
             ref: ${{ github.event.workflow_run.head_branch }}
-        - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
           with:
-            node-version: 22.21.1
+            node-version: 24.13.0
         - name: Installing packages
           run: cd performance && npm ci
         - name: Generating lighthouse reports for PR...
@@ -116,7 +116,7 @@ jobs:
                     fi
                   fi
               done
-        - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
           if: ${{ !cancelled() }}
           with:
               name: lighthouse-reports-pr

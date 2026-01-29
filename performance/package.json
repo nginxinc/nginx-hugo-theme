@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": "true",
   "devDependencies": {
-    "lighthouse": "12.2.2",
-    "puppeteer": "24.22.0"
+    "lighthouse": "12.8.2",
+    "puppeteer": "24.36.1"
   }
 }

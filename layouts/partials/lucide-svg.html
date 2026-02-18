@@ -1,0 +1,16 @@
+{{- /* Internal helper: extracts the inner SVG content for a Lucide icon from the spritesheet. */ -}}
+{{- /* Called via partialCached, keyed on icon name. Returns raw SVG inner markup (paths, circles, etc). */ -}}
+{{- $icon := . -}}
+{{- $result := "" -}}
+{{- with resources.Get "images/lucide-sprite.svg" -}}
+  {{- $pattern := printf `<symbol id="%s">([\s\S]*?)</symbol>` $icon -}}
+  {{- $matches := findRESubmatch $pattern .Content -}}
+  {{- with $matches -}}
+    {{- $result = index (index . 0) 1 -}}
+  {{- else -}}
+    {{- errorf "Lucide icon %q not found in spritesheet" $icon -}}
+  {{- end -}}
+{{- else -}}
+  {{- errorf "Could not load Lucide spritesheet from assets/images/lucide-sprite.svg" -}}
+{{- end -}}
+{{- return $result -}}

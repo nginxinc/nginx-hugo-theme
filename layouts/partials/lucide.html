@@ -1,7 +1,7 @@
 {{- /* Usage: */ -}}
-{{- /* (dict "context" . "icon" "circle") */ -}}
+{{- /* partial "lucide" (dict "context" . "icon" "circle") */ -}}
+{{- /* partial "lucide" (dict "context" . "icon" "circle" "style" "color:#E4002B") */ -}}
+{{- $inner := partialCached "lucide-svg" .icon .icon -}}
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" class="lucide" style="{{ .style | safeCSS }}">
-  {{- with printf "images/lucide-sprite.svg#%s" .icon -}}
-    <use href="{{. | absURL}}"></use>
-  {{- end -}}
-  </svg>
+  {{- $inner | safeHTML -}}
+</svg>

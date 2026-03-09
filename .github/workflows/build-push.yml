@@ -15,7 +15,7 @@ env:
 
 jobs:
     deploy-example-site:
-      uses: nginxinc/docs-actions/.github/workflows/docs-build-push.yml@54da3ca1694da6ce34840123a133054d847efcd6 # 1.0.13
+      uses: nginxinc/docs-actions/.github/workflows/docs-build-push.yml@87da99295dcb424d92efb2f6d783cc02e7c8da43 # v1.0.15
       with:
         production_url_path: "/nginx-hugo-theme"
         preview_url_path: "/previews/nginx-hugo-theme"
@@ -39,7 +39,7 @@ jobs:
             ref: ${{ github.event.workflow_run.head_branch }}
         - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
           with:
-            node-version: 22.22.0
+            node-version: 22.22.1
         - name: Installing packages
           run: cd performance && npm ci
         - name: Generating lighthouse reports for PR...

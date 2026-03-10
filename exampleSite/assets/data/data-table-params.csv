@@ -1,0 +1,8 @@
+Parameter,Required,Default,Description
+path,Yes,,Path to the data file relative to assets/ (e.g. /data/endpoints.json)
+interactive,No,false,Set to true to enable client-side column sorting
+sort,No,,Default sort column. Append :asc or :desc for direction (e.g. name:desc)
+columns,No,all,Comma-separated list of columns to display in the given order
+hide,No,,Comma-separated list of columns to exclude
+labels,No,,Column header overrides in key:Label format comma-separated (e.g. rate_limit:Throttle)
+variant,No,wide,Layout width: wide (full content area) or narrow (two-thirds)

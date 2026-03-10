@@ -1,0 +1,11 @@
+Version,Release Date,Status,NGINX Plus,OS Support,EOL Date
+3.2.0,2025-09-15,current,R33,Ubuntu 24.04 / RHEL 9 / Debian 12,2026-09-15
+3.1.2,2025-06-10,supported,R32,Ubuntu 22.04 / RHEL 9 / Debian 12,2026-06-10
+3.1.1,2025-04-22,supported,R32,Ubuntu 22.04 / RHEL 9 / Debian 12,2026-04-22
+3.1.0,2025-02-01,supported,R31,Ubuntu 22.04 / RHEL 9 / Debian 11,2026-02-01
+3.0.3,2024-11-18,supported,R31,Ubuntu 22.04 / RHEL 8 / Debian 11,2025-11-18
+3.0.2,2024-09-05,eol,R30,Ubuntu 22.04 / RHEL 8 / Debian 11,2025-09-05
+3.0.1,2024-07-12,eol,R30,Ubuntu 22.04 / RHEL 8 / Debian 11,2025-07-12
+3.0.0,2024-05-01,eol,R30,Ubuntu 22.04 / RHEL 8 / Debian 11,2025-05-01
+2.9.1,2024-02-15,eol,R29,Ubuntu 20.04 / RHEL 8 / Debian 11,2025-02-15
+2.9.0,2023-12-01,eol,R29,Ubuntu 20.04 / RHEL 8 / Debian 10,2024-12-01

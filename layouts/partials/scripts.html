@@ -56,6 +56,12 @@
   <script src="{{ $redoc.RelPermalink }}" type="text/javascript"></script>
 {{ end }}
 
+<!-- load data-table.js (conditional) -->
+{{ if .Page.Store.Get "hasDataTable" }}
+{{ $dataTable := resources.Get "js/data-table.js" | minify | fingerprint "sha512" }}
+<script src="{{ $dataTable.RelPermalink }}" type="text/javascript" integrity="{{ $dataTable.Data.Integrity }}"></script>
+{{ end }}
+
 <!-- Load Sidebar v2 javascript -->
 {{ $jsSidebarV2 := resources.Get "js/sidebar-v2.js" | minify | fingerprint "sha512" }}
 <script src="{{ $jsSidebarV2.RelPermalink }}" type="text/javascript" integrity="{{ $jsSidebarV2.Data.Integrity }}"></script>

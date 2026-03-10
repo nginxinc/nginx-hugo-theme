@@ -134,9 +134,14 @@ textarea:not([rows]) {
   /* More info: https://docs.coveo.com/en/atomic/latest/usage/themes-and-visual-customization/ */
 
   /* biome-ignore lint: Coveo override */
-  --atomic-primary: oklch(var(--color-brand)) !important; /* Adjust the primary color */
+  --atomic-primary: oklch(
+    var(--color-brand)
+  ) !important; /* Adjust the primary color */
   /* biome-ignore lint: necessary override */
-  --atomic-ring-primary: oklch(var(--color-brand) / 0.4) !important; /* Adjust the focus color */
+  --atomic-ring-primary: oklch(
+    var(--color-brand) /
+    0.4
+  ) !important; /* Adjust the focus color */
   /* biome-ignore lint: necessary override */
   --atomic-primary-light: oklch(var(--color-brand)) !important;
   --atomic-background: oklch(0.9911 0 0) !important;
@@ -2001,6 +2006,77 @@ table hr {
   margin-right: -10px;
   margin-left: -10px;
   width: auto;
+}
+
+/* MARK: Data Tables
+*/
+
+.data-table-wrapper {
+  --dt-header-bg: oklch(var(--color-foreground) / 5%);
+  --dt-focus-ring: oklch(var(--color-foreground) / 40%);
+
+  margin-block: var(--margin-table);
+}
+
+/* Sortable column headers */
+.data-table-wrapper th[data-column] {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--dt-header-bg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--dt-focus-ring);
+    outline-offset: -2px;
+  }
+}
+
+.data-table-th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Sort icons: three Lucide SVGs per header, toggled by aria-sort */
+.data-table-sort-icon {
+  display: none;
+  line-height: 0;
+
+  & .lucide {
+    width: 0.85em;
+    height: 0.85em;
+    vertical-align: middle;
+  }
+}
+
+.data-table-sort-icon--none {
+  display: inline-flex;
+  opacity: 0.35;
+}
+
+th[aria-sort="ascending"] .data-table-sort-icon--none,
+th[aria-sort="descending"] .data-table-sort-icon--none {
+  display: none;
+}
+
+th[aria-sort="ascending"] .data-table-sort-icon--asc {
+  display: inline-flex;
+  opacity: 1;
+}
+
+th[aria-sort="descending"] .data-table-sort-icon--desc {
+  display: inline-flex;
+  opacity: 1;
+}
+
+.data-table-noscript {
+  font-size: var(--step--1);
+  font-style: italic;
+  color: oklch(var(--color-foreground) / 60%);
+  margin-block-start: 0.5rem;
 }
 
 /* MARK: Callouts

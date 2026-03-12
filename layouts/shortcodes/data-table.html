@@ -12,6 +12,7 @@
     hide        (optional) - Comma-separated list of columns to hide
     labels      (optional) - Column label overrides: "col:Label,col2:Label 2"
     variant     (optional) - Layout variant: "narrow" or "wide" (default: "wide")
+    theme       (optional) - Table theme: "bordered" or "borderless" (default: "bordered")
 
   Data formats: .json (array of objects), .csv (with header row), .yaml/.yml (array of objects)
   CSV headers are used verbatim. JSON/YAML keys get humanize + title case.
@@ -25,11 +26,18 @@
 {{- $hideParam := .Get "hide" | default "" -}}
 {{- $labelsParam := .Get "labels" | default "" -}}
 {{- $variant := .Get "variant" | default "wide" -}}
+{{- $theme := .Get "theme" | default "bordered" -}}
 
 {{- /* Validate variant */ -}}
 {{- $validVariants := slice "narrow" "wide" -}}
 {{- if not (in $validVariants $variant) -}}
   {{- errorf "data-table: invalid variant '%s'. Must be 'narrow' or 'wide'." $variant -}}
+{{- end -}}
+
+{{- /* Validate theme */ -}}
+{{- $validThemes := slice "bordered" "borderless" -}}
+{{- if not (in $validThemes $theme) -}}
+  {{- errorf "data-table: invalid theme '%s'. Must be 'bordered' or 'borderless'." $theme -}}
 {{- end -}}
 
 {{- /* Map variant to data-grid value (same as table shortcode) */ -}}
@@ -161,7 +169,7 @@
 <div class="data-table-wrapper"
   {{- if $sortCol }} data-default-sort="{{ $sortCol }}" data-default-sort-dir="{{ $sortDir }}"{{ end -}}
 >
-  <div class="table bordered" data-grid="{{ $dataGrid }}">
+  <div class="table {{ $theme }}" data-grid="{{ $dataGrid }}">
     <table>
       <thead>
         <tr>
@@ -197,7 +205,7 @@
 </div>
 {{- else -}}
 {{- /* Static mode: clean table, no JS */ -}}
-<div class="table bordered" data-grid="{{ $dataGrid }}">
+<div class="table {{ $theme }}" data-grid="{{ $dataGrid }}">
   <table>
     <thead>
       <tr>

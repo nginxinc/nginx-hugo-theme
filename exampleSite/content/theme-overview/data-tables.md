@@ -110,6 +110,26 @@ Use `variant="narrow"` to constrain the table to two-thirds width.
 
 {{< data-table path="/data/api-endpoints.json" columns="endpoint,method,status" variant="narrow" >}}
 
+### Borderless theme
+
+Use `theme="borderless"` for a clean, minimal table without borders or row striping.
+
+```text
+{{</* data-table path="/data/api-endpoints.json" columns="endpoint,method,status" theme="borderless" */>}}
+```
+
+{{< data-table path="/data/api-endpoints.json" columns="endpoint,method,status" theme="borderless" >}}
+
+### Borderless with sorting
+
+Combine `theme="borderless"` with `interactive="true"` for a minimal sortable table.
+
+```text
+{{</* data-table path="/data/api-endpoints.json" columns="endpoint,method,status" theme="borderless" interactive="true" sort="endpoint:asc" */>}}
+```
+
+{{< data-table path="/data/api-endpoints.json" columns="endpoint,method,status" theme="borderless" interactive="true" sort="endpoint:asc" >}}
+
 ### CSV source
 
 CSV headers appear exactly as written in the file.
@@ -139,3 +159,9 @@ Use `sort` to set the initial sort column. Append `:asc` or `:desc` for directio
 ```
 
 {{< data-table path="/data/release-matrix.csv" interactive="true" sort="Version:desc" >}}
+
+---
+
+## Limitations
+
+Cell values are rendered as **plain text only**. Markdown syntax, HTML tags, and shortcode calls in data values are not processed -- they appear as literal strings in the output. If you need rich formatting in a table, use a standard Markdown table or the `table` shortcode instead.

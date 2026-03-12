@@ -6,3 +6,4 @@ columns,No,all,Comma-separated list of columns to display in the given order
 hide,No,,Comma-separated list of columns to exclude
 labels,No,,Column header overrides in key:Label format comma-separated (e.g. rate_limit:Throttle)
 variant,No,wide,Layout width: wide (full content area) or narrow (two-thirds)
+theme,No,bordered,Table style: bordered (borders and striped rows) or borderless (clean minimal look)

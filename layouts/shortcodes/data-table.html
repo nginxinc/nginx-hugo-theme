@@ -11,12 +11,22 @@
     columns     (optional) - Comma-separated list of columns to display (default: all)
     hide        (optional) - Comma-separated list of columns to hide
     labels      (optional) - Column label overrides: "col:Label,col2:Label 2"
+                             Use \, to escape commas and \: to escape colons in values.
     variant     (optional) - Layout variant: "narrow" or "wide" (default: "wide")
     theme       (optional) - Table theme: "bordered" or "borderless" (default: "bordered")
+    humanize    (optional) - Humanize JSON/YAML keys for headers: "true" or "false" (default: "true")
+    markdownify (optional) - Process cell values as markdown: "true" or "false" (default: "false")
 
   Data formats: .json (array of objects), .csv (with header row), .yaml/.yml (array of objects)
   CSV headers are used verbatim. JSON/YAML keys get humanize + title case.
+
+  Escape sequences: Use \, for literal commas and \: for literal colons in parameter
+  values that are split on those characters (labels, columns, hide, sort).
 */ -}}
+
+{{- /* Sentinel characters for escape handling (\, and \:) */ -}}
+{{- $commaEsc := "\u001E" -}}{{- /* ASCII Record Separator */ -}}
+{{- $colonEsc := "\u001F" -}}{{- /* ASCII Unit Separator */ -}}
 
 {{- /* Read parameters */ -}}
 {{- $path := .Get "path" -}}
@@ -27,6 +37,8 @@
 {{- $labelsParam := .Get "labels" | default "" -}}
 {{- $variant := .Get "variant" | default "wide" -}}
 {{- $theme := .Get "theme" | default "bordered" -}}
+{{- $humanize := eq (.Get "humanize" | default "true") "true" -}}
+{{- $markdownify := eq (.Get "markdownify" | default "false") "true" -}}
 
 {{- /* Validate variant */ -}}
 {{- $validVariants := slice "narrow" "wide" -}}
@@ -47,12 +59,22 @@
 {{- end -}}
 
 {{- /* Build column label lookup from "col:Label,col2:Label 2" format */ -}}
+{{- /* Supports \, and \: escape sequences for literal commas and colons */ -}}
 {{- $labelMap := dict -}}
 {{- if $labelsParam -}}
-  {{- range split $labelsParam "," -}}
+  {{- $escaped := replace $labelsParam `\,` $commaEsc -}}
+  {{- $escaped = replace $escaped `\:` $colonEsc -}}
+  {{- range split $escaped "," -}}
     {{- $pair := split (strings.TrimSpace .) ":" -}}
     {{- if ge (len $pair) 2 -}}
-      {{- $labelMap = merge $labelMap (dict (index $pair 0) (index $pair 1)) -}}
+      {{- $key := replace (index $pair 0) $colonEsc ":" -}}
+      {{- $key = replace $key $commaEsc "," -}}
+      {{- /* Rejoin remaining parts in case value contained unescaped colons */ -}}
+      {{- $valParts := after 1 $pair -}}
+      {{- $val := delimit $valParts ":" -}}
+      {{- $val = replace $val $colonEsc ":" -}}
+      {{- $val = replace $val $commaEsc "," -}}
+      {{- $labelMap = merge $labelMap (dict $key $val) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -119,20 +141,28 @@
 {{- /* Apply column selection */ -}}
 {{- $displayColumns := $allColumns -}}
 {{- if $columnsParam -}}
-  {{- $displayColumns = split $columnsParam "," -}}
+  {{- $escaped := replace $columnsParam `\,` $commaEsc -}}
+  {{- $escaped = replace $escaped `\:` $colonEsc -}}
+  {{- $displayColumns = split $escaped "," -}}
   {{- $trimmed := slice -}}
   {{- range $displayColumns -}}
-    {{- $trimmed = $trimmed | append (strings.TrimSpace .) -}}
+    {{- $col := replace (strings.TrimSpace .) $commaEsc "," -}}
+    {{- $col = replace $col $colonEsc ":" -}}
+    {{- $trimmed = $trimmed | append $col -}}
   {{- end -}}
   {{- $displayColumns = $trimmed -}}
 {{- end -}}
 
 {{- /* Apply column hiding */ -}}
 {{- if $hideParam -}}
-  {{- $hideCols := split $hideParam "," -}}
+  {{- $escaped := replace $hideParam `\,` $commaEsc -}}
+  {{- $escaped = replace $escaped `\:` $colonEsc -}}
+  {{- $hideCols := split $escaped "," -}}
   {{- $hideSet := slice -}}
   {{- range $hideCols -}}
-    {{- $hideSet = $hideSet | append (strings.TrimSpace .) -}}
+    {{- $col := replace (strings.TrimSpace .) $commaEsc "," -}}
+    {{- $col = replace $col $colonEsc ":" -}}
+    {{- $hideSet = $hideSet | append $col -}}
   {{- end -}}
   {{- $filtered := slice -}}
   {{- range $col := $displayColumns -}}
@@ -147,8 +177,9 @@
 {{- $sortCol := "" -}}
 {{- $sortDir := "asc" -}}
 {{- if $defaultSort -}}
-  {{- $sortParts := split $defaultSort ":" -}}
-  {{- $sortCol = index $sortParts 0 -}}
+  {{- $escaped := replace $defaultSort `\:` $colonEsc -}}
+  {{- $sortParts := split $escaped ":" -}}
+  {{- $sortCol = replace (index $sortParts 0) $colonEsc ":" -}}
   {{- if gt (len $sortParts) 1 -}}
     {{- $sortDir = index $sortParts 1 -}}
   {{- end -}}
@@ -179,7 +210,7 @@
             {{- if eq $col $sortCol }} aria-sort="{{ if eq $sortDir "desc" }}descending{{ else }}ascending{{ end }}"{{ end -}}
           >
             <span class="data-table-th-content">
-              <span class="data-table-th-label">{{ with index $labelMap $col }}{{ . }}{{ else }}{{ if $isCSV }}{{ $col }}{{ else }}{{ humanize $col | title }}{{ end }}{{ end }}</span>
+              <span class="data-table-th-label">{{ with index $labelMap $col }}{{ . }}{{ else }}{{ if or $isCSV (not $humanize) }}{{ $col }}{{ else }}{{ humanize $col | title }}{{ end }}{{ end }}</span>
               <span class="data-table-sort-icon data-table-sort-icon--none" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up-down") }}</span>
               <span class="data-table-sort-icon data-table-sort-icon--asc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up") }}</span>
               <span class="data-table-sort-icon data-table-sort-icon--desc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-down") }}</span>
@@ -191,15 +222,15 @@
       <tbody>
         {{- range $row := $data }}
         <tr>
-          {{- range $col := $displayColumns }}
-          <td>{{ index $row $col }}</td>
-          {{- end }}
-        </tr>
-        {{- end }}
-      </tbody>
-    </table>
-  </div>
-  <noscript>
+           {{- range $col := $displayColumns }}
+           <td>{{ if $markdownify }}{{ index $row $col | markdownify }}{{ else }}{{ index $row $col }}{{ end }}</td>
+           {{- end }}
+         </tr>
+         {{- end }}
+       </tbody>
+     </table>
+   </div>
+   <noscript>
     <p class="data-table-noscript">Enable JavaScript for column sorting.</p>
   </noscript>
 </div>
@@ -210,19 +241,19 @@
     <thead>
       <tr>
         {{- range $col := $displayColumns }}
-        <th scope="col">{{ with index $labelMap $col }}{{ . }}{{ else }}{{ if $isCSV }}{{ $col }}{{ else }}{{ humanize $col | title }}{{ end }}{{ end }}</th>
+        <th scope="col">{{ with index $labelMap $col }}{{ . }}{{ else }}{{ if or $isCSV (not $humanize) }}{{ $col }}{{ else }}{{ humanize $col | title }}{{ end }}{{ end }}</th>
         {{- end }}
       </tr>
     </thead>
     <tbody>
       {{- range $row := $data }}
       <tr>
-        {{- range $col := $displayColumns }}
-        <td>{{ index $row $col }}</td>
-        {{- end }}
-      </tr>
-      {{- end }}
-    </tbody>
-  </table>
-</div>
-{{- end -}}
+         {{- range $col := $displayColumns }}
+         <td>{{ if $markdownify }}{{ index $row $col | markdownify }}{{ else }}{{ index $row $col }}{{ end }}</td>
+         {{- end }}
+       </tr>
+       {{- end }}
+     </tbody>
+   </table>
+ </div>
+ {{- end -}}

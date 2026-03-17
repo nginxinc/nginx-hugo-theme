@@ -1,0 +1,122 @@
+[
+  {
+    "endpoint": "/api/v1/users",
+    "method": "GET",
+    "description": "List all users with optional pagination",
+    "auth": "Bearer token",
+    "rate_limit": "100/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/users/{id}",
+    "method": "GET",
+    "description": "Get a single user by ID",
+    "auth": "Bearer token",
+    "rate_limit": "200/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/users",
+    "method": "POST",
+    "description": "Create a new user",
+    "auth": "Bearer token",
+    "rate_limit": "50/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/users/{id}",
+    "method": "PUT",
+    "description": "Update an existing user",
+    "auth": "Bearer token",
+    "rate_limit": "50/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/users/{id}",
+    "method": "DELETE",
+    "description": "Delete a user",
+    "auth": "Admin token",
+    "rate_limit": "20/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/groups",
+    "method": "GET",
+    "description": "List all groups",
+    "auth": "Bearer token",
+    "rate_limit": "100/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/groups/{id}/members",
+    "method": "GET",
+    "description": "List members of a group",
+    "auth": "Bearer token",
+    "rate_limit": "100/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v2/analytics",
+    "method": "GET",
+    "description": "Retrieve analytics data with date range filtering",
+    "auth": "Bearer token",
+    "rate_limit": "30/min",
+    "status": "beta"
+  },
+  {
+    "endpoint": "/api/v2/analytics/export",
+    "method": "POST",
+    "description": "Export analytics data to CSV or PDF",
+    "auth": "Admin token",
+    "rate_limit": "5/min",
+    "status": "beta"
+  },
+  {
+    "endpoint": "/api/v1/health",
+    "method": "GET",
+    "description": "Health check endpoint",
+    "auth": "None",
+    "rate_limit": "unlimited",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/config",
+    "method": "GET",
+    "description": "Get current server configuration",
+    "auth": "Admin token",
+    "rate_limit": "10/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v1/config",
+    "method": "PATCH",
+    "description": "Update server configuration",
+    "auth": "Admin token",
+    "rate_limit": "5/min",
+    "status": "stable"
+  },
+  {
+    "endpoint": "/api/v2/certificates",
+    "method": "GET",
+    "description": "List SSL/TLS certificates",
+    "auth": "Bearer token",
+    "rate_limit": "50/min",
+    "status": "beta"
+  },
+  {
+    "endpoint": "/api/v2/certificates",
+    "method": "POST",
+    "description": "Upload a new SSL/TLS certificate",
+    "auth": "Admin token",
+    "rate_limit": "10/min",
+    "status": "beta"
+  },
+  {
+    "endpoint": "/api/v1/upstreams",
+    "method": "GET",
+    "description": "List all upstream server groups",
+    "auth": "Bearer token",
+    "rate_limit": "100/min",
+    "status": "stable"
+  }
+]

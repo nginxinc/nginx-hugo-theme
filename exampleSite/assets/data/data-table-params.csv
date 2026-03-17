@@ -1,0 +1,11 @@
+Parameter,Required,Default,Description
+path,Yes,,"Path to the data file relative to assets/ (e.g. /data/endpoints.json). The leading / is conventional but optional."
+interactive,No,false,Set to true to enable client-side column sorting
+sort,No,,"Sort column and direction, applied at build time. Works with or without interactive. Format: column_name or column_name:asc or column_name:desc."
+columns,No,all,"Comma-separated list of columns to display, in the order listed. Also controls column order for JSON/YAML sources where the default is alphabetical."
+hide,No,,"Comma-separated list of columns to exclude. If both columns and hide are set, columns is applied first."
+labels,No,,"Column header overrides in key:Label format, comma-separated (e.g. rate_limit:Throttle)."
+variant,No,wide,Layout width: wide (full content area) or narrow (two-thirds)
+theme,No,bordered,Table style: bordered (borders and striped rows) or borderless (clean minimal look)
+humanize,No,true,"Humanize and title-case JSON/YAML keys for headers (e.g. rate_limit becomes Rate Limit). Has no effect on CSV sources. Set to false for raw keys."
+markdownify,No,false,"Process cell values as markdown. Enables bold, italic, links, inline code, etc. Raw HTML in data will also be rendered -- use only with trusted data."

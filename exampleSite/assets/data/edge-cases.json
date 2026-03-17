@@ -1,0 +1,18 @@
+[
+  {
+    "col:with:colons": "value:with:colons",
+    "col,with,commas": "value,with,commas",
+    "normal": "nothing special",
+    "html": "<a href=\"https://example.com\">link</a>",
+    "markdown": "**bold** and [a link](https://example.com)",
+    "shortcode": "{{< ref \"/docs\" >}}"
+  },
+  {
+    "col:with:colons": "another:value",
+    "col,with,commas": "a, b, c",
+    "normal": "plain text",
+    "html": "<script>alert(1)</script>",
+    "markdown": "Supports `inline code` and *emphasis*",
+    "shortcode": "{{< data-table path=\"evil\" >}}"
+  }
+]

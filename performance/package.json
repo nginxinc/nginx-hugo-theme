@@ -4,6 +4,6 @@
   "private": "true",
   "devDependencies": {
     "lighthouse": "12.8.2",
-    "puppeteer": "24.39.1"
+    "puppeteer": "24.40.0"
   }
 }

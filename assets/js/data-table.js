@@ -99,6 +99,15 @@
   }
 
   /**
+   * Check whether a string is strictly numeric (rejects partial parses like "100/min").
+   * @param {string} s
+   * @returns {boolean}
+   */
+  function isNumeric(s) {
+    return s !== '' && !Number.isNaN(Number(s));
+  }
+
+  /**
    * Sort rows and update the DOM.
    */
   function render(tbody, allRows, colIndex, state) {
@@ -108,20 +117,27 @@
       const idx = colIndex[state.sortCol];
       const dir = state.sortDir === 'desc' ? -1 : 1;
 
-      rows = [...rows].sort((a, b) => {
-        const aCell = a.querySelectorAll('td')[idx];
-        const bCell = b.querySelectorAll('td')[idx];
-        const aText = aCell?.textContent?.trim() || '';
-        const bText = bCell?.textContent?.trim() || '';
+      // Pre-cache cell text to avoid DOM queries inside the comparator
+      const textCache = new Map();
+      for (const row of allRows) {
+        const cell = row.querySelectorAll('td')[idx];
+        textCache.set(row, cell?.textContent?.trim() || '');
+      }
 
-        // Try numeric comparison first
-        const aNum = Number.parseFloat(aText);
-        const bNum = Number.parseFloat(bText);
-        if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
-          return (aNum - bNum) * dir;
+      // Decide comparison mode once for the whole column:
+      // only use numeric sort when every non-empty value is a strict number.
+      const useNumeric = [...textCache.values()].every(
+        (v) => v === '' || isNumeric(v)
+      );
+
+      rows = [...rows].sort((a, b) => {
+        const aText = textCache.get(a);
+        const bText = textCache.get(b);
+
+        if (useNumeric) {
+          return (Number(aText) - Number(bText)) * dir;
         }
 
-        // Fall back to locale-aware string comparison
         return (
           aText.localeCompare(bText, undefined, { sensitivity: 'base' }) * dir
         );
@@ -129,13 +145,7 @@
     }
 
     // Update DOM -- clear tbody and re-append in order
-    while (tbody.firstChild) {
-      tbody.removeChild(tbody.firstChild);
-    }
-
-    for (const row of rows) {
-      tbody.appendChild(row);
-    }
+    tbody.replaceChildren(...rows);
   }
 
   // Initialize when DOM is ready

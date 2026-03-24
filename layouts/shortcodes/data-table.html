@@ -52,6 +52,11 @@
   {{- errorf "data-table: invalid theme '%s'. Must be 'bordered' or 'borderless'." $theme -}}
 {{- end -}}
 
+{{- /* Validate required path */ -}}
+{{- if not $path -}}
+  {{- errorf "data-table shortcode requires a 'path' parameter." -}}
+{{- end -}}
+
 {{- /* Map variant to data-grid value (same as table shortcode) */ -}}
 {{- $dataGrid := "wide" -}}
 {{- if eq $variant "narrow" -}}
@@ -82,11 +87,6 @@
 {{- /* Only load JS when interactive */ -}}
 {{- if $interactive -}}
   {{- .Page.Store.Set "hasDataTable" true -}}
-{{- end -}}
-
-{{- /* Validate required path */ -}}
-{{- if not $path -}}
-  {{- errorf "data-table shortcode requires a 'path' parameter." -}}
 {{- end -}}
 
 {{- /* Strip leading /static if present (same pattern as metrics shortcode) */ -}}

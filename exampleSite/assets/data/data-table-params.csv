@@ -1,7 +1,7 @@
 Parameter,Required,Default,Description
-path,Yes,,"Path to the data file relative to assets/ (e.g. /data/endpoints.json). The leading / is conventional but optional."
+path,Yes,,"Path to the data file. Looks in the page bundle first, then the assets/ directory (e.g. /data/endpoints.json)."
 interactive,No,false,Set to true to enable client-side column sorting
-sort,No,,"Sort column and direction, applied at build time. Works with or without interactive. Format: column_name or column_name:asc or column_name:desc."
+sort,No,,"Sort column and direction, applied at build time. Works with or without interactive. Format: column_name or column_name:asc or column_name:desc. Warns if the column does not exist or the direction is invalid."
 columns,No,all,"Comma-separated list of columns to display, in the order listed. Also controls column order for JSON/YAML sources where the default is alphabetical."
 hide,No,,"Comma-separated list of columns to exclude. If both columns and hide are set, columns is applied first."
 labels,No,,"Column header overrides in key:Label format, comma-separated (e.g. rate_limit:Throttle)."

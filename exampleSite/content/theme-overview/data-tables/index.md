@@ -6,7 +6,8 @@ toc: true
 
 ## Overview
 
-The `data-table` shortcode renders tables from JSON, CSV, or YAML data files stored in the `assets/` directory.
+The `data-table` shortcode renders tables from JSON, CSV, or YAML data files.
+Data files are resolved from the **page bundle** first, then the global **assets/** directory.
 Tables are fully rendered at build time as static HTML.
 Setting `interactive="true"` progressively enhances the table with client-side column sorting -- without JavaScript, the table remains fully readable.
 
@@ -18,9 +19,35 @@ Setting `interactive="true"` progressively enhances the table with client-side c
 
 ---
 
-## Data formats
+## Data file location
 
-Place data files anywhere inside your project's `assets/` directory. The `path` parameter is relative to `assets/` and conventionally starts with a `/` (e.g., `/data/endpoints.json`).
+The shortcode looks for data files in two places, in order:
+
+1. **Page bundle** -- files co-located with the page's `index.md`. Use this for page-specific data.
+2. **Global assets** -- the project's `assets/` directory (or any directory mounted to it). Use this for shared data.
+
+For page bundles, the path is relative to the bundle directory. For global assets, the path is relative to `assets/` and conventionally starts with a `/` (e.g., `/data/endpoints.json`).
+
+### Page bundle example
+
+```text
+content/
+└── my-page/
+    ├── index.md        <-- {{</* data-table path="results.json" */>}}
+    └── results.json    <-- resolved from page bundle
+```
+
+### Global assets example
+
+```text
+assets/
+└── data/
+    └── endpoints.json  <-- {{</* data-table path="/data/endpoints.json" */>}}
+```
+
+---
+
+## Data formats
 
 ### JSON
 
@@ -69,6 +96,16 @@ The simplest usage -- renders all columns from a JSON file as a static table. Co
 ```
 
 {{< data-table path="/data/api-endpoints.json" >}}
+
+### Page bundle resource
+
+Data files co-located with the page's `index.md` are resolved automatically. This `team.yaml` file lives in the same directory as this page.
+
+```text
+{{</* data-table path="team.yaml" */>}}
+```
+
+{{< data-table path="team.yaml" >}}
 
 ### Selecting columns and controlling order
 
@@ -231,6 +268,16 @@ Escape sequences work in both the key and value portions of `labels`.
 ```
 
 {{< data-table path="/data/edge-cases.json" hide="col\:with\:colons,col\,with\,commas" >}}
+
+---
+
+## Warnings and validation
+
+The shortcode produces build-time warnings for common mistakes:
+
+- **Duplicate column headers.** Duplicate keys in the `labels` parameter or duplicate CSV column headers trigger a warning. The first occurrence wins.
+- **Invalid sort column.** If the `sort` column does not exist in the data, a warning is emitted and no sort is applied.
+- **Invalid sort direction.** If the sort direction is not `asc` or `desc`, a warning is emitted and the default (`asc`) is used.
 
 ---
 

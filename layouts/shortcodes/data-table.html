@@ -5,7 +5,7 @@
   client-side column sorting.
 
   Parameters:
-    path        (required) - Path to data file in assets/ directory
+    path        (required) - Path to data file (page bundle or assets/ directory)
     interactive (optional) - Enable sortable columns via JS ("false" default)
     sort        (optional) - Default sort column, with optional :asc or :desc suffix
     columns     (optional) - Comma-separated list of columns to display (default: all)
@@ -17,6 +17,7 @@
     humanize    (optional) - Humanize JSON/YAML keys for headers: "true" or "false" (default: "true")
     markdownify (optional) - Process cell values as markdown: "true" or "false" (default: "false")
 
+  Resource lookup: page bundle (.Page.Resources.Get) first, then global assets (resources.Get).
   Data formats: .json (array of objects), .csv (with header row), .yaml/.yml (array of objects)
   CSV headers are used verbatim. JSON/YAML keys get humanize + title case.
 
@@ -79,7 +80,11 @@
       {{- $val := delimit $valParts ":" -}}
       {{- $val = replace $val $colonEsc ":" -}}
       {{- $val = replace $val $commaEsc "," -}}
-      {{- $labelMap = merge $labelMap (dict $key $val) -}}
+      {{- if index $labelMap $key -}}
+        {{- warnf "data-table: duplicate label key '%s' in labels parameter; first value wins." $key -}}
+      {{- else -}}
+        {{- $labelMap = merge $labelMap (dict $key $val) -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -89,24 +94,32 @@
   {{- .Page.Store.Set "hasDataTable" true -}}
 {{- end -}}
 
-{{- /* Strip leading /static if present (same pattern as metrics shortcode) */ -}}
-{{- $cleanPath := strings.TrimPrefix "/static" $path -}}
-
-{{- /* Load and unmarshal the data file */ -}}
-{{- $resource := resources.Get $cleanPath -}}
+{{- /* Load the data file: page bundle first, then global assets */ -}}
+{{- $resource := .Page.Resources.Get $path -}}
 {{- if not $resource -}}
-  {{- errorf "data-table: could not find resource at path '%s'. Ensure the file exists in the assets/ directory." $cleanPath -}}
+  {{- $resource = resources.Get $path -}}
+{{- end -}}
+{{- if not $resource -}}
+  {{- errorf "data-table: could not find resource at path '%s'. Place the file in the page bundle or the assets/ directory." $path -}}
 {{- end -}}
 
 {{- $data := slice -}}
 {{- $allColumns := slice -}}
-{{- $ext := path.Ext $cleanPath | lower -}}
+{{- $ext := path.Ext $path | lower -}}
 {{- $isCSV := eq $ext ".csv" -}}
 {{- if $isCSV -}}
   {{- /* CSV unmarshals as [][]string; first row is the header */ -}}
   {{- $rawCSV := $resource | transform.Unmarshal (dict "delimiter" ",") -}}
   {{- if and $rawCSV (gt (len $rawCSV) 1) -}}
     {{- $headers := index $rawCSV 0 -}}
+    {{- $seenHeaders := slice -}}
+    {{- range $col := $headers -}}
+      {{- if in $seenHeaders $col -}}
+        {{- warnf "data-table: duplicate CSV column header '%s'; first occurrence wins." $col -}}
+      {{- else -}}
+        {{- $seenHeaders = $seenHeaders | append $col -}}
+      {{- end -}}
+    {{- end -}}
     {{- $allColumns = $headers -}}
     {{- range $i, $row := $rawCSV -}}
       {{- if gt $i 0 -}}
@@ -135,7 +148,7 @@
 {{- end -}}
 
 {{- if not $data -}}
-  {{- errorf "data-table: failed to unmarshal data from '%s'. Check file format." $cleanPath -}}
+  {{- errorf "data-table: failed to unmarshal data from '%s'. Check file format." $path -}}
 {{- end -}}
 
 {{- /* Apply column selection */ -}}
@@ -181,79 +194,73 @@
   {{- $sortParts := split $escaped ":" -}}
   {{- $sortCol = replace (index $sortParts 0) $colonEsc ":" -}}
   {{- if gt (len $sortParts) 1 -}}
-    {{- $sortDir = index $sortParts 1 -}}
+    {{- $rawDir := index $sortParts 1 -}}
+    {{- if in (slice "asc" "desc") $rawDir -}}
+      {{- $sortDir = $rawDir -}}
+    {{- else -}}
+      {{- warnf "data-table: invalid sort direction '%s'; must be 'asc' or 'desc'. Defaulting to 'asc'." $rawDir -}}
+    {{- end -}}
   {{- end -}}
 {{- end -}}
 
 {{- if $sortCol -}}
-  {{- if eq $sortDir "desc" -}}
+  {{- if not (in $displayColumns $sortCol) -}}
+    {{- warnf "data-table: sort column '%s' does not exist in the data." $sortCol -}}
+  {{- else if eq $sortDir "desc" -}}
     {{- $data = sort $data $sortCol "desc" -}}
   {{- else -}}
     {{- $data = sort $data $sortCol -}}
   {{- end -}}
 {{- end -}}
 
-{{- /* Helper: resolve display label for a column */ -}}
-{{- /* --- Render --- */ -}}
+{{- /* --- Render ---
+     Column header labels are resolved by: labelMap override > raw key (CSV/no humanize) > humanize+title.
+     Interactive mode adds a wrapper div with data attrs, sort icons, and aria-sort on headers.
+*/ -}}
 {{- if $interactive -}}
-{{- /* Interactive mode: wrapper with data attrs for JS enhancement */ -}}
 <div class="data-table-wrapper"
   {{- if $sortCol }} data-default-sort="{{ $sortCol }}" data-default-sort-dir="{{ $sortDir }}"{{ end -}}
 >
-  <div class="table {{ $theme }}" data-grid="{{ $dataGrid }}">
-    <table>
-      <thead>
-        <tr>
-          {{- range $col := $displayColumns }}
-          <th scope="col"
-            data-column="{{ $col }}"
-            {{- if eq $col $sortCol }} aria-sort="{{ if eq $sortDir "desc" }}descending{{ else }}ascending{{ end }}"{{ end -}}
-          >
-            <span class="data-table-th-content">
-              <span class="data-table-th-label">{{ with index $labelMap $col }}{{ . }}{{ else }}{{ if or $isCSV (not $humanize) }}{{ $col }}{{ else }}{{ humanize $col | title }}{{ end }}{{ end }}</span>
-              <span class="data-table-sort-icon data-table-sort-icon--none" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up-down") }}</span>
-              <span class="data-table-sort-icon data-table-sort-icon--asc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up") }}</span>
-              <span class="data-table-sort-icon data-table-sort-icon--desc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-down") }}</span>
-            </span>
-          </th>
-          {{- end }}
-        </tr>
-      </thead>
-      <tbody>
-        {{- range $row := $data }}
-        <tr>
-           {{- range $col := $displayColumns }}
-           <td>{{ if $markdownify }}{{ index $row $col | markdownify }}{{ else }}{{ index $row $col }}{{ end }}</td>
-           {{- end }}
-         </tr>
-         {{- end }}
-       </tbody>
-     </table>
-   </div>
-   <noscript>
-    <p class="data-table-noscript">Enable JavaScript for column sorting.</p>
-  </noscript>
-</div>
-{{- else -}}
-{{- /* Static mode: clean table, no JS */ -}}
+{{- end }}
 <div class="table {{ $theme }}" data-grid="{{ $dataGrid }}">
   <table>
     <thead>
       <tr>
         {{- range $col := $displayColumns }}
-        <th scope="col">{{ with index $labelMap $col }}{{ . }}{{ else }}{{ if or $isCSV (not $humanize) }}{{ $col }}{{ else }}{{ humanize $col | title }}{{ end }}{{ end }}</th>
+        {{- $label := $col -}}
+        {{- with index $labelMap $col }}{{ $label = . }}{{ else }}{{ if and (not $isCSV) $humanize }}{{ $label = humanize $col | title }}{{ end }}{{ end -}}
+        {{- if $interactive }}
+        <th scope="col"
+          data-column="{{ $col }}"
+          {{- if eq $col $sortCol }} aria-sort="{{ if eq $sortDir "desc" }}descending{{ else }}ascending{{ end }}"{{ end -}}
+        >
+          <span class="data-table-th-content">
+            <span class="data-table-th-label">{{ $label }}</span>
+            <span class="data-table-sort-icon data-table-sort-icon--none" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up-down") }}</span>
+            <span class="data-table-sort-icon data-table-sort-icon--asc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up") }}</span>
+            <span class="data-table-sort-icon data-table-sort-icon--desc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-down") }}</span>
+          </span>
+        </th>
+        {{- else }}
+        <th scope="col">{{ $label }}</th>
+        {{- end }}
         {{- end }}
       </tr>
     </thead>
     <tbody>
       {{- range $row := $data }}
       <tr>
-         {{- range $col := $displayColumns }}
-         <td>{{ if $markdownify }}{{ index $row $col | markdownify }}{{ else }}{{ index $row $col }}{{ end }}</td>
-         {{- end }}
-       </tr>
-       {{- end }}
-     </tbody>
-   </table>
- </div>
- {{- end -}}
+        {{- range $col := $displayColumns }}
+        <td>{{ if $markdownify }}{{ index $row $col | markdownify }}{{ else }}{{ index $row $col }}{{ end }}</td>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>
+{{- if $interactive }}
+  <noscript>
+    <p class="data-table-noscript">Enable JavaScript for column sorting.</p>
+  </noscript>
+</div>
+{{- end -}}

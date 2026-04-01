@@ -1,0 +1,9 @@
+- name: Alice
+  role: Engineering
+  location: Portland
+- name: Bob
+  role: Design
+  location: Austin
+- name: Carol
+  role: Product
+  location: Seattle

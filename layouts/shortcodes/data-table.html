@@ -1,0 +1,266 @@
+{{- /*
+  data-table shortcode
+  Renders a table from a JSON, CSV, or YAML data file.
+  By default renders a plain static table. Set interactive="true" to enable
+  client-side column sorting.
+
+  Parameters:
+    path        (required) - Path to data file (page bundle or assets/ directory)
+    interactive (optional) - Enable sortable columns via JS ("false" default)
+    sort        (optional) - Default sort column, with optional :asc or :desc suffix
+    columns     (optional) - Comma-separated list of columns to display (default: all)
+    hide        (optional) - Comma-separated list of columns to hide
+    labels      (optional) - Column label overrides: "col:Label,col2:Label 2"
+                             Use \, to escape commas and \: to escape colons in values.
+    variant     (optional) - Layout variant: "narrow" or "wide" (default: "wide")
+    theme       (optional) - Table theme: "bordered" or "borderless" (default: "bordered")
+    humanize    (optional) - Humanize JSON/YAML keys for headers: "true" or "false" (default: "true")
+    markdownify (optional) - Process cell values as markdown: "true" or "false" (default: "false")
+
+  Resource lookup: page bundle (.Page.Resources.Get) first, then global assets (resources.Get).
+  Data formats: .json (array of objects), .csv (with header row), .yaml/.yml (array of objects)
+  CSV headers are used verbatim. JSON/YAML keys get humanize + title case.
+
+  Escape sequences: Use \, for literal commas and \: for literal colons in parameter
+  values that are split on those characters (labels, columns, hide, sort).
+*/ -}}
+
+{{- /* Sentinel characters for escape handling (\, and \:) */ -}}
+{{- $commaEsc := "\u001E" -}}{{- /* ASCII Record Separator */ -}}
+{{- $colonEsc := "\u001F" -}}{{- /* ASCII Unit Separator */ -}}
+
+{{- /* Read parameters */ -}}
+{{- $path := .Get "path" -}}
+{{- $interactive := eq (.Get "interactive" | default "false") "true" -}}
+{{- $defaultSort := .Get "sort" | default "" -}}
+{{- $columnsParam := .Get "columns" | default "" -}}
+{{- $hideParam := .Get "hide" | default "" -}}
+{{- $labelsParam := .Get "labels" | default "" -}}
+{{- $variant := .Get "variant" | default "wide" -}}
+{{- $theme := .Get "theme" | default "bordered" -}}
+{{- $humanize := eq (.Get "humanize" | default "true") "true" -}}
+{{- $markdownify := eq (.Get "markdownify" | default "false") "true" -}}
+
+{{- /* Validate variant */ -}}
+{{- $validVariants := slice "narrow" "wide" -}}
+{{- if not (in $validVariants $variant) -}}
+  {{- errorf "data-table: invalid variant '%s'. Must be 'narrow' or 'wide'." $variant -}}
+{{- end -}}
+
+{{- /* Validate theme */ -}}
+{{- $validThemes := slice "bordered" "borderless" -}}
+{{- if not (in $validThemes $theme) -}}
+  {{- errorf "data-table: invalid theme '%s'. Must be 'bordered' or 'borderless'." $theme -}}
+{{- end -}}
+
+{{- /* Validate required path */ -}}
+{{- if not $path -}}
+  {{- errorf "data-table shortcode requires a 'path' parameter." -}}
+{{- end -}}
+
+{{- /* Map variant to data-grid value (same as table shortcode) */ -}}
+{{- $dataGrid := "wide" -}}
+{{- if eq $variant "narrow" -}}
+  {{- $dataGrid = "first-two-thirds" -}}
+{{- end -}}
+
+{{- /* Build column label lookup from "col:Label,col2:Label 2" format */ -}}
+{{- /* Supports \, and \: escape sequences for literal commas and colons */ -}}
+{{- $labelMap := dict -}}
+{{- if $labelsParam -}}
+  {{- $escaped := replace $labelsParam `\,` $commaEsc -}}
+  {{- $escaped = replace $escaped `\:` $colonEsc -}}
+  {{- range split $escaped "," -}}
+    {{- $pair := split (strings.TrimSpace .) ":" -}}
+    {{- if ge (len $pair) 2 -}}
+      {{- $key := replace (index $pair 0) $colonEsc ":" -}}
+      {{- $key = replace $key $commaEsc "," -}}
+      {{- /* Rejoin remaining parts in case value contained unescaped colons */ -}}
+      {{- $valParts := after 1 $pair -}}
+      {{- $val := delimit $valParts ":" -}}
+      {{- $val = replace $val $colonEsc ":" -}}
+      {{- $val = replace $val $commaEsc "," -}}
+      {{- if index $labelMap $key -}}
+        {{- warnf "data-table: duplicate label key '%s' in labels parameter; first value wins." $key -}}
+      {{- else -}}
+        {{- $labelMap = merge $labelMap (dict $key $val) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Only load JS when interactive */ -}}
+{{- if $interactive -}}
+  {{- .Page.Store.Set "hasDataTable" true -}}
+{{- end -}}
+
+{{- /* Load the data file: page bundle first, then global assets */ -}}
+{{- $resource := .Page.Resources.Get $path -}}
+{{- if not $resource -}}
+  {{- $resource = resources.Get $path -}}
+{{- end -}}
+{{- if not $resource -}}
+  {{- errorf "data-table: could not find resource at path '%s'. Place the file in the page bundle or the assets/ directory." $path -}}
+{{- end -}}
+
+{{- $data := slice -}}
+{{- $allColumns := slice -}}
+{{- $ext := path.Ext $path | lower -}}
+{{- $isCSV := eq $ext ".csv" -}}
+{{- if $isCSV -}}
+  {{- /* CSV unmarshals as [][]string; first row is the header */ -}}
+  {{- $rawCSV := $resource | transform.Unmarshal (dict "delimiter" ",") -}}
+  {{- if and $rawCSV (gt (len $rawCSV) 1) -}}
+    {{- $headers := index $rawCSV 0 -}}
+    {{- $seenHeaders := slice -}}
+    {{- range $col := $headers -}}
+      {{- if in $seenHeaders $col -}}
+        {{- warnf "data-table: duplicate CSV column header '%s'; first occurrence wins." $col -}}
+      {{- else -}}
+        {{- $seenHeaders = $seenHeaders | append $col -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $allColumns = $headers -}}
+    {{- range $i, $row := $rawCSV -}}
+      {{- if gt $i 0 -}}
+        {{- $rowMap := dict -}}
+        {{- range $j, $col := $headers -}}
+          {{- $val := "" -}}
+          {{- if lt $j (len $row) -}}
+            {{- $val = index $row $j -}}
+          {{- end -}}
+          {{- $rowMap = merge $rowMap (dict $col $val) -}}
+        {{- end -}}
+        {{- $data = $data | append $rowMap -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- $data = $resource | transform.Unmarshal -}}
+  {{- /* Determine columns from first row of map data */ -}}
+  {{- with index $data 0 -}}
+    {{- range $key, $_ := . -}}
+      {{- $allColumns = $allColumns | append $key -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* Sort columns alphabetically for consistent ordering */ -}}
+  {{- $allColumns = sort $allColumns -}}
+{{- end -}}
+
+{{- if not $data -}}
+  {{- errorf "data-table: failed to unmarshal data from '%s'. Check file format." $path -}}
+{{- end -}}
+
+{{- /* Apply column selection */ -}}
+{{- $displayColumns := $allColumns -}}
+{{- if $columnsParam -}}
+  {{- $escaped := replace $columnsParam `\,` $commaEsc -}}
+  {{- $escaped = replace $escaped `\:` $colonEsc -}}
+  {{- $displayColumns = split $escaped "," -}}
+  {{- $trimmed := slice -}}
+  {{- range $displayColumns -}}
+    {{- $col := replace (strings.TrimSpace .) $commaEsc "," -}}
+    {{- $col = replace $col $colonEsc ":" -}}
+    {{- $trimmed = $trimmed | append $col -}}
+  {{- end -}}
+  {{- $displayColumns = $trimmed -}}
+{{- end -}}
+
+{{- /* Apply column hiding */ -}}
+{{- if $hideParam -}}
+  {{- $escaped := replace $hideParam `\,` $commaEsc -}}
+  {{- $escaped = replace $escaped `\:` $colonEsc -}}
+  {{- $hideCols := split $escaped "," -}}
+  {{- $hideSet := slice -}}
+  {{- range $hideCols -}}
+    {{- $col := replace (strings.TrimSpace .) $commaEsc "," -}}
+    {{- $col = replace $col $colonEsc ":" -}}
+    {{- $hideSet = $hideSet | append $col -}}
+  {{- end -}}
+  {{- $filtered := slice -}}
+  {{- range $col := $displayColumns -}}
+    {{- if not (in $hideSet $col) -}}
+      {{- $filtered = $filtered | append $col -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $displayColumns = $filtered -}}
+{{- end -}}
+
+{{- /* Parse and apply default sort at build time */ -}}
+{{- $sortCol := "" -}}
+{{- $sortDir := "asc" -}}
+{{- if $defaultSort -}}
+  {{- $escaped := replace $defaultSort `\:` $colonEsc -}}
+  {{- $sortParts := split $escaped ":" -}}
+  {{- $sortCol = replace (index $sortParts 0) $colonEsc ":" -}}
+  {{- if gt (len $sortParts) 1 -}}
+    {{- $rawDir := index $sortParts 1 -}}
+    {{- if in (slice "asc" "desc") $rawDir -}}
+      {{- $sortDir = $rawDir -}}
+    {{- else -}}
+      {{- warnf "data-table: invalid sort direction '%s'; must be 'asc' or 'desc'. Defaulting to 'asc'." $rawDir -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $sortCol -}}
+  {{- if not (in $displayColumns $sortCol) -}}
+    {{- warnf "data-table: sort column '%s' does not exist in the data." $sortCol -}}
+  {{- else if eq $sortDir "desc" -}}
+    {{- $data = sort $data $sortCol "desc" -}}
+  {{- else -}}
+    {{- $data = sort $data $sortCol -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* --- Render ---
+     Column header labels are resolved by: labelMap override > raw key (CSV/no humanize) > humanize+title.
+     Interactive mode adds a wrapper div with data attrs, sort icons, and aria-sort on headers.
+*/ -}}
+{{- if $interactive -}}
+<div class="data-table-wrapper"
+  {{- if $sortCol }} data-default-sort="{{ $sortCol }}" data-default-sort-dir="{{ $sortDir }}"{{ end -}}
+>
+{{- end }}
+<div class="table {{ $theme }}" data-grid="{{ $dataGrid }}">
+  <table>
+    <thead>
+      <tr>
+        {{- range $col := $displayColumns }}
+        {{- $label := $col -}}
+        {{- with index $labelMap $col }}{{ $label = . }}{{ else }}{{ if and (not $isCSV) $humanize }}{{ $label = humanize $col | title }}{{ end }}{{ end -}}
+        {{- if $interactive }}
+        <th scope="col"
+          data-column="{{ $col }}"
+          {{- if eq $col $sortCol }} aria-sort="{{ if eq $sortDir "desc" }}descending{{ else }}ascending{{ end }}"{{ end -}}
+        >
+          <span class="data-table-th-content">
+            <span class="data-table-th-label">{{ $label }}</span>
+            <span class="data-table-sort-icon data-table-sort-icon--none" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up-down") }}</span>
+            <span class="data-table-sort-icon data-table-sort-icon--asc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-up") }}</span>
+            <span class="data-table-sort-icon data-table-sort-icon--desc" aria-hidden="true">{{ partial "lucide" (dict "context" $ "icon" "arrow-down") }}</span>
+          </span>
+        </th>
+        {{- else }}
+        <th scope="col">{{ $label }}</th>
+        {{- end }}
+        {{- end }}
+      </tr>
+    </thead>
+    <tbody>
+      {{- range $row := $data }}
+      <tr>
+        {{- range $col := $displayColumns }}
+        <td>{{ if $markdownify }}{{ index $row $col | markdownify }}{{ else }}{{ index $row $col }}{{ end }}</td>
+        {{- end }}
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>
+{{- if $interactive }}
+  <noscript>
+    <p class="data-table-noscript">Enable JavaScript for column sorting.</p>
+  </noscript>
+</div>
+{{- end -}}

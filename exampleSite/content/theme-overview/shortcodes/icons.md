@@ -38,9 +38,16 @@ line-based parsing is sensitive to newlines in shortcode output.
 
 ### Icon in a heading
 
-#### Settings {{<icon "settings">}} page
+{{<call-out class="warning">}}
+When embedding an icon in a heading, you **must** use the percentage sign shortcode syntax.
+{{</call-out>}}
 
-#### {{<icon "rocket">}} Launch sequence
+``` go-html-template
+{{%/* icon "settings" */%}}
+```
+#### Settings {{% icon settings %}} page
+
+#### {{% icon rocket %}} Launch sequence
 
 ### Icon in a table
 
@@ -52,7 +59,7 @@ line-based parsing is sensitive to newlines in shortcode output.
 
 ### Multiple icons in a heading
 
-#### {{<icon "shield">}} Security {{<icon "lock">}} settings
+#### {{% icon "shield" %}} Security {{% icon "lock" %}} settings
 
 ### Icon in bold / italic
 

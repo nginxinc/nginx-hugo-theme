@@ -30,3 +30,37 @@ Or as part of a link to [http.cat - {{<icon "cat">}}](https://http.cat/):
 ``` go-html-template
 [http.cat - {{</*icon "cat"*/>}}](https://http.cat/)
 ```
+
+## Edge cases
+
+These test that icons render correctly in contexts where Goldmark's
+line-based parsing is sensitive to newlines in shortcode output.
+
+### Icon in a heading
+
+{{<call-out class="warning">}}
+When embedding an icon in a heading, you **must** use the percentage sign shortcode syntax.
+{{</call-out>}}
+
+``` go-html-template
+{{%/* icon "settings" */%}}
+```
+#### Settings {{% icon settings %}} page
+
+#### {{% icon rocket %}} Launch sequence
+
+### Icon in a table
+
+| Feature | Status | Icon |
+|---------|--------|------|
+| Search | Done | {{<icon "search">}} |
+| Upload | Pending | {{<icon "upload">}} |
+| Alerts | Active | {{<icon "bell">}} |
+
+### Multiple icons in a heading
+
+#### {{% icon "shield" %}} Security {{% icon "lock" %}} settings
+
+### Icon in bold / italic
+
+This is **bold with {{<icon "star">}} icon** and *italic with {{<icon "heart">}} icon*.

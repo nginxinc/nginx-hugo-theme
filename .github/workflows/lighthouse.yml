@@ -20,7 +20,7 @@ jobs:
             ref: ${{ github.event.workflow_run.head_branch }}
         - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
           with:
-            node-version: 24.14.0
+            node-version: 24.14.1
         - name: Installing packages
           run: cd performance && npm ci
         - name: Get PR number being merged

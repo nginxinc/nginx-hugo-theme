@@ -15,7 +15,7 @@ env:
 
 jobs:
     deploy-example-site:
-      uses: nginxinc/docs-actions/.github/workflows/docs-build-push.yml@87da99295dcb424d92efb2f6d783cc02e7c8da43 # v1.0.15
+      uses: nginxinc/docs-actions/.github/workflows/docs-build-push.yml@feat/oidc-migration
       with:
         production_url_path: "/nginx-hugo-theme"
         preview_url_path: "/previews/nginx-hugo-theme"
@@ -27,8 +27,8 @@ jobs:
         auto_deploy_branch: "main"
         auto_deploy_env: "prod"
       secrets:
-        AZURE_CREDENTIALS: ${{secrets.AZURE_CREDENTIALS_DOCS}}
-        AZURE_KEY_VAULT: ${{secrets.AZURE_KEY_VAULT_DOCS}}
+        OIDC_CLIENT_ID: ${{ secrets.OIDC_CLIENT_ID }}
+        OIDC_TENANT_ID: ${{ secrets.OIDC_TENANT_ID }}
     lighthouseci:
       if: github.event.pull_request
       needs: deploy-example-site

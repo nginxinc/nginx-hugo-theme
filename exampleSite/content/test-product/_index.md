@@ -5,16 +5,16 @@ weight: 100
 # The URL is the base of the deployed path, becoming "docs.nginx.com/<url>/<other-pages>"
 url: 
 # The subtitle displays directly underneath the heading of a given page
-nd-subtitle: Test pages for nginx-hugo-theme
+f5-subtitle: Test pages for nginx-hugo-theme
 # Indicates that this is a custom landing page
-nd-landing-page: true
+f5-landing-page: true
 # Types have a 1:1 relationship with Hugo archetypes, so you shouldn't need to change this
-nd-content-type: landing-page
+f5-content-type: landing-page
 # Intended for internal catalogue and search, case sensitive:
 # Agent, N4Azure, NIC, NIM, NGF, NAP-DOS, NAP-WAF, NGINX One, NGINX+, Solutions, Unit
-nd-product:
+f5-product:
 cascade:
-  nd-banner:
+  f5-banner:
     enabled: true
     start-date: 2025-01-01
     md: /_banners/test-product-intro.md

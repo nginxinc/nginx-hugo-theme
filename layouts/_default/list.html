@@ -17,15 +17,15 @@
 
           <div class="list-header-title">
             <h1>{{ .Title }}</h1>
-            {{ if index .Params "nd-subtitle" }}
-              <p>{{ index .Params "nd-subtitle" | markdownify }}</p>
+            {{ if index .Params "f5-subtitle" }}
+              <p>{{ index .Params "f5-subtitle" | markdownify }}</p>
             {{ end }}
           </div>
         </div>
 
         {{ partial "banner" . }}
 
-        {{ $hasCustomContent := index .Params "nd-landing-page" | default false }}
+        {{ $hasCustomContent := index .Params "f5-landing-page" | default false }}
         {{ if $hasCustomContent }}
         {{ .Content }}
 

@@ -2,7 +2,7 @@
 title: Get help
 weight: 750
 toc: true
-nd-docs: DOCS-882
+f5-docs: DOCS-882
 url: /nested/product/get-help/
 type:
 - how-to

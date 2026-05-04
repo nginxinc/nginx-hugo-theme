@@ -52,7 +52,7 @@
 {{ $redoc := $redoc | fingerprint "sha512" }}
 
 <!-- only load the redoc js if we're on an api reference page -->
-{{ with index .Params "nd-api-reference" }}
+{{ with index .Params "f5-api-reference" }}
   <script src="{{ $redoc.RelPermalink }}" type="text/javascript"></script>
 {{ end }}
 

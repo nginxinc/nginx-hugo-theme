@@ -15,7 +15,7 @@
 
         <h1>{{ .Title }}</h1>
         <div class="content__reading-time">
-        {{ if index .Params "nd-reading-time" }}
+        {{ if index .Params "f5-reading-time" }}
             {{ printf "~%d min read" .ReadingTime }}
         {{ end }}
         </div>
@@ -25,7 +25,7 @@
         {{ if eq .Page.Draft true }}{{ partial "draft-badge.html" . }}{{ end }}
         {{ if in .Params.doctypes "beta" }}{{ partial "beta-badge" . }}{{ end }}
 
-        {{ with (index .Page.Params "nd-api-reference") }}
+        {{ with (index .Page.Params "f5-api-reference") }}
         <div class="content__redocly" data-grid="breakout">
             {{ partial "openapi.html" . }}
         </div>

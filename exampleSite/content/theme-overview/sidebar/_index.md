@@ -1,7 +1,7 @@
 ---
 title: Sidebar
 weight: 100
-nd-subtitle: An overview of sidebar usage
-nd-landing-page: true
+f5-subtitle: An overview of sidebar usage
+f5-landing-page: true
 ---
 

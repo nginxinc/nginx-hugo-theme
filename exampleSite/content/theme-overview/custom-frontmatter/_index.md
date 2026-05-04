@@ -1,7 +1,7 @@
 ---
 title: Custom Frontmatter
 weight: 100
-nd-landing-page: true
+f5-landing-page: true
 ---
 
 ## Custom fields

@@ -1,7 +1,7 @@
 {{ with .Params }}
-  {{ if (index . "nd-commercial") }}
+  {{ if (index . "f5-commercial") }}
   - <em>Commercial</em>
-  {{ else if (index . "nd-commercial-partial") }}
+  {{ else if (index . "f5-commercial-partial") }}
   - <em>Partial Commercial</em>
   {{ end }}
 {{ end }}

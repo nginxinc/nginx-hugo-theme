@@ -1,4 +1,4 @@
 ---
 title: Default landing page
-nd-subtitle: This is a subtitle for a landing page
+f5-subtitle: This is a subtitle for a landing page
 ---

@@ -1,6 +1,6 @@
 ---
 title: Landing pages
-nd-subtitle: This is a subtitle for a landing page
+f5-subtitle: This is a subtitle for a landing page
 toc: true
 ---
 
@@ -11,14 +11,14 @@ Landing pages (`_index.md` files) are rendered using our [list.html](https://git
 
 ## Default landing page
 
-If `_index.md_` contains _only_ frontmatter, with no content or `nd-landing-page: true`, it will render a list of the content. 
+If `_index.md_` contains _only_ frontmatter, with no content or `f5-landing-page: true`, it will render a list of the content. 
 
 The most basic `_index.md` example:
 
 ```yml
 ---
 title: Default landing page
-nd-subtitle: This is a subtitle for a landing page
+f5-subtitle: This is a subtitle for a landing page
 ---
 
 ```
@@ -35,7 +35,7 @@ This page __will not__ get linked to in the sidebar. It can only be accessed thr
 
 ## Custom landing page
 
-If the `_index.md` file contains the `nd-landing-page: true` frontmatter field, __and__ you add some content, you can customize the contents on this page.
+If the `_index.md` file contains the `f5-landing-page: true` frontmatter field, __and__ you add some content, you can customize the contents on this page.
 
 The page will also be added to the sidebar with the name of `Overview` under a section.
 
@@ -45,8 +45,8 @@ This can be treated like any other content page, and supports all expected short
 ```yml
 ---
 title: Custom landing page
-nd-landing-page: true
-nd-subtitle: This is a subtitle for a landing page
+f5-landing-page: true
+f5-subtitle: This is a subtitle for a landing page
 ---
 
 This is a custom landing page.
@@ -62,4 +62,4 @@ Note that the `Overview` section for this page is visible in the sidebar, unlike
 
 ## Custom subtitle
 
-Regardless of using default or custom landing pages, `nd-subtitle` can be used to add a custom subtitle.
+Regardless of using default or custom landing pages, `f5-subtitle` can be used to add a custom subtitle.

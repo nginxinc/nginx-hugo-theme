@@ -7,5 +7,5 @@ tags:
   - api
 doctypes:
   - reference
-nd-api-reference: "./api/one.json"
+f5-api-reference: "./api/one.json"
 ---

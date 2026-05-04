@@ -1,19 +1,19 @@
 ---
 title: Redocly
-nd-api-reference: "./api/example.json"
+f5-api-reference: "./api/example.json"
 toc: true
 ---
 
-## nd-api-reference
+## f5-api-reference
 
-To render an OpenAPI specification using Redocly, you need to include the `nd-api-reference` front matter field, with a reference to an OpenAPI spec file.
+To render an OpenAPI specification using Redocly, you need to include the `f5-api-reference` front matter field, with a reference to an OpenAPI spec file.
 
 The front matter of this page is:
 
 ``` yml
 ---
 title: Redocly
-nd-api-reference: "./api/example.json"
+f5-api-reference: "./api/example.json"
 ---
 ```
 

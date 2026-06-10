@@ -1,0 +1,47 @@
+{{/*
+  clean-content.html
+  Transforms .RawContent by replacing Hugo shortcodes with clean Markdown equivalents.
+  Used by the md output format templates (single.md, list.md) so generated .md files
+  are readable by LLMs without opaque shortcode syntax.
+
+  Delegates all shortcode transforms to the clean-string.html partial, which is also
+  applied to inlined include content so shortcodes inside includes are cleaned too.
+
+  Limitations vs the Python post-processor:
+    - Callout blocks (call-out, warning, etc.) get a bold label prefix but inner
+      content lines are NOT prefixed with "> " — Go RE2 has no stateful line transforms.
+    - {{< include >}} content is inlined one level deep; nested includes inside an
+      include file are stripped rather than recursively resolved.
+    - {{< ghcode >}} is replaced with a reference note;
+*/}}
+{{- $c := .RawContent -}}
+
+{{/* Inline include shortcodes: read the include file directly from disk using readFile,
+     strip any YAML frontmatter, clean any shortcodes within the included content,
+     and substitute in place of the shortcode. Falls back to a plain note if not found.
+     Note: uses readFile instead of site.Pages because include pages are headless
+     (list: never) and therefore not available in Hugo's page collection. */}}
+{{- range $match := findRE `\{\{<-?\s*include\s+"[^"]+"\s*[^>]*>\}\}` $c -}}
+  {{- $filename := $match | replaceRE `\{\{<-?\s*include\s+"([^"]+)"[^>]*>\}\}` "$1" -}}
+  {{- $cleanName := $filename | strings.TrimSuffix ".md" | strings.TrimPrefix "/" -}}
+  {{- $fullPath := printf "includes/%s.md" $cleanName -}}
+  {{- $content := readFile $fullPath -}}
+  {{- if $content -}}
+    {{- $content = $content | strings.TrimSpace -}}
+    {{/* Strip YAML frontmatter if present: matches opening ---, everything up to
+         closing --- (including newlines via (?s) flag), and any trailing whitespace */}}
+    {{- if hasPrefix $content "---" -}}
+      {{- $content = replaceRE `(?s)^---.*?---\s*` "" $content -}}
+    {{- end -}}
+    {{/* Clean any shortcodes within the included content */}}
+    {{- $content = partial "clean-string.html" $content -}}
+    {{- $c = replace $c $match (printf "\n\n%s\n\n" ($content | strings.TrimSpace)) -}}
+  {{- else -}}
+    {{- $c = replace $c $match (printf "\n\n*[Include not found: %s]*\n\n" $fullPath) -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* Pass the main content through all shortcode-cleaning transforms */}}
+{{- $c = partial "clean-string.html" $c -}}
+
+{{- $c -}}

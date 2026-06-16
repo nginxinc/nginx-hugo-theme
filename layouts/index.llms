@@ -51,8 +51,11 @@
 {{- end -}}
 
 {{- /* ---------- Helper: flatten a description to a single clean line ---------- */ -}}
+{{- /* htmlUnescape decodes any HTML entities authored in the source description
+       (e.g. "&quot;", "&lt;") to literal characters; callers emit the result with
+       safeHTML so html/template does not re-encode them. */ -}}
 {{- define "partials/llms_clean.html" -}}
-{{- return (. | plainify | chomp | replaceRE `\s+` " ") -}}
+{{- return (. | plainify | htmlUnescape | chomp | replaceRE `\s+` " ") -}}
 {{- end -}}
 
 {{- /* ---------- Helper: build one markdown link line ---------- */ -}}
@@ -88,7 +91,7 @@
 
 # {{ site.Title }}
 
-> {{ partial "llms_clean.html" (site.Params.metadata.description | default site.Params.description | default site.Title) }}
+> {{ partial "llms_clean.html" (site.Params.metadata.description | default site.Params.description | default site.Title) | safeHTML }}
 
 {{- /* ---------- Pages: collect first, then emit header only if non-empty ---------- */ -}}
 {{- $pageLines := slice -}}
@@ -126,7 +129,7 @@
 
 ## Pages
 
-{{ delimit $pageLines "\n" }}
+{{ delimit $pageLines "\n" | safeHTML }}
 {{- end }}
 
 {{- /* ---------- Content sections: Blog, Docs, etc. ---------- */ -}}
@@ -158,8 +161,8 @@
 ## {{ $section.Title }}
 {{- $sectionUrl := $section.Permalink }}
 {{- with $section.OutputFormats.Get "md" }}{{ $sectionUrl = .Permalink }}{{ end }}
-{{ partial "llms_link.html" (dict "title" $section.Title "url" $sectionUrl "desc" $section.Params.description) }}
-{{ delimit $sectionLines "\n" }}
+{{ partial "llms_link.html" (dict "title" $section.Title "url" $sectionUrl "desc" $section.Params.description) | safeHTML }}
+{{ delimit $sectionLines "\n" | safeHTML }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -184,9 +187,9 @@
 ## {{ $taxPage.Title | default ($taxonomyName | humanize) }}
 {{- $taxUrl := $taxPage.Permalink }}
 {{- with $taxPage.OutputFormats.Get "md" }}{{ $taxUrl = .Permalink }}{{ end }}
-{{ partial "llms_link.html" (dict "title" ($taxPage.Title | default ($taxonomyName | humanize)) "url" $taxUrl "desc" $taxPage.Params.description) }}
+{{ partial "llms_link.html" (dict "title" ($taxPage.Title | default ($taxonomyName | humanize)) "url" $taxUrl "desc" $taxPage.Params.description) | safeHTML }}
 {{- with $termLines }}
-{{ delimit . "\n" }}
+{{ delimit . "\n" | safeHTML }}
 {{- end }}
 {{- end }}
 {{- end }}

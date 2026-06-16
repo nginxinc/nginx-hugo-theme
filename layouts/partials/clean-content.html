@@ -7,6 +7,18 @@
   Delegates all shortcode transforms to the clean-string.html partial, which is also
   applied to inlined include content so shortcodes inside includes are cleaned too.
 
+  Keeping the output free of HTML entities requires handling BOTH directions:
+    1. Output escaping (safeHTML): Hugo renders these partials with html/template, even
+       when the calling output format is isPlainText (md, llmsfull). html/template
+       entity-encodes plain markdown characters when a {{ }} value is emitted
+       ("+" → "&#43;", '"' → "&#34;", "=" → "&#61;", "`" → "&#96;"). To prevent that,
+       the cleaned value is piped through safeHTML here, in clean-string.html, and in
+       the consuming templates (single.md, list.md, index.llmsfull).
+    2. Input decoding (htmlUnescape): some source files contain authored HTML entities
+       (e.g. the changelog has "cr&#39;s", license files have "&quot;"). We decode the
+       raw inputs (.RawContent and readFile) so those become literal characters in the
+       markdown output too. safeHTML on the way out keeps them decoded.
+
   Limitations vs the Python post-processor:
     - Callout blocks (call-out, warning, etc.) get a bold label prefix but inner
       content lines are NOT prefixed with "> " — Go RE2 has no stateful line transforms.
@@ -14,16 +26,20 @@
       include file are stripped rather than recursively resolved.
     - {{< ghcode >}} is replaced with a reference note;
 */}}
-{{- $c := .RawContent -}}
+{{- $c := .RawContent | htmlUnescape -}}
 
 {{/* Inline include shortcodes: read the include file directly from disk using readFile,
     strip any YAML frontmatter, clean any shortcodes within the included content,
-    and substitute in place of the shortcode. Falls back to a plain note if not found. */}}
-{{- range $match := findRE `\{\{<-?\s*include\s+"[^"]+"\s*[^>]*>\}\}` $c -}}
-  {{- $filename := $match | replaceRE `\{\{<-?\s*include\s+"([^"]+)"[^>]*>\}\}` "$1" -}}
+    and substitute in place of the shortcode. Falls back to a plain note if not found.
+    The full line containing the shortcode is matched so any prefix (e.g. "1. ") and
+    suffix on the same line are preserved and the content is inserted inline. */}}
+{{- range $match := findRE `[^\n]*\{\{<-?\s*include\s+"[^"]+"\s*[^>]*>\}\}[^\n]*` $c -}}
+  {{- $filename := $match | replaceRE `.*\{\{<-?\s*include\s+"([^"]+)"[^>]*>\}\}.*` "$1" -}}
   {{- $cleanName := $filename | strings.TrimSuffix ".md" | strings.TrimPrefix "/" -}}
   {{- $fullPath := printf "includes/%s.md" $cleanName -}}
-  {{- $content := readFile $fullPath -}}
+  {{- $content := readFile $fullPath | htmlUnescape -}}
+  {{- $prefix := $match | replaceRE `^(.*?)\{\{<-?\s*include\s+"[^"]+"[^>]*>\}\}.*` "$1" -}}
+  {{- $suffix := $match | replaceRE `^.*\{\{<-?\s*include\s+"[^"]+"[^>]*>\}\}(.*)` "$1" -}}
   {{- if $content -}}
     {{- $content = $content | strings.TrimSpace -}}
     {{/* Strip YAML frontmatter if present: matches opening ---, everything up to
@@ -33,13 +49,15 @@
     {{- end -}}
     {{/* Clean any shortcodes within the included content */}}
     {{- $content = partial "clean-string.html" $content -}}
-    {{- $c = replace $c $match (printf "\n\n%s\n\n" ($content | strings.TrimSpace)) -}}
+    {{- $c = replace $c $match (printf "%s%s%s" $prefix ($content | strings.TrimSpace) $suffix) -}}
   {{- else -}}
-    {{- $c = replace $c $match (printf "\n\n*[Include not found: %s]*\n\n" $fullPath) -}}
+    {{- $c = replace $c $match (printf "%s*[Include not found: %s]*%s" $prefix $fullPath $suffix) -}}
   {{- end -}}
 {{- end -}}
 
 {{/* Pass the main content through all shortcode-cleaning transforms */}}
 {{- $c = partial "clean-string.html" $c -}}
 
-{{- $c -}}
+{{/* safeHTML: see clean-string.html — prevents html/template from entity-encoding
+     plain markdown characters when this value is emitted by the caller. */}}
+{{- $c | safeHTML -}}

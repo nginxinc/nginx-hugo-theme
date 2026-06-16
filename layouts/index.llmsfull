@@ -43,11 +43,11 @@
 {{- $max := .maxRunes -}}
 {{- if gt (len $content) $max -}}
 {{- $truncated := substr $content 0 $max -}}
-{{ $truncated }}
+{{ $truncated | safeHTML }}
 
 *[truncated — see full page: {{ $url }}]*
 {{- else -}}
-{{ $content }}
+{{ $content | safeHTML }}
 {{- end -}}
 {{- end -}}
 

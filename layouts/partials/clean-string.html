@@ -1,6 +1,8 @@
 {{/* clean-string.html
      Accepts a content string via . and applies all shortcode-cleaning transforms.
-     Called by clean-content.html for both the main page content and inlined includes. */}}
+     Called by clean-content.html for both the main page content and inlined includes.
+     Output is piped through safeHTML so html/template does not entity-encode plain
+     markdown characters; see clean-content.html for the full rationale. */}}
 {{- $c := . -}}
 
 {{/* Remove {{% comment %}} blocks before normalising percent-shortcodes */}}
@@ -58,4 +60,8 @@
 {{- $c = $c | replaceRE `\{\{<-?[^}]*>\}\}` "" -}}
 {{- $c = $c | replaceRE `\n{3,}` "\n\n" -}}
 
-{{- $c -}}
+{{/* safeHTML marks the output as already-safe so Hugo's html/template engine does not
+     entity-encode plain markdown characters (+ → &#43;, " → &#34;, etc.) when this
+     partial's {{ $c }} value is emitted. Required because Hugo renders this partial with
+     html/template even for the isPlainText (md, llmsfull) output formats. */}}
+{{- $c | safeHTML -}}

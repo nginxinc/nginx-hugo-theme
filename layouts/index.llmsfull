@@ -1,8 +1,9 @@
 {{- /*
-  llms-full.txt
-
   Generates /llms-full.txt — the full-content companion to llms.txt.
   Respects params.llms.generate_llms_full_txt, include, and exclude settings.
+
+  Per-page opt-out: set `nollms: true` in a page's front matter to exclude it,
+  regardless of the include/exclude globs (mirrors llms.txt / index.llms).
 
   Shortcodes are cleaned via the clean-content.html partial.
   Pages exceeding params.llms.truncate_runes (default 2000) are truncated
@@ -11,8 +12,12 @@
 
 {{- define "partials/llms_full_is_valid_page.html" -}}
 {{- $url := .url -}}
+{{- $page := .page -}}
 {{- $includeList := .includeList -}}
 {{- $excludeList := .excludeList -}}
+{{- /* Per-page opt-out: `nollms: true` in front matter excludes the page */ -}}
+{{- $nollms := false -}}
+{{- with $page }}{{ if .Params.nollms }}{{ $nollms = true }}{{ end }}{{- end -}}
 {{- $isIncluded := false -}}
 {{- if eq (len $includeList) 0 }}{{ $isIncluded = true }}{{ else -}}
 {{- range $includeList -}}
@@ -29,7 +34,7 @@
   {{- else }}{{ if eq $url . }}{{ $isExcluded = true }}{{ end -}}
   {{- end -}}
 {{- end -}}
-{{- return (and $isIncluded (not $isExcluded)) -}}
+{{- return (and $isIncluded (not $isExcluded) (not $nollms)) -}}
 {{- end -}}
 
 {{- /*
@@ -72,7 +77,7 @@
 
 {{- /* Home Page */ -}}
 {{- $home := site.Home }}
-{{- $showHome := partial "llms_full_is_valid_page.html" (dict "url" $home.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $showHome := partial "llms_full_is_valid_page.html" (dict "url" $home.RelPermalink "page" $home "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showHome }}
 {{- $homeUrl := $home.Permalink -}}
 {{- with $home.OutputFormats.Get "md" }}{{- $homeUrl = .Permalink -}}{{- end }}
@@ -91,7 +96,7 @@ url: {{ $homeUrl }}
 {{- range site.Home.Sections }}
 {{- if not .RegularPagesRecursive }}
 {{- if and .Title .Permalink }}
-{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "page" . "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
 {{- $url := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
@@ -111,7 +116,7 @@ url: {{ $url }}
 
 {{- /* Root-level regular pages: About, Contact, etc. */ -}}
 {{- range site.Home.RegularPages }}
-{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "page" . "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
 {{- $url := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
@@ -134,7 +139,7 @@ url: {{ $url }}
 {{- if .RegularPagesRecursive }}
 
 {{- /* Section index page content block */ -}}
-{{- $showSection := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $showSection := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "page" . "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showSection }}
 {{- $sectionUrl := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $sectionUrl = .Permalink -}}{{- end }}
@@ -152,7 +157,7 @@ url: {{ $sectionUrl }}
 {{- /* All nested pages recursively */ -}}
 {{- range where .RegularPagesRecursive ".Permalink" "ne" "" }}
 {{- if .Title }}
-{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $show := partial "llms_full_is_valid_page.html" (dict "url" .RelPermalink "page" . "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $show }}
 {{- $url := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
@@ -177,7 +182,7 @@ url: {{ $url }}
 {{- range $taxonomyName, $taxonomy := site.Taxonomies }}
 {{- $taxPage := site.GetPage $taxonomyName }}
 {{- if $taxPage }}
-{{- $showTax := partial "llms_full_is_valid_page.html" (dict "url" $taxPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $showTax := partial "llms_full_is_valid_page.html" (dict "url" $taxPage.RelPermalink "page" $taxPage "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showTax }}
 {{- $taxUrl := $taxPage.Permalink -}}
 {{- with $taxPage.OutputFormats.Get "md" }}{{- $taxUrl = .Permalink -}}{{- end }}
@@ -193,7 +198,7 @@ url: {{ $taxUrl }}
 {{- range $termName, $weightedPages := $taxonomy }}
 {{- $termPage := site.GetPage (printf "%s/%s" $taxonomyName $termName) }}
 {{- if $termPage }}
-{{- $showTerm := partial "llms_full_is_valid_page.html" (dict "url" $termPage.RelPermalink "includeList" $includeList "excludeList" $excludeList) }}
+{{- $showTerm := partial "llms_full_is_valid_page.html" (dict "url" $termPage.RelPermalink "page" $termPage "includeList" $includeList "excludeList" $excludeList) }}
 {{- if $showTerm }}
 {{- $termUrl := $termPage.Permalink -}}
 {{- with $termPage.OutputFormats.Get "md" }}{{- $termUrl = .Permalink -}}{{- end }}

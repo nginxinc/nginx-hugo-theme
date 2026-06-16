@@ -1,6 +1,4 @@
 {{- /*
-  llms.txt — part of the nginx Hugo theme
-
   Generates /llms.txt following the llmstxt.org specification.
   Grouped by Hugo sections. Respects:
     params.llms.generate_llms_txt  (bool, default true)
@@ -13,7 +11,7 @@
   regardless of the include/exclude globs.
 
   NOTE: per-page/section .md links require a Markdown output format to be enabled
-  for the relevant page kinds; otherwise links fall back to the HTML permalink.
+  for the relevant page kinds in the site configuration file; otherwise links fall back to the HTML permalink.
 
   The three inline `define` helpers below register globally and may be extracted
   into their own files under layouts/partials/ if you prefer.
@@ -52,8 +50,8 @@
 
 {{- /* ---------- Helper: flatten a description to a single clean line ---------- */ -}}
 {{- /* htmlUnescape decodes any HTML entities authored in the source description
-       (e.g. "&quot;", "&lt;") to literal characters; callers emit the result with
-       safeHTML so html/template does not re-encode them. */ -}}
+  (for example, "&quot;", "&lt;") to literal characters; callers emit the result with
+  safeHTML so html/template does not re-encode them. */ -}}
 {{- define "partials/llms_clean.html" -}}
 {{- return (. | plainify | htmlUnescape | chomp | replaceRE `\s+` " ") -}}
 {{- end -}}
@@ -132,7 +130,7 @@
 {{ delimit $pageLines "\n" | safeHTML }}
 {{- end }}
 
-{{- /* ---------- Content sections: Blog, Docs, etc. ---------- */ -}}
+{{- /* ---------- Content sections: Blog, Docs, and others ---------- */ -}}
 {{- range site.Home.Sections }}
 {{- if .RegularPagesRecursive }}
 {{- $section := . }}

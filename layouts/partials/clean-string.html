@@ -3,8 +3,12 @@
      Called by clean-content.html for both the main page content and inlined includes. */}}
 {{- $c := . -}}
 
-{{- $c = $c | replaceRE `\{\{<-?\s*nb\s*-?>\}\}` "" -}}
+{{/* Remove {{% comment %}} blocks before normalising percent-shortcodes */}}
 {{- $c = $c | replaceRE `(?s)\{\{%-?\s*comment\s*-?%\}\}.*?\{\{%-?\s*/comment\s*-?%\}\}` "" -}}
+{{/* Normalise {{% %}} to {{< >}} so all patterns below work uniformly */}}
+{{- $c = $c | replaceRE `\{\{%-?` "{{<" -}}
+{{- $c = $c | replaceRE `-?%\}\}` ">}}" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*nb\s*-?>\}\}` "" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*icon-([\w-]+)\s*-?>\}\}` "[icon: $1]" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*icon\s+"([\w-]+)"\s*-?>\}\}` "[icon: $1]" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*icon\s+([\w-]+)\s*-?>\}\}` "[icon: $1]" -}}
@@ -39,6 +43,9 @@
 {{- $c = $c | replaceRE `\{\{<-?\s*/banner[^>]*>\}\}` "" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*tab\b[^>]*\bname="([^"]+)"[^>]*>\}\}` "\n#### $1\n" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*/tab[^>]*>\}\}` "\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*details\b[^>]*\bsummary="([^"]+)"[^>]*>\}\}` "\n#### $1\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*details[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/details[^>]*>\}\}` "\n" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*card\b[^>]*\btitle="([^"]+)"[^>]*\btitleUrl="([^"]+)"[^>]*>\}\}` "\n### [$1]($2)\n" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*card\b[^>]*\btitleUrl="([^"]+)"[^>]*\btitle="([^"]+)"[^>]*>\}\}` "\n### [$2]($1)\n" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*card\b[^>]*\btitle="([^"]+)"[^>]*>\}\}` "\n### $1\n" -}}
@@ -48,6 +55,7 @@
 {{- $c = $c | replaceRE `\{\{<-?\s*include[^>]*>\}\}` "" -}}
 {{- $c = $c | replaceRE `\{\{<-?\s*(?:shortversions|versions|survey|metrics|data-table|dimensions|changelog-dates|readfile)[^>]*>\}\}` "" -}}
 {{- $c = $c | replaceRE `(?s)\{\{<-?\s*highlight[^>]*>\}\}.*?\{\{<-?\s*/highlight[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?[^}]*>\}\}` "" -}}
 {{- $c = $c | replaceRE `\n{3,}` "\n\n" -}}
 
 {{- $c -}}

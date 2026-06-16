@@ -17,10 +17,8 @@
 {{- $c := .RawContent -}}
 
 {{/* Inline include shortcodes: read the include file directly from disk using readFile,
-     strip any YAML frontmatter, clean any shortcodes within the included content,
-     and substitute in place of the shortcode. Falls back to a plain note if not found.
-     Note: uses readFile instead of site.Pages because include pages are headless
-     (list: never) and therefore not available in Hugo's page collection. */}}
+    strip any YAML frontmatter, clean any shortcodes within the included content,
+    and substitute in place of the shortcode. Falls back to a plain note if not found. */}}
 {{- range $match := findRE `\{\{<-?\s*include\s+"[^"]+"\s*[^>]*>\}\}` $c -}}
   {{- $filename := $match | replaceRE `\{\{<-?\s*include\s+"([^"]+)"[^>]*>\}\}` "$1" -}}
   {{- $cleanName := $filename | strings.TrimSuffix ".md" | strings.TrimPrefix "/" -}}

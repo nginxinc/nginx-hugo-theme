@@ -1,9 +1,12 @@
 {{- /*
-  llms-full.txt — Hugo Module by GetHugoThemes
-  https://github.com/gethugothemes/hugo-modules/llms-txt
+  llms-full.txt
 
   Generates /llms-full.txt — the full-content companion to llms.txt.
   Respects params.llms.generate_llms_full_txt, include, and exclude settings.
+
+  Shortcodes are cleaned via the clean-content.html partial.
+  Pages exceeding params.llms.truncate_runes (default 2000) are truncated
+  with a reference note pointing to the full page URL.
 */ -}}
 
 {{- define "partials/llms_full_is_valid_page.html" -}}
@@ -29,10 +32,31 @@
 {{- return (and $isIncluded (not $isExcluded)) -}}
 {{- end -}}
 
+{{- /*
+  truncate-content: truncates cleaned content to $maxRunes runes.
+  If truncated, appends a note with the full page URL.
+  Accepts: dict "content" string "url" string "maxRunes" int
+*/ -}}
+{{- define "partials/llms_full_truncate.html" -}}
+{{- $content := .content -}}
+{{- $url := .url -}}
+{{- $max := .maxRunes -}}
+{{- if gt (len $content) $max -}}
+{{- $truncated := substr $content 0 $max -}}
+{{ $truncated }}
+
+*[truncated — see full page: {{ $url }}]*
+{{- else -}}
+{{ $content }}
+{{- end -}}
+{{- end -}}
+
 {{- $llms := site.Params.llms | default dict -}}
 {{- if ne ($llms.generate_llms_full_txt | default true) false -}}
 {{- $rawExcludeList := $llms.exclude | default slice -}}
 {{- $includeList := $llms.include | default slice -}}
+{{- $maxRunes := $llms.truncate_runes | default 2000 -}}
+{{- $sep := "--------------------------------------------------------------------------------" -}}
 
 {{- /* Clean Exclude List (Include takes precedence for exact matches) */ -}}
 {{- $excludeList := slice -}}
@@ -53,13 +77,14 @@
 {{- $homeUrl := $home.Permalink -}}
 {{- with $home.OutputFormats.Get "md" }}{{- $homeUrl = .Permalink -}}{{- end }}
 
---------------------------------------------------------------------------------
+{{ $sep }}
 title: "{{ $home.Title | default "Home" }}"
 url: {{ $homeUrl }}
 {{ with $home.Params.description }}description: {{ . }}
 {{ end -}}
---------------------------------------------------------------------------------
-{{ if $home.RawContent }}{{ $home.RawContent }}{{ else }}{{ $home.Params.description }}{{ end }}
+{{ $sep }}
+{{- $cleaned := partial "clean-content.html" $home -}}
+{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" $home.Permalink "maxRunes" $maxRunes) }}
 {{- end }}
 
 {{- /* Standalone section pages (top-level sections with no pages at any depth) */ -}}
@@ -71,13 +96,14 @@ url: {{ $homeUrl }}
 {{- $url := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
 
---------------------------------------------------------------------------------
+{{ $sep }}
 title: "{{ .Title }}"
 url: {{ $url }}
 {{ with .Params.description }}description: {{ . }}
 {{ end -}}
---------------------------------------------------------------------------------
-{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Params.description }}{{ end }}
+{{ $sep }}
+{{- $cleaned := partial "clean-content.html" . -}}
+{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -90,15 +116,16 @@ url: {{ $url }}
 {{- $url := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
 
---------------------------------------------------------------------------------
+{{ $sep }}
 title: "{{ .Title }}"
 url: {{ $url }}
 {{ with .Date }}date: "{{ .Format "2006-01-02" }}"
 {{ end -}}
 {{ with .Params.description }}description: {{ . }}
 {{ end -}}
---------------------------------------------------------------------------------
-{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Summary | plainify }}{{ end }}
+{{ $sep }}
+{{- $cleaned := partial "clean-content.html" . -}}
+{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
 {{- end }}
 {{- end }}
 
@@ -112,13 +139,14 @@ url: {{ $url }}
 {{- $sectionUrl := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $sectionUrl = .Permalink -}}{{- end }}
 
---------------------------------------------------------------------------------
+{{ $sep }}
 title: "{{ .Title }}"
 url: {{ $sectionUrl }}
 {{ with .Params.description }}description: {{ . }}
 {{ end -}}
---------------------------------------------------------------------------------
-{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Params.description }}{{ end }}
+{{ $sep }}
+{{- $cleaned := partial "clean-content.html" . -}}
+{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
 {{- end }}
 
 {{- /* All nested pages recursively */ -}}
@@ -129,15 +157,16 @@ url: {{ $sectionUrl }}
 {{- $url := .Permalink -}}
 {{- with .OutputFormats.Get "md" }}{{- $url = .Permalink -}}{{- end }}
 
---------------------------------------------------------------------------------
+{{ $sep }}
 title: "{{ .Title }}"
 url: {{ $url }}
 {{ with .Date }}date: "{{ .Format "2006-01-02" }}"
 {{ end -}}
 {{ with .Params.description }}description: {{ . }}
 {{ end -}}
---------------------------------------------------------------------------------
-{{ if .RawContent }}{{ .RawContent }}{{ else }}{{ .Summary | plainify }}{{ end }}
+{{ $sep }}
+{{- $cleaned := partial "clean-content.html" . -}}
+{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -153,13 +182,14 @@ url: {{ $url }}
 {{- $taxUrl := $taxPage.Permalink -}}
 {{- with $taxPage.OutputFormats.Get "md" }}{{- $taxUrl = .Permalink -}}{{- end }}
 
---------------------------------------------------------------------------------
+{{ $sep }}
 title: "{{ $taxPage.Title | default ($taxonomyName | humanize) }}"
 url: {{ $taxUrl }}
 {{ with $taxPage.Params.description }}description: {{ . }}
 {{ end -}}
---------------------------------------------------------------------------------
-{{ if $taxPage.RawContent }}{{ $taxPage.RawContent }}{{ else }}{{ $taxPage.Params.description }}{{ end }}
+{{ $sep }}
+{{- $cleaned := partial "clean-content.html" $taxPage -}}
+{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" $taxPage.Permalink "maxRunes" $maxRunes) }}
 {{- range $termName, $weightedPages := $taxonomy }}
 {{- $termPage := site.GetPage (printf "%s/%s" $taxonomyName $termName) }}
 {{- if $termPage }}
@@ -168,13 +198,14 @@ url: {{ $taxUrl }}
 {{- $termUrl := $termPage.Permalink -}}
 {{- with $termPage.OutputFormats.Get "md" }}{{- $termUrl = .Permalink -}}{{- end }}
 
---------------------------------------------------------------------------------
+{{ $sep }}
 title: "{{ $termPage.Title | default $termName }}"
 url: {{ $termUrl }}
 {{ with $termPage.Params.description }}description: {{ . }}
 {{ end -}}
---------------------------------------------------------------------------------
-{{ if $termPage.RawContent }}{{ $termPage.RawContent }}{{ else }}{{ $termPage.Params.description }}{{ end }}
+{{ $sep }}
+{{- $cleaned := partial "clean-content.html" $termPage -}}
+{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" $termPage.Permalink "maxRunes" $maxRunes) }}
 {{- end }}
 {{- end }}
 {{- end }}

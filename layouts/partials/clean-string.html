@@ -1,0 +1,67 @@
+{{/* clean-string.html
+     Accepts a content string via . and applies all shortcode-cleaning transforms.
+     Called by clean-content.html for both the main page content and inlined includes.
+     Output is piped through safeHTML so html/template does not entity-encode plain
+     markdown characters; see clean-content.html for the full rationale. */}}
+{{- $c := . -}}
+
+{{/* Remove {{% comment %}} blocks before normalising percent-shortcodes */}}
+{{- $c = $c | replaceRE `(?s)\{\{%-?\s*comment\s*-?%\}\}.*?\{\{%-?\s*/comment\s*-?%\}\}` "" -}}
+{{/* Normalise {{% %}} to {{< >}} so all patterns below work uniformly */}}
+{{- $c = $c | replaceRE `\{\{%-?` "{{<" -}}
+{{- $c = $c | replaceRE `-?%\}\}` ">}}" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*nb\s*-?>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*icon-([\w-]+)\s*-?>\}\}` "[icon: $1]" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*icon\s+"([\w-]+)"\s*-?>\}\}` "[icon: $1]" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*icon\s+([\w-]+)\s*-?>\}\}` "[icon: $1]" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*youtube[^>]*\bid="([^"]+)"[^>]*>\}\}` "\nhttps://www.youtube.com/watch?v=$1\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*youtube\s+"([^"]+)"[^>]*>\}\}` "\nhttps://www.youtube.com/watch?v=$1\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*youtube\s+([\w-]+)[^>]*>\}\}` "\nhttps://www.youtube.com/watch?v=$1\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*img\b[^>]*\bsrc="([^"]+)"[^>]*\balt="([^"]+)"[^>]*>\}\}` "![$2]($1)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*img\b[^>]*\balt="([^"]+)"[^>]*\bsrc="([^"]+)"[^>]*>\}\}` "![$1]($2)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*img\b[^>]*\bsrc="([^"]+)"[^>]*\bcaption="([^"]+)"[^>]*>\}\}` "![$2]($1)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*img\b[^>]*\bcaption="([^"]+)"[^>]*\bsrc="([^"]+)"[^>]*>\}\}` "![$1]($2)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*img\b[^>]*\bsrc="([^"]+)"[^>]*>\}\}` "![image]($1)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*link\s+"([^"]+)"\s+"([^"]+)"[^>]*>\}\}` "[$2]($1)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*link\s+"([^"]+)"[^>]*>\}\}` "$1" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*download\s+"([^"]+)"\s+"([^"]+)"[^>]*>\}\}` "[Download: $2]($1)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*download\s+"([^"]+)"[^>]*>\}\}` "[Download]($1)" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*(?:ref|relref)\s+"([^"]+)"[^>]*>\}\}` "$1" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*ghcode\s+"([^"]+)"[^>]*>\}\}` "\n*[Code: $1]*\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*ghcode\b[^>]*\burl="([^"]+)"[^>]*>\}\}` "\n*[Code: $1]*\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*call-out\s+"([^"]+)"[^>]*>\}\}` "**$1:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*call-out[^>]*>\}\}` "**Note:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/call-out[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*important[^>]*>\}\}` "**Important:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/important[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*warning[^>]*>\}\}` "**Warning:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/warning[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*caution[^>]*>\}\}` "**Caution:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/caution[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*deprecated[^>]*>\}\}` "**Deprecated:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/deprecated[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*banner\s+"([^"]+)"[^>]*>\}\}` "**$1:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*banner[^>]*>\}\}` "**Note:** " -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/banner[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*tab\b[^>]*\bname="([^"]+)"[^>]*>\}\}` "\n#### $1\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/tab[^>]*>\}\}` "\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*details\b[^>]*\bsummary="([^"]+)"[^>]*>\}\}` "\n#### $1\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*details[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/details[^>]*>\}\}` "\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*card\b[^>]*\btitle="([^"]+)"[^>]*\btitleUrl="([^"]+)"[^>]*>\}\}` "\n### [$1]($2)\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*card\b[^>]*\btitleUrl="([^"]+)"[^>]*\btitle="([^"]+)"[^>]*>\}\}` "\n### [$2]($1)\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*card\b[^>]*\btitle="([^"]+)"[^>]*>\}\}` "\n### $1\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/card[^>]*>\}\}` "\n" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/?(?:tabs|card-section|table|bootstrap-table)[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*/?(raw-html|shortcode-usage)[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*include[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?\s*(?:shortversions|versions|survey|metrics|data-table|dimensions|changelog-dates|readfile)[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `(?s)\{\{<-?\s*highlight[^>]*>\}\}.*?\{\{<-?\s*/highlight[^>]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\{\{<-?[^}]*>\}\}` "" -}}
+{{- $c = $c | replaceRE `\n{3,}` "\n\n" -}}
+
+{{/* safeHTML marks the output as already-safe so Hugo's html/template engine does not
+     entity-encode plain markdown characters (+ → &#43;, " → &#34;, etc.) when this
+     partial's {{ $c }} value is emitted. Required because Hugo renders this partial with
+     html/template even for the isPlainText (md, llmsfull) output formats. */}}
+{{- $c | safeHTML -}}

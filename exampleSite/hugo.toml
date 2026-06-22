@@ -21,6 +21,12 @@ maxAge = -1
       guessSyntax = true
       noClasses = false
 
+
+[outputs]
+  home    = ["HTML", "RSS", "llms", "llmsfull"]
+  section = ["HTML", "md"]
+  page    = ["HTML", "md"]
+
 [outputFormats]
   [outputFormats.llms]
     baseName       = "llms"

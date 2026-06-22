@@ -21,6 +21,23 @@ maxAge = -1
       guessSyntax = true
       noClasses = false
 
+[outputFormats]
+  [outputFormats.llms]
+    baseName       = "llms"
+    mediaType      = "text/plain"
+    isPlainText    = true
+    notAlternative = true
+  [outputFormats.llmsfull]
+    baseName       = "llms-full"
+    mediaType      = "text/plain"
+    isPlainText    = true
+    notAlternative = true
+  [outputFormats.md]
+    baseName       = "index"
+    mediaType      = "text/markdown"
+    isPlainText    = true
+    notAlternative = true
+
 [params]
   description = "Component example site and usage documentation for NGINX Hugo Theme"
   github_repo = "https://github.com/nginxinc/nginx-hugo-theme"

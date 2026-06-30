@@ -39,13 +39,13 @@ jobs:
           - name: Checkout code
             uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
           - name: Setup Hugo
-            uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
+            uses: peaceiris/actions-hugo@2752ce1d29631191ea3f27c23495fa06139a5b78 # v3.2.1
             with:
                 hugo-version: '0.147.8'
                 extended: true
-          - uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
+          - uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6.4.0
             with: 
-              go-version: '1.26.1'
+              go-version: '1.26.3'
           - name: Install dependencies
             run: cd tests && npm ci
           - name: Run Playwright tests
@@ -61,7 +61,7 @@ jobs:
                 echo "Playwright tests failed. Please view the Playwright report to see full error."
                 exit 1
               fi
-          - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+          - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
             id: artifact-upload
             if: ${{ !cancelled() && failure() && steps.test-ui.conclusion == 'failure' }}
             with:

@@ -2,10 +2,22 @@
   <div class="bd-toc-item active">
     <h3 class="bd-toc-link">What's on This Page</h3>
     {{- if .Params.catalogType -}}
-      {{- partial "catalog-toc" . -}}  
+      {{- partial "catalog-toc" . -}}
     {{- else -}}
-      {{- with .TableOfContents -}}
-        {{- . -}}
+      {{- with partial "effective-toc.html" . -}}
+       <nav class="bd-links" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <h3 class="bd-toc-link">What's on This Page</h3>
+    {{- if .Params.catalogType -}}
+      {{- partial "catalog-toc" . -}}
+    {{- else -}}
+      {{- with partial "effective-toc.html" . -}}
+        {{- partial "sub-content-vars.html" (dict "content" . "page" $) | safeHTML -}}
+      {{- end -}}
+    {{ end }}
+  </div>
+</nav>
+ {{- partial "sub-content-vars.html" (dict "content" . "page" $) | safeHTML -}}
       {{- end -}}
     {{ end }}
   </div>

@@ -56,7 +56,8 @@
         </div>
       </li>
     {{ else if eq $p.Kind "page" }}
-      {{- $tocHasItems := (in $p.TableOfContents "<li>") -}}
+      {{- $effectiveToc := partial "effective-toc.html" $p -}}
+      {{- $tocHasItems := (in $effectiveToc "<li>") -}}
       {{- $pageHasTOC := (and $onPage $tocHasItems $p.Params.toc) -}}
       {{- $tocID := printf "%stoc-%s" $idPrefix (urlize $p.Permalink) -}}
       <li class="sidebar__page"  data-testid="sidebar__page">
@@ -80,7 +81,7 @@
             {{ else }}
               <a class="skip-link" href="#maincontent">Skip Table of Contents</a>
             {{ end }}
-              {{ $p.TableOfContents }}
+              {{ partial "sub-content-vars.html" (dict "content" $effectiveToc "page" $p) | safeHTML }}
           </div>
         {{ else }}
           <a

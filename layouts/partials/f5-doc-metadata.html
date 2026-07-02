@@ -1,0 +1,20 @@
+{{- /* Renders human-readable f5-content-type / f5-product metadata lines for plain-text output formats (e.g. md). Returns "" if neither is set. */ -}}
+{{- $lines := "" -}}
+{{- with index .Params "f5-content-type" -}}
+{{- $lines = printf "Type of document: %s" (index $.Site.Data.f5.content_types . | default .) -}}
+{{- end -}}
+{{- with index .Params "f5-product" -}}
+{{- $products := . -}}
+{{- $label := "" -}}
+{{- if eq (printf "%T" $products) "string" -}}
+{{- $label = $products -}}
+{{- else -}}
+{{- range $i, $p := $products -}}
+{{- if $i -}}{{- $label = printf "%s, " $label -}}{{- end -}}
+{{- $label = printf "%s%s" $label $p -}}
+{{- end -}}
+{{- end -}}
+{{- $line := printf "Product: %s" $label -}}
+{{- if $lines -}}{{- $lines = printf "%s\n%s" $lines $line -}}{{- else -}}{{- $lines = $line -}}{{- end -}}
+{{- end -}}
+{{- $lines -}}

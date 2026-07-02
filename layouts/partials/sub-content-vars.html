@@ -1,0 +1,27 @@
+{{- /*
+  Replaces ${key} tokens in a string using the page's contentVars.
+
+  Call with: (dict "content" <string|HTML> "page" <Page>)
+
+  Variables are resolved by merging, in order of precedence:
+    1. contentVars from the page referenced by contentSource (defaults)
+    2. contentVars from the page itself (overrides)
+
+  This lets a shared source document (pulled in via contentSource) be
+  reworded per consuming page (e.g. ${product} -> "NGINXaaS for Azure"),
+  and is applied to both rendered content and the auto-generated
+  .TableOfContents so the nav stays in sync.
+*/ -}}
+{{- $content := .content -}}
+{{- $page := .page -}}
+{{- $vars := dict -}}
+{{- with $page.Params.contentSource -}}
+  {{- with site.GetPage . -}}
+    {{- with .Params.contentVars -}}{{- $vars = merge $vars . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with $page.Params.contentVars -}}{{- $vars = merge $vars . -}}{{- end -}}
+{{- range $key, $value := $vars -}}
+  {{- $content = replace $content (printf "${%s}" $key) (printf "%v" $value) -}}
+{{- end -}}
+{{- return $content -}}

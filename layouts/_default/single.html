@@ -1,7 +1,27 @@
 {{ define "main" }}
 <main class="content" data-testid="content">
+
+    {{/* Content delegation: if this page points to another source, use that page's content */}}
+    {{ $page := . }}
+    {{ $extraContent := "" }}
+    {{ with .Params.contentSource }}
+        {{ with site.GetPage . }}
+            {{ $page = . }}
+            {{/* When the delegating page has its own body, render it after the sourced content */}}
+            {{ $extraContent = $.Content }}
+        {{ else }}
+            {{ errorf "contentSource %q does not resolve to a page (referenced in %s)" . $.File.Filename }}
+        {{ end }}
+    {{ end }}
+
+    {{/* Source content, optionally followed by this page's own content */}}
+    {{ $combinedContent := printf "%s%s" $page.Content $extraContent }}
+
+    {{/* Replace ${key} tokens in the content using this page's contentVars */}}
+    {{ $rawContent := partial "sub-content-vars.html" (dict "content" $combinedContent "page" .) }}
+
     <!-- Replace icons -->
-    {{ $content := partial "icon-replacement.html" (dict "content" .Content) }}
+    {{ $content := partial "icon-replacement.html" (dict "content" $rawContent) }}
 
     <div class="breadcrumb-layout">
         {{ if not .IsHome }}
@@ -16,7 +36,7 @@
         <h1>{{ .Title }}</h1>
         <div class="content__reading-time">
         {{ if index .Params "f5-reading-time" }}
-            {{ printf "~%d min read" .ReadingTime }}
+            {{ printf "~%d min read" $page.ReadingTime }}
         {{ end }}
         </div>
 
@@ -31,9 +51,9 @@
         </div>
         {{ end }}
 
-        {{ if .Page.Lastmod }}
+        {{ if $page.Lastmod }}
         <div class="last-modified">
-            {{ partial "page-meta-links" . }}
+            {{ partial "page-meta-links" $page }}
         </div>
         {{ end }}
 
@@ -46,15 +66,10 @@
 </main>
 
 
-
-
-
 <!-- If there is a script defined in the page metadata, load it  -->
 {{if .Params.script}}
     {{ $script := (delimit (slice "scripts" .Params.script) "/")}}
     {{ partial (string $script) .}}
 {{end }}
-
-
 
 {{ end }}

@@ -11,9 +11,7 @@
 {{- end -}}
 {{- if $header -}}
 {{ $header }}
-
----
-
+{{- printf "\n\n---\n\n" -}}
 {{ end -}}
 {{- $page := . -}}
 {{- $extraContent := "" -}}

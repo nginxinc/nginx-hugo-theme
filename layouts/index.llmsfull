@@ -6,8 +6,6 @@
   regardless of the include/exclude globs (mirrors llms.txt / index.llms).
 
   Shortcodes are cleaned via the clean-content.html partial.
-  Pages exceeding params.llms.truncate_runes (default 2000) are truncated
-  with a reference note pointing to the full page URL.
 */ -}}
 
 {{- define "partials/llms_full_is_valid_page.html" -}}
@@ -37,30 +35,10 @@
 {{- return (and $isIncluded (not $isExcluded) (not $nollms)) -}}
 {{- end -}}
 
-{{- /*
-  truncate-content: truncates cleaned content to $maxRunes runes.
-  If truncated, appends a note with the full page URL.
-  Accepts: dict "content" string "url" string "maxRunes" int
-*/ -}}
-{{- define "partials/llms_full_truncate.html" -}}
-{{- $content := .content -}}
-{{- $url := .url -}}
-{{- $max := .maxRunes -}}
-{{- if gt (len $content) $max -}}
-{{- $truncated := substr $content 0 $max -}}
-{{ $truncated | safeHTML }}
-
-*[truncated — see full page: {{ $url }}]*
-{{- else -}}
-{{ $content | safeHTML }}
-{{- end -}}
-{{- end -}}
-
 {{- $llms := site.Params.llms | default dict -}}
 {{- if ne ($llms.generate_llms_full_txt | default true) false -}}
 {{- $rawExcludeList := $llms.exclude | default slice -}}
 {{- $includeList := $llms.include | default slice -}}
-{{- $maxRunes := $llms.truncate_runes | default 2000 -}}
 {{- $sep := "--------------------------------------------------------------------------------" -}}
 
 {{- /* Clean Exclude List (Include takes precedence for exact matches) */ -}}
@@ -89,7 +67,7 @@ url: {{ $homeUrl }}
 {{ end -}}
 {{ $sep }}
 {{- $cleaned := partial "clean-content.html" $home -}}
-{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" $home.Permalink "maxRunes" $maxRunes) }}
+{{ $cleaned | safeHTML }}
 {{- end }}
 
 {{- /* Standalone section pages (top-level sections with no pages at any depth) */ -}}
@@ -108,7 +86,7 @@ url: {{ $url }}
 {{ end -}}
 {{ $sep }}
 {{- $cleaned := partial "clean-content.html" . -}}
-{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
+{{ $cleaned | safeHTML }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -130,7 +108,7 @@ url: {{ $url }}
 {{ end -}}
 {{ $sep }}
 {{- $cleaned := partial "clean-content.html" . -}}
-{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
+{{ $cleaned | safeHTML }}
 {{- end }}
 {{- end }}
 
@@ -151,7 +129,7 @@ url: {{ $sectionUrl }}
 {{ end -}}
 {{ $sep }}
 {{- $cleaned := partial "clean-content.html" . -}}
-{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
+{{ $cleaned | safeHTML }}
 {{- end }}
 
 {{- /* All nested pages recursively */ -}}
@@ -171,7 +149,7 @@ url: {{ $url }}
 {{ end -}}
 {{ $sep }}
 {{- $cleaned := partial "clean-content.html" . -}}
-{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" .Permalink "maxRunes" $maxRunes) }}
+{{ $cleaned | safeHTML }}
 {{- end }}
 {{- end }}
 {{- end }}
@@ -194,7 +172,7 @@ url: {{ $taxUrl }}
 {{ end -}}
 {{ $sep }}
 {{- $cleaned := partial "clean-content.html" $taxPage -}}
-{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" $taxPage.Permalink "maxRunes" $maxRunes) }}
+{{ $cleaned | safeHTML }}
 {{- range $termName, $weightedPages := $taxonomy }}
 {{- $termPage := site.GetPage (printf "%s/%s" $taxonomyName $termName) }}
 {{- if $termPage }}
@@ -210,7 +188,7 @@ url: {{ $termUrl }}
 {{ end -}}
 {{ $sep }}
 {{- $cleaned := partial "clean-content.html" $termPage -}}
-{{ partial "llms_full_truncate.html" (dict "content" $cleaned "url" $termPage.Permalink "maxRunes" $maxRunes) }}
+{{ $cleaned | safeHTML }}
 {{- end }}
 {{- end }}
 {{- end }}

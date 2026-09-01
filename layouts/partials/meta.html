@@ -102,7 +102,7 @@
     https://cdn.bizible.com/xdc.js
     https://f5networksglobalprod.122.2o7.net/
     https://f5networksnginxdocs.122.2o7.net/
-    {{ if $qualtricsEnabled }}https://*.siteintercept.qualtrics.com/SIE{{ end }}
+    {{ if $qualtricsEnabled }}https://*.siteintercept.qualtrics.com/SIE/{{ end }}
     {{ if $qualtricsEnabled }}https://siteintercept.qualtrics.com/{{ end }}
     {{ if in .Params.doctypes "devportal" }} 'unsafe-eval' {{end}};
     worker-src 'self' blob:">

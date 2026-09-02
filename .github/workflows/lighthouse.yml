@@ -17,12 +17,12 @@ jobs:
   generate-lighthouse-report:
     runs-on: ubuntu-22.04
     steps:
-        - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
           with:
             ref: ${{ github.event.workflow_run.head_branch }}
-        - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
           with:
-            node-version: 24.14.0
+            node-version: 24.20.0
         - name: Installing packages
           run: cd performance && npm ci
         - name: Get PR number being merged
@@ -43,7 +43,7 @@ jobs:
             GITHUB_PR_NUMBER: ${{ env.GITHUB_PR_NUMBER }}
           run: |
             node performance/lighthouse-script.js
-        - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
           with:
             name: lighthouse-reports-main
             path: lighthouse-reports/main-report.json

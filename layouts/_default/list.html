@@ -25,13 +25,14 @@
 
         {{ partial "banner" . }}
 
+        {{/* Render the section's own body content whenever it has one. */}}
+        {{ with .Content }}{{ . }}{{ end }}
+
+        {{/* Then the generated card grid, unless this page opted out with f5-landing-page. */}}
         {{ $hasCustomContent := index .Params "f5-landing-page" | default false }}
-        {{ if $hasCustomContent }}
-        {{ .Content }}
+        {{ if and (not $hasCustomContent) .Pages }}
 
         <!-- Default index page content -->
-        {{ else }}
-
     <h2> In this section </h2>
     <div class="card-section">
         <div class="card-section-content card-grid" data-testid="header-search-dropdown">

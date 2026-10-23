@@ -25,7 +25,14 @@
 {{ end }}
 
 
+{{/* Honour a `canonical` front matter key when present, so that duplicated
+     content (for example, a renamed product tree) can point search engines at
+     the authoritative page. Falls back to Hugo's default behaviour. */}}
+{{ if .Params.canonical }}
+<link rel="canonical" href="{{ .Params.canonical | absURL }}">
+{{ else }}
 <link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
 
 <!-- noindex meta -->
 {{ $default_noindex_kinds := slice "section" "taxonomy" "taxonomyTerm" }}

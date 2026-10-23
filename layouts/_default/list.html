@@ -26,6 +26,16 @@
         {{ partial "banner" . }}
 
         {{ $hasCustomContent := index .Params "f5-landing-page" | default false }}
+
+        {{/* Local override: section pages normally skip .Content entirely unless
+             f5-landing-page is set, which hides page-level notices such as
+             renamed-notice. Render .Content for renamed pages (identified by
+             f5-product-former) so the notice shows above the section cards.
+             Guarded against double-rendering when f5-landing-page is also set. */}}
+        {{ if and (index .Params "f5-product-former") (not $hasCustomContent) }}
+        {{ .Content }}
+        {{ end }}
+
         {{ if $hasCustomContent }}
         {{ .Content }}
 

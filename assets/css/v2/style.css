@@ -2505,6 +2505,14 @@ ul .code-block {
   }
 }
 
+.new-site-banner {
+  display: flex;
+  justify-content: center;
+  background-color: oklch(var(--color-callout-caution-shadow));
+  border: 1px solid oklch(var(--color-callout-caution));
+  padding-block: 1rem;
+}
+
 /* MARK: Images
 */
 figure {

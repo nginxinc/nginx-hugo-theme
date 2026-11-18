@@ -19,7 +19,7 @@ jobs:
           version: ${{ steps.get-playwright-version.outputs.version }}
         steps:
           - name: Checkout code
-            uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+            uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
           - name: Get version from package.json
             id: get-playwright-version
             run: |
@@ -37,7 +37,7 @@ jobs:
         steps: 
           # Checkout the repository so the workflow has access to the code
           - name: Checkout code
-            uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+            uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
           - name: Setup Hugo
             uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f # v3.0.0
             with:

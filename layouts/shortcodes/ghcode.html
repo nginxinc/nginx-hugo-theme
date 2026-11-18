@@ -1,6 +1,6 @@
 {{ $file := .Get 0 }}
 {{ $params := .Get 1 }}
-{{ $codeBlockId :=  printf "id-%x" (now.UnixNano) }}
+{{ $codeBlockId := printf "gh-%d" .Ordinal }}
 {{ with try (resources.GetRemote $file) }}
   {{ with .Err }}
     {{ errorf "%s" . }}
